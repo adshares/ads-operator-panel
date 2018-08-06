@@ -28,8 +28,8 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
-        <Route exact path="/blockexplorer/node" component={NodePage} />
-        <Route exact path="/blockexplorer/block" component={BlockPage} />
+        <Route exact path="/blockexplorer/nodes" component={NodePage} />
+        <Route exact path="/blockexplorer/blocks" component={BlockPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

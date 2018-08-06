@@ -10,31 +10,37 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
-import TableDataSet from 'components/TableDataSet';
-
 import Search from 'components/Search';
 import Card from 'components/Card';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectBlockexplorer, makeSelectLatestNodes, makeSelectLatestBlocks } from './selectors';
+import {
+  makeSelectLatestNodes,
+  makeSelectLatestBlocks,
+  makeSelectLatestTransactions,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { loadLatestBlock, loadLatestNode } from './actions';
+import {
+  loadLatestBlocks,
+  loadLatestNode,
+  loadLatestsTransactions,
+} from './actions';
 import LatestPanel from '../../components/LatestPanel';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Blockexplorer extends React.PureComponent {
   componentDidMount() {
     this.props.dispatch(loadLatestNode());
-    this.props.dispatch(loadLatestBlock());
+    this.props.dispatch(loadLatestBlocks());
+    this.props.dispatch(loadLatestsTransactions());
   }
 
   render() {
     const nodeColumns = {
       id: 'Id',
       account_count: 'Accounts',
-      msid: 'Messages',
+      msid: 'Messages count',
       balance: 'Balance',
       status: 'Status',
     };
@@ -46,12 +52,33 @@ export class Blockexplorer extends React.PureComponent {
       time: 'Time',
     };
 
+    const transactionColumns = {
+      id: 'Id',
+      type: 'Type',
+    };
+
     const nodeTab = {
       id: 'node',
-      name: 'Node',
-      link: 'link',
-      data: this.props.latestNodes,
+      name: 'Nodes',
+      link: 'blockexplorer/nodes',
+      data: this.props.nodes.data,
       columns: nodeColumns,
+    };
+
+    const blockTab = {
+      id: 'block',
+      name: 'Blocks',
+      link: '/blockexplorer/blocks',
+      data: this.props.blocks.data,
+      columns: blockColumns,
+    };
+
+    const transactionTab = {
+      id: 'transaction',
+      name: 'Transactions',
+      link: '/blockexplorer/transactions',
+      data: this.props.transactions.data,
+      columns: transactionColumns,
     };
 
     return (
@@ -70,46 +97,40 @@ export class Blockexplorer extends React.PureComponent {
           </div>
         </div>
         <div className="row">
-          {/*<LatestPanel data={this.props.latestNodes} type={'node'} onTabSelection={this.props.onLatestTabSelection}/>*/}
-          <LatestPanel tabs={[nodeTab]} />
+          <LatestPanel
+            tabs={[nodeTab, blockTab]}
+            loading={this.props.blocks.loading || this.props.nodes.loading}
+            error={this.props.blocks.error || this.props.nodes.error}
+          />
         </div>
         <div className="row">
-          <ul className="nav">
-            <li className="nav-item">
-              <span>Latest transactions</span>
-            </li>
-            <li className="nav-item">
-              <Link to="/blockexplorer/block">View all</Link>
-            </li>
-          </ul>
+          <LatestPanel
+            tabs={[transactionTab]}
+            loading={this.props.transactions.loading}
+            error={this.props.transactions.error}
+          />
         </div>
-        <TableDataSet name="transactions" columns={{}} data={[]} />
       </div>
     );
   }
 }
 
 Blockexplorer.propTypes = {
-  latestNodes: PropTypes.any,
-  onLatestTabSelection: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  nodes: PropTypes.object,
+  blocks: PropTypes.object,
+  transactions: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  blockexplorer: makeSelectBlockexplorer(),
-  latestNodes: makeSelectLatestNodes(),
-  latestBlocks: makeSelectLatestNodes(),
+  nodes: makeSelectLatestNodes(),
+  blocks: makeSelectLatestBlocks(),
+  transactions: makeSelectLatestTransactions(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    onLatestTabSelection: type => {
-      if (type === 'nodes') {
-        return dispatch(loadLatestNode());
-      }
-
-      return dispatch(loadLatestBlock());
-    },
   };
 }
 
@@ -119,7 +140,6 @@ const withConnect = connect(
 );
 
 const withReducer = injectReducer({ key: 'blockexplorer', reducer });
-
 const withSaga = injectSaga({ key: 'blockexplorer', saga });
 
 export default compose(

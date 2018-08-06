@@ -6,6 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import LoadingIndicator from 'components/LoadingIndicator';
+import ErrorMsg from 'components/ErrorMsg';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
@@ -26,21 +28,49 @@ class TableDataSet extends React.PureComponent {
     );
   }
 
-  generateRows() {
+  generateRowsFromData() {
     return this.props.data.map(row => this.generateSingleRow(row));
   }
 
   generateSingleRow(row) {
     const cells = [];
-    Object.entries(row).forEach(([column, value]) => {
-      if (Object.prototype.hasOwnProperty.call(this.props.columns, column)) {
-        cells.push(
-          <td key={`${row.id}_${column}_${value.toString()}`}>{value}</td>,
-        );
-      }
+    Object.entries(this.props.columns).forEach(([columnHeader]) => {
+      Object.entries(row).forEach(([rowColumnName, value]) => {
+        if (rowColumnName === columnHeader) {
+          cells.push(
+            <td key={`${row.id}_${columnHeader}_${value.toString()}`}>
+              {value}
+            </td>,
+          );
+        }
+      });
     });
 
     return <tr key={row.id}>{cells}</tr>;
+  }
+
+  generateTableContent() {
+    if (this.props.loading === true) {
+      return (
+        <tr>
+          <td>
+            <LoadingIndicator />
+          </td>
+        </tr>
+      );
+    }
+
+    if (this.props.error) {
+      return (
+        <tr>
+          <td>
+            <ErrorMsg error={this.props.error} />
+          </td>
+        </tr>
+      );
+    }
+
+    return this.generateRowsFromData();
   }
 
   render() {
@@ -57,7 +87,7 @@ class TableDataSet extends React.PureComponent {
       <div className="row">
         <table className="table">
           {this.generateHeader()}
-          <tbody>{this.generateRows()}</tbody>
+          <tbody>{this.generateTableContent()}</tbody>
         </table>
       </div>
     );
@@ -69,6 +99,8 @@ TableDataSet.propTypes = {
   columns: PropTypes.object.isRequired,
   data: PropTypes.any,
   messageNoData: PropTypes.string,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 export default TableDataSet;
