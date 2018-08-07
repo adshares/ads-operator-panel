@@ -1,5 +1,3 @@
-// // import { take, call, put, select } from 'redux-saga/effects';
-//
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   LOAD_LATEST_NODES,

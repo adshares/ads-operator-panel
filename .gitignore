@@ -10,3 +10,5 @@ npm-debug.log
 .idea
 
 .env
+
+__snapshots__
