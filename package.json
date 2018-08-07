@@ -1,17 +1,17 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.6.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "ads-operator-panel",
+  "version": "0.0.1",
+  "description": "Operator Panel to manage ADS operations and display blockexplorer",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git@github.com:adshares/ads-operator-panel.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8"
   },
-  "author": "Max Stoiber",
-  "license": "MIT",
+  "author": "Adshares",
+  "license": "GPL",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
@@ -161,6 +161,7 @@
     "ip": "1.1.5",
     "lodash": "4.17.10",
     "minimist": "1.2.0",
+    "moment": "^2.22.2",
     "prop-types": "15.6.1",
     "react": "16.4.1",
     "react-dom": "16.4.1",
