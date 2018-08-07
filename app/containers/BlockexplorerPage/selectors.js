@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -13,9 +14,19 @@ const makeSelectLatestNodes = () =>
   );
 
 const makeSelectLatestBlocks = () =>
-  createSelector(selectBlockexplorerDomain, globalState =>
-    globalState.get('blocks').toJS(),
-  );
+  createSelector(selectBlockexplorerDomain, globalState => {
+    const blocks = globalState.get('blocks').toJS();
+
+    if (blocks.data) {
+      blocks.data.map(item => {
+        const date = moment.parseZone(item.time);
+        item.time = date.format('YYYY-MM-DD HH:MM:SS'); // eslint-disable-line no-param-reassign
+        return item;
+      });
+    }
+
+    return blocks;
+  });
 
 const makeSelectLatestTransactions = () =>
   createSelector(selectBlockexplorerDomain, globalState =>
