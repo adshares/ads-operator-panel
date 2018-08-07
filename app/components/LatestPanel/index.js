@@ -7,8 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
 import TableDataSet from 'components/TableDataSet';
+import { LatestPanelWrapper, List, ListItem, Button } from './styled';
 
 /* eslint-disable react/prefer-stateless-function */
 class LatestPanel extends React.PureComponent {
@@ -16,9 +16,12 @@ class LatestPanel extends React.PureComponent {
     super(props);
 
     const defaultTab = this.props.tabs[0];
-    this.state = {
-      selectedTabId: defaultTab.id,
-    };
+
+    if (defaultTab) {
+      this.state = {
+        selectedTabId: defaultTab.id,
+      };
+    }
 
     this.handleTabSelection = this.handleTabSelection.bind(this);
   }
@@ -33,14 +36,15 @@ class LatestPanel extends React.PureComponent {
 
   generateHeader() {
     return this.props.tabs.map(tab => (
-      <li className="nav-item" key={`tab_${tab.id}}`}>
-        <button
+      <ListItem className="nav-item" key={`tab_${tab.id}}`}>
+        <Button
+          className={this.state.selectedTabId === tab.id ? 'active' : ''}
           key={`button_${tab.id}`}
           onClick={() => this.handleTabSelection(tab.id)}
         >
           {tab.name}
-        </button>
-      </li>
+        </Button>
+      </ListItem>
     ));
   }
 
@@ -51,21 +55,21 @@ class LatestPanel extends React.PureComponent {
   }
 
   render() {
-    if (!this.props.tabs) {
+    if (!this.props.tabs || this.props.tabs.length === 0) {
       return <div />;
     }
 
     const currentTab = this.getSelectedTab(this.state.selectedTabId);
 
     return (
-      <div>
+      <LatestPanelWrapper>
         <div className="row">
-          <ul className="nav">
+          <List className="nav">
             {this.generateHeader()}
-            <li className="nav-item">
+            <ListItem className="nav-item">
               <Link to={currentTab.link}>View all</Link>
-            </li>
-          </ul>
+            </ListItem>
+          </List>
         </div>
         <TableDataSet
           name={currentTab.name}
@@ -74,7 +78,7 @@ class LatestPanel extends React.PureComponent {
           loading={this.props.loading}
           error={this.props.error}
         />
-      </div>
+      </LatestPanelWrapper>
     );
   }
 }
