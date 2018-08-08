@@ -42,6 +42,7 @@ class Pagination extends React.PureComponent {
   renderNextButton() {
     const label = this.context.intl.formatMessage(messages.next);
     const page = this.props.page + 1;
+
     return (
       <Item
         disabled={!this.props.nextPage}

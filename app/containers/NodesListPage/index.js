@@ -57,9 +57,12 @@ export class NodesListPage extends React.PureComponent {
         page: params.page,
         sort: params.sort,
         order: params.order,
-        nextPage: nextProps.nodes.data.length > LIMIT,
       });
     }
+
+    this.setState({
+      nextPage: nextProps.nodes.data.length > LIMIT,
+    })
   }
 
   render() {
