@@ -36,7 +36,7 @@ export class NodesListPage extends React.PureComponent {
 
     this.state = {
       page,
-      offset: (page-1) * LIMIT,
+      offset: (page - 1) * LIMIT,
       sort: params.sort || 'id',
       order: params.order || 'desc',
       nextPage: this.props.nodes.data.length > LIMIT,
@@ -62,7 +62,7 @@ export class NodesListPage extends React.PureComponent {
 
     this.setState({
       nextPage: nextProps.nodes.data.length > LIMIT,
-    })
+    });
   }
 
   render() {
@@ -83,7 +83,7 @@ export class NodesListPage extends React.PureComponent {
         <TableDataSet
           name="nodes"
           columns={columns}
-          data={(this.props.nodes.data.length > LIMIT) ? this.props.nodes.data.slice(0, -1) : this.props.nodes.data}
+          data={this.props.nodes.data.length > LIMIT ? this.props.nodes.data.slice(0, -1) : this.props.nodes.data}
           loading={this.props.nodes.loading}
           error={this.props.nodes.error}
         />
