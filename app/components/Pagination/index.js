@@ -63,7 +63,7 @@ class Pagination extends React.PureComponent {
     }
 
     if (beforeDot < this.props.page) {
-      pages.push(<Item key={`page_dot`} label="..." />);
+      pages.push(<Item key="page_dot" label="..." />);
 
       for (let i = beforeDot + 1; i <= this.props.page; i += 1) {
         pages.push(this.renderSinglePageButton(i, this.props.page === i));
@@ -123,6 +123,5 @@ Pagination.defaultProps = {
 Pagination.contextTypes = {
   intl: intlShape,
 };
-
 
 export default Pagination;

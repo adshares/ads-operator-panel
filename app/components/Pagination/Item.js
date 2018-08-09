@@ -16,7 +16,11 @@ class Item extends React.PureComponent {
     }
 
     return (
-      <Link className="page-link" to={this.props.link} onClick={this.props.onChange}>
+      <Link
+        className="page-link"
+        to={this.props.link}
+        onClick={this.props.onChange}
+      >
         {label}
       </Link>
     );

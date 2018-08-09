@@ -7,7 +7,7 @@ import api from '../../api';
 
 export function* getNodes(action) {
   try {
-    const nodes = yield call(api.fetchNodes, action.limit, action.offset, action.sort, action.order);
+    const nodes = yield call(api.fetchNodes, ...action);
     yield put(nodesLoaded(nodes));
   } catch (err) {
     yield put(nodesLoadingError(err));

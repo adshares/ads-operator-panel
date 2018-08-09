@@ -44,7 +44,14 @@ export class NodesListPage extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.dispatch(loadNodes(LIMIT + 1, this.state.offset, this.state.sort, this.state.order));
+    this.props.dispatch(
+      loadNodes(
+        LIMIT + 1,
+        this.state.offset,
+        this.state.sort,
+        this.state.order,
+      ),
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,7 +90,11 @@ export class NodesListPage extends React.PureComponent {
         <TableDataSet
           name="nodes"
           columns={columns}
-          data={this.props.nodes.data.length > LIMIT ? this.props.nodes.data.slice(0, -1) : this.props.nodes.data}
+          data={
+            this.props.nodes.data.length > LIMIT
+              ? this.props.nodes.data.slice(0, -1)
+              : this.props.nodes.data
+          }
           loading={this.props.nodes.loading}
           error={this.props.nodes.error}
         />

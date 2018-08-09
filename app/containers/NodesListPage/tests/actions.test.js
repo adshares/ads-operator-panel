@@ -1,13 +1,24 @@
-import { defaultAction } from '../actions';
-import { DEFAULT_ACTION } from '../constants';
+import { LOAD_NODES, LOAD_NODES_SUCCESS } from '../constants';
+import { loadNodes, nodesLoaded } from '../actions';
 
 describe('NodesListPage actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('Load nodes Action', () => {
+    it('has a type of LOAD_NODES', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: LOAD_NODES,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(loadNodes()).toEqual(expected);
+    });
+  });
+  describe('Latest nodes loaded Action', () => {
+    it('has a type of LOAD_NODES_SUCCESS', () => {
+      const nodes = [];
+
+      const expected = {
+        type: LOAD_NODES_SUCCESS,
+        data: nodes,
+      };
+      expect(nodesLoaded(nodes)).toEqual(expected);
     });
   });
 });

@@ -29,7 +29,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
         <Route exact path="/blockexplorer/nodes" component={NodesListPage} />
-        <Route exact path="/blockexplorer/nodes/:page/:sort/:order" component={NodesListPage} />
+        <Route exact path="/blockexplorer/nodes/:page/:sort/:order" component={NodesListPage} /> {/* eslint-disable-line  prettier/prettier */}
         <Route exact path="/blockexplorer/blocks" component={BlockPage} />
         <Route component={NotFoundPage} />
       </Switch>
