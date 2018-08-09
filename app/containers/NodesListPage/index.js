@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { Link } from 'react-router-dom';
 import Pagination from 'components/Pagination/Loadable';
 
 import injectSaga from 'utils/injectSaga';
@@ -24,7 +24,7 @@ import TableDataSet from '../../components/TableDataSet';
 const LIMIT = 1;
 
 /* eslint-disable react/prefer-stateless-function */
-export class NodesListPage extends React.PureComponent {
+export class NodesListPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -41,9 +41,7 @@ export class NodesListPage extends React.PureComponent {
       order: params.order || 'desc',
       nextPage: this.props.nodes.data.length > LIMIT,
     };
-  }
 
-  componentDidMount() {
     this.props.dispatch(
       loadNodes(
         LIMIT + 1,
@@ -59,6 +57,8 @@ export class NodesListPage extends React.PureComponent {
       match: { params },
     } = nextProps;
 
+    const paramsOld = this.props.match.params;
+
     if (params.page && params.sort && params.order) {
       this.setState({
         page: params.page,
@@ -70,6 +70,14 @@ export class NodesListPage extends React.PureComponent {
     this.setState({
       nextPage: nextProps.nodes.data.length > LIMIT,
     });
+
+    if (
+      paramsOld.page !== params.page ||
+      paramsOld.sort !== params.sort ||
+      paramsOld.order !== params.order
+    ) {
+      this.props.onPageChange(params.page, params.sort, params.order);
+    }
   }
 
   render() {
@@ -80,16 +88,26 @@ export class NodesListPage extends React.PureComponent {
       balance: 'Balance',
       status: 'Status',
     };
+    const link = '/blockexplorer/nodes';
+    const sortingColumns = ['id', 'msid'];
+    const ceilConfiguration = {
+      id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+    };
 
     return (
       <div>
         <Helmet>
-          <title>NodesListPage</title>
-          <meta name="description" content="Description of NodesListPage" />
+          <title>List of nodes</title>
+          <meta name="description" content="Blockexplorer nodes list" />
         </Helmet>
         <TableDataSet
           name="nodes"
           columns={columns}
+          link={link}
+          sortingColumns={sortingColumns}
+          sortBy={this.state.sort}
+          orderBy={this.state.order}
+          ceilConfiguration={ceilConfiguration}
           data={
             this.props.nodes.data.length > LIMIT
               ? this.props.nodes.data.slice(0, -1)
@@ -97,9 +115,10 @@ export class NodesListPage extends React.PureComponent {
           }
           loading={this.props.nodes.loading}
           error={this.props.nodes.error}
+          onChange={this.props.onPageChange}
         />
         <Pagination
-          link="/blockexplorer/nodes"
+          link={link}
           page={parseInt(this.state.page, 10)}
           sort={this.state.sort}
           order={this.state.order}
