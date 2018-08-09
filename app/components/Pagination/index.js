@@ -103,7 +103,7 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
-  maxPages: 20,
+  maxPages: 2,
 };
 
 Pagination.contextTypes = {
