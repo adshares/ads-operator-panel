@@ -40,10 +40,7 @@ class TableDataSet extends React.PureComponent {
 
       return (
         <th scope="col" key={`${this.props.name}_${columnId}`}>
-          <Link
-            to={link}
-            onClick={() => this.props.onChange(1, columnId, order)}
-          >
+          <Link to={link}>
             {columnName}
             {columnId === this.props.sortBy ? TableDataSet.sortIcon(order) : ''}
           </Link>
@@ -147,7 +144,6 @@ TableDataSet.propTypes = {
   messageNoData: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  onChange: PropTypes.func,
 };
 
 TableDataSet.defaultProps = {

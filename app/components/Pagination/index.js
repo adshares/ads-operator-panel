@@ -14,16 +14,6 @@ import Item from './Item';
 
 /* eslint-disable react/prefer-stateless-function */
 class Pagination extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.handleOnPageChange = this.handleOnPageChange.bind(this);
-  }
-
-  handleOnPageChange(page) {
-    this.props.onPageChange(page, this.props.sort, this.props.order);
-  }
-
   renderPreviousButton() {
     const label = this.context.intl.formatMessage(messages.previous);
     const page = this.props.page - 1;
@@ -34,7 +24,6 @@ class Pagination extends React.PureComponent {
         label={label}
         page={page}
         link={this.generateLink(page)}
-        onChange={() => this.handleOnPageChange(page)}
       />
     );
   }
@@ -49,7 +38,6 @@ class Pagination extends React.PureComponent {
         label={label}
         page={page}
         link={this.generateLink(page)}
-        onChange={() => this.handleOnPageChange(page)}
       />
     );
   }
@@ -84,7 +72,6 @@ class Pagination extends React.PureComponent {
         active={active}
         page={page}
         link={this.generateLink(page)}
-        onChange={() => this.handleOnPageChange(page)}
       />
     );
   }
@@ -113,11 +100,10 @@ Pagination.propTypes = {
   nextPage: PropTypes.bool.isRequired,
   link: PropTypes.string.isRequired,
   maxPages: PropTypes.number,
-  onPageChange: PropTypes.func.isRequired,
 };
 
 Pagination.defaultProps = {
-  maxPages: 2,
+  maxPages: 20,
 };
 
 Pagination.contextTypes = {

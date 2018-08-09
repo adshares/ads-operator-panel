@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import TableDataSet from '../index';
 
 describe('<TableDataSet />', () => {
-  it('should render an <table> tag without th,tr,td for empty columns and data', () => {
+  it('should render <strong> element when data is empty', () => {
     const renderedComponent = mount(
       <TableDataSet
         name="table-test"
@@ -11,20 +11,21 @@ describe('<TableDataSet />', () => {
         data={[]}
         loading={false}
         error={false}
+        messageNoData="no data"
       />,
     );
 
-    expect(renderedComponent.find('table').length).toEqual(1);
-    expect(renderedComponent.find('th').length).toEqual(0);
-    expect(renderedComponent.find('td').length).toEqual(0);
+    expect(renderedComponent.find('div').length).toEqual(1);
+    expect(renderedComponent.find('strong').length).toEqual(1);
+    expect(renderedComponent.find('strong').text()).toEqual('no data');
   });
 
-  it('should render an <table> tag and th when columns exist', () => {
+  it('should render an <table> tag and th when columns exist and data is not empty', () => {
     const renderedComponent = mount(
       <TableDataSet
         name="table-test"
         columns={{ id: 'Id' }}
-        data={[]}
+        data={[{ id: 1 }]}
         loading={false}
         error={false}
       />,

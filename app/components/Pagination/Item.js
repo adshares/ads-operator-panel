@@ -16,11 +16,7 @@ class Item extends React.PureComponent {
     }
 
     return (
-      <Link
-        className="page-link"
-        to={this.props.link}
-        onClick={this.props.onChange}
-      >
+      <Link className="page-link" to={this.props.link}>
         {label}
       </Link>
     );
@@ -48,7 +44,6 @@ Item.propTypes = {
   page: PropTypes.number,
   link: PropTypes.string,
   label: PropTypes.string,
-  onChange: PropTypes.func,
 };
 
 Item.defaultProps = {

@@ -21,7 +21,7 @@ import saga from './saga';
 import { loadNodes } from './actions';
 import TableDataSet from '../../components/TableDataSet';
 
-const LIMIT = 1;
+const LIMIT = 10;
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodesListPage extends React.Component {
@@ -34,49 +34,33 @@ export class NodesListPage extends React.Component {
 
     const page = params.page || 1;
 
-    this.state = {
-      page,
-      offset: (page - 1) * LIMIT,
-      sort: params.sort || 'id',
-      order: params.order || 'desc',
-      nextPage: this.props.nodes.data.length > LIMIT,
-    };
-
     this.props.dispatch(
       loadNodes(
         LIMIT + 1,
-        this.state.offset,
-        this.state.sort,
-        this.state.order,
+        (page - 1) * LIMIT,
+        params.sort || 'id',
+        params.order || 'desc',
       ),
     );
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     const {
       match: { params },
     } = nextProps;
 
-    const paramsOld = this.props.match.params;
-
-    if (params.page && params.sort && params.order) {
-      this.setState({
-        page: params.page,
-        sort: params.sort,
-        order: params.order,
-      });
-    }
-
-    this.setState({
-      nextPage: nextProps.nodes.data.length > LIMIT,
-    });
+    const paramsFromProps = this.props.match.params;
 
     if (
-      paramsOld.page !== params.page ||
-      paramsOld.sort !== params.sort ||
-      paramsOld.order !== params.order
+      paramsFromProps.page !== params.page ||
+      paramsFromProps.sort !== params.sort ||
+      paramsFromProps.order !== params.order
     ) {
-      this.props.onPageChange(params.page, params.sort, params.order);
+      this.props.onPageChange(
+        paramsFromProps.page,
+        paramsFromProps.sort,
+        paramsFromProps.order,
+      );
     }
   }
 
@@ -94,6 +78,14 @@ export class NodesListPage extends React.Component {
       id: value => <Link to={`${link}/${value}`}>{value}</Link>,
     };
 
+    const {
+      match: { params },
+    } = this.props;
+
+    const page = parseInt(params.page || 1, 10);
+    const sort = params.sort || 'id';
+    const order = params.order || 'desc';
+
     return (
       <div>
         <Helmet>
@@ -105,8 +97,8 @@ export class NodesListPage extends React.Component {
           columns={columns}
           link={link}
           sortingColumns={sortingColumns}
-          sortBy={this.state.sort}
-          orderBy={this.state.order}
+          sortBy={sort}
+          orderBy={order}
           ceilConfiguration={ceilConfiguration}
           data={
             this.props.nodes.data.length > LIMIT
@@ -115,15 +107,13 @@ export class NodesListPage extends React.Component {
           }
           loading={this.props.nodes.loading}
           error={this.props.nodes.error}
-          onChange={this.props.onPageChange}
         />
         <Pagination
           link={link}
-          page={parseInt(this.state.page, 10)}
-          sort={this.state.sort}
-          order={this.state.order}
-          nextPage={this.state.nextPage}
-          onPageChange={this.props.onPageChange}
+          page={page}
+          sort={sort}
+          order={order}
+          nextPage={this.props.nodes.data.length > LIMIT}
         />
       </div>
     );
