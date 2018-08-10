@@ -34,7 +34,7 @@ class LatestPanel extends React.PureComponent {
     });
   }
 
-  generateHeader() {
+  renderTabs() {
     return this.props.tabs.map(tab => (
       <ListItem className="nav-item" key={`tab_${tab.id}}`}>
         <Button
@@ -46,6 +46,18 @@ class LatestPanel extends React.PureComponent {
         </Button>
       </ListItem>
     ));
+  }
+
+  renderViewAll(link) {
+    if (link && link.length > 0) {
+      return (
+        <ListItem className="nav-item">
+          <Link to={link}>View all</Link>
+        </ListItem>
+      );
+    }
+
+    return null;
   }
 
   getSelectedTab(tabId) {
@@ -65,10 +77,8 @@ class LatestPanel extends React.PureComponent {
       <LatestPanelWrapper>
         <div className="row">
           <List className="nav">
-            {this.generateHeader()}
-            <ListItem className="nav-item">
-              <Link to={currentTab.link}>View all</Link>
-            </ListItem>
+            {this.renderTabs()}
+            {this.renderViewAll(currentTab.link)}
           </List>
         </div>
         <TableDataSet

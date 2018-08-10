@@ -16,6 +16,20 @@ function fetchTransactions(limit = 5, offset = 0, sort = 'id', order = 'desc') {
   );
 }
 
+function fetchNode(id) {
+  return send(`api/v1/blockexplorer/nodes/${id}`);
+}
+
+function fetchAccountsByNodeId(
+  nodeId,
+  limit = 5,
+  offset = 0,
+  sort = 'id',
+  order = 'desc'
+) {
+  return send(`api/v1/blockexplorer/nodes/${nodeId}/accounts`);
+}
+
 function send(url, params) {
   const endpoint = process.env.API_URL + url;
   const credentials = {};
@@ -36,4 +50,5 @@ export default {
   fetchNodes,
   fetchBlocks,
   fetchTransactions,
+  fetchNode,
 };
