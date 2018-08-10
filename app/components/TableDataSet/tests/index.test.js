@@ -1,9 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
+import { shallowWrap } from 'testHelper';
 import TableDataSet from '../index';
 
 describe('<TableDataSet />', () => {
-  it('should render an <table> tag without th,tr,td for empty columns and data', () => {
+  it('should render <strong> element when data is empty', () => {
     const renderedComponent = mount(
       <TableDataSet
         name="table-test"
@@ -11,20 +12,21 @@ describe('<TableDataSet />', () => {
         data={[]}
         loading={false}
         error={false}
+        messageNoData="no data"
       />,
     );
 
-    expect(renderedComponent.find('table').length).toEqual(1);
-    expect(renderedComponent.find('th').length).toEqual(0);
-    expect(renderedComponent.find('td').length).toEqual(0);
+    expect(renderedComponent.find('div').length).toEqual(1);
+    expect(renderedComponent.find('strong').length).toEqual(1);
+    expect(renderedComponent.find('strong').text()).toEqual('no data');
   });
 
-  it('should render an <table> tag and th when columns exist', () => {
+  it('should render an <table> tag and th when columns exist and data is not empty', () => {
     const renderedComponent = mount(
       <TableDataSet
         name="table-test"
         columns={{ id: 'Id' }}
-        data={[]}
+        data={[{ id: 1 }]}
         loading={false}
         error={false}
       />,
@@ -50,7 +52,7 @@ describe('<TableDataSet />', () => {
     expect(renderedComponent.find('tbody td').length).toEqual(4);
   });
 
-  it('should render cell only if column header exists', () => {
+  it('should render ceil only if column header exists', () => {
     const renderedComponent = mount(
       <TableDataSet
         name="table-test"
@@ -92,5 +94,56 @@ describe('<TableDataSet />', () => {
     );
 
     expect(renderedComponent.find('ErrorMsg').length).toEqual(1);
+  });
+
+  it('should render headers including sorting fields', () => {
+    const renderedComponent = shallowWrap(
+      <TableDataSet
+        name="table-test"
+        columns={{ id: 'Id', title: 'Title' }}
+        sortingColumns={['id']}
+        sortBy="id"
+        orderBy="desc"
+        data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: '2' }]}
+        loading={false}
+        error={false}
+      />,
+    );
+
+    expect(renderedComponent.find('Link').length).toEqual(1);
+  });
+
+  it('should render headers including sorting fields', () => {
+    const ceilConfiguration = {
+      id: value => <p>{value}</p>,
+    };
+    const renderedComponent = shallow(
+      <TableDataSet
+        name="table-test"
+        columns={{ id: 'Id', title: 'Title' }}
+        sortingColumns={['id']}
+        ceilConfiguration={ceilConfiguration}
+        sortBy="id"
+        orderBy="desc"
+        data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: '2' }]}
+        loading={false}
+        error={false}
+      />,
+    );
+
+    expect(renderedComponent.find('p').length).toEqual(2);
+    expect(
+      renderedComponent
+        .find('p')
+        .at(0)
+        .text(),
+    ).toEqual('0001');
+
+    expect(
+      renderedComponent
+        .find('p')
+        .at(1)
+        .text(),
+    ).toEqual('0002');
   });
 });

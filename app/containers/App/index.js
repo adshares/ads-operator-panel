@@ -16,7 +16,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import BlockExplorerPage from 'containers/BlockexplorerPage/Loadable';
-import NodePage from 'containers/NodePage/Loadable';
+import NodesListPage from 'containers/NodesListPage/Loadable';
 import BlockPage from 'containers/BlockPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
@@ -28,7 +28,8 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
-        <Route exact path="/blockexplorer/nodes" component={NodePage} />
+        <Route exact path="/blockexplorer/nodes" component={NodesListPage} />
+        <Route exact path="/blockexplorer/nodes/:page/:sort/:order" component={NodesListPage} /> {/* eslint-disable-line  prettier/prettier */}
         <Route exact path="/blockexplorer/blocks" component={BlockPage} />
         <Route component={NotFoundPage} />
       </Switch>

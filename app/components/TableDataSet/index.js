@@ -5,20 +5,18 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMsg from 'components/ErrorMsg';
+import { FaSortUp, FaSortDown } from 'react-icons/fa';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
-  generateHeader() {
+  renderHeader() {
     const headers = [];
-    Object.values(this.props.columns).forEach(column => {
-      headers.push(
-        <th scope="col" key={`${this.props.name}_${column}`}>
-          {column}
-        </th>,
-      );
+    Object.entries(this.props.columns).forEach(([columnId, columnName]) => {
+      headers.push(this.renderColumnHeader(columnId, columnName));
     });
 
     return (
@@ -28,20 +26,61 @@ class TableDataSet extends React.PureComponent {
     );
   }
 
-  generateRowsFromData() {
-    return this.props.data.map(row => this.generateSingleRow(row));
+  renderColumnHeader(columnId, columnName) {
+    if (
+      this.props.sortingColumns.length > 0 &&
+      this.props.sortingColumns.lastIndexOf(columnId) !== -1
+    ) {
+      const order =
+        columnId === this.props.sortBy
+          ? TableDataSet.reverseOrder(this.props.orderBy)
+          : this.props.orderBy;
+
+      const link = `${this.props.link}/1/${columnId}/${order}`;
+
+      return (
+        <th scope="col" key={`${this.props.name}_${columnId}`}>
+          <Link to={link}>
+            {columnName}
+            {columnId === this.props.sortBy ? TableDataSet.sortIcon(order) : ''}
+          </Link>
+        </th>
+      );
+    }
+
+    return (
+      <th scope="col" key={`${this.props.name}_${columnId}`}>
+        {columnName}
+      </th>
+    );
   }
 
-  generateSingleRow(row) {
+  static reverseOrder(order) {
+    if (order === 'desc') {
+      return 'asc';
+    }
+
+    return 'desc';
+  }
+
+  static sortIcon(order) {
+    if (order === 'desc') {
+      return <FaSortUp />;
+    }
+
+    return <FaSortDown />;
+  }
+
+  renderRows() {
+    return this.props.data.map(row => this.renderSingleRow(row));
+  }
+
+  renderSingleRow(row) {
     const cells = [];
     Object.entries(this.props.columns).forEach(([columnHeader]) => {
       Object.entries(row).forEach(([rowColumnName, value]) => {
         if (rowColumnName === columnHeader) {
-          cells.push(
-            <td key={`${row.id}_${columnHeader}_${value.toString()}`}>
-              {value}
-            </td>,
-          );
+          cells.push(this.renderCeil(rowColumnName, value, row));
         }
       });
     });
@@ -49,32 +88,31 @@ class TableDataSet extends React.PureComponent {
     return <tr key={row.id}>{cells}</tr>;
   }
 
-  generateTableContent() {
-    if (this.props.loading === true) {
+  renderCeil(columnName, value, row) {
+    if (
+      this.props.ceilConfiguration[columnName] !== undefined &&
+      typeof this.props.ceilConfiguration[columnName] === 'function'
+    ) {
       return (
-        <tr>
-          <td>
-            <LoadingIndicator />
-          </td>
-        </tr>
+        <td key={`${row.id}_${columnName}_${value.toString()}`}>
+          {this.props.ceilConfiguration[columnName](value)}
+        </td>
       );
     }
 
-    if (this.props.error) {
-      return (
-        <tr>
-          <td>
-            <ErrorMsg error={this.props.error} />
-          </td>
-        </tr>
-      );
-    }
-
-    return this.generateRowsFromData();
+    return <td key={`${row.id}_${columnName}_${value.toString()}`}>{value}</td>;
   }
 
   render() {
-    if (!this.props.data) {
+    if (this.props.error) {
+      return <ErrorMsg error={this.props.error} />;
+    }
+
+    if (this.props.loading) {
+      return <LoadingIndicator />;
+    }
+
+    if (this.props.data.length === 0) {
       const message = this.props.messageNoData || 'No data to display';
       return (
         <div className="row">
@@ -86,8 +124,8 @@ class TableDataSet extends React.PureComponent {
     return (
       <div className="row">
         <table className="table">
-          {this.generateHeader()}
-          <tbody>{this.generateTableContent()}</tbody>
+          {this.renderHeader()}
+          <tbody>{this.renderRows()}</tbody>
         </table>
       </div>
     );
@@ -97,10 +135,23 @@ class TableDataSet extends React.PureComponent {
 TableDataSet.propTypes = {
   name: PropTypes.string.isRequired,
   columns: PropTypes.object.isRequired,
-  data: PropTypes.any,
+  sortingColumns: PropTypes.array,
+  ceilConfiguration: PropTypes.object,
+  sortBy: PropTypes.string,
+  orderBy: PropTypes.string,
+  link: PropTypes.string,
+  data: PropTypes.array.isRequired,
   messageNoData: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+};
+
+TableDataSet.defaultProps = {
+  sortingColumns: [],
+  ceilConfiguration: {},
+  sortBy: 'id',
+  orderBy: 'desc',
+  link: '',
 };
 
 export default TableDataSet;
