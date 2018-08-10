@@ -13,10 +13,10 @@ import { FaSortUp, FaSortDown } from 'react-icons/fa';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
-  generateHeader() {
+  renderHeader() {
     const headers = [];
     Object.entries(this.props.columns).forEach(([columnId, columnName]) => {
-      headers.push(this.generateColumnHeader(columnId, columnName));
+      headers.push(this.renderColumnHeader(columnId, columnName));
     });
 
     return (
@@ -26,7 +26,7 @@ class TableDataSet extends React.PureComponent {
     );
   }
 
-  generateColumnHeader(columnId, columnName) {
+  renderColumnHeader(columnId, columnName) {
     if (
       this.props.sortingColumns.length > 0 &&
       this.props.sortingColumns.lastIndexOf(columnId) !== -1
@@ -71,11 +71,11 @@ class TableDataSet extends React.PureComponent {
     return <FaSortDown />;
   }
 
-  generateRowsFromData() {
-    return this.props.data.map(row => this.generateSingleRow(row));
+  renderRows() {
+    return this.props.data.map(row => this.renderSingleRow(row));
   }
 
-  generateSingleRow(row) {
+  renderSingleRow(row) {
     const cells = [];
     Object.entries(this.props.columns).forEach(([columnHeader]) => {
       Object.entries(row).forEach(([rowColumnName, value]) => {
@@ -124,8 +124,8 @@ class TableDataSet extends React.PureComponent {
     return (
       <div className="row">
         <table className="table">
-          {this.generateHeader()}
-          <tbody>{this.generateRowsFromData()}</tbody>
+          {this.renderHeader()}
+          <tbody>{this.renderRows()}</tbody>
         </table>
       </div>
     );
