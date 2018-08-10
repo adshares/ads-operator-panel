@@ -11,23 +11,24 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import Pagination from 'components/Pagination/Loadable';
+import { intlShape } from 'react-intl';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import config from 'config';
+import Pagination from 'components/Pagination/Loadable';
+
 import makeSelectNodesListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import messages from './messages';
 import { loadNodes } from './actions';
 import TableDataSet from '../../components/TableDataSet';
-
-const LIMIT = 10;
+import ErrorMsg from '../../components/ErrorMsg';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodesListPage extends React.Component {
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
     const {
       match: { params },
     } = this.props;
@@ -36,8 +37,8 @@ export class NodesListPage extends React.Component {
 
     this.props.dispatch(
       loadNodes(
-        LIMIT + 1,
-        (page - 1) * LIMIT,
+        config.limit + 1,
+        (page - 1) * config.limit,
         params.sort || 'id',
         params.order || 'desc',
       ),
@@ -86,6 +87,18 @@ export class NodesListPage extends React.Component {
     const sort = params.sort || 'id';
     const order = params.order || 'desc';
 
+    if (sort !== 'id' && sort !== 'msid') {
+      return (
+        <ErrorMsg error={this.context.intl.formatMessage(messages.sorting)} />
+      );
+    }
+
+    if (order !== 'desc' && order !== 'asc') {
+      return (
+        <ErrorMsg error={this.context.intl.formatMessage(messages.ordering)} />
+      );
+    }
+
     return (
       <div>
         <Helmet>
@@ -101,7 +114,7 @@ export class NodesListPage extends React.Component {
           orderBy={order}
           ceilConfiguration={ceilConfiguration}
           data={
-            this.props.nodes.data.length > LIMIT
+            this.props.nodes.data.length > config.limit
               ? this.props.nodes.data.slice(0, -1)
               : this.props.nodes.data
           }
@@ -113,7 +126,7 @@ export class NodesListPage extends React.Component {
           page={page}
           sort={sort}
           order={order}
-          nextPage={this.props.nodes.data.length > LIMIT}
+          nextPage={this.props.nodes.data.length > config.limit}
         />
       </div>
     );
@@ -127,6 +140,10 @@ NodesListPage.propTypes = {
   onPageChange: PropTypes.func,
 };
 
+NodesListPage.contextTypes = {
+  intl: intlShape,
+};
+
 const mapStateToProps = createStructuredSelector({
   nodes: makeSelectNodesListPage(),
 });
@@ -135,8 +152,8 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     onPageChange: (page, sort, order) => {
-      const offset = (page - 1) * LIMIT;
-      return dispatch(loadNodes(LIMIT + 1, offset, sort, order));
+      const offset = (page - 1) * config.limit;
+      return dispatch(loadNodes(config.limit + 1, offset, sort, order));
     },
   };
 }

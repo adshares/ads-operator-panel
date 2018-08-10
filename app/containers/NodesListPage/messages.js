@@ -7,8 +7,12 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.containers.NodesListPage.header',
-    defaultMessage: 'This is NodesListPage container !',
+  sorting: {
+    id: 'app.containers.NodesListPage.sorting',
+    defaultMessage: 'Unsupported sorting fields !',
+  },
+  ordering: {
+    id: 'app.containers.NodesListPage.ordering',
+    defaultMessage: 'Unsupported ordering fields !',
   },
 });
