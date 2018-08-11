@@ -20,6 +20,7 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadNode } from './actions';
+import { NodePageWrapper } from './styled';
 import LatestPanel from '../../components/LatestPanel';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -74,10 +75,10 @@ export class NodePage extends React.PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <NodePageWrapper>
         <Helmet>
-          <title>NodePage</title>
-          <meta name="description" content="Description of NodePage" />
+          <title>Node #{params.id}</title>
+          <meta name="description" content={`Node #${params.id}`} />
         </Helmet>
         <h3>Node #{params.id}</h3>
         <DetailView
@@ -90,7 +91,7 @@ export class NodePage extends React.PureComponent {
         <div className="row">
           <LatestPanel tabs={[accountTab]} loading={false} error={false} />
         </div>
-      </div>
+      </NodePageWrapper>
     );
   }
 }

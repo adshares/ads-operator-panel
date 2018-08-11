@@ -8,12 +8,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/styles/hljs';
-
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import { Button, LatestPanelWrapper, List, ListItem, IconWrapper } from './styled';
-
-import { Link } from 'react-router-dom';
+import {
+  Button,
+  LatestPanelWrapper,
+  List,
+  ListItem,
+  IconWrapper,
+} from './styled';
+import ErrorMsg from '../ErrorMsg';
+import LoadingIndicator from '../LoadingIndicator';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailView extends React.PureComponent {
@@ -70,11 +73,11 @@ class DetailView extends React.PureComponent {
 
   renderContent() {
     if (this.props.error) {
-
+      return <ErrorMsg error={this.props.error} />
     }
 
     if (this.props.loading) {
-
+      return <LoadingIndicator />
     }
 
     if (this.state.selectedTabId === 'code') {
@@ -109,12 +112,9 @@ class DetailView extends React.PureComponent {
       <LatestPanelWrapper className="row">
         <List className="nav">
           {this.renderTabs()}
-          <ListItem className="nav-item">
-          </ListItem>
+          <ListItem className="nav-item" />
         </List>
-        <div className="col-md-12">
-          {this.renderContent()}
-        </div>
+        <div className="col-md-12">{this.renderContent()}</div>
       </LatestPanelWrapper>
     );
   }

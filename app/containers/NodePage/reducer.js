@@ -8,6 +8,7 @@ import { fromJS } from 'immutable';
 import { LOAD_NODE, LOAD_NODE_SUCCESS, LOAD_NODE_ERROR } from './constants';
 
 export const initialState = fromJS({
+
   loading: false,
   error: false,
   data: {},
