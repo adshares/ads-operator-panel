@@ -8,18 +8,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { FaAlignJustify, FaCode } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
-import makeSelectNodePage from './selectors';
+import { makeSelectAccounts, makeSelectNode } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
-import { loadNode } from './actions';
+import { loadAccounts, loadNode } from './actions';
 import { NodePageWrapper } from './styled';
 import LatestPanel from '../../components/LatestPanel';
 
@@ -32,6 +31,7 @@ export class NodePage extends React.PureComponent {
 
     if (params.id) {
       this.props.dispatch(loadNode(params.id));
+      this.props.dispatch(loadAccounts(params.id));
     }
   }
 
@@ -44,30 +44,20 @@ export class NodePage extends React.PureComponent {
       status: 'Status',
     };
 
-    const detailTab = {
-      id: 'table',
-      name: 'Table',
-      icon: <FaAlignJustify />,
-    };
-
-    const codeTab = {
-      id: 'code',
-      name: 'Code',
-      icon: <FaCode />,
-    };
-
-    const tabs = [detailTab, codeTab];
-
     const accountColumns = {
       id: 'Account Id',
       balance: 'Balance',
     };
 
+    const link = '/blockexplorer/accounts';
     const accountTab = {
       id: 'account',
       name: 'Accounts',
-      data: [],
+      data: this.props.accounts.data,
       columns: accountColumns,
+      ceilConfiguration: {
+        id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+      },
     };
 
     const {
@@ -82,14 +72,17 @@ export class NodePage extends React.PureComponent {
         </Helmet>
         <h3>Node #{params.id}</h3>
         <DetailView
-          tabs={tabs}
           fields={fields}
           data={this.props.node.data}
           loading={this.props.node.loading}
           error={this.props.node.error}
         />
         <div className="row">
-          <LatestPanel tabs={[accountTab]} loading={false} error={false} />
+          <LatestPanel
+            tabs={[accountTab]}
+            loading={this.props.accounts.loading}
+            error={this.props.accounts.error}
+          />
         </div>
       </NodePageWrapper>
     );
@@ -97,13 +90,15 @@ export class NodePage extends React.PureComponent {
 }
 
 NodePage.propTypes = {
+  match: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   node: PropTypes.object,
   accounts: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  node: makeSelectNodePage(),
+  node: makeSelectNode(),
+  accounts: makeSelectAccounts(),
 });
 
 function mapDispatchToProps(dispatch) {

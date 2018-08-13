@@ -6,17 +6,12 @@ export const LatestPanelWrapper = styled.div`
 `;
 
 export const List = styled.ul`
-  display: inline;
   border-bottom: 3px solid #bdc3c7;
   width: 100%;
 `;
 
 export const ListItem = styled.li`
   color: #6c7a89;
-  float: left;
-  &:nth-last-child(1) {
-    float: right;
-  }
 `;
 
 export const Button = styled.button`
@@ -33,3 +28,9 @@ export const Button = styled.button`
 export const IconWrapper = styled.span`
   margin-right: 7px;  
 `;
+
+LatestPanelWrapper.displayName = 'LatestPanelWrapper';
+List.displayName = 'List';
+ListItem.displayName = 'ListItem';
+Button.displayName = 'Button';
+IconWrapper.displayName = 'IconWrapper';

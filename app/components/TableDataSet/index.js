@@ -85,7 +85,7 @@ class TableDataSet extends React.PureComponent {
       });
     });
 
-    return <tr key={row.id}>{cells}</tr>;
+    return <tr key={`row_${row.id}`}>{cells}</tr>;
   }
 
   renderCeil(columnName, value, row) {

@@ -3,14 +3,9 @@ import { mountWrap } from 'testHelper';
 import LatestPanel from '../index';
 
 describe('<LatestPanel />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(true);
-  });
-
   it('should render empty <div /> when there is no tabs', () => {
-    const tabs = [];
     const renderedComponent = mountWrap(
-      <LatestPanel tabs={tabs} loading={false} error={false} />,
+      <LatestPanel tabs={[]} loading={false} error={false} />,
     );
 
     expect(renderedComponent.find('div').length).toEqual(1);

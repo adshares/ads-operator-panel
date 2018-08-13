@@ -1,7 +1,12 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
-import { LOAD_NODE } from './constants';
-import { nodeLoaded, nodeLoadingError } from './actions';
+import { LOAD_ACCOUNTS, LOAD_NODE } from './constants';
+import {
+  accountsLoaded,
+  accountsLoadingError,
+  nodeLoaded,
+  nodeLoadingError,
+} from './actions';
 
 import api from '../../api';
 
@@ -14,8 +19,17 @@ export function* getNode(action) {
   }
 }
 
+export function* getAccounts(action) {
+  try {
+    const accounts = yield call(api.fetchAccountsByNodeId, action.nodeId);
+    yield put(accountsLoaded(accounts));
+  } catch (err) {
+    yield put(accountsLoadingError(err));
+  }
+}
+
 // Individual exports for testing
 export default function* defaultSaga() {
   yield takeLatest(LOAD_NODE, getNode);
+  yield takeLatest(LOAD_ACCOUNTS, getAccounts);
 }
-

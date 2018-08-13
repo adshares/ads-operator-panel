@@ -10,13 +10,14 @@ const selectNodePageDomain = state => state.get('nodePage', initialState);
 /**
  * Other specific selectors
  */
+const makeSelectNode = () =>
+  createSelector(selectNodePageDomain, globalState =>
+    globalState.get('node').toJS(),
+  );
 
-/**
- * Default selector used by NodePage
- */
+const makeSelectAccounts = () =>
+  createSelector(selectNodePageDomain, globalState =>
+    globalState.get('accounts').toJS(),
+  );
 
-const makeSelectNodePage = () =>
-  createSelector(selectNodePageDomain, substate => substate.toJS());
-
-export default makeSelectNodePage;
-export { selectNodePageDomain };
+export { makeSelectNode, makeSelectAccounts };

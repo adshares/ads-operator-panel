@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/styles/hljs';
+import { FaAlignJustify, FaCode } from 'react-icons/fa';
 import {
   Button,
   LatestPanelWrapper,
@@ -20,16 +21,23 @@ import LoadingIndicator from '../LoadingIndicator';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailView extends React.PureComponent {
+  tabs = [
+    {
+      id: 'table',
+      name: 'Table',
+      icon: <FaAlignJustify />,
+    },
+    {
+      id: 'code',
+      name: 'Code',
+      icon: <FaCode />,
+    },
+  ];
+
   constructor(props) {
     super(props);
 
-    const defaultTab = this.props.tabs[0];
-
-    if (defaultTab) {
-      this.state = {
-        selectedTabId: defaultTab.id,
-      };
-    }
+    this.state = { selectedTabId: this.tabs[0].id };
 
     this.handleTabSelection = this.handleTabSelection.bind(this);
   }
@@ -43,9 +51,9 @@ class DetailView extends React.PureComponent {
   }
 
   getSelectedTab(tabId) {
-    const tab = this.props.tabs.filter(item => item.id === tabId);
+    const tab = this.tabs.filter(item => item.id === tabId);
 
-    return tab[0] || this.props.tabs[0];
+    return tab[0];
   }
 
   renderIcon(icon) {
@@ -57,7 +65,7 @@ class DetailView extends React.PureComponent {
   }
 
   renderTabs() {
-    return this.props.tabs.map(tab => (
+    return this.tabs.map(tab => (
       <ListItem className="nav-item" key={`tab_${tab.id}}`}>
         <Button
           className={this.state.selectedTabId === tab.id ? 'active' : ''}
@@ -73,14 +81,14 @@ class DetailView extends React.PureComponent {
 
   renderContent() {
     if (this.props.error) {
-      return <ErrorMsg error={this.props.error} />
+      return <ErrorMsg error={this.props.error} />;
     }
 
     if (this.props.loading) {
-      return <LoadingIndicator />
+      return <LoadingIndicator />;
     }
 
-    if (this.state.selectedTabId === 'code') {
+    if (this.state.selectedTabId === this.tabs[1].id) {
       return (
         <div key="highlight_code" className="list-group-item row">
           <SyntaxHighlighter language="json" style={darcula}>
@@ -91,7 +99,7 @@ class DetailView extends React.PureComponent {
     }
 
     const rows = [];
-    if (this.state.selectedTabId === 'table') {
+    if (this.state.selectedTabId === this.tabs[0].id) {
       Object.entries(this.props.data).forEach(([columnId, columnValue]) => {
         if (this.props.fields[columnId] !== undefined) {
           rows.push(
@@ -104,16 +112,13 @@ class DetailView extends React.PureComponent {
       });
     }
 
-    return <ul className="list-group">{rows}</ul>
+    return <ul className="list-group">{rows}</ul>;
   }
 
   render() {
     return (
       <LatestPanelWrapper className="row">
-        <List className="nav">
-          {this.renderTabs()}
-          <ListItem className="nav-item" />
-        </List>
+        <List className="nav">{this.renderTabs()}</List>
         <div className="col-md-12">{this.renderContent()}</div>
       </LatestPanelWrapper>
     );
@@ -121,7 +126,6 @@ class DetailView extends React.PureComponent {
 }
 
 DetailView.propTypes = {
-  tabs: PropTypes.array.isRequired,
   data: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,

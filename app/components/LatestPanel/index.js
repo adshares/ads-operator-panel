@@ -51,7 +51,7 @@ class LatestPanel extends React.PureComponent {
   renderViewAll(link) {
     if (link && link.length > 0) {
       return (
-        <ListItem className="nav-item">
+        <ListItem className="nav-item view-all">
           <Link to={link}>View all</Link>
         </ListItem>
       );
@@ -85,6 +85,7 @@ class LatestPanel extends React.PureComponent {
           name={currentTab.name}
           columns={currentTab.columns}
           data={currentTab.data}
+          ceilConfiguration={currentTab.ceilConfiguration || null}
           loading={this.props.loading}
           error={this.props.error}
         />

@@ -20,13 +20,7 @@ function fetchNode(id) {
   return send(`api/v1/blockexplorer/nodes/${id}`);
 }
 
-function fetchAccountsByNodeId(
-  nodeId,
-  limit = 5,
-  offset = 0,
-  sort = 'id',
-  order = 'desc'
-) {
+function fetchAccountsByNodeId(nodeId) {
   return send(`api/v1/blockexplorer/nodes/${nodeId}/accounts`);
 }
 
@@ -51,4 +45,5 @@ export default {
   fetchBlocks,
   fetchTransactions,
   fetchNode,
+  fetchAccountsByNodeId,
 };
