@@ -44,17 +44,15 @@ export class NodePage extends React.PureComponent {
       status: 'Status',
     };
 
-    const accountColumns = {
-      id: 'Account Id',
-      balance: 'Balance',
-    };
-
     const link = '/blockexplorer/accounts';
     const accountTab = {
       id: 'account',
       name: 'Accounts',
       data: this.props.accounts.data,
-      columns: accountColumns,
+      columns: {
+        id: 'Account Id',
+        balance: 'Balance',
+      },
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
       },
