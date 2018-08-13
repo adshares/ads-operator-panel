@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/styles/hljs';
+import { FormattedMessage } from 'react-intl';
 import { FaAlignJustify, FaCode } from 'react-icons/fa';
 import {
   Button,
@@ -18,18 +19,17 @@ import {
 } from './styled';
 import ErrorMsg from '../ErrorMsg';
 import LoadingIndicator from '../LoadingIndicator';
+import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailView extends React.PureComponent {
   tabs = [
     {
       id: 'table',
-      name: 'Table',
       icon: <FaAlignJustify />,
     },
     {
       id: 'code',
-      name: 'Code',
       icon: <FaCode />,
     },
   ];
@@ -73,7 +73,7 @@ class DetailView extends React.PureComponent {
           onClick={() => this.handleTabSelection(tab.id)}
         >
           {this.renderIcon(tab.icon)}
-          {tab.name}
+          <FormattedMessage {...messages[tab.id]} />
         </Button>
       </ListItem>
     ));

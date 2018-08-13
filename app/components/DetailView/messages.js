@@ -7,8 +7,12 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.DetailView.header',
-    defaultMessage: 'This is the DetailView component !',
+  table: {
+    id: 'app.components.DetailView.table',
+    defaultMessage: 'Table',
+  },
+  code: {
+    id: 'app.components.DetailView.code',
+    defaultMessage: 'Code',
   },
 });
