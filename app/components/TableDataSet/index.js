@@ -90,7 +90,7 @@ class TableDataSet extends React.PureComponent {
 
   renderCeil(columnName, value, row) {
     if (
-      this.props.ceilConfiguration[columnName] !== undefined &&
+      this.props.ceilConfiguration &&
       typeof this.props.ceilConfiguration[columnName] === 'function'
     ) {
       return (
