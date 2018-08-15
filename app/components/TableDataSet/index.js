@@ -133,7 +133,7 @@ class TableDataSet extends React.PureComponent {
 }
 
 TableDataSet.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   columns: PropTypes.object.isRequired,
   sortingColumns: PropTypes.array,
   ceilConfiguration: PropTypes.object,

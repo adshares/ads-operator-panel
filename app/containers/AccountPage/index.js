@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
@@ -20,45 +21,42 @@ import saga from './saga';
 import { loadAccount, loadTransactions } from './actions';
 import LatestPanel from '../../components/LatestPanel';
 import { AccountPageWrapper } from './styled';
+import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 export class AccountPage extends React.PureComponent {
   componentDidMount() {
-    const {
-      match: { params },
-    } = this.props;
+    const { id } = this.props.match.params;
 
-    if (params.id) {
-      this.props.dispatch(loadAccount(params.id));
-      this.props.dispatch(loadTransactions(params.id));
+    if (id) {
+      this.props.dispatch(loadAccount(id));
+      this.props.dispatch(loadTransactions(id));
     }
   }
 
   render() {
-    const {
-      match: { params },
-    } = this.props;
+    const { id } = this.props.match.params;
 
     const fields = {
-      id: 'Id',
-      balance: 'Balance',
-      msid: 'Messages',
-      status: 'Status',
-      time: 'Time',
+      id: <FormattedMessage {...messages.fieldId} />,
+      balance: <FormattedMessage {...messages.fieldBalance} />,
+      msid: <FormattedMessage {...messages.fieldMsid} />,
+      status: <FormattedMessage {...messages.fieldStatus} />,
+      time: <FormattedMessage {...messages.fieldTime} />,
     };
 
     const link = '/blockexplorer/transactions';
     const transactionTab = {
       id: 'transactions',
-      name: 'Transactions',
+      name: <FormattedMessage {...messages.transactionTabTitle} />,
       data: this.props.transactions.data,
       columns: {
-        id: 'Transaction Id',
-        type: 'Type',
-        sender_address: 'From',
-        target_address: 'To',
-        amount: 'Amount',
-        time: 'Time',
+        id: <FormattedMessage {...messages.columnId} />,
+        type: <FormattedMessage {...messages.columnType} />,
+        sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
+        target_address: <FormattedMessage {...messages.columnTargetAddress} />,
+        amount: <FormattedMessage {...messages.columnAmount} />,
+        time: <FormattedMessage {...messages.columnTime} />,
       },
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
@@ -69,9 +67,12 @@ export class AccountPage extends React.PureComponent {
       <AccountPageWrapper>
         <Helmet>
           <title>AccountPage</title>
-          <meta name="description" content="Description of AccountPage" />
+          <meta
+            name="description"
+            content={<FormattedMessage {...messages.metaDescription} />}
+          />
         </Helmet>
-        <h3>Account #{params.id}</h3>
+        <h3>Account #{id}</h3>
         <DetailView
           fields={fields}
           data={this.props.account.data}
