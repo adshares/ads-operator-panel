@@ -17,7 +17,7 @@ before_install:
 script:
 - node ./internals/scripts/generate-templates-for-linting
 - npm test -- --maxWorkers=4
-#- npm run build
+- npm run build
 
 after_success: 'npm run coveralls'
 
