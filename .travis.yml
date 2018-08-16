@@ -1,0 +1,33 @@
+language: node_js
+
+node_js:
+- 9
+- 8
+
+cache:
+  yarn: true
+  directories:
+  - node_modules
+
+before_install:
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+
+script:
+- node ./internals/scripts/generate-templates-for-linting
+- npm test -- --maxWorkers=4
+#- npm run build
+
+after_success: 'npm run coveralls'
+
+notifications:
+  email: false
+  slack:
+    rooms:
+      secure: "IaQb1b75JgGP9GICERECLKNrWOrekKcJdkjXBC8fFXXt71Wn1dBanj3zFovC4uhCcULP1zbBVjaahcubT0wPJ+DefGVXpFHnoM+m26oBnbR3BGBW/bd6AtXIF8vYohsbJPhkz7lXqkDW07qz6eCgdZpmyRp96HE5hKE0jQY3se3Vlo/wx3QcF+TBnkmiUKn+JcJ/9dbi8ZaIq+h/xCS72RMV7hAADCDKQyD+mEFoZgEqdq+AkkWTNbN/vG7f06PlvQMKorDr1ySVZJ6UgmCbSYYOIOPwKmkEgS/uDqo7bM16gwOJ4WHCd24+Ecl5Ai+5Wi56+Zk3kQm7R3g0IahWWQLhr9OS2zm1Ju+h3dv/vlEDqJcC0feXsqLuxwdxf0UMBS/gH5LpgO2jJyCwNJ4sSV+YVaON+tNZ6YadwOZzK0iu4Er1hkC/Ek5K4enVwnQReJq2/DwPxGjoyHhcwMGeMl1pkzLAEuVrb7P+AVcPBMJos/ehwiqOntlzvfeetClklG4sJ6jOZxhB319bDoJNJvpzJblCgIvH3en9VKUqfKPRgWHgYGpzSZM6kdY9VrCFXYOLBZd3PexISSj67Fi2P+NWimszusrKC+RpqJMNLffsXnWoQnH7EqhqCEU5YPkCsxREYfYk0gqy9axDXn0k86/mspQJ5f16aWgeDDGuMNQ="
+    on_success: change
+    on_failure: always
+
+
+

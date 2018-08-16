@@ -28,11 +28,6 @@ const makeSelectLatestBlocks = () =>
     return blocks;
   });
 
-// const makeSelectLatestTransactions = () =>
-//   createSelector(selectBlockexplorerDomain, globalState =>
-//     globalState.get('transactions').toJS(),
-//   );
-
 const makeSelectLatestTransactions = () =>
   createSelector(
     selectBlockexplorerDomain,
@@ -40,7 +35,6 @@ const makeSelectLatestTransactions = () =>
     (globalState, accountId) => {
       const transactions = globalState.get('transactions').toJS();
       transactions.data.forEach(transaction => {
-
         if (transaction.time) {
           const date = moment.parseZone(transaction.time);
           transaction.time = date.format('YYYY-MM-DD HH:MM:ss'); // eslint-disable-line
