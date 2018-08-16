@@ -20,6 +20,7 @@ import NodesListPage from 'containers/NodesListPage/Loadable';
 import NodePage from 'containers/NodePage/Loadable';
 import BlockPage from 'containers/BlockPage/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
+import TransactionPage from 'containers/TransactionPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 
@@ -35,6 +36,7 @@ export default function App() {
         <Route exact path="/blockexplorer/nodes/:id([a-zA-Z0-9]{4})" component={NodePage} /> {/* eslint-disable-line  prettier/prettier */}
         <Route exact path="/blockexplorer/blocks" component={BlockPage} />
         <Route exact path="/blockexplorer/accounts/:id([a-zA-Z0-9]{4}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4})" component={AccountPage} /> {/* eslint-disable-line  prettier/prettier */}
+        <Route exact path="/blockexplorer/transactions/:id([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8}:[a-zA-Z0-9]{4})" component={TransactionPage} /> {/* eslint-disable-line  prettier/prettier */}
         <Route component={NotFoundPage} />
       </Switch>
     </div>

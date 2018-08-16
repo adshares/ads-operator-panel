@@ -20,7 +20,7 @@ const makeSelectLatestBlocks = () =>
     if (blocks.data) {
       blocks.data.map(item => {
         const date = moment.parseZone(item.time);
-        item.time = date.format('YYYY-MM-DD HH:MM:SS'); // eslint-disable-line no-param-reassign
+        item.time = date.format('YYYY-MM-DD HH:MM:ss'); // eslint-disable-line no-param-reassign
         return item;
       });
     }

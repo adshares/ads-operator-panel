@@ -73,4 +73,57 @@ describe('<DetailView />', () => {
     expect(renderedComponent.find('SyntaxHighlighter').length).toEqual(0);
     expect(renderedComponent.find('ul').length).toEqual(1);
   });
+
+  it('should assign `active` class to clicked element', () => {
+    const renderedComponent = shallow(
+      <DetailView data={{}} fields={{}} loading={false} error={false} />,
+    );
+
+    expect(
+      renderedComponent
+        .find('ListItem Button')
+        .at(0)
+        .hasClass('active'),
+    ).toEqual(true);
+    expect(
+      renderedComponent
+        .find('ListItem Button')
+        .at(1)
+        .hasClass('active'),
+    ).toEqual(false);
+
+    renderedComponent
+      .find('ListItem Button')
+      .at(1)
+      .simulate('click');
+    expect(
+      renderedComponent
+        .find('ListItem Button')
+        .at(0)
+        .hasClass('active'),
+    ).toEqual(false);
+    expect(
+      renderedComponent
+        .find('ListItem Button')
+        .at(1)
+        .hasClass('active'),
+    ).toEqual(true);
+
+    renderedComponent
+      .find('ListItem Button')
+      .at(0)
+      .simulate('click');
+    expect(
+      renderedComponent
+        .find('ListItem Button')
+        .at(0)
+        .hasClass('active'),
+    ).toEqual(true);
+    expect(
+      renderedComponent
+        .find('ListItem Button')
+        .at(1)
+        .hasClass('active'),
+    ).toEqual(false);
+  });
 });

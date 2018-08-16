@@ -10,12 +10,14 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/styles/hljs';
 import { FormattedMessage } from 'react-intl';
 import { FaAlignJustify, FaCode } from 'react-icons/fa';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   Button,
   LatestPanelWrapper,
   List,
   ListItem,
   IconWrapper,
+  CopyToClipboardWrapper,
 } from './styled';
 import ErrorMsg from '../ErrorMsg';
 import LoadingIndicator from '../LoadingIndicator';
@@ -37,7 +39,10 @@ class DetailView extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { selectedTabId: this.tabs[0].id };
+    this.state = {
+      selectedTabId: this.tabs[0].id,
+      copied: false,
+    };
 
     this.handleTabSelection = this.handleTabSelection.bind(this);
   }
@@ -92,7 +97,7 @@ class DetailView extends React.PureComponent {
       return (
         <div key="highlight_code" className="list-group-item row">
           <SyntaxHighlighter language="json" style={darcula}>
-            {JSON.stringify(this.props.data, null, 2)}
+            {this.getData()}
           </SyntaxHighlighter>
         </div>
       );
@@ -100,12 +105,12 @@ class DetailView extends React.PureComponent {
 
     const rows = [];
     if (this.state.selectedTabId === this.tabs[0].id) {
-      Object.entries(this.props.data).forEach(([columnId, columnValue]) => {
-        if (this.props.fields[columnId] !== undefined) {
+      Object.entries(this.props.fields).forEach(([columnId, columnValue]) => {
+        if (this.props.data[columnId] !== undefined) {
           rows.push(
             <li key={`column_${columnId}`} className="list-group-item row">
-              <span className="col-md-3">{this.props.fields[columnId]}</span>
-              <span className="col-md-9">{columnValue}</span>
+              <span className="col-md-3">{columnValue}</span>
+              <span className="col-md-9">{this.props.data[columnId]}</span>
             </li>,
           );
         }
@@ -115,11 +120,27 @@ class DetailView extends React.PureComponent {
     return <ul className="list-group">{rows}</ul>;
   }
 
+  getData() {
+    return JSON.stringify(this.props.data, null, 2);
+  }
+
   render() {
+    const buttonClassName = this.state.copied ? 'btn-secondary' : 'btn-primary';
+
     return (
       <LatestPanelWrapper className="row">
         <List className="nav">{this.renderTabs()}</List>
         <div className="col-md-12">{this.renderContent()}</div>
+        <CopyToClipboardWrapper>
+          <CopyToClipboard
+            text={this.getData()}
+            onCopy={() => this.setState({ copied: true })}
+          >
+            <Button type="button" className={`btn ${buttonClassName}`}>
+              Copy
+            </Button>
+          </CopyToClipboard>
+        </CopyToClipboardWrapper>
       </LatestPanelWrapper>
     );
   }
