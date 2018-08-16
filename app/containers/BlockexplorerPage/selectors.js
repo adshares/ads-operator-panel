@@ -28,9 +28,46 @@ const makeSelectLatestBlocks = () =>
     return blocks;
   });
 
+// const makeSelectLatestTransactions = () =>
+//   createSelector(selectBlockexplorerDomain, globalState =>
+//     globalState.get('transactions').toJS(),
+//   );
+
 const makeSelectLatestTransactions = () =>
-  createSelector(selectBlockexplorerDomain, globalState =>
-    globalState.get('transactions').toJS(),
+  createSelector(
+    selectBlockexplorerDomain,
+    (stateOwn, propsOwn) => propsOwn.match.params.id,
+    (globalState, accountId) => {
+      const transactions = globalState.get('transactions').toJS();
+      transactions.data.forEach(transaction => {
+
+        if (transaction.time) {
+          const date = moment.parseZone(transaction.time);
+          transaction.time = date.format('YYYY-MM-DD HH:MM:ss'); // eslint-disable-line
+        }
+
+        if (transaction.type === 'send_many' && transaction.wires.length > 0) {
+          const targetAddress = [];
+          let amount = 0;
+          transaction.wires.forEach(target => {
+            if (
+              transaction.sender_address !== accountId &&
+              target.target_address !== accountId
+            ) {
+              return;
+            }
+
+            targetAddress.push(target.target_address);
+            amount += parseInt(target.amount, 10);
+          });
+
+          transaction.target_address = targetAddress.join(', '); // eslint-disable-line
+          transaction.amount = amount; // eslint-disable-line
+        }
+      });
+
+      return transactions;
+    },
   );
 
 export {
