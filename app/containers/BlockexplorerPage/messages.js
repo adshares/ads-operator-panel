@@ -29,7 +29,7 @@ export default defineMessages({
   },
   transactionTabTitle: {
     id: 'app.containers.BlockExplorerPage.transactionTabTitle',
-    defaultMessage: 'Transactions',
+    defaultMessage: 'Latest transactions',
   },
   nodeColumnId: {
     id: 'app.containers.BlockExplorerPage.nodeColumnId',
