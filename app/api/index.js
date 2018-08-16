@@ -32,6 +32,10 @@ function fetchTransactionsByAccountId(accountId) {
   return send(`api/v1/blockexplorer/accounts/${accountId}/transactions`);
 }
 
+function fetchTransaction(id) {
+  return send(`api/v1/blockexplorer/transactions/${id}`);
+}
+
 function send(url, params) {
   const endpoint = process.env.API_URL + url;
   const credentials = {};
@@ -56,4 +60,5 @@ export default {
   fetchAccountsByNodeId,
   fetchAccountsById,
   fetchTransactionsByAccountId,
+  fetchTransaction,
 };
