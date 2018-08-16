@@ -18,13 +18,20 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   color: #6c7a89;
   float: left;
+    
+  &:hover {
+    cursor: pointer;        
+  }
 `;
 
 export const Button = styled.button`
   margin-right: 20px;
- 
+  
   &:hover {
-    text-decoration: underline;
+    cursor: pointer;    
+  }
+  &:focus {
+    outline: 0;   
   }
   &.active {
     border-bottom: 4px solid #5dbcd2;    

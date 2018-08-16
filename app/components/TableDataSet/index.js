@@ -78,17 +78,14 @@ class TableDataSet extends React.PureComponent {
   renderSingleRow(row) {
     const cells = [];
     Object.entries(this.props.columns).forEach(([columnHeader]) => {
-      Object.entries(row).forEach(([rowColumnName, value]) => {
-        if (rowColumnName === columnHeader) {
-          cells.push(this.renderCeil(rowColumnName, value, row));
-        }
-      });
+      const value = row[columnHeader] !== undefined ? row[columnHeader] : '--';
+      cells.push(this.renderCell(columnHeader, value, row));
     });
 
     return <tr key={`row_${row.id}`}>{cells}</tr>;
   }
 
-  renderCeil(columnName, value, row) {
+  renderCell(columnName, value, row) {
     if (
       this.props.ceilConfiguration &&
       typeof this.props.ceilConfiguration[columnName] === 'function'

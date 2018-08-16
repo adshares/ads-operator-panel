@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-
+import { FormattedMessage, intlShape } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
@@ -21,54 +21,60 @@ import saga from './saga';
 import { loadAccounts, loadNode } from './actions';
 import { NodePageWrapper } from './styled';
 import LatestPanel from '../../components/LatestPanel';
+import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodePage extends React.PureComponent {
   componentDidMount() {
-    const {
-      match: { params },
-    } = this.props;
+    const { id } = this.props.match.params;
 
-    if (params.id) {
-      this.props.dispatch(loadNode(params.id));
-      this.props.dispatch(loadAccounts(params.id));
+    if (id) {
+      this.props.dispatch(loadNode(id));
+      this.props.dispatch(loadAccounts(id));
     }
   }
 
   render() {
+    const { id } = this.props.match.params;
+
     const fields = {
-      id: 'Id',
-      account_count: 'Accounts',
-      msid: 'Messages count',
-      balance: 'Balance',
-      status: 'Status',
+      id: <FormattedMessage {...messages.fieldId} />,
+      account_count: <FormattedMessage {...messages.fieldAccountCount} />,
+      msid: <FormattedMessage {...messages.fieldMsid} />,
+      balance: <FormattedMessage {...messages.fieldBalance} />,
+      status: <FormattedMessage {...messages.fieldStatus} />,
     };
 
     const link = '/blockexplorer/accounts';
     const accountTab = {
       id: 'account',
-      name: 'Accounts',
+      name: this.context.intl.formatMessage(messages.accountTabTitle),
       data: this.props.accounts.data,
       columns: {
-        id: 'Account Id',
-        balance: 'Balance',
+        id: this.context.intl.formatMessage(messages.accountColumnId),
+        balance: this.context.intl.formatMessage(messages.accountBalance),
       },
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
       },
     };
 
-    const {
-      match: { params },
-    } = this.props;
+    const metaDescription = this.context.intl.formatMessage(
+      messages.metaDescription,
+      { id },
+    );
 
     return (
       <NodePageWrapper>
         <Helmet>
-          <title>Node #{params.id}</title>
-          <meta name="description" content={`Node #${params.id}`} />
+          <title>
+            {this.context.intl.formatMessage(messages.metaTitle, { id })}
+          </title>
+          <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>Node #{params.id}</h3>
+        <h3>
+          <FormattedMessage {...messages.header} /> #{id}
+        </h3>
         <DetailView
           fields={fields}
           data={this.props.node.data}
@@ -92,6 +98,10 @@ NodePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   node: PropTypes.object,
   accounts: PropTypes.object,
+};
+
+NodePage.contextTypes = {
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({

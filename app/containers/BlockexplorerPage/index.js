@@ -10,10 +10,13 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { FormattedMessage, intlShape } from 'react-intl';
 import Search from 'components/Search';
 import Card from 'components/Card';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import LatestPanel from 'components/LatestPanel';
+
 import {
   makeSelectLatestNodes,
   makeSelectLatestBlocks,
@@ -26,7 +29,7 @@ import {
   loadLatestNode,
   loadLatestsTransactions,
 } from './actions';
-import LatestPanel from '../../components/LatestPanel';
+import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Blockexplorer extends React.PureComponent {
@@ -38,28 +41,41 @@ export class Blockexplorer extends React.PureComponent {
 
   render() {
     const nodeColumns = {
-      id: 'Id',
-      account_count: 'Accounts',
-      msid: 'Messages count',
-      balance: 'Balance',
-      status: 'Status',
+      id: <FormattedMessage {...messages.nodeColumnId} />,
+      account_count: <FormattedMessage {...messages.nodeColumnAccountCount} />,
+      msid: <FormattedMessage {...messages.nodeColumnMsid} />,
+      balance: <FormattedMessage {...messages.nodeColumnBalance} />,
+      status: <FormattedMessage {...messages.nodeColumnStatus} />,
     };
 
     const blockColumns = {
-      id: 'Id',
-      message_count: 'Messages',
-      transaction_count: 'Transactions',
-      time: 'Time',
+      id: <FormattedMessage {...messages.blockColumnId} />,
+      message_count: <FormattedMessage {...messages.blockColumnMessageCount} />,
+      transaction_count: (
+        <FormattedMessage {...messages.blockColumnTransactionCount} />
+      ),
+      time: <FormattedMessage {...messages.blockColumnTime} />,
     };
 
     const transactionColumns = {
-      id: 'Id',
-      type: 'Type',
+      id: <FormattedMessage {...messages.transactionColumnId} />,
+      block_id: <FormattedMessage {...messages.transactionColumnBlockId} />,
+      message_id: <FormattedMessage {...messages.transactionColumnMessageId} />,
+      sender_address: (
+        <FormattedMessage {...messages.transactionColumnSenderAddress} />
+      ),
+      target_address: (
+        <FormattedMessage {...messages.transactionColumnTargetAddress} />
+      ),
+      sender_fee: <FormattedMessage {...messages.transactionColumnSenderFee} />,
+      size: <FormattedMessage {...messages.transactionColumnSize} />,
+      type: <FormattedMessage {...messages.transactionColumnType} />,
+      time: <FormattedMessage {...messages.transactionColumnTime} />,
     };
 
     const nodeTab = {
       id: 'node',
-      name: 'Nodes',
+      name: this.context.intl.formatMessage(messages.nodeTabTitle),
       link: 'blockexplorer/nodes',
       data: this.props.nodes.data,
       columns: nodeColumns,
@@ -67,7 +83,7 @@ export class Blockexplorer extends React.PureComponent {
 
     const blockTab = {
       id: 'block',
-      name: 'Blocks',
+      name: this.context.intl.formatMessage(messages.blockTabTitle),
       link: '/blockexplorer/blocks',
       data: this.props.blocks.data,
       columns: blockColumns,
@@ -75,7 +91,7 @@ export class Blockexplorer extends React.PureComponent {
 
     const transactionTab = {
       id: 'transaction',
-      name: 'Transactions',
+      name: this.context.intl.formatMessage(messages.transactionTabTitle),
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
       columns: transactionColumns,
@@ -84,8 +100,11 @@ export class Blockexplorer extends React.PureComponent {
     return (
       <div>
         <Helmet>
-          <title>Blockexplorer</title>
-          <meta name="description" content="Description of Blockexplorer" />
+          <title>{this.context.intl.formatMessage(messages.metaTitle)}</title>
+          <meta
+            name="description"
+            content={this.context.intl.formatMessage(messages.metaDescription)}
+          />
         </Helmet>
         <div className="row">
           <Card />
@@ -120,6 +139,10 @@ Blockexplorer.propTypes = {
   nodes: PropTypes.object,
   blocks: PropTypes.object,
   transactions: PropTypes.object,
+};
+
+Blockexplorer.contextTypes = {
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
