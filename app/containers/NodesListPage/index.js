@@ -11,13 +11,11 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import { intlShape } from 'react-intl';
-
+import { FormattedMessage, intlShape } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
 import Pagination from 'components/Pagination/Loadable';
-
 import makeSelectNodesListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -67,11 +65,11 @@ export class NodesListPage extends React.Component {
 
   render() {
     const columns = {
-      id: 'Id',
-      account_count: 'Accounts',
-      msid: 'Messages count',
-      balance: 'Balance',
-      status: 'Status',
+      id: <FormattedMessage {...messages.fieldId} />,
+      account_count: <FormattedMessage {...messages.fieldAccountCount} />,
+      msid: <FormattedMessage {...messages.fieldMsid} />,
+      balance: <FormattedMessage {...messages.fieldBalance} />,
+      status: <FormattedMessage {...messages.fieldStatus} />,
     };
     const link = '/blockexplorer/nodes';
     const sortingColumns = ['id', 'msid'];
@@ -102,8 +100,11 @@ export class NodesListPage extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>List of nodes</title>
-          <meta name="description" content="Blockexplorer nodes list" />
+          <title>{this.context.intl.formatMessage(messages.metaTitle)}</title>
+          <meta
+            name="description"
+            content={this.context.intl.formatMessage(messages.metaDescription)}
+          />
         </Helmet>
         <TableDataSet
           name="nodes"

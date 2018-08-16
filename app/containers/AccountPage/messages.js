@@ -9,15 +9,15 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   header: {
     id: 'app.containers.AccountPage.header',
-    defaultMessage: 'This is AccountPage container !',
+    defaultMessage: 'Account',
   },
   metaTitle: {
     id: 'app.containers.AccountPage.metaTitle',
-    defaultMessage: 'Account details',
+    defaultMessage: 'Account {id}',
   },
   metaDescription: {
     id: 'app.containers.AccountPage.metaDescription',
-    defaultMessage: 'Account details',
+    defaultMessage: 'Account {id} page',
   },
   transactionTabTitle: {
     id: 'app.containers.AccountPage.transactionTabTitle',

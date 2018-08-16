@@ -25,11 +25,6 @@ export const Button = styled.button`
   &:hover {
     cursor: pointer;    
   }
-  &:active {
-    border: 1px solid white;
-    text-decoration: none;
-    
-  }
   &:focus {
     outline: 0;   
   }

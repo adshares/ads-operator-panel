@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
@@ -63,16 +63,22 @@ export class AccountPage extends React.PureComponent {
       },
     };
 
+    const metaDescription = this.context.intl.formatMessage(
+      messages.metaDescription,
+      { id },
+    );
+
     return (
       <AccountPageWrapper>
         <Helmet>
-          <title>AccountPage</title>
-          <meta
-            name="description"
-            content={<FormattedMessage {...messages.metaDescription} />}
-          />
+          <title>
+            {this.context.intl.formatMessage(messages.metaTitle, { id })}
+          </title>
+          <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>Account #{id}</h3>
+        <h3>
+          <FormattedMessage {...messages.header} /> #{id}
+        </h3>
         <DetailView
           fields={fields}
           data={this.props.account.data}
@@ -94,6 +100,10 @@ AccountPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   account: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
+};
+
+AccountPage.contextTypes = {
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
