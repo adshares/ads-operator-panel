@@ -9,7 +9,7 @@ import { nodesLoaded, nodesLoadingError } from '../actions';
 
 import { LOAD_NODES } from '../constants';
 
-describe('getNodes Saga', () => {
+describe('getTransactions Saga', () => {
   let getNodesGenarator;
 
   beforeEach(() => {
@@ -21,7 +21,9 @@ describe('getNodes Saga', () => {
     };
 
     getNodesGenarator = getNodes(action);
-    const selectDescriptor = getNodesGenarator.next().value; // eslint-disable-line no-unused-vars
+    const selectDescriptor = getNodesGenarator.next().value;
+
+    expect(selectDescriptor).toMatchSnapshot();
   });
 
   it('should dispatch the nodesLoaded action if it requests the data successfully', () => {
