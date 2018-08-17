@@ -91,7 +91,7 @@ class Pagination extends React.PureComponent {
   render() {
     return (
       <PaginationWrapper aria-label="Nodes Pagination area">
-        <ul className="pagination justify-content-center">
+        <ul className="pagination justify-content-center flex-wrap">
           {this.renderPreviousButton()}
           {this.renderPagesButton()}
           {this.renderNextButton()}
@@ -112,7 +112,7 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
-  pageRangeDisplayed: 20,
+  pageRangeDisplayed: 15,
   marginPagesDisplayed: 5,
 };
 
