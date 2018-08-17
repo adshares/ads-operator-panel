@@ -37,3 +37,8 @@ export const Button = styled.button`
     border-bottom: 4px solid #5dbcd2;    
   }
 `;
+
+LatestPanelWrapper.displayName = 'LatestPanelWrapper';
+List.displayName = 'List';
+ListItem.displayName = 'ListItem';
+Button.displayName = 'Button';

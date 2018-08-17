@@ -17,6 +17,7 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import BlockExplorerPage from 'containers/BlockexplorerPage/Loadable';
 import NodesListPage from 'containers/NodesListPage/Loadable';
+import TransactionsListPage from 'containers/TransactionsListPage/Loadable';
 import NodePage from 'containers/NodePage/Loadable';
 import BlockPage from 'containers/BlockPage/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
@@ -32,11 +33,37 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
         <Route exact path="/blockexplorer/nodes" component={NodesListPage} />
-        <Route exact path="/blockexplorer/nodes/:page/:sort/:order" component={NodesListPage} /> {/* eslint-disable-line  prettier/prettier */}
-        <Route exact path="/blockexplorer/nodes/:id([a-zA-Z0-9]{4})" component={NodePage} /> {/* eslint-disable-line  prettier/prettier */}
+        <Route
+          exact
+          path="/blockexplorer/nodes/:page/:sort/:order"
+          component={NodesListPage}
+        />
+        <Route
+          exact
+          path="/blockexplorer/nodes/:id([a-zA-Z0-9]{4})"
+          component={NodePage}
+        />
         <Route exact path="/blockexplorer/blocks" component={BlockPage} />
-        <Route exact path="/blockexplorer/accounts/:id([a-zA-Z0-9]{4}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4})" component={AccountPage} /> {/* eslint-disable-line  prettier/prettier */}
-        <Route exact path="/blockexplorer/transactions/:id([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8}:[a-zA-Z0-9]{4})" component={TransactionPage} /> {/* eslint-disable-line  prettier/prettier */}
+        <Route
+          exact
+          path="/blockexplorer/accounts/:id([a-zA-Z0-9]{4}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4})"
+          component={AccountPage}
+        />
+        <Route
+          exact
+          path="/blockexplorer/transactions/:id([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8}:[a-zA-Z0-9]{4})"
+          component={TransactionPage}
+        />
+        <Route
+          exact
+          path="/blockexplorer/transactions"
+          component={TransactionsListPage}
+        />
+        <Route
+          exact
+          path="/blockexplorer/transactions/:page/:sort/:order"
+          component={TransactionsListPage}
+        />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
