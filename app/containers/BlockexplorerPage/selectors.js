@@ -20,7 +20,7 @@ const makeSelectLatestBlocks = () =>
     if (blocks.data) {
       blocks.data.map(item => {
         const date = moment.parseZone(item.time);
-        item.time = date.format('YYYY-MM-DD HH:MM:ss'); // eslint-disable-line no-param-reassign
+        item.time = date.format('YYYY-MM-DD HH:mm:ss'); // eslint-disable-line no-param-reassign
         return item;
       });
     }
@@ -37,7 +37,7 @@ const makeSelectLatestTransactions = () =>
       transactions.data.forEach(transaction => {
         if (transaction.time) {
           const date = moment.parseZone(transaction.time);
-          transaction.time = date.format('YYYY-MM-DD HH:MM:ss'); // eslint-disable-line
+          transaction.time = date.format('YYYY-MM-DD HH:mm:ss'); // eslint-disable-line
         }
 
         if (transaction.type === 'send_many' && transaction.wires.length > 0) {

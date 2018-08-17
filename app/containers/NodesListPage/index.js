@@ -56,7 +56,7 @@ export class NodesListPage extends React.Component {
       paramsFromProps.order !== params.order
     ) {
       this.props.onPageChange(
-        paramsFromProps.page,
+        paramsFromProps.page || 1,
         paramsFromProps.sort,
         paramsFromProps.order,
       );

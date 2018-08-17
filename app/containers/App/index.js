@@ -18,8 +18,8 @@ import HomePage from 'containers/HomePage/Loadable';
 import BlockExplorerPage from 'containers/BlockexplorerPage/Loadable';
 import NodesListPage from 'containers/NodesListPage/Loadable';
 import TransactionsListPage from 'containers/TransactionsListPage/Loadable';
+import BlocksListPage from 'containers/BlocksListPage/Loadable';
 import NodePage from 'containers/NodePage/Loadable';
-import BlockPage from 'containers/BlockPage/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
 import TransactionPage from 'containers/TransactionPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -43,7 +43,12 @@ export default function App() {
           path="/blockexplorer/nodes/:id([a-zA-Z0-9]{4})"
           component={NodePage}
         />
-        <Route exact path="/blockexplorer/blocks" component={BlockPage} />
+        <Route exact path="/blockexplorer/blocks" component={BlocksListPage} />
+        <Route
+          exact
+          path="/blockexplorer/blocks/:page/:sort/:order"
+          component={BlocksListPage}
+        />
         <Route
           exact
           path="/blockexplorer/accounts/:id([a-zA-Z0-9]{4}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4})"

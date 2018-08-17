@@ -23,7 +23,7 @@ const makeSelectTransaction = () =>
     }
 
     const date = moment.parseZone(data.time);
-    data.time = date.format('YYYY-MM-DD HH:MM:ss');
+    data.time = date.format('YYYY-MM-DD HH:mm:ss');
 
     transaction.data = data;
 

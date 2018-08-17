@@ -1,6 +1,6 @@
 /**
  *
- * TransactionsListPage
+ * BlocksListPage
  *
  */
 
@@ -12,20 +12,20 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
+import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import config from 'config';
 import TableDataSet from 'components/TableDataSet';
 import Pagination from 'components/Pagination/Loadable';
-import { makeSelectTransactions } from './selectors';
+import ErrorMsg from 'components/ErrorMsg';
+import { makeSelectBlocks } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { loadTransactions } from './actions';
-import ErrorMsg from '../../components/ErrorMsg';
+import { loadBlocks } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
-export class TransactionsListPage extends React.PureComponent {
+export class BlocksListPage extends React.PureComponent {
   componentDidMount() {
     const {
       match: { params },
@@ -34,10 +34,10 @@ export class TransactionsListPage extends React.PureComponent {
     const page = params.page || 1;
 
     this.props.dispatch(
-      loadTransactions(
+      loadBlocks(
         config.limit + 1,
         (page - 1) * config.limit,
-        params.sort || 'block_id',
+        params.sort || 'id',
         params.order || 'desc',
       ),
     );
@@ -62,22 +62,25 @@ export class TransactionsListPage extends React.PureComponent {
       );
     }
   }
-
   render() {
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
-      block_id: <FormattedMessage {...messages.columnBlockId} />,
-      message_id: <FormattedMessage {...messages.columnMessageId} />,
-      sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
-      target_address: <FormattedMessage {...messages.columnTargetAddress} />,
-      sender_fee: <FormattedMessage {...messages.columnSenderFee} />,
-      size: <FormattedMessage {...messages.columnSize} />,
-      type: <FormattedMessage {...messages.columnType} />,
+      message_count: <FormattedMessage {...messages.columnMessageCount} />,
+      node_count: <FormattedMessage {...messages.columnNodeCount} />,
+      transaction_count: (
+        <FormattedMessage {...messages.columnTransactionCount} />
+      ),
       time: <FormattedMessage {...messages.columnTime} />,
     };
 
-    const link = '/blockexplorer/transactions';
-    const sortingColumns = ['id', 'block_id', 'type'];
+    const link = '/blockexplorer/blocks';
+    const sortingColumns = [
+      'id',
+      'time',
+      'message_count',
+      'node_count',
+      'transaction_count',
+    ];
     const ceilConfiguration = {
       id: value => <Link to={`${link}/${value}`}>{value}</Link>,
     };
@@ -87,10 +90,17 @@ export class TransactionsListPage extends React.PureComponent {
     } = this.props;
 
     const page = parseInt(params.page || 1, 10);
-    const sort = params.sort || 'block_id';
+    const sort = params.sort || 'id';
     const order = params.order || 'desc';
+    const availableSortingFields = [
+      'id',
+      'time',
+      'node_count',
+      'message_count',
+      'transaction_count',
+    ];
 
-    if (sort !== 'id' && sort !== 'block_id' && sort !== 'type') {
+    if (!availableSortingFields.includes(sort)) {
       return (
         <ErrorMsg error={this.context.intl.formatMessage(messages.sorting)} />
       );
@@ -114,7 +124,7 @@ export class TransactionsListPage extends React.PureComponent {
           <FormattedMessage {...messages.header} />
         </h3>
         <TableDataSet
-          name="nodes"
+          name="blocks"
           columns={columns}
           link={link}
           sortingColumns={sortingColumns}
@@ -122,38 +132,38 @@ export class TransactionsListPage extends React.PureComponent {
           orderBy={order}
           ceilConfiguration={ceilConfiguration}
           data={
-            this.props.transactions.data.length > config.limit
-              ? this.props.transactions.data.slice(0, -1)
-              : this.props.transactions.data
+            this.props.blocks.data.length > config.limit
+              ? this.props.blocks.data.slice(0, -1)
+              : this.props.blocks.data
           }
-          loading={this.props.transactions.loading}
-          error={this.props.transactions.error}
+          loading={this.props.blocks.loading}
+          error={this.props.blocks.error}
         />
         <Pagination
           link={link}
           page={page}
           sort={sort}
           order={order}
-          nextPage={this.props.transactions.data.length > config.limit}
+          nextPage={this.props.blocks.data.length > config.limit}
         />
       </div>
     );
   }
 }
 
-TransactionsListPage.propTypes = {
+BlocksListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  transactions: PropTypes.object.isRequired,
+  blocks: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
 };
 
-TransactionsListPage.contextTypes = {
+BlocksListPage.contextTypes = {
   intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
-  transactions: makeSelectTransactions(),
+  blocks: makeSelectBlocks(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -161,7 +171,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     onPageChange: (page, sort, order) => {
       const offset = (page - 1) * config.limit;
-      return dispatch(loadTransactions(config.limit + 1, offset, sort, order));
+      return dispatch(loadBlocks(config.limit + 1, offset, sort, order));
     },
   };
 }
@@ -171,11 +181,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'transactionsListPage', reducer });
-const withSaga = injectSaga({ key: 'transactionsListPage', saga });
+const withReducer = injectReducer({ key: 'blocksListPage', reducer });
+const withSaga = injectSaga({ key: 'blocksListPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(TransactionsListPage);
+)(BlocksListPage);
