@@ -1,6 +1,6 @@
 /**
  *
- * NodesListPage
+ * TransactionsListPage
  *
  */
 
@@ -8,24 +8,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import { FormattedMessage, intlShape } from 'react-intl';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
+import TableDataSet from 'components/TableDataSet';
 import Pagination from 'components/Pagination/Loadable';
-import makeSelectNodesListPage from './selectors';
+import { makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { loadNodes } from './actions';
-import TableDataSet from '../../components/TableDataSet';
+import { loadTransactions } from './actions';
 import ErrorMsg from '../../components/ErrorMsg';
 
 /* eslint-disable react/prefer-stateless-function */
-export class NodesListPage extends React.Component {
+export class TransactionsListPage extends React.PureComponent {
   componentDidMount() {
     const {
       match: { params },
@@ -34,7 +34,7 @@ export class NodesListPage extends React.Component {
     const page = params.page || 1;
 
     this.props.dispatch(
-      loadNodes(
+      loadTransactions(
         config.limit + 1,
         (page - 1) * config.limit,
         params.sort || 'id',
@@ -65,14 +65,19 @@ export class NodesListPage extends React.Component {
 
   render() {
     const columns = {
-      id: <FormattedMessage {...messages.fieldId} />,
-      account_count: <FormattedMessage {...messages.fieldAccountCount} />,
-      msid: <FormattedMessage {...messages.fieldMsid} />,
-      balance: <FormattedMessage {...messages.fieldBalance} />,
-      status: <FormattedMessage {...messages.fieldStatus} />,
+      id: <FormattedMessage {...messages.columnId} />,
+      block_id: <FormattedMessage {...messages.columnBlockId} />,
+      message_id: <FormattedMessage {...messages.columnMessageId} />,
+      sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
+      target_address: <FormattedMessage {...messages.columnTargetAddress} />,
+      sender_fee: <FormattedMessage {...messages.columnSenderFee} />,
+      size: <FormattedMessage {...messages.columnSize} />,
+      type: <FormattedMessage {...messages.columnType} />,
+      time: <FormattedMessage {...messages.columnTime} />,
     };
-    const link = '/blockexplorer/nodes';
-    const sortingColumns = ['id', 'msid'];
+
+    const link = '/blockexplorer/transactions';
+    const sortingColumns = ['id', 'block_id', 'type'];
     const ceilConfiguration = {
       id: value => <Link to={`${link}/${value}`}>{value}</Link>,
     };
@@ -82,10 +87,10 @@ export class NodesListPage extends React.Component {
     } = this.props;
 
     const page = parseInt(params.page || 1, 10);
-    const sort = params.sort || 'id';
+    const sort = params.sort || 'block_id';
     const order = params.order || 'desc';
 
-    if (sort !== 'id' && sort !== 'msid') {
+    if (sort !== 'id' && sort !== 'block_id' && sort !== 'type') {
       return (
         <ErrorMsg error={this.context.intl.formatMessage(messages.sorting)} />
       );
@@ -96,7 +101,6 @@ export class NodesListPage extends React.Component {
         <ErrorMsg error={this.context.intl.formatMessage(messages.ordering)} />
       );
     }
-
     return (
       <div>
         <Helmet>
@@ -118,38 +122,38 @@ export class NodesListPage extends React.Component {
           orderBy={order}
           ceilConfiguration={ceilConfiguration}
           data={
-            this.props.nodes.data.length > config.limit
-              ? this.props.nodes.data.slice(0, -1)
-              : this.props.nodes.data
+            this.props.transactions.data.length > config.limit
+              ? this.props.transactions.data.slice(0, -1)
+              : this.props.transactions.data
           }
-          loading={this.props.nodes.loading}
-          error={this.props.nodes.error}
+          loading={this.props.transactions.loading}
+          error={this.props.transactions.error}
         />
         <Pagination
           link={link}
           page={page}
           sort={sort}
           order={order}
-          nextPage={this.props.nodes.data.length > config.limit}
+          nextPage={this.props.transactions.data.length > config.limit}
         />
       </div>
     );
   }
 }
 
-NodesListPage.propTypes = {
+TransactionsListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  nodes: PropTypes.object,
+  transactions: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
 };
 
-NodesListPage.contextTypes = {
+TransactionsListPage.contextTypes = {
   intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
-  nodes: makeSelectNodesListPage(),
+  transactions: makeSelectTransactions(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -157,7 +161,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     onPageChange: (page, sort, order) => {
       const offset = (page - 1) * config.limit;
-      return dispatch(loadNodes(config.limit + 1, offset, sort, order));
+      return dispatch(loadTransactions(config.limit + 1, offset, sort, order));
     },
   };
 }
@@ -167,11 +171,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'nodesListPage', reducer });
-const withSaga = injectSaga({ key: 'nodesListPage', saga });
+const withReducer = injectReducer({ key: 'transactionsListPage', reducer });
+const withSaga = injectSaga({ key: 'transactionsListPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(NodesListPage);
+)(TransactionsListPage);

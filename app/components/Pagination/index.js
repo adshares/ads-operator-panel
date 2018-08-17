@@ -44,16 +44,24 @@ class Pagination extends React.PureComponent {
 
   renderPagesButton() {
     const pages = [];
-    const beforeDot = Math.min(this.props.maxPages, this.props.page);
+    const beforeRangeLimit = Math.min(
+      this.props.pageRangeDisplayed,
+      this.props.page,
+    );
 
-    for (let i = 1; i <= beforeDot; i += 1) {
+    for (let i = 1; i <= beforeRangeLimit; i += 1) {
       pages.push(this.renderSinglePageButton(i, this.props.page === i));
     }
 
-    if (beforeDot < this.props.page) {
+    if (beforeRangeLimit < this.props.page) {
+      let marginPages = this.props.page - this.props.marginPagesDisplayed;
+      if (marginPages <= beforeRangeLimit) {
+        marginPages = beforeRangeLimit + 1;
+      }
+
       pages.push(<Item key="page_dot" label="..." />);
 
-      for (let i = beforeDot + 1; i <= this.props.page; i += 1) {
+      for (let i = marginPages; i <= this.props.page; i += 1) {
         pages.push(this.renderSinglePageButton(i, this.props.page === i));
       }
     }
@@ -83,7 +91,7 @@ class Pagination extends React.PureComponent {
   render() {
     return (
       <PaginationWrapper aria-label="Nodes Pagination area">
-        <ul className="pagination justify-content-center">
+        <ul className="pagination justify-content-center flex-wrap">
           {this.renderPreviousButton()}
           {this.renderPagesButton()}
           {this.renderNextButton()}
@@ -99,11 +107,13 @@ Pagination.propTypes = {
   order: PropTypes.string.isRequired,
   nextPage: PropTypes.bool.isRequired,
   link: PropTypes.string.isRequired,
-  maxPages: PropTypes.number,
+  pageRangeDisplayed: PropTypes.number,
+  marginPagesDisplayed: PropTypes.number,
 };
 
 Pagination.defaultProps = {
-  maxPages: 20,
+  pageRangeDisplayed: 15,
+  marginPagesDisplayed: 5,
 };
 
 Pagination.contextTypes = {
