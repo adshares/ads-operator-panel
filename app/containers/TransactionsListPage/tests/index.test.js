@@ -1,10 +1,24 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-// import { TransactionsListPage } from '../index';
+import { TransactionsListPage } from '../index';
 
 describe('<TransactionsListPage />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(true);
+  it('should render ListView element', () => {
+    const match = {
+      params: {},
+    };
+
+    const dispatch = () => {};
+    const transactions = {};
+
+    const renderedComponent = shallow(
+      <TransactionsListPage
+        match={match}
+        dispatch={dispatch}
+        transactions={transactions}
+      />,
+    );
+    expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 });

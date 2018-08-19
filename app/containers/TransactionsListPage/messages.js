@@ -55,12 +55,4 @@ export default defineMessages({
     id: 'app.containers.TransactionsListPage.columnTime',
     defaultMessage: 'Time',
   },
-  sorting: {
-    id: 'app.containers.TransactionsListPage.sorting',
-    defaultMessage: 'Unsupported sorting fields !',
-  },
-  ordering: {
-    id: 'app.containers.TransactionsListPage.ordering',
-    defaultMessage: 'Unsupported ordering fields !',
-  },
 });
