@@ -1,6 +1,10 @@
 import { fromJS } from 'immutable';
 import transactionPageReducer from '../reducer';
-import { loadTransaction, transactionLoaded } from '../actions';
+import {
+  loadTransaction,
+  transactionLoaded,
+  tranasctionLoadingError,
+} from '../actions';
 
 describe('transactionPageReducer', () => {
   let state;
@@ -47,5 +51,21 @@ describe('transactionPageReducer', () => {
     expect(transactionPageReducer(state, transactionLoaded(data))).toEqual(
       expectedResult,
     );
+  });
+
+  it('should handle transactionLoadingError action correctly', () => {
+    const error = {
+      message: 'custom error',
+    };
+
+    const expectedResult = fromJS({
+      loading: false,
+      error,
+      data: {},
+    });
+
+    expect(
+      transactionPageReducer(state, tranasctionLoadingError(error)),
+    ).toEqual(expectedResult);
   });
 });

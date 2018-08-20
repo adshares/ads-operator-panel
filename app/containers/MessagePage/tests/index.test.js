@@ -1,32 +1,32 @@
 import React from 'react';
 import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
-import { NodePage } from '../index';
+import { MessagePage } from '../index';
 
-describe('<NodePage />', () => {
+describe('<MessagePage />', () => {
   it('should render h3, DetailView, LatestPanel elements', () => {
     const match = {
       params: {},
     };
 
     const dispatch = () => {};
-    const accounts = {
+    const transactions = {
       loading: false,
       error: false,
       data: [],
     };
-    const node = {
+    const message = {
       loading: false,
       error: false,
       data: {},
     };
 
     const renderedComponent = shallowIntlWrap(
-      <NodePage
+      <MessagePage
         match={match}
         dispatch={dispatch}
-        node={node}
-        accounts={accounts}
+        message={message}
+        transactions={transactions}
       />,
     );
     expect(renderedComponent.find('h3').length).toEqual(1);
@@ -34,19 +34,19 @@ describe('<NodePage />', () => {
     expect(renderedComponent.find('LatestPanel').length).toEqual(1);
   });
 
-  it('should dispatch loadNode and loadAccounts when id exists', () => {
+  it('should dispatch loadMessage and loadTransactions when id exists', () => {
     const match = {
       params: {
-        id: '0001',
+        id: '0001-00000001',
       },
     };
 
-    const accounts = {
+    const transactions = {
       loading: false,
       error: false,
       data: [],
     };
-    const node = {
+    const message = {
       loading: false,
       error: false,
       data: {},
@@ -55,11 +55,11 @@ describe('<NodePage />', () => {
     const dispatch = sinon.spy();
 
     shallowIntlWrap(
-      <NodePage
+      <MessagePage
         match={match}
         dispatch={dispatch}
-        node={node}
-        accounts={accounts}
+        message={message}
+        transactions={transactions}
       />,
     );
 

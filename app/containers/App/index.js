@@ -23,6 +23,7 @@ import BlockPage from 'containers/BlockPage/Loadable';
 import NodePage from 'containers/NodePage/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
 import TransactionPage from 'containers/TransactionPage/Loadable';
+import MessagePage from 'containers/MessagePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 
@@ -74,6 +75,11 @@ export default function App() {
           exact
           path="/blockexplorer/transactions/:page/:sort/:order"
           component={TransactionsListPage}
+        />
+        <Route
+          exact
+          path="/blockexplorer/messages/:id([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8})"
+          component={MessagePage}
         />
         <Route component={NotFoundPage} />
       </Switch>
