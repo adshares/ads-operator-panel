@@ -49,6 +49,10 @@ function fetchMessagesByBlockId(blockId) {
   return send(`api/v1/blockexplorer/blocks/${blockId}/messages`);
 }
 
+function fetchMessage(id) {
+  return send(`api/v1/blockexplorer/messages/${id}`);
+}
+
 function send(url, params) {
   const endpoint = process.env.API_URL + url;
   const credentials = {};
@@ -76,4 +80,5 @@ export default {
   fetchTransaction,
   fetchBlock,
   fetchMessagesByBlockId,
+  fetchMessage,
 };

@@ -1,40 +1,36 @@
 import React from 'react';
 import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
-import { TransactionPage } from '../index';
+import { MessagePage } from '../index';
 
-describe('<TransactionPage />', () => {
+describe('<MessagePage />', () => {
   it('should render h3, DetailView elements', () => {
     const match = {
       params: {},
     };
 
     const dispatch = () => {};
-    const transaction = {
+    const message = {
       loading: false,
       error: false,
       data: {},
     };
 
     const renderedComponent = shallowIntlWrap(
-      <TransactionPage
-        match={match}
-        dispatch={dispatch}
-        transaction={transaction}
-      />,
+      <MessagePage match={match} dispatch={dispatch} message={message} />,
     );
     expect(renderedComponent.find('h3').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
   });
 
-  it('should dispatch loadTransaction when id exists', () => {
+  it('should dispatch loadMessage when id exists', () => {
     const match = {
       params: {
-        id: '0002:0000005A:1234',
+        id: '0002:0000005A',
       },
     };
 
-    const transaction = {
+    const message = {
       loading: false,
       error: false,
       data: {},
@@ -43,11 +39,7 @@ describe('<TransactionPage />', () => {
     const dispatch = sinon.spy();
 
     shallowIntlWrap(
-      <TransactionPage
-        match={match}
-        dispatch={dispatch}
-        transaction={transaction}
-      />,
+      <MessagePage match={match} dispatch={dispatch} message={message} />,
     );
 
     expect(dispatch.callCount).toEqual(1);

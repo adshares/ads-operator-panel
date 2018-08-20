@@ -32,7 +32,7 @@ describe('TransactionPage actions', () => {
     });
   });
   describe('transaction error Action', () => {
-    it('has a type of LOAD_ERROR_SUCCESS', () => {
+    it('has a type of LOAD_TRANSACTION_ERROR', () => {
       const error = {
         message: 'error #123',
       };
