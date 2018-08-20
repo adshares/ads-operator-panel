@@ -1,8 +1,18 @@
-import { loadMessage, messageLoaded, messageLoadingError } from '../actions';
+import {
+  loadMessage,
+  messageLoaded,
+  messageLoadingError,
+  loadTransactions,
+  transactionsLoaded,
+  transactionsLoadingError,
+} from '../actions';
 import {
   LOAD_MESSAGE,
   LOAD_MESSAGE_SUCCESS,
   LOAD_MESSAGE_ERROR,
+  LOAD_TRANSACTIONS,
+  LOAD_TRANSACTIONS_SUCCESS,
+  LOAD_TRANSACTIONS_ERROR,
 } from '../constants';
 
 describe('MessagenPage actions', () => {
@@ -38,6 +48,43 @@ describe('MessagenPage actions', () => {
         error,
       };
       expect(messageLoadingError(error)).toEqual(expected);
+    });
+  });
+
+  describe('Load transactions Action', () => {
+    it('has a type of LOAD_TRANSACTIONS', () => {
+      const expected = {
+        type: LOAD_TRANSACTIONS,
+      };
+      expect(loadTransactions()).toEqual(expected);
+    });
+  });
+  describe('transactions loaded Action', () => {
+    it('has a type of LOAD_TRANSACTIONS_SUCCESS', () => {
+      const transactions = [
+        {
+          id: '0001:00000001:1234',
+        },
+      ];
+
+      const expected = {
+        type: LOAD_TRANSACTIONS_SUCCESS,
+        data: transactions,
+      };
+      expect(transactionsLoaded(transactions)).toEqual(expected);
+    });
+  });
+  describe('transactions error Action', () => {
+    it('has a type of LOAD_TRANSACTIONS_ERROR', () => {
+      const error = {
+        message: 'error #123',
+      };
+
+      const expected = {
+        type: LOAD_TRANSACTIONS_ERROR,
+        error,
+      };
+      expect(transactionsLoadingError(error)).toEqual(expected);
     });
   });
 });

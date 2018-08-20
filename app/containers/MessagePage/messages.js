@@ -19,6 +19,10 @@ export default defineMessages({
     id: 'app.containers.MessagePage.metaDescription',
     defaultMessage: 'Message {id} page',
   },
+  transactionTabTitle: {
+    id: 'app.containers.MessagePage.transactionTabTitle',
+    defaultMessage: 'Transactions',
+  },
   fieldId: {
     id: 'app.containers.MessagePage.fieldId',
     defaultMessage: 'Id',
@@ -38,5 +42,29 @@ export default defineMessages({
   fieldLength: {
     id: 'app.containers.MessagePage.fieldLength',
     defaultMessage: 'Length',
+  },
+  columnId: {
+    id: 'app.containers.MessagePage.columnId',
+    defaultMessage: 'Id',
+  },
+  columnType: {
+    id: 'app.containers.MessagePage.columnType',
+    defaultMessage: 'Type',
+  },
+  columnSenderAddress: {
+    id: 'app.containers.MessagePage.columnSenderAddress',
+    defaultMessage: 'From',
+  },
+  columnTargetAddress: {
+    id: 'app.containers.MessagePage.columnTargetAddress',
+    defaultMessage: 'To',
+  },
+  columnAmount: {
+    id: 'app.containers.MessagePage.columnAmount',
+    defaultMessage: 'Amount',
+  },
+  columnTime: {
+    id: 'app.containers.MessagePage.columnTime',
+    defaultMessage: 'Time',
   },
 });
