@@ -21,7 +21,7 @@ export default defineMessages({
   },
   transactionTabTitle: {
     id: 'app.containers.AccountPage.transactionTabTitle',
-    defaultMessage: 'Transaction',
+    defaultMessage: 'Transactions',
   },
   columnId: {
     id: 'app.containers.AccountPage.columnId',

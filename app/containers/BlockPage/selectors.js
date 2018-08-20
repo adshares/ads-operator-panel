@@ -1,22 +1,23 @@
+import moment from 'moment';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-/**
- * Direct selector to the blockPage state domain
- */
-
 const selectBlockPageDomain = state => state.get('blockPage', initialState);
 
-/**
- * Other specific selectors
- */
+const makeSelectBlock = () =>
+  createSelector(selectBlockPageDomain, globalState => {
+    const block = globalState.get('block').toJS();
+    const date = moment.parseZone(block.data.time);
+    block.data.time = date.format('YYYY-MM-DD HH:mm:ss'); // eslint-disable-line no-param-reassign
+    block.data.dividend_pay =
+      block.data.dividend_pay === true ? 'true' : 'false';
 
-/**
- * Default selector used by BlockPage
- */
+    return block;
+  });
 
-const makeSelectBlockPage = () =>
-  createSelector(selectBlockPageDomain, substate => substate.toJS());
+const makeSelectMessages = () =>
+  createSelector(selectBlockPageDomain, globalState =>
+    globalState.get('messages').toJS(),
+  );
 
-export default makeSelectBlockPage;
-export { selectBlockPageDomain };
+export { makeSelectBlock, makeSelectMessages };

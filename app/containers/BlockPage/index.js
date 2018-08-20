@@ -8,38 +8,112 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectBlockPage from './selectors';
+import DetailView from 'components/DetailView';
+import { makeSelectBlock, makeSelectMessages } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import { BlockPageWrapper } from './styled';
+import LatestPanel from '../../components/LatestPanel';
+import { loadBlock, loadMessages } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockPage extends React.PureComponent {
+  componentDidMount() {
+    const { id } = this.props.match.params;
+
+    if (id) {
+      this.props.dispatch(loadBlock(id));
+      this.props.dispatch(loadMessages(id));
+    }
+  }
+
   render() {
+    const { id } = this.props.match.params;
+
+    const fields = {
+      id: <FormattedMessage {...messages.fieldId} />,
+      message_count: <FormattedMessage {...messages.fieldMessageCount} />,
+      node_count: <FormattedMessage {...messages.fieldNodeCount} />,
+      transaction_count: (
+        <FormattedMessage {...messages.fieldTransactionCount} />
+      ),
+      dividend_balance: <FormattedMessage {...messages.fieldDividendBalance} />,
+      dividend_pay: <FormattedMessage {...messages.fieldDividendPay} />,
+      time: <FormattedMessage {...messages.fieldTime} />,
+    };
+
+    const link = '/blockexplorer/messages';
+    const messageTab = {
+      id: 'messages',
+      name: <FormattedMessage {...messages.messageTabTitle} />,
+      data: this.props.messages.data,
+      columns: {
+        id: <FormattedMessage {...messages.columnMessagesId} />,
+        node_id: <FormattedMessage {...messages.columnMessagesNodeId} />,
+        block_id: <FormattedMessage {...messages.columnMessagesBlockId} />,
+        transaction_count: (
+          <FormattedMessage {...messages.columnMessagesTransactionCount} />
+        ),
+        length: <FormattedMessage {...messages.columnMessagesLength} />,
+      },
+      ceilConfiguration: {
+        id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+      },
+    };
+
+    const metaDescription = this.context.intl.formatMessage(
+      messages.metaDescription,
+      { id },
+    );
+
     return (
-      <div>
+      <BlockPageWrapper>
         <Helmet>
-          <title>BlockPage</title>
-          <meta name="description" content="Description of BlockPage" />
+          <title>
+            {this.context.intl.formatMessage(messages.metaTitle, { id })}
+          </title>
+          <meta name="description" content={metaDescription} />
         </Helmet>
-        <FormattedMessage {...messages.header} />
-      </div>
+        <h3>
+          <FormattedMessage {...messages.header} /> #{id}
+        </h3>
+        <DetailView
+          fields={fields}
+          data={this.props.block.data}
+          loading={this.props.block.loading}
+          error={this.props.block.error}
+        />
+        <LatestPanel
+          tabs={[messageTab]}
+          loading={this.props.messages.loading}
+          error={this.props.messages.error}
+        />
+      </BlockPageWrapper>
     );
   }
 }
 
 BlockPage.propTypes = {
+  match: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
+  block: PropTypes.object.isRequired,
+  messages: PropTypes.object.isRequired,
+};
+
+BlockPage.contextTypes = {
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
-  blockpage: makeSelectBlockPage(),
+  block: makeSelectBlock(),
+  messages: makeSelectMessages(),
 });
 
 function mapDispatchToProps(dispatch) {

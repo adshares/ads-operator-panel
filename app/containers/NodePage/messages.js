@@ -41,7 +41,7 @@ export default defineMessages({
   },
   accountTabTitle: {
     id: 'app.containers.NodePage.accountTabTitle',
-    defaultMessage: 'Account',
+    defaultMessage: 'Accounts',
   },
   accountColumnId: {
     id: 'app.containers.NodePage.accountColumnId',
