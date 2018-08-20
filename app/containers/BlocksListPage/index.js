@@ -1,6 +1,6 @@
 /**
  *
- * TransactionsListPage
+ * BlocksListPage
  *
  */
 
@@ -10,59 +10,63 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import config from 'config';
 import ListView from 'components/ListView';
 
-import { makeSelectTransactions } from './selectors';
+import { makeSelectBlocks } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { loadTransactions } from './actions';
+import { loadBlocks } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
-export class TransactionsListPage extends React.PureComponent {
+export class BlocksListPage extends React.PureComponent {
   render() {
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
-      block_id: <FormattedMessage {...messages.columnBlockId} />,
-      message_id: <FormattedMessage {...messages.columnMessageId} />,
-      sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
-      target_address: <FormattedMessage {...messages.columnTargetAddress} />,
-      sender_fee: <FormattedMessage {...messages.columnSenderFee} />,
-      size: <FormattedMessage {...messages.columnSize} />,
-      type: <FormattedMessage {...messages.columnType} />,
+      message_count: <FormattedMessage {...messages.columnMessageCount} />,
+      node_count: <FormattedMessage {...messages.columnNodeCount} />,
+      transaction_count: (
+        <FormattedMessage {...messages.columnTransactionCount} />
+      ),
       time: <FormattedMessage {...messages.columnTime} />,
     };
 
-    const sortingColumns = ['id', 'block_id', 'type'];
+    const sortingColumns = [
+      'id',
+      'time',
+      'message_count',
+      'node_count',
+      'transaction_count',
+    ];
 
     return (
       <ListView
-        name="nodes"
+        name="blocks"
         urlParams={this.props.match.params}
-        list={this.props.transactions}
+        list={this.props.blocks}
         columns={columns}
         sortingColumns={sortingColumns}
-        defaultSort="block_id"
+        defaultSort="id"
         messages={messages}
-        link="/blockexplorer/transactions"
+        link="/blockexplorer/blocks"
         onPageChange={this.props.onPageChange}
       />
     );
   }
 }
 
-TransactionsListPage.propTypes = {
+BlocksListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
-  transactions: PropTypes.object.isRequired,
+  blocks: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  transactions: makeSelectTransactions(),
+  blocks: makeSelectBlocks(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -70,7 +74,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     onPageChange: (page, sort, order) => {
       const offset = (page - 1) * config.limit;
-      return dispatch(loadTransactions(config.limit + 1, offset, sort, order));
+      return dispatch(loadBlocks(config.limit + 1, offset, sort, order));
     },
   };
 }
@@ -80,11 +84,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'transactionsListPage', reducer });
-const withSaga = injectSaga({ key: 'transactionsListPage', saga });
+const withReducer = injectReducer({ key: 'blocksListPage', reducer });
+const withSaga = injectSaga({ key: 'blocksListPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(TransactionsListPage);
+)(BlocksListPage);

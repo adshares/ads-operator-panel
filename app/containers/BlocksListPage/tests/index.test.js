@@ -1,23 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { BlocksListPage } from '../index';
 
-import { TransactionsListPage } from '../index';
-
-describe('<TransactionsListPage />', () => {
+describe('<BlocksListPage />', () => {
   it('should render ListView element', () => {
     const match = {
       params: {},
     };
 
     const dispatch = () => {};
-    const transactions = {};
+    const blocks = {};
 
     const renderedComponent = shallow(
-      <TransactionsListPage
-        match={match}
-        dispatch={dispatch}
-        transactions={transactions}
-      />,
+      <BlocksListPage match={match} dispatch={dispatch} blocks={blocks} />,
     );
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });

@@ -119,7 +119,7 @@ class TableDataSet extends React.PureComponent {
     }
 
     return (
-      <div className="row">
+      <div>
         <table className="table">
           {this.renderHeader()}
           <tbody>{this.renderRows()}</tbody>
