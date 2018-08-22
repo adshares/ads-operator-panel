@@ -26,7 +26,14 @@ const routes = {
   '/blockexplorer/transactions': 'Transactions',
   '/blockexplorer/transactions/:page/:sort/:order': null,
   '/blockexplorer/transactions/:page/:sort': null,
-  '/blockexplorer/transactions/:id': 'Transaction :id',
+  '/blockexplorer/transactions/:id': (url, match) => {
+    const { href } = window.location;
+    if (href.includes('/asc') || href.includes('/desc')) {
+      return null;
+    }
+
+    return `Transaction ${match.id}`;
+  },
   '/blockexplorer/accounts': null,
   '/blockexplorer/accounts/:id': 'Account :id',
   '/blockexplorer/messages': null,
