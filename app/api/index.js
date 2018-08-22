@@ -34,7 +34,7 @@ function fetchAccountsById(id) {
 }
 
 function fetchTransactionsByAccountId(accountId) {
-  return send(`api/v1/blockexplorer/accounts/${accountId}/transactions`);
+  return send(`api/v1/blockexplorer/accounts/${accountId}/transactions?sort=block_id`);
 }
 
 function fetchTransaction(id) {
