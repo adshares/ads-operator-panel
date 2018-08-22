@@ -11,12 +11,12 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { FormattedMessage, intlShape } from 'react-intl';
+import { Link } from 'react-router-dom';
 import Search from 'components/Search';
 import Card from 'components/Card';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LatestPanel from 'components/LatestPanel';
-
 import {
   makeSelectLatestNodes,
   makeSelectLatestBlocks,
@@ -79,6 +79,9 @@ export class Blockexplorer extends React.PureComponent {
       link: 'blockexplorer/nodes',
       data: this.props.nodes.data,
       columns: nodeColumns,
+      ceilConfiguration: {
+        id: value => <Link to={`blockexplorer/nodes/${value}`}>{value}</Link>,
+      },
     };
 
     const blockTab = {
@@ -87,6 +90,9 @@ export class Blockexplorer extends React.PureComponent {
       link: '/blockexplorer/blocks',
       data: this.props.blocks.data,
       columns: blockColumns,
+      ceilConfiguration: {
+        id: value => <Link to={`blockexplorer/blocks/${value}`}>{value}</Link>,
+      },
     };
 
     const transactionTab = {
@@ -95,6 +101,17 @@ export class Blockexplorer extends React.PureComponent {
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
       columns: transactionColumns,
+      ceilConfiguration: {
+        id: value => (
+          <Link to={`blockexplorer/transactions/${value}`}>{value}</Link>
+        ),
+        block_id: value => (
+          <Link to={`blockexplorer/blocks/${value}`}>{value}</Link>
+        ),
+        message_id: value => (
+          <Link to={`blockexplorer/messages/${value}`}>{value}</Link>
+        ),
+      },
     };
 
     return (
