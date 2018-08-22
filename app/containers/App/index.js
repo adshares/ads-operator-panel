@@ -13,6 +13,7 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Breadcrumbs from 'components/Breadcrumbs';
 
 import HomePage from 'containers/HomePage/Loadable';
 import BlockExplorerPage from 'containers/BlockexplorerPage/Loadable';
@@ -26,24 +27,27 @@ import TransactionPage from 'containers/TransactionPage/Loadable';
 import MessagePage from 'containers/MessagePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
+import config from 'config';
+import { AppContainer } from './styled';
 
 export default function App() {
   return (
-    <div className="container">
+    <AppContainer className="container">
       <Header />
+      <Breadcrumbs mappedRoutes={config.routes} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
+        <Route
+          exact
+          path="/blockexplorer/nodes/:id([a-zA-Z0-9]{4})"
+          component={NodePage}
+        />
         <Route exact path="/blockexplorer/nodes" component={NodesListPage} />
         <Route
           exact
           path="/blockexplorer/nodes/:page/:sort/:order"
           component={NodesListPage}
-        />
-        <Route
-          exact
-          path="/blockexplorer/nodes/:id([a-zA-Z0-9]{4})"
-          component={NodePage}
         />
         <Route exact path="/blockexplorer/blocks" component={BlocksListPage} />
         <Route
@@ -83,6 +87,6 @@ export default function App() {
         />
         <Route component={NotFoundPage} />
       </Switch>
-    </div>
+    </AppContainer>
   );
 }
