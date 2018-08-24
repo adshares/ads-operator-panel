@@ -40,8 +40,9 @@ export class AccountPage extends React.PureComponent {
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
       balance: <FormattedMessage {...messages.fieldBalance} />,
-      msid: <FormattedMessage {...messages.fieldMsid} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
+      public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+      local_change: <FormattedMessage {...messages.fieldLocalChange} />,
       time: <FormattedMessage {...messages.fieldTime} />,
     };
 

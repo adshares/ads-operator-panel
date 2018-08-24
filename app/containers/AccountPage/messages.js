@@ -55,10 +55,6 @@ export default defineMessages({
     id: 'app.containers.AccountPage.fieldBalance',
     defaultMessage: 'Balance',
   },
-  fieldMsid: {
-    id: 'app.containers.AccountPage.fieldMsid',
-    defaultMessage: 'Messages',
-  },
   fieldStatus: {
     id: 'app.containers.AccountPage.fieldStatus',
     defaultMessage: 'Status',
@@ -66,5 +62,13 @@ export default defineMessages({
   fieldTime: {
     id: 'app.containers.AccountPage.fieldTime',
     defaultMessage: 'Time',
+  },
+  fieldPublicKey: {
+    id: 'app.containers.AccountPage.fieldPublicKey',
+    defaultMessage: 'Public Key',
+  },
+  fieldLocalChange: {
+    id: 'app.containers.AccountPage.fieldLocalChange',
+    defaultMessage: 'Last Active Time',
   },
 });
