@@ -32,14 +32,23 @@ class Pagination extends React.PureComponent {
     const label = this.context.intl.formatMessage(messages.next);
     const page = this.props.page + 1;
 
-    return (
+    const items = [];
+
+    if (this.props.nextPage) {
+      items.push(<Item key="page_dot_next" label="..." />);
+    }
+
+    items.push(
       <Item
+        key="page_next"
         disabled={!this.props.nextPage}
         label={label}
         page={page}
         link={this.generateLink(page)}
-      />
+      />,
     );
+
+    return items;
   }
 
   renderPagesButton() {
