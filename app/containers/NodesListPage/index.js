@@ -31,7 +31,7 @@ export class NodesListPage extends React.Component {
       balance: <FormattedMessage {...messages.fieldBalance} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
     };
-    const sortingColumns = ['id', 'msid'];
+    const sortingColumns = ['id'];
 
     return (
       <ListView
