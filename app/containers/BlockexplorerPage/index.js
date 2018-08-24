@@ -13,7 +13,6 @@ import { compose } from 'redux';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import Search from 'components/Search';
-import Card from 'components/Card';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LatestPanel from 'components/LatestPanel';
@@ -124,12 +123,8 @@ export class Blockexplorer extends React.PureComponent {
           />
         </Helmet>
         <div className="row">
-          <Card />
-          <Card />
-        </div>
-        <div className="row">
           <div className="col-md-12 col-xs-6">
-            <Search />
+            <Search history={this.props.history} />
           </div>
         </div>
         <div className="row">
@@ -153,6 +148,7 @@ export class Blockexplorer extends React.PureComponent {
 
 Blockexplorer.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   nodes: PropTypes.object,
   blocks: PropTypes.object,
   transactions: PropTypes.object,
