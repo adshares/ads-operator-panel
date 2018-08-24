@@ -109,8 +109,10 @@ class DetailView extends React.PureComponent {
         if (this.props.data[columnId] !== undefined) {
           rows.push(
             <li key={`column_${columnId}`} className="list-group-item row">
-              <span className="col-md-3">{columnValue}</span>
-              <span className="col-md-9">{this.props.data[columnId]}</span>
+              <span className="row">
+                <span className="col-md-3">{columnValue}</span>
+                <span className="col-md-9">{this.props.data[columnId]}</span>
+              </span>
             </li>,
           );
         }
