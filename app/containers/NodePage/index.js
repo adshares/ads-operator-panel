@@ -43,6 +43,9 @@ export class NodePage extends React.PureComponent {
       msid: <FormattedMessage {...messages.fieldMsid} />,
       balance: <FormattedMessage {...messages.fieldBalance} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
+      ipv4: <FormattedMessage {...messages.fieldIp} />,
+      public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+      mtim: <FormattedMessage {...messages.fieldMtim} />,
     };
 
     const link = '/blockexplorer/accounts';
@@ -53,6 +56,8 @@ export class NodePage extends React.PureComponent {
       columns: {
         id: this.context.intl.formatMessage(messages.accountColumnId),
         balance: this.context.intl.formatMessage(messages.accountBalance),
+        status: this.context.intl.formatMessage(messages.accountStatus),
+        public_key: this.context.intl.formatMessage(messages.accountPublicKey),
       },
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
