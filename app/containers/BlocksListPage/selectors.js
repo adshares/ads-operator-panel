@@ -15,6 +15,7 @@ const makeSelectBlocks = () =>
     blocks.data.forEach(block => {
       const date = moment.parseZone(block.time);
       block.time = date.format('YYYY-MM-DD HH:mm:ss'); // eslint-disable-line
+      block.votes = `${block.vote_yes}/${block.vote_total}`; // eslint-disable-line
     });
 
     return blocks;
