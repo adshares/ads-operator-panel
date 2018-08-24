@@ -16,11 +16,11 @@ class Search extends React.PureComponent {
 
     this.state = { value: '' };
     this.urlMap = {
-      '^[0-9A-Z]{4}-[0-9A-Z]{8}-[0-9A-Z]{4}$': '/blockexplorer/accounts/',
-      '^[0-9A-Z]{4}$': '/blockexplorer/nodes/',
-      '^[0-9A-Z]{8}$': '/blockexplorer/blocks/',
-      '^[0-9A-Z]{4}:[0-9A-Z]{8}:[0-9A-Z]{4}$': '/blockexplorer/transactions/',
-      '^[0-9A-Z]{4}:[0-9A-Z]{8}$': '/blockexplorer/messages/',
+      '^[0-9A-F]{4}-[0-9A-F]{8}-[0-9A-F]{4}$': '/blockexplorer/accounts/',
+      '^[0-9A-F]{4}$': '/blockexplorer/nodes/',
+      '^[0-9A-F]{8}$': '/blockexplorer/blocks/',
+      '^[0-9A-F]{4}:[0-9A-F]{8}:[0-9A-F]{4}$': '/blockexplorer/transactions/',
+      '^[0-9A-F]{4}:[0-9A-F]{8}$': '/blockexplorer/messages/',
     };
   }
 
