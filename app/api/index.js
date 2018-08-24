@@ -11,7 +11,7 @@ function fetchBlocks(limit = 5, offset = 0, sort = 'id', order = 'desc') {
 }
 
 function fetchTransactions(
-  limit = 5,
+  limit = 10,
   offset = 0,
   sort = 'block_id',
   order = 'desc',
