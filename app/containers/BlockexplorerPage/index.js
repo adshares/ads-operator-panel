@@ -123,16 +123,26 @@ export class Blockexplorer extends React.PureComponent {
           />
         </Helmet>
         <div className="row">
-          <div className="col-md-12 col-xs-6">
+          <div className="col-md-12 col-xs-12">
             <Search history={this.props.history} />
           </div>
         </div>
         <div className="row">
-          <LatestPanel
-            tabs={[nodeTab, blockTab]}
-            loading={this.props.blocks.loading || this.props.nodes.loading}
-            error={this.props.blocks.error || this.props.nodes.error}
-          />
+          <span className="col-md-5 col-xs-12">
+            <LatestPanel
+              tabs={[nodeTab]}
+              loading={this.props.nodes.loading}
+              error={this.props.nodes.error}
+            />
+          </span>
+          <span className="col-md-1 col-xs-12" />
+          <span className="col-md-6 col-xs-12">
+            <LatestPanel
+              tabs={[blockTab]}
+              loading={this.props.blocks.loading}
+              error={this.props.blocks.error}
+            />
+          </span>
         </div>
         <div className="row">
           <LatestPanel
