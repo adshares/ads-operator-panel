@@ -27,9 +27,9 @@ export default defineMessages({
     id: 'app.containers.BlocksListPage.columnMessageCount',
     defaultMessage: 'Messages',
   },
-  columnNodeCount: {
-    id: 'app.containers.BlocksListPage.columnNodeCount',
-    defaultMessage: 'Nodes',
+  columnVotes: {
+    id: 'app.containers.BlocksListPage.columnVotes',
+    defaultMessage: 'Votes',
   },
   columnTransactionCount: {
     id: 'app.containers.BlocksListPage.columnTransactionCount',

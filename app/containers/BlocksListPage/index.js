@@ -26,21 +26,15 @@ export class BlocksListPage extends React.PureComponent {
   render() {
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
+      votes: <FormattedMessage {...messages.columnVotes} />,
       message_count: <FormattedMessage {...messages.columnMessageCount} />,
-      node_count: <FormattedMessage {...messages.columnNodeCount} />,
       transaction_count: (
         <FormattedMessage {...messages.columnTransactionCount} />
       ),
       time: <FormattedMessage {...messages.columnTime} />,
     };
 
-    const sortingColumns = [
-      'id',
-      'time',
-      'message_count',
-      'node_count',
-      'transaction_count',
-    ];
+    const sortingColumns = ['id'];
 
     return (
       <ListView
