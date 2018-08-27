@@ -9,12 +9,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
+import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
 import ListView from 'components/ListView';
-
 import makeSelectNodesListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -34,17 +34,29 @@ export class NodesListPage extends React.Component {
     const sortingColumns = ['id'];
 
     return (
-      <ListView
-        name="nodes"
-        urlParams={this.props.match.params}
-        list={this.props.nodes}
-        columns={columns}
-        sortingColumns={sortingColumns}
-        defaultSort="id"
-        messages={messages}
-        link="/blockexplorer/nodes"
-        onPageChange={this.props.onPageChange}
-      />
+      <div>
+        <Helmet>
+          <title>{this.context.intl.formatMessage(messages.metaTitle)}</title>
+          <meta
+            name="description"
+            content={this.context.intl.formatMessage(messages.metaDescription)}
+          />
+        </Helmet>
+        <h3>
+          <FormattedMessage {...messages.header} />
+        </h3>
+        <ListView
+          name="nodes"
+          urlParams={this.props.match.params}
+          list={this.props.nodes}
+          columns={columns}
+          sortingColumns={sortingColumns}
+          defaultSort="id"
+          messages={messages}
+          link="/blockexplorer/nodes"
+          onPageChange={this.props.onPageChange}
+        />
+      </div>
     );
   }
 }
@@ -54,6 +66,10 @@ NodesListPage.propTypes = {
   match: PropTypes.object,
   nodes: PropTypes.object,
   onPageChange: PropTypes.func,
+};
+
+NodesListPage.contextTypes = {
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({

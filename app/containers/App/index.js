@@ -49,6 +49,11 @@ export default function App() {
           path="/blockexplorer/nodes/:page/:sort/:order"
           component={NodesListPage}
         />
+        <Route
+          exact
+          path="/blockexplorer/blocks/:id([a-zA-Z0-9]{8})/messages/:messageId([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8})"
+          component={MessagePage}
+        />
         <Route exact path="/blockexplorer/blocks" component={BlocksListPage} />
         <Route
           exact
@@ -60,11 +65,23 @@ export default function App() {
           path="/blockexplorer/blocks/:id([a-zA-Z0-9]{8})"
           component={BlockPage}
         />
+
+        <Route
+          exact
+          path="/blockexplorer/blocks/:id([a-zA-Z0-9]{8})/messages/:page/:sort/:order"
+          component={BlockPage}
+        />
         <Route
           exact
           path="/blockexplorer/accounts/:id([a-zA-Z0-9]{4}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4})"
           component={AccountPage}
         />
+        <Route
+          exact
+          path="/blockexplorer/accounts/node/:id([a-zA-Z0-9]{4})"
+          component={AccountPage}
+        />
+
         <Route
           exact
           path="/blockexplorer/transactions/:id([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8}:[a-zA-Z0-9]{4})"

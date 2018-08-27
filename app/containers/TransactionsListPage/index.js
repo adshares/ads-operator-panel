@@ -7,14 +7,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
 import ListView from 'components/ListView';
-
 import { makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -39,17 +39,29 @@ export class TransactionsListPage extends React.PureComponent {
     const sortingColumns = ['id', 'block_id', 'type'];
 
     return (
-      <ListView
-        name="nodes"
-        urlParams={this.props.match.params}
-        list={this.props.transactions}
-        columns={columns}
-        sortingColumns={sortingColumns}
-        defaultSort="block_id"
-        messages={messages}
-        link="/blockexplorer/transactions"
-        onPageChange={this.props.onPageChange}
-      />
+      <div>
+        <Helmet>
+          <title>{this.context.intl.formatMessage(messages.metaTitle)}</title>
+          <meta
+            name="description"
+            content={this.context.intl.formatMessage(messages.metaDescription)}
+          />
+        </Helmet>
+        <h3>
+          <FormattedMessage {...messages.header} />
+        </h3>
+        <ListView
+          name="nodes"
+          urlParams={this.props.match.params}
+          list={this.props.transactions}
+          columns={columns}
+          sortingColumns={sortingColumns}
+          defaultSort="block_id"
+          messages={messages}
+          link="/blockexplorer/transactions"
+          onPageChange={this.props.onPageChange}
+        />
+      </div>
     );
   }
 }
@@ -59,6 +71,10 @@ TransactionsListPage.propTypes = {
   match: PropTypes.object,
   transactions: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+};
+
+TransactionsListPage.contextTypes = {
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({

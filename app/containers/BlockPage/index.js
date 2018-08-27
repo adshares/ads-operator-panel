@@ -12,25 +12,24 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
+import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
+import ListView from 'components/ListView';
 import { makeSelectBlock, makeSelectMessages } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { BlockPageWrapper } from './styled';
-import LatestPanel from '../../components/LatestPanel';
 import { loadBlock, loadMessages } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockPage extends React.PureComponent {
   componentDidMount() {
     const { id } = this.props.match.params;
-
     if (id) {
       this.props.dispatch(loadBlock(id));
-      this.props.dispatch(loadMessages(id));
     }
   }
 
@@ -57,11 +56,9 @@ export class BlockPage extends React.PureComponent {
       columns: {
         id: <FormattedMessage {...messages.columnMessagesId} />,
         node_id: <FormattedMessage {...messages.columnMessagesNodeId} />,
-        block_id: <FormattedMessage {...messages.columnMessagesBlockId} />,
         transaction_count: (
           <FormattedMessage {...messages.columnMessagesTransactionCount} />
         ),
-        length: <FormattedMessage {...messages.columnMessagesLength} />,
       },
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
@@ -90,10 +87,16 @@ export class BlockPage extends React.PureComponent {
           loading={this.props.block.loading}
           error={this.props.block.error}
         />
-        <LatestPanel
-          tabs={[messageTab]}
-          loading={this.props.messages.loading}
-          error={this.props.messages.error}
+        <ListView
+          name="messages"
+          urlParams={this.props.match.params}
+          list={this.props.messages}
+          columns={messageTab.columns}
+          sortingColumns={['id']}
+          defaultSort="id"
+          messages={messages}
+          link={`/blockexplorer/blocks/${id}/messages`}
+          onPageChange={this.props.onPageChange}
         />
       </BlockPageWrapper>
     );
@@ -105,6 +108,7 @@ BlockPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   block: PropTypes.object.isRequired,
   messages: PropTypes.object.isRequired,
+  onPageChange: PropTypes.func,
 };
 
 BlockPage.contextTypes = {
@@ -119,6 +123,10 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onPageChange: (id, page, sort, order) => {
+      const offset = (page - 1) * config.limit;
+      return dispatch(loadMessages(id, config.limit + 1, offset, sort, order));
+    },
   };
 }
 

@@ -59,16 +59,8 @@ export default defineMessages({
     id: 'app.containers.BlockPage.columnMessagesNodeId',
     defaultMessage: 'Node Id',
   },
-  columnMessagesBlockId: {
-    id: 'app.containers.BlockPage.columnMessagesBlockId',
-    defaultMessage: 'Block Id',
-  },
   columnMessagesTransactionCount: {
     id: 'app.containers.BlockPage.columnMessagesTransactionCount',
     defaultMessage: 'Transactions',
-  },
-  columnMessagesLength: {
-    id: 'app.containers.BlockPage.columnMessagesLength',
-    defaultMessage: 'Length',
   },
 });
