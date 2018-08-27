@@ -87,6 +87,7 @@ export class BlockPage extends React.PureComponent {
           loading={this.props.block.loading}
           error={this.props.block.error}
         />
+        <h4><FormattedMessage {...messages.messageTabTitle} /></h4>
         <ListView
           name="messages"
           urlParams={this.props.match.params}
