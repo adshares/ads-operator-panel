@@ -4,7 +4,7 @@ import { shallowIntlWrap } from 'testHelper';
 import { NodePage } from '../index';
 
 describe('<NodePage />', () => {
-  it('should render h3, DetailView, LatestPanel elements', () => {
+  it('should render h3, DetailView, ListView elements', () => {
     const match = {
       params: {},
     };
@@ -31,10 +31,10 @@ describe('<NodePage />', () => {
     );
     expect(renderedComponent.find('h3').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
-    expect(renderedComponent.find('LatestPanel').length).toEqual(1);
+    expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 
-  it('should dispatch loadNode and loadAccounts when id exists', () => {
+  it('should dispatch loadNode when id exists', () => {
     const match = {
       params: {
         id: '0001',
@@ -63,6 +63,6 @@ describe('<NodePage />', () => {
       />,
     );
 
-    expect(dispatch.callCount).toEqual(2);
+    expect(dispatch.callCount).toEqual(1);
   });
 });

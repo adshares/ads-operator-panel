@@ -26,7 +26,7 @@ import messages from './messages';
 /* eslint-disable react/prefer-stateless-function */
 export class AccountPage extends React.PureComponent {
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const id = this.props.match.params.accountId || this.props.match.params.id;
 
     if (id) {
       this.props.dispatch(loadAccount(id));
@@ -35,7 +35,7 @@ export class AccountPage extends React.PureComponent {
   }
 
   render() {
-    const { id } = this.props.match.params;
+    const id = this.props.match.params.accountId || this.props.match.params.id;
 
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
