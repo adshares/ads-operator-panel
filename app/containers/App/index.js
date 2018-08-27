@@ -40,7 +40,7 @@ export default function App() {
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
         <Route
           exact
-          path="/blockexplorer/nodes/:id([a-zA-Z0-9]{4})"
+          path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})"
           component={NodePage}
         />
         <Route exact path="/blockexplorer/nodes" component={NodesListPage} />
@@ -51,7 +51,7 @@ export default function App() {
         />
         <Route
           exact
-          path="/blockexplorer/blocks/:id([a-zA-Z0-9]{8})/messages/:messageId([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8})"
+          path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})/messages/:messageId([a-fA-F0-9]{4}:[a-fA-F0-9]{8})"
           component={MessagePage}
         />
         <Route exact path="/blockexplorer/blocks" component={BlocksListPage} />
@@ -62,29 +62,29 @@ export default function App() {
         />
         <Route
           exact
-          path="/blockexplorer/blocks/:id([a-zA-Z0-9]{8})"
+          path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})"
           component={BlockPage}
         />
 
         <Route
           exact
-          path="/blockexplorer/blocks/:id([a-zA-Z0-9]{8})/messages/:page/:sort/:order"
+          path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})/messages/:page/:sort/:order"
           component={BlockPage}
         />
         <Route
           exact
-          path="/blockexplorer/accounts/:id([a-zA-Z0-9]{4}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4})"
+          path="/blockexplorer/accounts/:id([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})"
           component={AccountPage}
         />
         <Route
           exact
-          path="/blockexplorer/accounts/node/:id([a-zA-Z0-9]{4})"
+          path="/blockexplorer/accounts/node/:id([a-fA-F0-9]{4})"
           component={AccountPage}
         />
 
         <Route
           exact
-          path="/blockexplorer/transactions/:id([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8}:[a-zA-Z0-9]{4})"
+          path="/blockexplorer/transactions/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8}:[a-fA-F0-9]{4})"
           component={TransactionPage}
         />
         <Route
@@ -99,7 +99,7 @@ export default function App() {
         />
         <Route
           exact
-          path="/blockexplorer/messages/:id([a-zA-Z0-9]{4}:[a-zA-Z0-9]{8})"
+          path="/blockexplorer/messages/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8})"
           component={MessagePage}
         />
         <Route component={NotFoundPage} />
