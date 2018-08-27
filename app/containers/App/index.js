@@ -40,6 +40,11 @@ export default function App() {
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
         <Route
           exact
+          path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/accounts/:accountId([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})"
+          component={AccountPage}
+        />
+        <Route
+          exact
           path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})"
           component={NodePage}
         />
@@ -48,6 +53,11 @@ export default function App() {
           exact
           path="/blockexplorer/nodes/:page/:sort/:order"
           component={NodesListPage}
+        />
+        <Route
+          exact
+          path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/accounts/:page/:sort/:order"
+          component={NodePage}
         />
         <Route
           exact

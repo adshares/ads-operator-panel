@@ -27,12 +27,7 @@ import { MessagePageWrapper } from './styled';
 /* eslint-disable react/prefer-stateless-function */
 export class MessagePage extends React.PureComponent {
   componentDidMount() {
-    const { id, messageId } = this.props.match.params;
-    if (messageId) {
-      this.props.dispatch(loadMessage(messageId));
-      this.props.dispatch(loadTransactions(messageId));
-      return;
-    }
+    const id = this.props.match.params.messageId || this.props.match.params.id;
 
     if (id) {
       this.props.dispatch(loadMessage(id));
@@ -40,8 +35,7 @@ export class MessagePage extends React.PureComponent {
     }
   }
   render() {
-    const { id, messageId } = this.props.match.params;
-    const title = messageId || id;
+    const id = this.props.match.params.messageId || this.props.match.params.id;
 
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
@@ -85,7 +79,7 @@ export class MessagePage extends React.PureComponent {
           <meta name="description" content={metaDescription} />
         </Helmet>
         <h3>
-          <FormattedMessage {...messages.header} /> #{title}
+          <FormattedMessage {...messages.header} /> #{id}
         </h3>
         <DetailView
           fields={fields}

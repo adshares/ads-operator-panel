@@ -12,6 +12,23 @@ const routes = {
 
     return `Node ${match.id}`;
   },
+  '/blockexplorer/nodes/:id/accounts/:accountId': (url, match) => {
+    const { href } = window.location;
+    if (href.includes('/asc') || href.includes('/desc')) {
+      return null;
+    }
+    return `Account ${match.accountId}`;
+  },
+  '/blockexplorer/nodes/:id/accounts/:page/:sort/:order': (url, match) => {
+    const { href } = window.location;
+    if (href.includes('/asc') || href.includes('/desc')) {
+      return `Node ${match.id}`;
+    }
+
+    return null;
+  },
+  '/blockexplorer/nodes/:id/accounts/:page/:sort': null,
+  '/blockexplorer/nodes/:id/accounts/:page': null,
   '/blockexplorer/blocks': 'Blocks',
   '/blockexplorer/blocks/:page/:sort/:order': null,
   '/blockexplorer/blocks/:page/:sort': null,

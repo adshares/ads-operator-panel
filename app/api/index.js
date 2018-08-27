@@ -25,8 +25,16 @@ function fetchNode(id) {
   return send(`api/v1/blockexplorer/nodes/${id}`);
 }
 
-function fetchAccountsByNodeId(nodeId) {
-  return send(`api/v1/blockexplorer/nodes/${nodeId}/accounts`);
+function fetchAccountsByNodeId(
+  nodeId,
+  limit = 5,
+  offset = 0,
+  sort = 'id',
+  order = 'desc',
+) {
+  return send(
+    `api/v1/blockexplorer/nodes/${nodeId}/accounts?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function fetchAccountsById(id) {

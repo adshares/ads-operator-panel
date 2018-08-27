@@ -12,15 +12,16 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
+import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
+import ListView from 'components/ListView';
 import { makeSelectAccounts, makeSelectNode } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadAccounts, loadNode } from './actions';
 import { NodePageWrapper } from './styled';
-import LatestPanel from '../../components/LatestPanel';
 import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -30,7 +31,6 @@ export class NodePage extends React.PureComponent {
 
     if (id) {
       this.props.dispatch(loadNode(id));
-      this.props.dispatch(loadAccounts(id));
     }
   }
 
@@ -86,13 +86,20 @@ export class NodePage extends React.PureComponent {
           loading={this.props.node.loading}
           error={this.props.node.error}
         />
-        <div className="row">
-          <LatestPanel
-            tabs={[accountTab]}
-            loading={this.props.accounts.loading}
-            error={this.props.accounts.error}
-          />
-        </div>
+        <h4>
+          <FormattedMessage {...messages.accountTabTitle} />
+        </h4>
+        <ListView
+          name="accounts"
+          urlParams={this.props.match.params}
+          list={this.props.accounts}
+          columns={accountTab.columns}
+          sortingColumns={['id']}
+          defaultSort="id"
+          messages={messages}
+          link={`/blockexplorer/nodes/${id}/accounts`}
+          onPageChange={this.props.onPageChange}
+        />
       </NodePageWrapper>
     );
   }
@@ -103,6 +110,7 @@ NodePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   node: PropTypes.object,
   accounts: PropTypes.object,
+  onPageChange: PropTypes.func,
 };
 
 NodePage.contextTypes = {
@@ -117,6 +125,10 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onPageChange: (id, page, sort, order) => {
+      const offset = (page - 1) * config.limit;
+      return dispatch(loadAccounts(id, config.limit + 1, offset, sort, order));
+    },
   };
 }
 
