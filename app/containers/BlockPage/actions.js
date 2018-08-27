@@ -34,10 +34,14 @@ export function blockLoadingError(error) {
   };
 }
 
-export function loadMessages(blockId) {
+export function loadMessages(blockId, limit, offset, sort, order) {
   return {
     type: LOAD_MESSAGES,
     blockId,
+    limit,
+    offset,
+    sort,
+    order,
   };
 }
 

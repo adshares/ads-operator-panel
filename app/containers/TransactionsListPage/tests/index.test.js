@@ -1,10 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-
+import { shallowIntlWrap } from 'testHelper';
 import { TransactionsListPage } from '../index';
 
 describe('<TransactionsListPage />', () => {
-  it('should render ListView element', () => {
+  it('should render h3 and ListView element', () => {
     const match = {
       params: {},
     };
@@ -12,13 +11,14 @@ describe('<TransactionsListPage />', () => {
     const dispatch = () => {};
     const transactions = {};
 
-    const renderedComponent = shallow(
+    const renderedComponent = shallowIntlWrap(
       <TransactionsListPage
         match={match}
         dispatch={dispatch}
         transactions={transactions}
       />,
     );
+    expect(renderedComponent.find('h3').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 });

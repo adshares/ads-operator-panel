@@ -7,9 +7,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Helmet } from 'react-helmet';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -37,17 +38,29 @@ export class BlocksListPage extends React.PureComponent {
     const sortingColumns = ['id'];
 
     return (
-      <ListView
-        name="blocks"
-        urlParams={this.props.match.params}
-        list={this.props.blocks}
-        columns={columns}
-        sortingColumns={sortingColumns}
-        defaultSort="id"
-        messages={messages}
-        link="/blockexplorer/blocks"
-        onPageChange={this.props.onPageChange}
-      />
+      <div>
+        <Helmet>
+          <title>{this.context.intl.formatMessage(messages.metaTitle)}</title>
+          <meta
+            name="description"
+            content={this.context.intl.formatMessage(messages.metaDescription)}
+          />
+        </Helmet>
+        <h3>
+          <FormattedMessage {...messages.header} />
+        </h3>
+        <ListView
+          name="blocks"
+          urlParams={this.props.match.params}
+          list={this.props.blocks}
+          columns={columns}
+          sortingColumns={sortingColumns}
+          defaultSort="id"
+          messages={messages}
+          link="/blockexplorer/blocks"
+          onPageChange={this.props.onPageChange}
+        />
+      </div>
     );
   }
 }
@@ -57,6 +70,10 @@ BlocksListPage.propTypes = {
   match: PropTypes.object,
   blocks: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+};
+
+BlocksListPage.contextTypes = {
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -21,7 +21,14 @@ export function* getBlock(action) {
 
 export function* getMessages(action) {
   try {
-    const messages = yield call(api.fetchMessagesByBlockId, action.blockId);
+    const messages = yield call(
+      api.fetchMessagesByBlockId,
+      action.blockId,
+      action.limit,
+      action.offset,
+      action.sort,
+      action.order,
+    );
     yield put(messagesLoaded(messages));
   } catch (err) {
     yield put(messagesLoadingError(err));

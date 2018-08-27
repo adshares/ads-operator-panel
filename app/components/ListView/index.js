@@ -7,9 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FormattedMessage, intlShape } from 'react-intl';
-import { Helmet } from 'react-helmet';
-
+import { intlShape } from 'react-intl';
 import config from 'config';
 import Pagination from 'components/Pagination/Loadable';
 import TableDataSet from 'components/TableDataSet';
@@ -28,6 +26,14 @@ class ListView extends React.PureComponent {
       ['desc', 'asc'].includes(order)
     ) {
       const page = this.props.urlParams.page || 1;
+      const { id } = this.props.urlParams;
+
+      if (id) {
+        this.props.onPageChange(id, page, sort, order);
+
+        return;
+      }
+
       this.props.onPageChange(page, sort, order);
     }
   }
@@ -41,6 +47,19 @@ class ListView extends React.PureComponent {
       paramsFromProps.sort !== params.sort ||
       paramsFromProps.order !== params.order
     ) {
+      const { id } = this.props.urlParams;
+
+      if (id) {
+        this.props.onPageChange(
+          id,
+          paramsFromProps.page || 1,
+          paramsFromProps.sort,
+          paramsFromProps.order,
+        );
+
+        return;
+      }
+
       this.props.onPageChange(
         paramsFromProps.page || 1,
         paramsFromProps.sort,
@@ -76,20 +95,6 @@ class ListView extends React.PureComponent {
 
     return (
       <ListViewWrapper>
-        <Helmet>
-          <title>
-            {this.context.intl.formatMessage(this.props.messages.metaTitle)}
-          </title>
-          <meta
-            name="description"
-            content={this.context.intl.formatMessage(
-              this.props.messages.metaDescription,
-            )}
-          />
-        </Helmet>
-        <h3>
-          <FormattedMessage {...this.props.messages.header} />
-        </h3>
         <TableDataSet
           name={this.props.name}
           columns={this.props.columns}
@@ -126,7 +131,6 @@ ListView.propTypes = {
   sortingColumns: PropTypes.array.isRequired,
   defaultSort: PropTypes.string,
   defaultOrder: PropTypes.string,
-  messages: PropTypes.object.isRequired,
   link: PropTypes.string.isRequired,
   onPageChange: PropTypes.func,
 };

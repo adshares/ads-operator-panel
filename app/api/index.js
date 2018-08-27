@@ -47,8 +47,16 @@ function fetchBlock(id) {
   return send(`api/v1/blockexplorer/blocks/${id}`);
 }
 
-function fetchMessagesByBlockId(blockId) {
-  return send(`api/v1/blockexplorer/blocks/${blockId}/messages`);
+function fetchMessagesByBlockId(
+  blockId,
+  limit = 5,
+  offset = 0,
+  sort = 'id',
+  order = 'desc',
+) {
+  return send(
+    `api/v1/blockexplorer/blocks/${blockId}/messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function fetchMessage(id) {

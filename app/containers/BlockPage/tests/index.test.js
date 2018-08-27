@@ -4,7 +4,7 @@ import { shallowIntlWrap } from 'testHelper';
 import { BlockPage } from '../index';
 
 describe('<BlockPage />', () => {
-  it('should render h3, DetailView, LatestPanel elements', () => {
+  it('should render h3, DetailView, ListView elements', () => {
     const match = {
       params: {},
     };
@@ -31,10 +31,10 @@ describe('<BlockPage />', () => {
     );
     expect(renderedComponent.find('h3').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
-    expect(renderedComponent.find('LatestPanel').length).toEqual(1);
+    expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 
-  it('should dispatch loadBlock and loadMessages when id exists', () => {
+  it('should dispatch loadBlock when id exists', () => {
     const match = {
       params: {
         id: 'ABC11234',
@@ -63,6 +63,6 @@ describe('<BlockPage />', () => {
       />,
     );
 
-    expect(dispatch.callCount).toEqual(2);
+    expect(dispatch.callCount).toEqual(1);
   });
 });

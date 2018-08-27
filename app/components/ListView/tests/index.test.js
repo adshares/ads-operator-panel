@@ -80,7 +80,6 @@ describe('<ListView />', () => {
 
     expect(renderedComponent.find('ErrorMsg').length).toEqual(0);
     expect(renderedComponent.find('ListViewWrapper').length).toEqual(1);
-    expect(renderedComponent.find('h3').length).toEqual(1);
     expect(renderedComponent.find('TableDataSet').length).toEqual(1);
   });
 
