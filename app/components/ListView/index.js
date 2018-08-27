@@ -27,11 +27,14 @@ class ListView extends React.PureComponent {
     ) {
       const page = this.props.urlParams.page || 1;
       const { id } = this.props.urlParams;
+
       if (id) {
         this.props.onPageChange(id, page, sort, order);
-      } else {
-        this.props.onPageChange(page, sort, order);
+
+        return;
       }
+
+      this.props.onPageChange(page, sort, order);
     }
   }
 
@@ -45,6 +48,7 @@ class ListView extends React.PureComponent {
       paramsFromProps.order !== params.order
     ) {
       const { id } = this.props.urlParams;
+
       if (id) {
         this.props.onPageChange(
           id,
