@@ -12,30 +12,31 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
+import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
+import ListView from 'components/ListView';
 import { makeSelectAccount, makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadAccount, loadTransactions } from './actions';
-import LatestPanel from '../../components/LatestPanel';
 import { AccountPageWrapper } from './styled';
 import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 export class AccountPage extends React.PureComponent {
   componentDidMount() {
-    const id = this.props.match.params.accountId || this.props.match.params.id;
+    const { id } = this.props.match.params;
 
     if (id) {
       this.props.dispatch(loadAccount(id));
-      this.props.dispatch(loadTransactions(id));
     }
   }
 
   render() {
-    const id = this.props.match.params.accountId || this.props.match.params.id;
+    const { id } = this.props.match.params;
+    const { nodeId } = this.props.match.params;
 
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
@@ -86,10 +87,19 @@ export class AccountPage extends React.PureComponent {
           loading={this.props.account.loading}
           error={this.props.account.error}
         />
-        <LatestPanel
-          tabs={[transactionTab]}
-          loading={this.props.transactions.loading}
-          error={this.props.transactions.error}
+        <h4>
+          <FormattedMessage {...messages.transactionTabTitle} />
+        </h4>
+        <ListView
+          name="transactions"
+          urlParams={this.props.match.params}
+          list={this.props.transactions}
+          columns={transactionTab.columns}
+          sortingColumns={['id', 'type']}
+          defaultSort="id"
+          messages={messages}
+          link={`/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`}
+          onPageChange={this.props.onPageChange}
         />
       </AccountPageWrapper>
     );
@@ -101,6 +111,7 @@ AccountPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   account: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
+  onPageChange: PropTypes.func,
 };
 
 AccountPage.contextTypes = {
@@ -115,6 +126,12 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onPageChange: (id, page, sort, order) => {
+      const offset = (page - 1) * config.limit;
+      return dispatch(
+        loadTransactions(id, config.limit + 1, offset, sort, order),
+      );
+    },
   };
 }
 

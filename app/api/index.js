@@ -41,9 +41,15 @@ function fetchAccountsById(id) {
   return send(`api/v1/blockexplorer/accounts/${id}`);
 }
 
-function fetchTransactionsByAccountId(accountId) {
+function fetchTransactionsByAccountId(
+  accountId,
+  limit = 5,
+  offset = 0,
+  sort = 'block_id',
+  order = 'desc',
+) {
   return send(
-    `api/v1/blockexplorer/accounts/${accountId}/transactions?sort=block_id&order=desc`,
+    `api/v1/blockexplorer/accounts/${accountId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
