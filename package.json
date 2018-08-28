@@ -117,7 +117,10 @@
       "!app/app.js",
       "!app/global-styles.js",
       "!app/*/*/Loadable.{js,jsx}",
-      "!app/components/Breadcrumbs/*.{js,jsx}"
+      "!app/components/Breadcrumbs/*.{js,jsx}",
+      "!app/config.js",
+      "!app/components/*/messages.js",
+      "!app/containers/*/messages.js"
     ],
     "coverageThreshold": {
       "global": {

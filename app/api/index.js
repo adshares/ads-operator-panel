@@ -71,8 +71,16 @@ function fetchMessage(id) {
   return send(`api/v1/blockexplorer/messages/${id}`);
 }
 
-function fetchTransactionsByMessageId(messageId) {
-  return send(`api/v1/blockexplorer/messages/${messageId}/transactions`);
+function fetchTransactionsByMessageId(
+  messageId,
+  limit = 5,
+  offset = 0,
+  sort = 'id',
+  order = 'desc',
+) {
+  return send(
+    `api/v1/blockexplorer/messages/${messageId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function send(url, params) {

@@ -12,11 +12,11 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-
+import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
-import LatestPanel from 'components/LatestPanel';
+import ListView from 'components/ListView';
 import { makeSelectMessage, makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -27,15 +27,16 @@ import { MessagePageWrapper } from './styled';
 /* eslint-disable react/prefer-stateless-function */
 export class MessagePage extends React.PureComponent {
   componentDidMount() {
-    const id = this.props.match.params.messageId || this.props.match.params.id;
+    const { id } = this.props.match.params;
 
     if (id) {
       this.props.dispatch(loadMessage(id));
-      this.props.dispatch(loadTransactions(id));
     }
   }
+
   render() {
-    const id = this.props.match.params.messageId || this.props.match.params.id;
+    const { id } = this.props.match.params;
+    const { blockId } = this.props.match.params;
 
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
@@ -48,6 +49,7 @@ export class MessagePage extends React.PureComponent {
     };
 
     const link = '/blockexplorer/transactions';
+
     const transactionTab = {
       id: 'transactions',
       name: <FormattedMessage {...messages.transactionTabTitle} />,
@@ -87,10 +89,19 @@ export class MessagePage extends React.PureComponent {
           loading={this.props.message.loading}
           error={this.props.message.error}
         />
-        <LatestPanel
-          tabs={[transactionTab]}
-          loading={this.props.transactions.loading}
-          error={this.props.transactions.error}
+        <h4>
+          <FormattedMessage {...messages.transactionTabTitle} />
+        </h4>
+        <ListView
+          name="transactions"
+          urlParams={this.props.match.params}
+          list={this.props.transactions}
+          columns={transactionTab.columns}
+          sortingColumns={['id']}
+          defaultSort="id"
+          messages={messages}
+          link={`/blockexplorer/blocks/${blockId}/messages/${id}/transactions`}
+          onPageChange={this.props.onPageChange}
         />
       </MessagePageWrapper>
     );
@@ -102,6 +113,7 @@ MessagePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   message: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
+  onPageChange: PropTypes.func,
 };
 
 MessagePage.contextTypes = {
@@ -116,6 +128,12 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onPageChange: (id, page, sort, order) => {
+      const offset = (page - 1) * config.limit;
+      return dispatch(
+        loadTransactions(id, config.limit + 1, offset, sort, order),
+      );
+    },
   };
 }
 
