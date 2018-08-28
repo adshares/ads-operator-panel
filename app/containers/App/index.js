@@ -40,7 +40,12 @@ export default function App() {
         <Route exact path="/blockexplorer" component={BlockExplorerPage} />
         <Route
           exact
-          path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/accounts/:accountId([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})"
+          path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:accountId([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})/transactions/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8}:[a-fA-F0-9]{4})"
+          component={TransactionPage}
+        />
+        <Route
+          exact
+          path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:id([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})"
           component={AccountPage}
         />
         <Route
@@ -116,6 +121,12 @@ export default function App() {
           path="/blockexplorer/blocks/:blockId([a-fA-F0-9]{8})/messages/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8})/transactions/:page/:sort/:order"
           component={MessagePage}
         />
+        <Route
+          exact
+          path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:id([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})/transactions/:page/:sort/:order"
+          component={AccountPage}
+        />
+
         <Route
           exact
           path="/blockexplorer/messages/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8})"

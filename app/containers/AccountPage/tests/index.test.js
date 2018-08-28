@@ -31,10 +31,10 @@ describe('<AccountPage />', () => {
     );
     expect(renderedComponent.find('h3').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
-    expect(renderedComponent.find('LatestPanel').length).toEqual(1);
+    expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 
-  it('should dispatch loadAccount and loadTransactions when id exists', () => {
+  it('should dispatch loadAccount when id exists', () => {
     const match = {
       params: {
         id: '0001-00000000-9B6F',
@@ -63,6 +63,6 @@ describe('<AccountPage />', () => {
       />,
     );
 
-    expect(dispatch.callCount).toEqual(2);
+    expect(dispatch.callCount).toEqual(1);
   });
 });
