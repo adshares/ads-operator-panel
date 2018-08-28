@@ -15,6 +15,8 @@ const routes = {
   '/blockexplorer/blocks/:blockId/messages/:id/transactions/:page': null,
   '/blockexplorer/nodes/:nodeId/accounts/:id/transactions/:page/:sort': null,
   '/blockexplorer/nodes/:nodeId/accounts/:id/transactions/:page': null,
+  '/blockexplorer/nodes/:nodeId/accounts/:accountId/transactions/:id':
+    'Transaction :id',
   '/blockexplorer/transactions': 'Transactions',
   '/blockexplorer/transactions/:page/:sort/:order': null,
   '/blockexplorer/transactions/:page/:sort': null,
