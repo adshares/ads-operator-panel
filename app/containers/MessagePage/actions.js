@@ -34,10 +34,14 @@ export function messageLoadingError(error) {
   };
 }
 
-export function loadTransactions(messageId) {
+export function loadTransactions(messageId, limit, offset, sort, order) {
   return {
     type: LOAD_TRANSACTIONS,
     messageId,
+    limit,
+    offset,
+    sort,
+    order,
   };
 }
 

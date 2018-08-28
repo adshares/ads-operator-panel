@@ -24,6 +24,10 @@ export function* getTransactions(action) {
     const transactions = yield call(
       api.fetchTransactionsByMessageId,
       action.messageId,
+      action.limit,
+      action.offset,
+      action.sort,
+      action.order,
     );
     yield put(transactionsLoaded(transactions));
   } catch (err) {
