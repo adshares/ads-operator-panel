@@ -27,13 +27,25 @@ export default defineMessages({
     id: 'app.containers.AccountPage.columnId',
     defaultMessage: 'Id',
   },
+  columnBlockId: {
+    id: 'app.containers.AccountPage.columnBlockId',
+    defaultMessage: 'Block',
+  },
+  columnMessageId: {
+    id: 'app.containers.AccountPage.columnMessageId',
+    defaultMessage: 'Message',
+  },
+  columnDirection: {
+    id: 'app.containers.AccountPage.columnDirection',
+    defaultMessage: 'Direction',
+  },
   columnType: {
     id: 'app.containers.AccountPage.columnType',
     defaultMessage: 'Type',
   },
-  columnSenderAddress: {
-    id: 'app.containers.AccountPage.columnSenderAddress',
-    defaultMessage: 'From',
+  columnAddress: {
+    id: 'app.containers.AccountPage.columnAddress',
+    defaultMessage: 'Address',
   },
   columnTargetAddress: {
     id: 'app.containers.AccountPage.columnTargetAddress',
@@ -70,5 +82,9 @@ export default defineMessages({
   fieldLocalChange: {
     id: 'app.containers.AccountPage.fieldLocalChange',
     defaultMessage: 'Last Active Time',
+  },
+  multiTransaction: {
+    id: 'app.containers.AccountPage.multiTransaction',
+    defaultMessage: 'Multi Transaction',
   },
 });

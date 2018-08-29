@@ -25,23 +25,23 @@ export default defineMessages({
   },
   columnBlockId: {
     id: 'app.containers.TransactionsListPage.columnBlockId',
-    defaultMessage: 'Block Id',
+    defaultMessage: 'Block',
   },
   columnMessageId: {
     id: 'app.containers.TransactionsListPage.columnMessageId',
-    defaultMessage: 'Message Id',
+    defaultMessage: 'Message',
   },
   columnSenderAddress: {
     id: 'app.containers.TransactionsListPage.columnSenderAddress',
-    defaultMessage: 'Sender Address',
+    defaultMessage: 'From',
   },
   columnTargetAddress: {
     id: 'app.containers.TransactionsListPage.columnTargetAddress',
-    defaultMessage: 'Target Address',
+    defaultMessage: 'To',
   },
-  columnSenderFee: {
-    id: 'app.containers.TransactionsListPage.columnSenderFee',
-    defaultMessage: 'Sender Fee',
+  columnAmount: {
+    id: 'app.containers.TransactionsListPage.columnAmount',
+    defaultMessage: 'Amount',
   },
   columnSize: {
     id: 'app.containers.TransactionsListPage.columnSize',

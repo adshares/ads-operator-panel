@@ -16,6 +16,7 @@ import Search from 'components/Search';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LatestPanel from 'components/LatestPanel';
+import TransactionAddressLink from 'components/TransactionAddressLink';
 import {
   makeSelectLatestNodes,
   makeSelectLatestBlocks,
@@ -66,8 +67,7 @@ export class Blockexplorer extends React.PureComponent {
       target_address: (
         <FormattedMessage {...messages.transactionColumnTargetAddress} />
       ),
-      sender_fee: <FormattedMessage {...messages.transactionColumnSenderFee} />,
-      size: <FormattedMessage {...messages.transactionColumnSize} />,
+      amount: <FormattedMessage {...messages.transactionColumnAmount} />,
       type: <FormattedMessage {...messages.transactionColumnType} />,
       time: <FormattedMessage {...messages.transactionColumnTime} />,
     };
@@ -107,8 +107,24 @@ export class Blockexplorer extends React.PureComponent {
         block_id: value => (
           <Link to={`blockexplorer/blocks/${value}`}>{value}</Link>
         ),
-        message_id: value => (
-          <Link to={`blockexplorer/messages/${value}`}>{value}</Link>
+        message_id: (value, row) => (
+          <Link to={`blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+            {value}
+          </Link>
+        ),
+        sender_address: (value, row) => (
+          <TransactionAddressLink
+            transactionLink="/blockexplorer/transactions"
+            transactionId={row.id}
+            address={value}
+          />
+        ),
+        target_address: (value, row) => (
+          <TransactionAddressLink
+            transactionLink="/blockexplorer/transactions"
+            transactionId={row.id}
+            address={value}
+          />
         ),
       },
     };
