@@ -17,6 +17,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
 import ListView from 'components/ListView';
+import TransactionAddressLink from 'components/TransactionAddressLink';
 import { makeSelectAccount, makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -34,6 +35,14 @@ export class AccountPage extends React.PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { id } = this.props.match.params;
+    if (prevProps.match.params.id !== id) {
+      this.props.dispatch(loadAccount(id));
+      this.props.dispatch(loadTransactions(id, config.limit + 1, 0));
+    }
+  }
+
   render() {
     const { id } = this.props.match.params;
     const { nodeId } = this.props.match.params;
@@ -47,22 +56,35 @@ export class AccountPage extends React.PureComponent {
       time: <FormattedMessage {...messages.fieldTime} />,
     };
 
-    const link = '/blockexplorer/transactions';
-    const transactionTab = {
-      id: 'transactions',
-      name: <FormattedMessage {...messages.transactionTabTitle} />,
-      data: this.props.transactions.data,
-      columns: {
-        id: <FormattedMessage {...messages.columnId} />,
-        type: <FormattedMessage {...messages.columnType} />,
-        sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
-        target_address: <FormattedMessage {...messages.columnTargetAddress} />,
-        amount: <FormattedMessage {...messages.columnAmount} />,
-        time: <FormattedMessage {...messages.columnTime} />,
-      },
-      ceilConfiguration: {
-        id: value => <Link to={`${link}/${value}`}>{value}</Link>,
-      },
+    const link = `/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`;
+    const columns = {
+      id: <FormattedMessage {...messages.columnId} />,
+      block_id: <FormattedMessage {...messages.columnBlockId} />,
+      message_id: <FormattedMessage {...messages.columnMessageId} />,
+      address: <FormattedMessage {...messages.columnAddress} />,
+      direction: <FormattedMessage {...messages.columnDirection} />,
+      amount: <FormattedMessage {...messages.columnAmount} />,
+      type: <FormattedMessage {...messages.columnType} />,
+      time: <FormattedMessage {...messages.columnTime} />,
+    };
+
+    const ceilConfiguration = {
+      id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+      block_id: value => (
+        <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
+      ),
+      message_id: (value, row) => (
+        <Link to={`blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+          {value}
+        </Link>
+      ),
+      address: (value, row) => (
+        <TransactionAddressLink
+          transactionLink={link}
+          transactionId={row.id}
+          address={value}
+        />
+      ),
     };
 
     const metaDescription = this.context.intl.formatMessage(
@@ -94,9 +116,10 @@ export class AccountPage extends React.PureComponent {
           name="transactions"
           urlParams={this.props.match.params}
           list={this.props.transactions}
-          columns={transactionTab.columns}
-          sortingColumns={['id', 'type']}
-          defaultSort="id"
+          columns={columns}
+          ceilConfiguration={ceilConfiguration}
+          sortingColumns={['id', 'block_id', 'type']}
+          defaultSort="block_id"
           messages={messages}
           link={`/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`}
           onPageChange={this.props.onPageChange}

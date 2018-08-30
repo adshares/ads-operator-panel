@@ -17,6 +17,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/DetailView';
 import ListView from 'components/ListView';
+import TransactionAddressLink from 'components/TransactionAddressLink';
 import { makeSelectMessage, makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -48,23 +49,33 @@ export class MessagePage extends React.PureComponent {
       length: <FormattedMessage {...messages.fieldLength} />,
     };
 
-    const link = '/blockexplorer/transactions';
+    const link = `/blockexplorer/blocks/${blockId}/messages/${id}/transactions`;
 
-    const transactionTab = {
-      id: 'transactions',
-      name: <FormattedMessage {...messages.transactionTabTitle} />,
-      data: this.props.transactions.data,
-      columns: {
-        id: <FormattedMessage {...messages.columnId} />,
-        type: <FormattedMessage {...messages.columnType} />,
-        sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
-        target_address: <FormattedMessage {...messages.columnTargetAddress} />,
-        amount: <FormattedMessage {...messages.columnAmount} />,
-        time: <FormattedMessage {...messages.columnTime} />,
-      },
-      ceilConfiguration: {
-        id: value => <Link to={`${link}/${value}`}>{value}</Link>,
-      },
+    const columns = {
+      id: <FormattedMessage {...messages.columnId} />,
+      sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
+      target_address: <FormattedMessage {...messages.columnTargetAddress} />,
+      amount: <FormattedMessage {...messages.columnAmount} />,
+      type: <FormattedMessage {...messages.columnType} />,
+      time: <FormattedMessage {...messages.columnTime} />,
+    };
+
+    const ceilConfiguration = {
+      id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+      sender_address: (value, row) => (
+        <TransactionAddressLink
+          transactionLink="/blockexplorer/transactions"
+          transactionId={row.id}
+          address={value}
+        />
+      ),
+      target_address: (value, row) => (
+        <TransactionAddressLink
+          transactionLink="/blockexplorer/transactions"
+          transactionId={row.id}
+          address={value}
+        />
+      ),
     };
 
     const metaDescription = this.context.intl.formatMessage(
@@ -96,8 +107,9 @@ export class MessagePage extends React.PureComponent {
           name="transactions"
           urlParams={this.props.match.params}
           list={this.props.transactions}
-          columns={transactionTab.columns}
+          columns={columns}
           sortingColumns={['id']}
+          ceilConfiguration={ceilConfiguration}
           defaultSort="id"
           messages={messages}
           link={`/blockexplorer/blocks/${blockId}/messages/${id}/transactions`}

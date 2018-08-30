@@ -69,7 +69,7 @@ class ListView extends React.PureComponent {
   }
 
   render() {
-    const ceilConfiguration = {
+    const ceilConfiguration = this.props.ceilConfiguration || {
       id: value => <Link to={`${this.props.link}/${value}`}>{value}</Link>,
     };
 
@@ -129,6 +129,7 @@ ListView.propTypes = {
   list: PropTypes.object.isRequired,
   columns: PropTypes.object.isRequired,
   sortingColumns: PropTypes.array.isRequired,
+  ceilConfiguration: PropTypes.object,
   defaultSort: PropTypes.string,
   defaultOrder: PropTypes.string,
   link: PropTypes.string.isRequired,
@@ -138,6 +139,7 @@ ListView.propTypes = {
 ListView.defaultProps = {
   defaultSort: 'id',
   defaultOrder: 'desc',
+  ceilConfiguration: null,
 };
 
 ListView.contextTypes = {

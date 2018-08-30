@@ -11,12 +11,30 @@ const routes = {
   '/blockexplorer/blocks/:page/:sort': null,
   '/blockexplorer/blocks/:id/messages/:page/:sort': null,
   '/blockexplorer/blocks/:id/messages/:page': null,
+  '/blockexplorer/blocks/:blockId/messages/:messageId/transactions/:id': (
+    url,
+    match,
+  ) => {
+    const { href } = window.location;
+    if (href.includes('/asc') || href.includes('/desc')) {
+      return null;
+    }
+    return `Transaction ${match.id}`;
+  },
   '/blockexplorer/blocks/:blockId/messages/:id/transactions/:page/:sort': null,
   '/blockexplorer/blocks/:blockId/messages/:id/transactions/:page': null,
   '/blockexplorer/nodes/:nodeId/accounts/:id/transactions/:page/:sort': null,
   '/blockexplorer/nodes/:nodeId/accounts/:id/transactions/:page': null,
-  '/blockexplorer/nodes/:nodeId/accounts/:accountId/transactions/:id':
-    'Transaction :id',
+  '/blockexplorer/nodes/:nodeId/accounts/:accountId/transactions/:id': (
+    url,
+    match,
+  ) => {
+    const { href } = window.location;
+    if (href.includes('/asc') || href.includes('/desc')) {
+      return null;
+    }
+    return `Transaction ${match.id}`;
+  },
   '/blockexplorer/transactions': 'Transactions',
   '/blockexplorer/transactions/:page/:sort/:order': null,
   '/blockexplorer/transactions/:page/:sort': null,
@@ -125,5 +143,6 @@ const routes = {
 
 export default {
   limit: process.env.LIMIT,
+  date_format: 'YYYY-MM-DD HH:mm:ss',
   routes,
 };

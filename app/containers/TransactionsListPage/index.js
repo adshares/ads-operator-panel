@@ -11,10 +11,12 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
 import ListView from 'components/ListView';
+import TransactionAddressLink from 'components/TransactionAddressLink';
 import { makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -30,13 +32,39 @@ export class TransactionsListPage extends React.PureComponent {
       message_id: <FormattedMessage {...messages.columnMessageId} />,
       sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
       target_address: <FormattedMessage {...messages.columnTargetAddress} />,
-      sender_fee: <FormattedMessage {...messages.columnSenderFee} />,
-      size: <FormattedMessage {...messages.columnSize} />,
+      amount: <FormattedMessage {...messages.columnAmount} />,
       type: <FormattedMessage {...messages.columnType} />,
       time: <FormattedMessage {...messages.columnTime} />,
     };
 
     const sortingColumns = ['id', 'block_id', 'type'];
+    const ceilConfiguration = {
+      id: value => (
+        <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
+      ),
+      block_id: value => (
+        <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
+      ),
+      message_id: (value, row) => (
+        <Link to={`/blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+          {value}
+        </Link>
+      ),
+      sender_address: (value, row) => (
+        <TransactionAddressLink
+          transactionLink="/blockexplorer/transactions"
+          transactionId={row.id}
+          address={value}
+        />
+      ),
+      target_address: (value, row) => (
+        <TransactionAddressLink
+          transactionLink="/blockexplorer/transactions"
+          transactionId={row.id}
+          address={value}
+        />
+      ),
+    };
 
     return (
       <div>
@@ -56,6 +84,7 @@ export class TransactionsListPage extends React.PureComponent {
           list={this.props.transactions}
           columns={columns}
           sortingColumns={sortingColumns}
+          ceilConfiguration={ceilConfiguration}
           defaultSort="block_id"
           messages={messages}
           link="/blockexplorer/transactions"

@@ -1,3 +1,4 @@
+import { formatDate } from 'dateHelper';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -21,27 +22,54 @@ const makeSelectTransactions = () =>
     (stateOwn, propsOwn) => propsOwn.match.params.id,
     (globalState, accountId) => {
       const transactions = globalState.get('transactions').toJS();
-      transactions.data.forEach(transaction => {
-        if (transaction.type === 'send_many' && transaction.wires.length > 0) {
-          const targetAddress = [];
-          let amount = 0;
-          transaction.wires.forEach(target => {
-            if (
-              transaction.sender_address !== accountId &&
-              target.target_address !== accountId
-            ) {
-              return;
-            }
+      const data = [];
+      transactions.data.forEach(rawTransaction => {
+        const transaction = rawTransaction;
+        const senderAddress = transaction.sender_address;
+        const { type } = transaction;
+        if (type === 'send_one') {
+          if (senderAddress === accountId) {
+            transaction.direction = 'out';
+            transaction.address = transaction.target_address;
+          } else {
+            transaction.direction = 'in';
+            transaction.address = transaction.sender_address;
+          }
+        } else if (type === 'send_many' && transaction.wires.length > 0) {
+          if (senderAddress === accountId) {
+            let amount = 0;
+            const targetAddress = [];
 
-            targetAddress.push(target.target_address);
-            amount += parseInt(target.amount, 10);
-          });
+            transaction.wires.forEach(target => {
+              amount += parseInt(target.amount, 10);
+              targetAddress.push(target.target_address);
+            });
 
-          transaction.target_address = targetAddress.join(', '); // eslint-disable-line
-          transaction.amount = amount; // eslint-disable-line
+            transaction.direction = 'out';
+            transaction.address =
+              targetAddress.length === 1 ? targetAddress[0] : targetAddress;
+            transaction.amount = amount;
+            transaction.targetAddress = targetAddress;
+          } else {
+            transaction.direction = 'in';
+            transaction.address = transaction.sender_address;
+            transaction.wires.every(target => {
+              if (target.target_address === accountId) {
+                transaction.amount = target.amount;
+                return false;
+              }
+
+              return true;
+            });
+          }
         }
+
+        transaction.time = formatDate(transaction.time);
+
+        data.push(transaction);
       });
 
+      transactions.data = data;
       return transactions;
     },
   );

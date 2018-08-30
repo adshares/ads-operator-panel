@@ -73,23 +73,23 @@ export default defineMessages({
   },
   transactionColumnBlockId: {
     id: 'app.containers.BlockExplorerPage.transactionColumnBlockId',
-    defaultMessage: 'Block Id',
+    defaultMessage: 'Block',
   },
   transactionColumnMessageId: {
     id: 'app.containers.BlockExplorerPage.transactionColumnMessageId',
-    defaultMessage: 'Message Id',
+    defaultMessage: 'Message',
   },
   transactionColumnSenderAddress: {
     id: 'app.containers.BlockExplorerPage.transactionColumnSenderAddress',
-    defaultMessage: 'Sender Address',
+    defaultMessage: 'From',
   },
   transactionColumnTargetAddress: {
     id: 'app.containers.BlockExplorerPage.transactionColumnTargetAddress',
-    defaultMessage: 'Target Address',
+    defaultMessage: 'To',
   },
-  transactionColumnSenderFee: {
-    id: 'app.containers.BlockExplorerPage.transactionColumnSenderFee',
-    defaultMessage: 'Sender Fee',
+  transactionColumnAmount: {
+    id: 'app.containers.BlockExplorerPage.transactionColumnAmount',
+    defaultMessage: 'Amount',
   },
   transactionColumnSize: {
     id: 'app.containers.BlockExplorerPage.transactionColumnSize',

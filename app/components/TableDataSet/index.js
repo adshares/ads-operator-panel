@@ -92,7 +92,7 @@ class TableDataSet extends React.PureComponent {
     ) {
       return (
         <td key={`${row.id}_${columnName}_${value.toString()}`}>
-          {this.props.ceilConfiguration[columnName](value)}
+          {this.props.ceilConfiguration[columnName](value, row)}
         </td>
       );
     }
@@ -120,7 +120,7 @@ class TableDataSet extends React.PureComponent {
 
     return (
       <div>
-        <table className="table">
+        <table className="table table-striped">
           {this.renderHeader()}
           <tbody>{this.renderRows()}</tbody>
         </table>
