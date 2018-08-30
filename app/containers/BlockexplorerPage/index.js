@@ -12,7 +12,6 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
-import Search from 'components/Search';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LatestPanel from 'components/LatestPanel';
@@ -30,6 +29,7 @@ import {
   loadLatestsTransactions,
 } from './actions';
 import messages from './messages';
+import { BlockexplorerWrapper } from './styled';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Blockexplorer extends React.PureComponent {
@@ -130,7 +130,7 @@ export class Blockexplorer extends React.PureComponent {
     };
 
     return (
-      <div>
+      <BlockexplorerWrapper>
         <Helmet>
           <title>{this.context.intl.formatMessage(messages.metaTitle)}</title>
           <meta
@@ -138,12 +138,7 @@ export class Blockexplorer extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <div className="row">
-          <div className="col-md-12 col-xs-12">
-            <Search history={this.props.history} />
-          </div>
-        </div>
-        <div className="row">
+        <div className="row area-one">
           <span className="col-md-5 col-xs-12">
             <LatestPanel
               tabs={[nodeTab]}
@@ -160,14 +155,14 @@ export class Blockexplorer extends React.PureComponent {
             />
           </span>
         </div>
-        <div className="row">
+        <div className="row area-two">
           <LatestPanel
             tabs={[transactionTab]}
             loading={this.props.transactions.loading}
             error={this.props.transactions.error}
           />
         </div>
-      </div>
+      </BlockexplorerWrapper>
     );
   }
 }

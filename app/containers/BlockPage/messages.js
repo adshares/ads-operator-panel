@@ -47,6 +47,22 @@ export default defineMessages({
     id: 'app.containers.BlockPage.fieldDividendPay',
     defaultMessage: 'Dividend Pay',
   },
+  fieldOldHash: {
+    id: 'app.containers.BlockPage.fieldDividendOldHash',
+    defaultMessage: 'Old Hash',
+  },
+  fieldNowHash: {
+    id: 'app.containers.BlockPage.fieldDividendNowHash',
+    defaultMessage: 'Now Hash',
+  },
+  fieldMsgHash: {
+    id: 'app.containers.BlockPage.fieldDividendMsgHash',
+    defaultMessage: 'Msg Hash',
+  },
+  fieldVipHash: {
+    id: 'app.containers.BlockPage.fieldDividendVipHash',
+    defaultMessage: 'Vip Hash',
+  },
   fieldTime: {
     id: 'app.containers.BlockPage.fieldTime',
     defaultMessage: 'Time',

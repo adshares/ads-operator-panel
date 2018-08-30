@@ -45,6 +45,10 @@ export class BlockPage extends React.PureComponent {
       ),
       dividend_balance: <FormattedMessage {...messages.fieldDividendBalance} />,
       dividend_pay: <FormattedMessage {...messages.fieldDividendPay} />,
+      old_hash: <FormattedMessage {...messages.fieldOldHash} />,
+      now_hash: <FormattedMessage {...messages.fieldNowHash} />,
+      msg_hash: <FormattedMessage {...messages.fieldMsgHash} />,
+      vip_hash: <FormattedMessage {...messages.fieldVipHash} />,
       time: <FormattedMessage {...messages.fieldTime} />,
     };
 

@@ -15,7 +15,7 @@ const makeSelectNode = () =>
   createSelector(selectNodePageDomain, globalState => {
     const node = globalState.get('node').toJS();
 
-    if (node.data) {
+    if (node.data.balance) {
       node.data.balance = formatMoney(node.data.balance);
     }
 
