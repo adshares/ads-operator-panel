@@ -43,6 +43,10 @@ export default defineMessages({
     id: 'app.containers.TransactionPage.fieldSenderFee',
     defaultMessage: 'Sender Fee',
   },
+  fieldAmount: {
+    id: 'app.containers.TransactionPage.fieldAmount',
+    defaultMessage: 'Amount',
+  },
   fieldSize: {
     id: 'app.containers.TransactionPage.fieldSize',
     defaultMessage: 'Size',

@@ -1,4 +1,5 @@
-import { formatDate } from 'dateHelper';
+import formatDate from 'lib/formatDate';
+import formatMoney from 'lib/formatMoney';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -9,9 +10,15 @@ const selectBlockexplorerDomain = state =>
   state.get('blockexplorer', initialState);
 
 const makeSelectLatestNodes = () =>
-  createSelector(selectBlockexplorerDomain, globalState =>
-    globalState.get('nodes').toJS(),
-  );
+  createSelector(selectBlockexplorerDomain, globalState => {
+    const nodes = globalState.get('nodes').toJS();
+    nodes.data.map(item => {
+      item.balance = formatMoney(item.balance); // eslint-disable-line
+      return item;
+    });
+
+    return nodes;
+  });
 
 const makeSelectLatestBlocks = () =>
   createSelector(selectBlockexplorerDomain, globalState => {
@@ -43,10 +50,14 @@ const makeSelectLatestTransactions = () =>
 
         transaction.target_address =
           targetAddress.length === 1 ? targetAddress[0] : targetAddress;
-        transaction.amount = amount;
+        transaction.amount = formatMoney(amount);
+      } else if (transaction.type === 'send_one') {
+        transaction.amount = formatMoney(transaction.amount);
       }
 
-      transaction.time = formatDate(transaction.time);
+      if (transaction.time) {
+        transaction.time = formatDate(transaction.time);
+      }
     });
 
     return transactions;

@@ -37,6 +37,7 @@ export class TransactionPage extends React.PureComponent {
       message_id: <FormattedMessage {...messages.fieldMessageId} />,
       sender_address: <FormattedMessage {...messages.fieldSenderAddress} />,
       target_address: <FormattedMessage {...messages.fieldTargetAddress} />,
+      amount: <FormattedMessage {...messages.fieldAmount} />,
       sender_fee: <FormattedMessage {...messages.fieldSenderFee} />,
       size: <FormattedMessage {...messages.fieldSize} />,
       type: <FormattedMessage {...messages.fieldType} />,

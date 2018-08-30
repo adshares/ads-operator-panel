@@ -1,4 +1,4 @@
-import moment from 'moment';
+import formatDate from 'lib/formatDate';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -12,10 +12,12 @@ const selectBlocksListPageDomain = state =>
 const makeSelectBlocks = () =>
   createSelector(selectBlocksListPageDomain, globalState => {
     const blocks = globalState.toJS();
-    blocks.data.forEach(block => {
-      const date = moment.parseZone(block.time);
-      block.time = date.format('YYYY-MM-DD HH:mm:ss'); // eslint-disable-line
-      block.votes = `${block.vote_yes}/${block.vote_total}`; // eslint-disable-line
+    blocks.data.map(rawBlock => {
+      const block = rawBlock;
+      block.time = formatDate(block.time);
+      block.votes = `${block.vote_yes}/${block.vote_total}`;
+
+      return block;
     });
 
     return blocks;
