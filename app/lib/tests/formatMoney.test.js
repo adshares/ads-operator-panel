@@ -20,8 +20,8 @@ describe('formatDate', () => {
   });
 
   it('should use `:` separator for thousand values', () => {
-    const value = 1507263537768104788;
+    const value = 1507263537768555;
 
-    expect(formatMoney(value, true, '.', ':')).toEqual('15:072:635.377681047');
+    expect(formatMoney(value, true, '.', ':')).toEqual('15:072.63537768555');
   });
 });

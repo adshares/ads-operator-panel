@@ -4,7 +4,7 @@ export default function(value, trim, decimal, thousand) {
   const r = typeof trim === 'undefined' ? false : trim;
   const d = typeof decimal === 'undefined' ? '.' : decimal;
   const t = typeof thousand === 'undefined' ? ',' : thousand;
-  let v = value;
+  let v = value.toString();
 
   v = ((v || '0') + '').padStart(11, '0');
   const l = v.length - 11;
