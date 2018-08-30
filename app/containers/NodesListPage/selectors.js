@@ -1,18 +1,22 @@
+import formatMoney from 'lib/formatMoney';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
-
-/**
- * Direct selector to the nodesListPage state domain
- */
 
 const selectNodesListPageDomain = state =>
   state.get('nodesListPage', initialState);
 
-/**
- * Default selector used by NodesListPage
- */
 const makeSelectNodesListPage = () =>
-  createSelector(selectNodesListPageDomain, substate => substate.toJS());
+  createSelector(selectNodesListPageDomain, substate => {
+    const nodes = substate.toJS();
+    nodes.data.map(item => {
+      const node = item;
+      node.balance = formatMoney(node.balance);
+
+      return node;
+    });
+
+    return nodes;
+  });
 
 export default makeSelectNodesListPage;
 export { makeSelectNodesListPage };

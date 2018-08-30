@@ -1,4 +1,5 @@
-import { formatDate } from 'dateHelper';
+import formatMoney from 'lib/formatMoney';
+import formatDate from 'lib/formatDate';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -12,9 +13,18 @@ const selectAccountPageDomain = state => state.get('accountPage', initialState);
  * Other specific selectors
  */
 const makeSelectAccount = () =>
-  createSelector(selectAccountPageDomain, globalState =>
-    globalState.get('account').toJS(),
-  );
+  createSelector(selectAccountPageDomain, globalState => {
+    const account = globalState.get('account').toJS();
+
+    if (account.data) {
+      account.data.balance = formatMoney(account.data.balance);
+      account.data.local_change = formatDate(account.data.local_change);
+      account.data.remote_change = formatDate(account.data.remote_change);
+      account.data.time = formatDate(account.data.time);
+    }
+
+    return account;
+  });
 
 const makeSelectTransactions = () =>
   createSelector(
@@ -64,7 +74,11 @@ const makeSelectTransactions = () =>
           }
         }
 
-        transaction.time = formatDate(transaction.time);
+        transaction.amount = formatMoney(transaction.amount);
+
+        if (transaction.time) {
+          transaction.time = formatDate(transaction.time);
+        }
 
         data.push(transaction);
       });

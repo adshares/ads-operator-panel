@@ -1,4 +1,5 @@
-import { formatDate } from 'dateHelper';
+import formatMoney from 'lib/formatMoney';
+import formatDate from 'lib/formatDate';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -21,10 +22,14 @@ const makeSelectTransactions = () =>
 
         transaction.target_address =
           targetAddress.length === 1 ? targetAddress[0] : targetAddress;
-        transaction.amount = amount;
+        transaction.amount = formatMoney(amount);
+      } else if (transaction.type === 'send_one') {
+        transaction.amount = formatMoney(transaction.amount);
       }
 
-      transaction.time = formatDate(transaction.time);
+      if (transaction.time) {
+        transaction.time = formatDate(transaction.time);
+      }
     });
 
     return transactions;
