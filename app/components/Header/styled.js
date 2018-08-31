@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
   img { 
-    margin-top: 1em;  
+    margin-top: 1em;
+    height: 42px;
   }
 `;
 
