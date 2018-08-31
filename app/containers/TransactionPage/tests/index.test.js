@@ -4,6 +4,8 @@ import { shallowIntlWrap } from 'testHelper';
 import { TransactionPage } from '../index';
 
 describe('<TransactionPage />', () => {
+  const location = { search: '' };
+
   it('should render h3, DetailView elements', () => {
     const match = {
       params: {},
@@ -19,6 +21,7 @@ describe('<TransactionPage />', () => {
     const renderedComponent = shallowIntlWrap(
       <TransactionPage
         match={match}
+        location={location}
         dispatch={dispatch}
         transaction={transaction}
       />,
@@ -45,6 +48,7 @@ describe('<TransactionPage />', () => {
     shallowIntlWrap(
       <TransactionPage
         match={match}
+        location={location}
         dispatch={dispatch}
         transaction={transaction}
       />,

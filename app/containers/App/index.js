@@ -60,12 +60,7 @@ export default function App() {
         <Route exact path="/blockexplorer/nodes" component={NodesListPage} />
         <Route
           exact
-          path="/blockexplorer/nodes/:page/:sort/:order"
-          component={NodesListPage}
-        />
-        <Route
-          exact
-          path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/accounts/:page/:sort/:order"
+          path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/accounts"
           component={NodePage}
         />
         <Route
@@ -81,18 +76,13 @@ export default function App() {
         <Route exact path="/blockexplorer/blocks" component={BlocksListPage} />
         <Route
           exact
-          path="/blockexplorer/blocks/:page/:sort/:order"
-          component={BlocksListPage}
-        />
-        <Route
-          exact
           path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})"
           component={BlockPage}
         />
 
         <Route
           exact
-          path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})/messages/:page/:sort/:order"
+          path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})/messages"
           component={BlockPage}
         />
         <Route
@@ -117,17 +107,12 @@ export default function App() {
         />
         <Route
           exact
-          path="/blockexplorer/transactions/:page/:sort/:order"
-          component={TransactionsListPage}
-        />
-        <Route
-          exact
-          path="/blockexplorer/blocks/:blockId([a-fA-F0-9]{8})/messages/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8})/transactions/:page/:sort/:order"
+          path="/blockexplorer/blocks/:blockId([a-fA-F0-9]{8})/messages/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8})/transactions"
           component={MessagePage}
         />
         <Route
           exact
-          path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:id([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})/transactions/:page/:sort/:order"
+          path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:id([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})/transactions"
           component={AccountPage}
         />
 

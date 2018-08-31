@@ -48,6 +48,7 @@ export class NodesListPage extends React.Component {
         <ListView
           name="nodes"
           urlParams={this.props.match.params}
+          query={this.props.location.search}
           list={this.props.nodes}
           columns={columns}
           sortingColumns={sortingColumns}
@@ -64,6 +65,7 @@ export class NodesListPage extends React.Component {
 NodesListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
+  location: PropTypes.object,
   nodes: PropTypes.object,
   onPageChange: PropTypes.func,
 };

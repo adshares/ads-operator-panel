@@ -106,6 +106,7 @@ export class MessagePage extends React.PureComponent {
         <ListView
           name="transactions"
           urlParams={this.props.match.params}
+          query={this.props.location.search}
           list={this.props.transactions}
           columns={columns}
           sortingColumns={['id']}
@@ -122,6 +123,7 @@ export class MessagePage extends React.PureComponent {
 
 MessagePage.propTypes = {
   match: PropTypes.object,
+  location: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   message: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,

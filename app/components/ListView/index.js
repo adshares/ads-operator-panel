@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { intlShape } from 'react-intl';
+import queryString from 'query-string';
 import config from 'config';
 import Pagination from 'components/Pagination/Loadable';
 import TableDataSet from 'components/TableDataSet';
@@ -18,14 +19,16 @@ import listViewMessages from './messages';
 /* eslint-disable react/prefer-stateless-function */
 class ListView extends React.PureComponent {
   componentDidMount() {
-    const sort = this.props.urlParams.sort || this.props.defaultSort;
-    const order = this.props.urlParams.order || this.props.defaultOrder;
+    const parsedQuery = queryString.parse(this.props.query);
+
+    const sort = parsedQuery.sort || this.props.defaultSort;
+    const order = parsedQuery.order || this.props.defaultOrder;
 
     if (
       this.props.sortingColumns.includes(sort) &&
       ['desc', 'asc'].includes(order)
     ) {
-      const page = this.props.urlParams.page || 1;
+      const page = parsedQuery.page || 1;
       const { id } = this.props.urlParams;
 
       if (id) {
@@ -39,8 +42,8 @@ class ListView extends React.PureComponent {
   }
 
   componentDidUpdate(nextProps) {
-    const params = nextProps.urlParams;
-    const paramsFromProps = this.props.urlParams;
+    const params = queryString.parse(nextProps.query);
+    const paramsFromProps = queryString.parse(this.props.query);
 
     if (
       paramsFromProps.page !== params.page ||
@@ -69,15 +72,16 @@ class ListView extends React.PureComponent {
   }
 
   render() {
+    const parsedQuery = queryString.parse(this.props.query);
     const ceilConfiguration = this.props.ceilConfiguration || {
       id: value => <Link to={`${this.props.link}/${value}`}>{value}</Link>,
     };
 
-    const page = parseInt(this.props.urlParams.page || 1, 10);
-    const sort = this.props.urlParams.sort || this.props.defaultSort;
-    const order = this.props.urlParams.order || this.props.defaultOrder;
+    const page = parseInt(parsedQuery.page || 1, 10);
+    const sort = parsedQuery.sort || this.props.defaultSort;
+    const order = parsedQuery.order || this.props.defaultOrder;
 
-    if (!this.props.sortingColumns.includes(sort)) {
+    if (!this.props.sortingColumns.includes(sort) || Array.isArray(sort)) {
       return (
         <ErrorMsg
           error={this.context.intl.formatMessage(listViewMessages.sorting)}
@@ -126,6 +130,7 @@ class ListView extends React.PureComponent {
 ListView.propTypes = {
   name: PropTypes.string.isRequired,
   urlParams: PropTypes.object.isRequired,
+  query: PropTypes.string.isRequired,
   list: PropTypes.object.isRequired,
   columns: PropTypes.object.isRequired,
   sortingColumns: PropTypes.array.isRequired,

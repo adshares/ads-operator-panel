@@ -4,6 +4,8 @@ import { shallowIntlWrap } from 'testHelper';
 import { BlockPage } from '../index';
 
 describe('<BlockPage />', () => {
+  const location = { search: '' };
+
   it('should render h3, DetailView, ListView elements', () => {
     const match = {
       params: {},
@@ -24,6 +26,7 @@ describe('<BlockPage />', () => {
     const renderedComponent = shallowIntlWrap(
       <BlockPage
         match={match}
+        location={location}
         dispatch={dispatch}
         block={block}
         messages={messages}
@@ -57,6 +60,7 @@ describe('<BlockPage />', () => {
     shallowIntlWrap(
       <BlockPage
         match={match}
+        location={location}
         dispatch={dispatch}
         block={block}
         messages={messages}

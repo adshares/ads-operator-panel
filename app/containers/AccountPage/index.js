@@ -115,6 +115,7 @@ export class AccountPage extends React.PureComponent {
         <ListView
           name="transactions"
           urlParams={this.props.match.params}
+          query={this.props.location.search}
           list={this.props.transactions}
           columns={columns}
           ceilConfiguration={ceilConfiguration}
@@ -131,6 +132,7 @@ export class AccountPage extends React.PureComponent {
 
 AccountPage.propTypes = {
   match: PropTypes.object,
+  location: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   account: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
@@ -151,6 +153,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     onPageChange: (id, page, sort, order) => {
       const offset = (page - 1) * config.limit;
+
       return dispatch(
         loadTransactions(id, config.limit + 1, offset, sort, order),
       );
