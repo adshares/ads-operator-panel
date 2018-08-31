@@ -6,15 +6,14 @@ import ListView from '../index';
 
 describe('<ListView />', () => {
   it('should render <ErrorMsg> when sorting column is wrong', () => {
-    const urlParms = {
-      sort: 'asd',
-      order: 'asc',
-    };
+    const query = '?sort=asd&order=asc';
+
     const availableColumns = ['id', 'title'];
     const renderedComponent = shallowIntlWrap(
       <ListView
         name="name"
-        urlParams={urlParms}
+        urlParams={{}}
+        query={query}
         list={{}}
         columns={{}}
         sortingColumns={availableColumns}
@@ -27,15 +26,13 @@ describe('<ListView />', () => {
   });
 
   it('should render <ErrorMsg> when order value is wrong', () => {
-    const urlParms = {
-      sort: 'id',
-      order: 'none',
-    };
+    const query = '?sort=id&order=none';
     const availableColumns = ['id', 'title'];
     const renderedComponent = shallowIntlWrap(
       <ListView
         name="name"
-        urlParams={urlParms}
+        urlParams={{}}
+        query={query}
         list={{}}
         columns={{}}
         sortingColumns={availableColumns}
@@ -54,10 +51,7 @@ describe('<ListView />', () => {
       title: 'title',
     };
 
-    const urlParams = {
-      sort: 'id',
-      order: 'desc',
-    };
+    const query = '?sort=id&order=desc';
     const list = {
       loading: false,
       error: false,
@@ -68,7 +62,8 @@ describe('<ListView />', () => {
     const renderedComponent = shallowIntlWrap(
       <ListView
         name="name"
-        urlParams={urlParams}
+        urlParams={{}}
+        query={query}
         list={list}
         columns={columns}
         sortingColumns={sortingColumns}
@@ -90,7 +85,6 @@ describe('<ListView />', () => {
       title: 'title',
     };
 
-    const urlParams = {};
     const list = {
       loading: false,
       error: false,
@@ -101,7 +95,8 @@ describe('<ListView />', () => {
     shallowIntlWrap(
       <ListView
         name="name"
-        urlParams={urlParams}
+        query=""
+        urlParams={{}}
         list={list}
         columns={columns}
         sortingColumns={sortingColumns}
@@ -121,10 +116,7 @@ describe('<ListView />', () => {
       title: 'title',
     };
 
-    const urlParams = {
-      sort: 'id',
-      order: 'desc',
-    };
+    const query = '?sort=id&order=desc';
     const list = {
       loading: false,
       error: false,
@@ -135,7 +127,8 @@ describe('<ListView />', () => {
     const renderedComponent = shallowIntlWrap(
       <ListView
         name="name"
-        urlParams={urlParams}
+        query={query}
+        urlParams={{}}
         list={list}
         columns={columns}
         sortingColumns={sortingColumns}
@@ -144,12 +137,9 @@ describe('<ListView />', () => {
         onPageChange={onPageChange}
       />,
     );
-    const newUrlParams = {
-      sort: 'id',
-      order: 'asc',
-    };
+    const newQuery = '?sort=id&order=asc';
 
-    renderedComponent.setProps({ urlParams: newUrlParams });
+    renderedComponent.setProps({ query: newQuery });
     expect(onPageChange.callCount).toEqual(2);
   });
 });

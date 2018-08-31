@@ -4,6 +4,8 @@ import { shallowIntlWrap } from 'testHelper';
 import { NodePage } from '../index';
 
 describe('<NodePage />', () => {
+  const location = { search: '' };
+
   it('should render h3, DetailView, ListView elements', () => {
     const match = {
       params: {},
@@ -24,6 +26,7 @@ describe('<NodePage />', () => {
     const renderedComponent = shallowIntlWrap(
       <NodePage
         match={match}
+        location={location}
         dispatch={dispatch}
         node={node}
         accounts={accounts}
@@ -57,6 +60,7 @@ describe('<NodePage />', () => {
     shallowIntlWrap(
       <NodePage
         match={match}
+        location={location}
         dispatch={dispatch}
         node={node}
         accounts={accounts}

@@ -52,6 +52,7 @@ export class BlocksListPage extends React.PureComponent {
         <ListView
           name="blocks"
           urlParams={this.props.match.params}
+          query={this.props.location.search}
           list={this.props.blocks}
           columns={columns}
           sortingColumns={sortingColumns}
@@ -68,6 +69,7 @@ export class BlocksListPage extends React.PureComponent {
 BlocksListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
+  location: PropTypes.object,
   blocks: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
 };

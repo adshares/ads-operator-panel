@@ -92,6 +92,7 @@ export class NodePage extends React.PureComponent {
         <ListView
           name="accounts"
           urlParams={this.props.match.params}
+          query={this.props.location.search}
           list={this.props.accounts}
           columns={accountTab.columns}
           sortingColumns={['id']}
@@ -107,6 +108,7 @@ export class NodePage extends React.PureComponent {
 
 NodePage.propTypes = {
   match: PropTypes.object.isRequired,
+  location: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   node: PropTypes.object,
   accounts: PropTypes.object,

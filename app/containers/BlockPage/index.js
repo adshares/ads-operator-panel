@@ -97,6 +97,7 @@ export class BlockPage extends React.PureComponent {
         <ListView
           name="messages"
           urlParams={this.props.match.params}
+          query={this.props.location.search}
           list={this.props.messages}
           columns={messageTab.columns}
           sortingColumns={['id']}
@@ -112,6 +113,7 @@ export class BlockPage extends React.PureComponent {
 
 BlockPage.propTypes = {
   match: PropTypes.object,
+  location: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   block: PropTypes.object.isRequired,
   messages: PropTypes.object.isRequired,

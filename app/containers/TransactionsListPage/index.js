@@ -81,6 +81,7 @@ export class TransactionsListPage extends React.PureComponent {
         <ListView
           name="nodes"
           urlParams={this.props.match.params}
+          query={this.props.location.search}
           list={this.props.transactions}
           columns={columns}
           sortingColumns={sortingColumns}
@@ -98,6 +99,7 @@ export class TransactionsListPage extends React.PureComponent {
 TransactionsListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
+  location: PropTypes.object,
   transactions: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
 };

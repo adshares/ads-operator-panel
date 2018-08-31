@@ -36,7 +36,7 @@ class TableDataSet extends React.PureComponent {
           ? TableDataSet.reverseOrder(this.props.orderBy)
           : this.props.orderBy;
 
-      const link = `${this.props.link}/1/${columnId}/${order}`;
+      const link = `${this.props.link}?page=1&sort=${columnId}&order=${order}`;
 
       return (
         <th scope="col" key={`${this.props.name}_${columnId}`}>

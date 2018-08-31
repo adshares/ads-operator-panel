@@ -94,7 +94,9 @@ class Pagination extends React.PureComponent {
   }
 
   generateLink(page) {
-    return `${this.props.link}/${page}/${this.props.sort}/${this.props.order}`;
+    return `${this.props.link}?page=${page}&sort=${this.props.sort}&order=${
+      this.props.order
+    }`;
   }
 
   render() {
