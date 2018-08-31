@@ -6,11 +6,11 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the blockexplorer state domain
  */
-const selectBlockexplorerDomain = state =>
-  state.get('blockexplorer', initialState);
+const selectBlockexplorerDashboardPageDomain = state =>
+  state.get('blockexplorerDashboardPage', initialState);
 
 const makeSelectLatestNodes = () =>
-  createSelector(selectBlockexplorerDomain, globalState => {
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const nodes = globalState.get('nodes').toJS();
     nodes.data.map(item => {
       item.balance = formatMoney(item.balance); // eslint-disable-line
@@ -21,7 +21,7 @@ const makeSelectLatestNodes = () =>
   });
 
 const makeSelectLatestBlocks = () =>
-  createSelector(selectBlockexplorerDomain, globalState => {
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const blocks = globalState.get('blocks').toJS();
 
     if (blocks.data) {
@@ -35,7 +35,7 @@ const makeSelectLatestBlocks = () =>
   });
 
 const makeSelectLatestTransactions = () =>
-  createSelector(selectBlockexplorerDomain, globalState => {
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const transactions = globalState.get('transactions').toJS();
     transactions.data.forEach(rawTransaction => {
       const transaction = rawTransaction;

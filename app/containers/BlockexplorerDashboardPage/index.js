@@ -32,7 +32,7 @@ import messages from './messages';
 import { BlockexplorerWrapper } from './styled';
 
 /* eslint-disable react/prefer-stateless-function */
-export class Blockexplorer extends React.PureComponent {
+export class BlockexplorerDashboardPage extends React.PureComponent {
   componentDidMount() {
     this.props.dispatch(loadLatestNode());
     this.props.dispatch(loadLatestBlocks());
@@ -167,7 +167,7 @@ export class Blockexplorer extends React.PureComponent {
   }
 }
 
-Blockexplorer.propTypes = {
+BlockexplorerDashboardPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   nodes: PropTypes.object,
@@ -175,7 +175,7 @@ Blockexplorer.propTypes = {
   transactions: PropTypes.object,
 };
 
-Blockexplorer.contextTypes = {
+BlockexplorerDashboardPage.contextTypes = {
   intl: intlShape,
 };
 
@@ -196,11 +196,14 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'blockexplorer', reducer });
-const withSaga = injectSaga({ key: 'blockexplorer', saga });
+const withReducer = injectReducer({
+  key: 'blockexplorerDashboardPage',
+  reducer,
+});
+const withSaga = injectSaga({ key: 'blockexplorerDashboardPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(Blockexplorer);
+)(BlockexplorerDashboardPage);

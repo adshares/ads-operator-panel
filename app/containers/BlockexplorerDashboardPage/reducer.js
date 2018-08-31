@@ -36,13 +36,13 @@ export const initialState = fromJS({
   },
 });
 
-const blockexplorerReducer = (state = initialState, action) => {
+const blockexplorerDashboardPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_LATEST_NODES:
       return state
         .setIn(['nodes', 'loading'], true)
         .setIn(['nodes', 'error'], false)
-        .setIn(['nodes', 'data'], []);
+        .setIn(['nodes', 'data'], fromJS([]));
     case LOAD_LATEST_NODES_SUCCESS:
       return state
         .setIn(['nodes', 'loading'], false)
@@ -52,12 +52,12 @@ const blockexplorerReducer = (state = initialState, action) => {
       return state
         .setIn(['nodes', 'loading'], false)
         .setIn(['nodes', 'error'], fromJS(action.error))
-        .setIn(['nodes', 'data'], []);
+        .setIn(['nodes', 'data'], fromJS([]));
     case LOAD_LATEST_BLOCKS:
       return state
         .setIn(['blocks', 'loading'], true)
         .setIn(['blocks', 'error'], false)
-        .setIn(['blocks', 'data'], []);
+        .setIn(['blocks', 'data'], fromJS([]));
     case LOAD_LATEST_BLOCKS_SUCCESS:
       return state
         .setIn(['blocks', 'loading'], false)
@@ -67,12 +67,12 @@ const blockexplorerReducer = (state = initialState, action) => {
       return state
         .setIn(['blocks', 'loading'], false)
         .setIn(['blocks', 'error'], fromJS(action.error))
-        .setIn(['blocks', 'data'], []);
+        .setIn(['blocks', 'data'], fromJS([]));
     case LOAD_LATEST_TRANSACTIONS:
       return state
         .setIn(['transactions', 'loading'], true)
         .setIn(['transactions', 'error'], false)
-        .setIn(['transactions', 'data'], []);
+        .setIn(['transactions', 'data'], fromJS([]));
     case LOAD_LATEST_TRANSACTIONS_SUCCESS:
       return state
         .setIn(['transactions', 'loading'], false)
@@ -82,9 +82,9 @@ const blockexplorerReducer = (state = initialState, action) => {
       return state
         .setIn(['transactions', 'loading'], false)
         .setIn(['transactions', 'error'], fromJS(action.error))
-        .setIn(['transactions', 'data'], []);
+        .setIn(['transactions', 'data'], fromJS([]));
     default:
       return state;
   }
 };
-export default blockexplorerReducer;
+export default blockexplorerDashboardPageReducer;

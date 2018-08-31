@@ -6,3 +6,5 @@ export const HeaderWrapper = styled.div`
     margin-top: 1em;  
   }
 `;
+
+HeaderWrapper.displayName = 'HeaderWrapper';

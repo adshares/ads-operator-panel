@@ -16,7 +16,7 @@ import { Switch, Route } from 'react-router-dom';
 import Breadcrumbs from 'components/Breadcrumbs';
 
 import HomePage from 'containers/HomePage/Loadable';
-import BlockExplorerPage from 'containers/BlockexplorerPage/Loadable';
+import BlockExplorerDashboardPage from 'containers/BlockexplorerDashboardPage/Loadable';
 import NodesListPage from 'containers/NodesListPage/Loadable';
 import TransactionsListPage from 'containers/TransactionsListPage/Loadable';
 import BlocksListPage from 'containers/BlocksListPage/Loadable';
@@ -37,7 +37,11 @@ export default function App() {
       <Breadcrumbs mappedRoutes={config.routes} />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/blockexplorer" component={BlockExplorerPage} />
+        <Route
+          exact
+          path="/blockexplorer"
+          component={BlockExplorerDashboardPage}
+        />
         <Route
           exact
           path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:accountId([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})/transactions/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8}:[a-fA-F0-9]{4})"

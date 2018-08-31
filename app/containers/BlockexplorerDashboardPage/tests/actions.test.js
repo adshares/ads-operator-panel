@@ -15,7 +15,7 @@ import {
   LOAD_LATEST_TRANSACTIONS_SUCCESS,
 } from '../constants';
 
-describe('BlockExplorerPage actions', () => {
+describe('BlockexplorerDashboardPage actions', () => {
   describe('Load nodes Action', () => {
     it('has a type of LOAD_LATEST_NODES', () => {
       const expected = {
