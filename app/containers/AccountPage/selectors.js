@@ -16,10 +16,19 @@ const makeSelectAccount = () =>
   createSelector(selectAccountPageDomain, globalState => {
     const account = globalState.get('account').toJS();
 
-    if (account.data) {
+    if (account.data.balance) {
       account.data.balance = formatMoney(account.data.balance);
+    }
+
+    if (account.data.local_change) {
       account.data.local_change = formatDate(account.data.local_change);
+    }
+
+    if (account.data.remote_change) {
       account.data.remote_change = formatDate(account.data.remote_change);
+    }
+
+    if (account.data.time) {
       account.data.time = formatDate(account.data.time);
     }
 
@@ -74,7 +83,9 @@ const makeSelectTransactions = () =>
           }
         }
 
-        transaction.amount = formatMoney(transaction.amount);
+        if (transaction.amount) {
+          transaction.amount = formatMoney(transaction.amount);
+        }
 
         if (transaction.time) {
           transaction.time = formatDate(transaction.time);

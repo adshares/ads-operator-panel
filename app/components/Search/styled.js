@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 
-export const SearchWrapper = styled.div`  
+export const SearchWrapper = styled.span`  
   .search { 
     position: relative; 
+    margin: 1em;
   }
   
   .search input { text-indent: 30px;}

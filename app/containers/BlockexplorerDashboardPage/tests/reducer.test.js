@@ -1,9 +1,9 @@
 import { fromJS } from 'immutable';
-import blockexplorerReducer from '../reducer';
+import blockexplorerDashboardPageReducer from '../reducer';
 
-describe('blockexplorerReducer', () => {
+describe('blockexplorerDashboardPageReducer', () => {
   it('returns the initial state', () => {
-    expect(blockexplorerReducer(undefined, {})).toEqual(
+    expect(blockexplorerDashboardPageReducer(undefined, {})).toEqual(
       fromJS({
         nodes: {
           loading: false,
