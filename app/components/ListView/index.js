@@ -81,7 +81,7 @@ class ListView extends React.PureComponent {
     const sort = parsedQuery.sort || this.props.defaultSort;
     const order = parsedQuery.order || this.props.defaultOrder;
 
-    if (!this.props.sortingColumns.includes(sort) || Array.isArray(sort)) {
+    if (!this.props.sortingColumns.includes(sort)) {
       return (
         <ErrorMsg
           error={this.context.intl.formatMessage(listViewMessages.sorting)}
