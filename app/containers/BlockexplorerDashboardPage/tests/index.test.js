@@ -1,5 +1,5 @@
 describe('<BlockExplorerDashboardPage />', () => {
-  it('should render h3, DetailView, LatestPanel elements', () => {
+  it('Expect to have unit tests specified', () => {
     expect(true).toEqual(true);
   });
 });
