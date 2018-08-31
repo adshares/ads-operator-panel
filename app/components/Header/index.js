@@ -14,8 +14,9 @@ class Header extends React.Component {
   render() {
     return (
       <HeaderWrapper className="row">
-        <span className="col-md-1">
+        <span className="col-md-2">
           <Img src={Logo} alt="react-boilerplate - Logo" />
+          <strong>ADS Operator</strong>
         </span>
         <span className="col-md-3">
           <NavBar>
@@ -24,7 +25,7 @@ class Header extends React.Component {
             </HeaderLink>
           </NavBar>
         </span>
-        <span className="col-md-8">
+        <span className="col-md-7">
           <Route
             path="/:path"
             render={props => <Search history={props.history} />}
