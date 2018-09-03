@@ -33,7 +33,7 @@ class Search extends React.PureComponent {
     event.preventDefault();
     event.stopPropagation();
 
-    const { value } = this.state;
+    const value = this.state.value.toUpperCase();
 
     Object.entries(this.urlMap).forEach(([regex, url]) => {
       const matched = value.match(new RegExp(regex, 'i'));
