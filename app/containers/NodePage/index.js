@@ -34,6 +34,15 @@ export class NodePage extends React.PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const newId = this.props.match.params.id;
+    const oldId = prevProps.match.params.id;
+    if (oldId !== newId) {
+      this.props.dispatch(loadNode(newId));
+      this.props.dispatch(loadAccounts(newId));
+    }
+  }
+
   render() {
     const { id } = this.props.match.params;
 

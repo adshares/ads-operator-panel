@@ -145,4 +145,26 @@ describe('<Search />', () => {
 
     expect(history.value).toEqual(null);
   });
+
+  it('should change to uppercase', () => {
+    const fakeEvent = {
+      preventDefault: () => null,
+      stopPropagation: () => null,
+    };
+
+    const history = {
+      value: null,
+      push: param => {
+        history.value = param;
+        return null;
+      },
+    };
+    const renderedComponent = shallow(<Search history={history} />);
+    renderedComponent.setState({ value: 'abcdef11' });
+
+    const form = renderedComponent.find('form');
+    form.simulate('submit', fakeEvent);
+
+    expect(history.value).toEqual('/blockexplorer/blocks/ABCDEF11');
+  });
 });

@@ -35,9 +35,19 @@ export class MessagePage extends React.PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const newId = this.props.match.params.id;
+    const oldId = prevProps.match.params.id;
+    if (oldId !== newId) {
+      this.props.dispatch(loadMessage(newId));
+      this.props.dispatch(loadTransactions(newId));
+    }
+  }
+
   render() {
     const { id } = this.props.match.params;
-    const { blockId } = this.props.match.params;
+    const blockId =
+      this.props.match.params.blockId || this.props.message.data.block_id;
 
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
@@ -49,8 +59,6 @@ export class MessagePage extends React.PureComponent {
       length: <FormattedMessage {...messages.fieldLength} />,
     };
 
-    const link = `/blockexplorer/blocks/${blockId}/messages/${id}/transactions`;
-
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
       sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
@@ -59,6 +67,8 @@ export class MessagePage extends React.PureComponent {
       type: <FormattedMessage {...messages.columnType} />,
       time: <FormattedMessage {...messages.columnTime} />,
     };
+
+    const link = `/blockexplorer/blocks/${blockId}/messages/${id}/transactions`;
 
     const ceilConfiguration = {
       id: value => <Link to={`${link}/${value}`}>{value}</Link>,
@@ -113,7 +123,7 @@ export class MessagePage extends React.PureComponent {
           ceilConfiguration={ceilConfiguration}
           defaultSort="id"
           messages={messages}
-          link={`/blockexplorer/blocks/${blockId}/messages/${id}/transactions`}
+          link={link}
           onPageChange={this.props.onPageChange}
         />
       </MessagePageWrapper>

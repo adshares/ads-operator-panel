@@ -45,7 +45,8 @@ export class AccountPage extends React.PureComponent {
 
   render() {
     const { id } = this.props.match.params;
-    const { nodeId } = this.props.match.params;
+    const nodeId =
+      this.props.match.params.nodeId || this.props.account.data.node_id;
 
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
@@ -56,7 +57,6 @@ export class AccountPage extends React.PureComponent {
       time: <FormattedMessage {...messages.fieldTime} />,
     };
 
-    const link = `/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`;
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
       block_id: <FormattedMessage {...messages.columnBlockId} />,
@@ -67,6 +67,8 @@ export class AccountPage extends React.PureComponent {
       type: <FormattedMessage {...messages.columnType} />,
       time: <FormattedMessage {...messages.columnTime} />,
     };
+
+    const link = `/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`;
 
     const ceilConfiguration = {
       id: value => <Link to={`${link}/${value}`}>{value}</Link>,
@@ -122,7 +124,7 @@ export class AccountPage extends React.PureComponent {
           sortingColumns={['id', 'block_id', 'type']}
           defaultSort="block_id"
           messages={messages}
-          link={`/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`}
+          link={link}
           onPageChange={this.props.onPageChange}
         />
       </AccountPageWrapper>
