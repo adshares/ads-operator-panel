@@ -1,0 +1,61 @@
+{
+  "request": {
+    "method": "GET",
+    "url":
+      "/api/v1/blockexplorer/nodes/0003/accounts?limit=26&offset=0&sort=id&order=asc"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": [
+      {
+        "address": "0003-00000000-DFEC",
+        "balance": 9884567209798,
+        "hash":
+          "254A34CEA3240D63E0EB2F6FB5BFDEF33F3F81524E76E5F718B886886A689B20",
+        "local_change": "2018-08-29T15:47:44+02:00",
+        "msid": 3,
+        "paired_node": 0,
+        "public_key":
+          "D2F94A03066F3306C03D132551F2DA825E044C3AD076F143E9FCA4B97D17D3CB",
+        "remote_change": "2018-09-06T14:13:52+02:00",
+        "status": 0,
+        "time": "2018-08-29T15:50:30+02:00",
+        "id": "0003-00000000-DFEC"
+      },
+      {
+        "address": "0003-00000001-CFCD",
+        "balance": 193750000000000000,
+        "hash":
+          "76065EFA7FC5FBC1E32C7CA855EF03EBBD89098706ED98C3F137850AA6D2F7D2",
+        "local_change": "2018-08-28T14:54:24+02:00",
+        "msid": 1,
+        "paired_node": 0,
+        "public_key":
+          "8C5DBE5E5B9B3122563229C1498085AC03C65B05B18EE6A0C2D6D3B4DC6483C5",
+        "remote_change": "2018-08-28T14:54:24+02:00",
+        "status": 0,
+        "time": "2018-08-28T14:54:24+02:00",
+        "id": "0003-00000001-CFCD"
+      },
+      {
+        "address": "0003-00000002-FFAE",
+        "balance": 157776217762,
+        "hash":
+          "1A7CFC231F3FB2E1947182268C6654803EE75A9FCDC0894315F6F34D6EC2158A",
+        "local_change": "2018-09-06T14:13:52+02:00",
+        "msid": 2106,
+        "paired_node": 0,
+        "public_key":
+          "B1A24224B65D7BEC0EF6BD1BF3B34C69553CBD290093AE02A23FADCF1FB5714F",
+        "remote_change": "2018-09-06T14:13:52+02:00",
+        "status": 0,
+        "time": "2018-09-06T14:20:55+02:00",
+        "id": "0003-00000002-FFAE"
+      }
+    ]
+  }
+}
