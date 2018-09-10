@@ -69,4 +69,84 @@ describe('<BlockPage />', () => {
 
     expect(dispatch.callCount).toEqual(1);
   });
+
+  it('Update component with the same id should not call dispatch function', () => {
+    const match = {
+      params: {
+        id: 'ABC11234',
+      },
+    };
+
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const block = {
+      loading: false,
+      error: false,
+      data: {},
+    };
+
+    const dispatch = sinon.spy();
+
+    const renderedComponent = shallowIntlWrap(
+      <BlockPage
+        match={match}
+        location={location}
+        dispatch={dispatch}
+        block={block}
+        messages={messages}
+      />,
+    );
+
+    const newMatchProp = {
+      params: {
+        id: 'ABC11234',
+      },
+    };
+
+    renderedComponent.setProps({ match: newMatchProp });
+    expect(dispatch.callCount).toEqual(1);
+  });
+
+  it('Update component with the new id should call dispatch function', () => {
+    const match = {
+      params: {
+        id: 'ABC11234',
+      },
+    };
+
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const block = {
+      loading: false,
+      error: false,
+      data: {},
+    };
+
+    const dispatch = sinon.spy();
+
+    const renderedComponent = shallowIntlWrap(
+      <BlockPage
+        match={match}
+        location={location}
+        dispatch={dispatch}
+        block={block}
+        messages={messages}
+      />,
+    );
+
+    const newMatchProp = {
+      params: {
+        id: 'ABC112111',
+      },
+    };
+
+    renderedComponent.setProps({ match: newMatchProp });
+    expect(dispatch.callCount).toEqual(3);
+  });
 });

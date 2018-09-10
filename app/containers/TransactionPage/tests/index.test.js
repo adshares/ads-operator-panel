@@ -56,4 +56,72 @@ describe('<TransactionPage />', () => {
 
     expect(dispatch.callCount).toEqual(1);
   });
+
+  it('Update component with the same id should not call dispatch function', () => {
+    const match = {
+      params: {
+        id: '0002:0000005A:1234',
+      },
+    };
+
+    const transaction = {
+      loading: false,
+      error: false,
+      data: {},
+    };
+
+    const dispatch = sinon.spy();
+
+    const renderedComponent = shallowIntlWrap(
+      <TransactionPage
+        match={match}
+        location={location}
+        dispatch={dispatch}
+        transaction={transaction}
+      />,
+    );
+
+    const newMatchProp = {
+      params: {
+        id: '0002:0000005A:1234',
+      },
+    };
+
+    renderedComponent.setProps({ match: newMatchProp });
+    expect(dispatch.callCount).toEqual(1);
+  });
+
+  it('Update component with the new id should call dispatch function', () => {
+    const match = {
+      params: {
+        id: '0002:0000005A:1234',
+      },
+    };
+
+    const transaction = {
+      loading: false,
+      error: false,
+      data: {},
+    };
+
+    const dispatch = sinon.spy();
+
+    const renderedComponent = shallowIntlWrap(
+      <TransactionPage
+        match={match}
+        location={location}
+        dispatch={dispatch}
+        transaction={transaction}
+      />,
+    );
+
+    const newMatchProp = {
+      params: {
+        id: '0002:0000005A:1111',
+      },
+    };
+
+    renderedComponent.setProps({ match: newMatchProp });
+    expect(dispatch.callCount).toEqual(2);
+  });
 });
