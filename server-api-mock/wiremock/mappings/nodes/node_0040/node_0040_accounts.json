@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "url":
+      "/api/v1/blockexplorer/nodes/0040/accounts?limit=26&offset=0&sort=id&order=desc"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": []
+  }
+}

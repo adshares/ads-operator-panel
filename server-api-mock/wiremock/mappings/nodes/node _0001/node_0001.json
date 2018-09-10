@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/v1/blockexplorer/nodes/0001"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": {
+      "account_count": 17,
+      "balance": 453320797982196,
+      "hash":
+        "FF3E907371FA9A56E52CD9F6B37CEF386B088F0715C4DB8BA5D3FF01C67C4E91",
+      "id": "0001",
+      "ipv4": "145.239.133.129",
+      "message_hash":
+        "249D959B2045387667CC239F3B96917C6BB6DB983278F42F8A48E330A84AF9FA",
+      "msid": "5",
+      "mtim": "2018-09-04T12:59:29+02:00",
+      "port": 6510,
+      "public_key":
+        "F294C963B0FF677F183E133CCD378768DD34DFE4835C5EF2B511F4607B75C5FC",
+      "status": 0
+    }
+  }
+}
