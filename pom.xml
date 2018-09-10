@@ -109,10 +109,6 @@
                     <installationDirectory>${project.build.directory}/drivers</installationDirectory>
                     <drivers>
                         <driver>
-                            <name>operadriver</name>
-                            <version>2.29</version>
-                        </driver>
-                        <driver>
                             <name>chromedriver</name>
                         </driver>
                     </drivers>
