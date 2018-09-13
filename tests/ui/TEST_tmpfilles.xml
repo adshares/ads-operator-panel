@@ -3,5 +3,30 @@
 <suite name="TEST" parallel="false">
 
 
+  <test name="TC_5" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="viewAllNode"/>
+          <include name="sortingNodes"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+  <test name="TC_10" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="viewAllBlock"/>
+          <include name="sortingBlocks"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+
 
 </suite>

@@ -1,8 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url":
-      "/api/v1/blockexplorer/nodes/0000/accounts?limit=26&offset=0&sort=id&order=desc"
+    "url": "/api/v1/blockexplorer/blocks/9[^.]{7}/messages\\?.*"
   },
   "response": {
     "status": 200,

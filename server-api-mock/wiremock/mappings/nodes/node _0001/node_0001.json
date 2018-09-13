@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url": "/api/v1/blockexplorer/nodes/0001"
+    "urlPattern": "/api/v1/blockexplorer/nodes/[0-8]{1}[^.]{3}"
   },
   "response": {
     "status": 200,

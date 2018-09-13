@@ -1,8 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url":
-      "/api/v1/blockexplorer/nodes/0040/accounts?limit=26&offset=0&sort=id&order=desc"
+    "urlPattern": "/api/v1/blockexplorer/nodes/9[^.]{3}/accounts\\?.*"
   },
   "response": {
     "status": 200,

@@ -1,0 +1,118 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern":
+      "/api/v1/blockexplorer/accounts/[0-8]{1}[^.]{3}-[^.]{8}-[^.]{4}/transactions\\?.*"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": [
+      {
+        "block_id": "5B928000",
+        "id": "0001:00000006:0001",
+        "message_id": "0001:00000006",
+        "type": "create_account",
+        "size": 117,
+        "msg_id": "5",
+        "node": 1,
+        "signature":
+          "C9094CD85457DD68E425DF8AB387527178598020FF1E78C4111A809724AEFD24A9B099A6942A5E3462EFBFA3D3169948E4017D51E902B3A3839202C51B08630A",
+        "target_node": 1,
+        "time": "2018-09-07T15:41:56+02:00",
+        "user": 0,
+        "sender_address": "0001-00000000-9B6F"
+      },
+      {
+        "block_id": "5B928000",
+        "id": "0001:00000007:0001",
+        "message_id": "0001:00000007",
+        "type": "send_one",
+        "size": 125,
+        "amount": "200000000000",
+        "message": 0,
+        "msg_id": "6",
+        "node": 1,
+        "sender_address": "0001-00000000-9B6F",
+        "sender_fee": 100000000,
+        "signature":
+          "15A65C72A4FCEC9DA57A03777527AE05D929A6CE6DDF222B9D4383E98FDA27CD97F54A38B17B8B88AD1B4DFEC817FD060A6FF27089D36E0122C35524DF3C3109",
+        "target_address": "0001-00000011-997F",
+        "target_node": 1,
+        "target_user": 17,
+        "time": "2018-09-07T15:42:28+02:00",
+        "user": 0
+      },
+      {
+        "block_id": "5B8E6400",
+        "id": "0001:00000004:0001",
+        "message_id": "0001:00000004",
+        "type": "create_account",
+        "size": 117,
+        "msg_id": "3",
+        "node": 1,
+        "signature":
+          "3787EE3094B88232D2C032B05966E4DDF95B0E6F660EA77369AD72C319E4E49C3ED2BA900C8A7AB00648603EC5876B7F0BE302C261544075E7E8892A91391E0B",
+        "target_node": 1,
+        "time": "2018-09-04T12:58:02+02:00",
+        "user": 0,
+        "sender_address": "0001-00000000-9B6F"
+      },
+      {
+        "block_id": "5B8E6400",
+        "id": "0001:00000005:0001",
+        "message_id": "0001:00000005",
+        "type": "send_one",
+        "size": 125,
+        "amount": "100000000000",
+        "message": 0,
+        "msg_id": "4",
+        "node": 1,
+        "sender_address": "0001-00000000-9B6F",
+        "sender_fee": 50000000,
+        "signature":
+          "3457F3C6701B4D1EE16A2DD7D9D4CCCEA33D5610E39B7BCB585BF4F9906F314B23EE1D10A483B70EF792442777631FBF81ADD38314D09A597F977DB24034100F",
+        "target_address": "0001-00000010-895E",
+        "target_node": 1,
+        "target_user": 16,
+        "time": "2018-09-04T12:59:28+02:00",
+        "user": 0
+      },
+      {
+        "block_id": "5B87D200",
+        "id": "0001:00000003:0001",
+        "message_id": "0001:00000003",
+        "type": "create_account",
+        "size": 117,
+        "msg_id": "2",
+        "node": 1,
+        "signature":
+          "C79DE87B638CFC155C3FA78116007D3AA1457CBDA31E225A914E33BA77A35097965B976AB8BC31A2227DF3E2CD17E1A156D2163CF629C46A4E5BE44681236D05",
+        "target_node": 1,
+        "time": "2018-08-30T13:22:10+02:00",
+        "user": 0,
+        "sender_address": "0001-00000000-9B6F"
+      },
+      {
+        "block_id": "5B854800",
+        "id": "0001:00000002:0001",
+        "message_id": "0001:00000002",
+        "type": "broadcast",
+        "size": 164,
+        "message":
+          "224265657220616E64206368656573652061726520657373656E7469616C207768656E206D6F76696E67206269672061726D6965732E22202D2053756E20547A75202D204175677573742032382C2032303138",
+        "message_length": 83,
+        "msg_id": "1",
+        "node": 1,
+        "signature":
+          "01AA194306CAB5F04D3229F48803709498F15A221AED32733D8DB998FB960D45876570C3EFE7E7CC27564CC25349017948F17CC199EB6A2112C28F15D881020A",
+        "time": "2018-08-28T15:05:05+02:00",
+        "user": 0,
+        "sender_address": "0001-00000000-9B6F"
+      }
+    ]
+  }
+}

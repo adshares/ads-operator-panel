@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/api/v1/blockexplorer/blocks/[0-8]{1}[^.]{7}"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": {
+      "dividend_balance": 0,
+      "dividend_pay": true,
+      "id": "5B8E4000",
+      "message_count": 54,
+      "min_hash":
+        "15809FBEA4641E35A0DD4FD92A08659319D99BF1666657D9E2981422F35635B1",
+      "msg_hash":
+        "1FC4FC8256F4B6CE16BC11D3E0CA3F79CAB2BD0533D741F60105C5A0DEE3F62E",
+      "node_count": 65,
+      "now_hash":
+        "14A714D60420364B5919DF25B859C145C5DC45D997D5BF707D1E88621EB5A7C2",
+      "old_hash":
+        "299B6003700D361F547FFC17C4052C3C2B3AF99D22295EF1716D878B0218725E",
+      "time": "2018-09-10T12:05:52+02:00",
+      "vip_hash":
+        "5EC5169779C824BF7F67EC06A3A41294105CC860672A1A98E53E78B9DB96D525",
+      "vote_no": 0,
+      "vote_total": 31,
+      "vote_yes": 30,
+      "transaction_count": 109
+    }
+  }
+}

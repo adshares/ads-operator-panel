@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/v1/blockexplorer/transactions/[^.]{4}:[^.]{8}:[^.]{4}"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": {
+      "block_id": "5B965200",
+      "id": "0003:00000C55:0001",
+      "message_id": "0003:00000C55",
+      "type": "send_one",
+      "size": 125,
+      "amount": "5391141",
+      "message": 0,
+      "msg_id": "3170",
+      "node": 3,
+      "sender_address": "0003-00000002-FFAE",
+      "sender_fee": 10000,
+      "signature":
+        "D836A3E62A60DA9B84C5F939AE9856BFB31992E06E2528AF06E0B8843F270EF46E743A0015F6F6E581DDC745512FB0A0474147941800497B115D61318977A505",
+      "target_address": "001B-00000000-D99B",
+      "target_node": 27,
+      "target_user": 0,
+      "time": "2018-09-10T13:17:06+02:00",
+      "user": 2
+    }
+  }
+}

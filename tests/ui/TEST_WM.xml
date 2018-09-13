@@ -54,5 +54,57 @@
       </class>
     </classes>
   </test>
-
+  <test name="TC_WM_6" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="firstBlock"/>
+          <include name="detailedDataBlock"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_7" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="firstBlock"/>
+          <include name="sortingSccountsInBlock"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_8" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="searchForABlock"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_9" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="blockSearchnNoPosition"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_10" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="viewAllBlock"/>
+          <include name="sortingBlocks"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
 </suite>
