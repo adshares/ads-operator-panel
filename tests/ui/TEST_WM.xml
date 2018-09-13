@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TEST" parallel="false">
-
+<suite name="TEST_WIREMOCK" parallel="false">
   <test name="TC_WM_1" group-by-instances="true">
     <classes>
       <class name="ui.ads.operator.panel.Blockexplorer">
@@ -107,4 +106,47 @@
       </class>
     </classes>
   </test>
+  <test name="TC_WM_11" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="firstTransaction"/>
+          <include name="detailedDataTransaction"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_12" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="searchTransaction"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_13" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="searchTransactionNoPosition"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_14" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="viewAllTransaction"/>
+          <include name="sortingTransactions"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
 </suite>
