@@ -9,4 +9,13 @@ export default defineMessages({
     id: 'boilerplate.components.Header.blockexplorer',
     defaultMessage: 'Blockexplorer',
   },
+
+  dashboard: {
+    id: 'boilerplate.components.Header.dashboard',
+    defaultMessage: 'Dashboard',
+  },
+  administrator: {
+    id: 'boilerplate.components.Header.administrator',
+    defaultMessage: 'Administrator',
+  },
 });
