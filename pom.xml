@@ -75,7 +75,8 @@
                 <version>2.22.0</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${project.build.testSourceDirectory}/TEST.xml</suiteXmlFile>-->
+                        <suiteXmlFile>${project.build.testSourceDirectory}/TEST_WM.xml</suiteXmlFile>
+                        <suiteXmlFile>${project.build.testSourceDirectory}/TEST.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

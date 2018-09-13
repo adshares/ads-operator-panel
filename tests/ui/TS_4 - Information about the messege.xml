@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TS_4 - Publisher" parallel="false">
-
-
-
+<suite name="TS_4 - Information about the messege" parallel="false">
+  <test name="TC_15" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="firstMessage"/>
+          <include name="detailedDataMessage"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_16" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="firstMessage"/>
+          <include name="sortingTransactionsInMessage"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_17" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="messageSearchn"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_18" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="searchMessageNoPosition"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
 </suite>

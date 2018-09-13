@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TS_1 - Informacje odnośnie node" parallel="methods" thread-count="1" verbose="3">
+<suite name="TS_WM_1 - Informacje odnośnie node" parallel="methods" thread-count="1" verbose="3">
   <test name="TC_WM_1" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
           <include name="firstNode"/>
@@ -14,7 +14,7 @@
   </test>
   <test name="TC_WM_2" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
           <include name="sortingAccountsInNode"/>
@@ -24,7 +24,7 @@
   </test>
   <test name="TC_WM_3" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
           <include name="searchForANode"/>
@@ -34,7 +34,7 @@
   </test>
   <test name="TC_WM_4" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
           <include name="nodeSearchnNoPosition"/>
@@ -44,7 +44,7 @@
   </test>
   <test name="TC_WM_5" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
           <include name="viewAllNode"/>

@@ -4,7 +4,7 @@
 
   <test name="TC_1" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="firstNode"/>
@@ -15,7 +15,7 @@
   </test>
   <test name="TC_2" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="sortingAccountsInNode"/>
@@ -25,7 +25,7 @@
   </test>
   <test name="TC_3" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="searchForANode"/>
@@ -35,7 +35,7 @@
   </test>
   <test name="TC_4" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="nodeSearchnNoPosition"/>
@@ -45,7 +45,7 @@
   </test>
   <test name="TC_5" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="viewAllNode"/>
@@ -56,7 +56,7 @@
   </test>
   <test name="TC_6" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="firstBlock"/>
@@ -67,7 +67,7 @@
   </test>
   <test name="TC_7" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="firstBlock"/>
@@ -78,7 +78,7 @@
   </test>
   <test name="TC_8" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="searchForABlock"/>
@@ -88,7 +88,7 @@
   </test>
   <test name="TC_9" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="blockSearchnNoPosition"/>
@@ -98,11 +98,95 @@
   </test>
   <test name="TC_10" group-by-instances="true">
     <classes>
-      <class name="ui.ads.operator.panel.Blockexplorer">
+      <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="viewAllBlock"/>
           <include name="sortingBlocks"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_11" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="firstTransaction"/>
+          <include name="detailedDataTransaction"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_12" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="searchTransaction"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_13" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="searchTransactionNoPosition"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_14" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="viewAllTransaction"/>
+          <include name="sortingTransactions"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_15" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="firstMessage"/>
+          <include name="detailedDataMessage"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_16" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="firstMessage"/>
+          <include name="sortingTransactionsInMessage"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_17" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="messageSearchn"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_18" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="searchMessageNoPosition"/>
         </methods>
       </class>
     </classes>

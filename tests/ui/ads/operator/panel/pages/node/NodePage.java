@@ -1,4 +1,4 @@
-package ui.ads.operator.panel.pages.node;
+package ads.operator.panel.pages.node;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

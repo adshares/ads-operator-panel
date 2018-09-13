@@ -1,6 +1,5 @@
-package ads.operator.panel.pages.transaction;
+package ads.operator.panel.pages.message;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,19 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class TransactionPage {
+public class MessagePage {
 
 //  Assert
   @FindBy(xpath = "//*[contains(text(), 'Id')]")                                                                        private WebElement IdAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Node Id')]")                                                                   private WebElement NodeIdAssert;
   @FindBy(xpath = "//*[contains(text(), 'Block Id')]")                                                                  private WebElement BlockIdAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Message Id')]")                                                                private WebElement MessageIdAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Sender Address')]")                                                            private WebElement SenderAddressAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Target Address')]")                                                            private WebElement TargetAddressAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Amount')]")                                                                    private WebElement AmountAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Sender Fee')]")                                                                private WebElement SenderFeeAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Size')]")                                                                      private WebElement SizeAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Type')]")                                                                      private WebElement TypeAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Time')]")                                                                      private WebElement TimeAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Transactions')]")                                                              private WebElement TransactionsAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Length')]")                                                                    private WebElement LengthAssert;
   @FindBy(xpath = "//*[contains(text(), 'Failed to fetch')]")                                                           private WebElement FailedToFetchAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=id&order=desc')]")                                                          private WebElement SortIdOrderDescAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=id&order=asc')]")                                                           private WebElement SortIdOrderAscAssert;
@@ -49,48 +43,32 @@ public class TransactionPage {
   private WebDriver driver;
   private WebDriverWait wait;
 
-  public TransactionPage(WebDriver driver) {
+  public MessagePage(WebDriver driver) {
     this.driver = driver;
     wait = new WebDriverWait(driver, 30);
     PageFactory.initElements(driver, this);
   }
 
-  public void detailedDataTransaction () {
+  public void detailedDataMessage () {
     wait.until(ExpectedConditions.visibilityOf(IdAssert));
     Assert.assertEquals("Id", IdAssert.getText());
     System.out.print("Assert - Id, ");
+    wait.until(ExpectedConditions.visibilityOf(NodeIdAssert));
+    Assert.assertEquals("Node Id", NodeIdAssert.getText());
+    System.out.print("Node Id, ");
     wait.until(ExpectedConditions.visibilityOf(BlockIdAssert));
     Assert.assertEquals("Block Id", BlockIdAssert.getText());
     System.out.print("Block Id, ");
-    wait.until(ExpectedConditions.visibilityOf(MessageIdAssert));
-    Assert.assertEquals("Message Id", MessageIdAssert.getText());
-    System.out.print("Message Id, ");
-    wait.until(ExpectedConditions.visibilityOf(SenderAddressAssert));
-    Assert.assertEquals("Sender Address", SenderAddressAssert.getText());
-    System.out.print("Sender Address, ");
-    wait.until(ExpectedConditions.visibilityOf(TargetAddressAssert));
-    Assert.assertEquals("Target Address", TargetAddressAssert.getText());
-    System.out.print("Target Address, ");
-    wait.until(ExpectedConditions.visibilityOf(AmountAssert));
-    Assert.assertEquals("Amount", AmountAssert.getText());
-    System.out.print("Amount, ");
-    wait.until(ExpectedConditions.visibilityOf(SenderFeeAssert));
-    Assert.assertEquals("Sender Fee", SenderFeeAssert.getText());
-    System.out.print("Sender Fee, ");
-    wait.until(ExpectedConditions.visibilityOf(SizeAssert));
-    Assert.assertEquals("Size", SizeAssert.getText());
-    System.out.print("Size, ");
-    wait.until(ExpectedConditions.visibilityOf(TypeAssert));
-    Assert.assertEquals("Type", TypeAssert.getText());
-    System.out.print("Type, ");
-    wait.until(ExpectedConditions.visibilityOf(TimeAssert));
-    Assert.assertEquals("Time", TimeAssert.getText());
-    System.out.print("Time");
-
+    wait.until(ExpectedConditions.visibilityOf(TransactionsAssert));
+    Assert.assertEquals("Transactions", TransactionsAssert.getText());
+    System.out.print("Transactions, ");
+    wait.until(ExpectedConditions.visibilityOf(LengthAssert));
+    Assert.assertEquals("Length", LengthAssert.getText());
+    System.out.println("Length");
     copyCode();
   }
 
-  public void  searchTransactionNoPosition () {
+  public void  searchMessageNoPosition () {
     wait.until(ExpectedConditions.visibilityOf(FailedToFetchAssert));
     Assert.assertEquals("Failed to fetch", FailedToFetchAssert.getText());
     System.out.println("Assert - Failed to fetch");
@@ -98,7 +76,7 @@ public class TransactionPage {
     copyCode();
   }
 
-  public void sortingTransactions() {
+  public void sortingMessages() {
     wait.until(ExpectedConditions.visibilityOf(SortBlockOrderAscAssert));
     wait.until(ExpectedConditions.visibilityOf(NodesId));
     NodesId.click();
@@ -137,26 +115,15 @@ public class TransactionPage {
 
   }
   private void nextPrevious() {
-    if(!driver.findElements(By.xpath("//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")).isEmpty()){
-      System.out.println("---------- next page ----------");
-      String url=driver.getCurrentUrl();
-      System.out.println(url);
-      wait.until(ExpectedConditions.visibilityOf(Previous));
-      wait.until(ExpectedConditions.visibilityOf(Next));
-      Next.click();
-      url=driver.getCurrentUrl();
-      System.out.println(url);
-      wait.until(ExpectedConditions.visibilityOf(Previous));
-      wait.until(ExpectedConditions.visibilityOf(Next));
-      Previous.click();
-    }else{
-      String url=driver.getCurrentUrl();
-      System.out.println(url);
-      System.out.println("---------- no page ----------");
-      System.out.println("Skip >>>>>");
-    }
+    String url=driver.getCurrentUrl();
+    System.out.println(url);
+    wait.until(ExpectedConditions.visibilityOf(Next));
+    Next.click();
+    url=driver.getCurrentUrl();
+    System.out.println(url);
+    wait.until(ExpectedConditions.visibilityOf(Previous));
+    Previous.click();
   }
-
   private void copyCode() {
     wait.until(ExpectedConditions.visibilityOf(Copy));
     Copy.click();
@@ -169,5 +136,20 @@ public class TransactionPage {
     System.out.println("Click - Copy");
   }
 
+
+  public void sortingTransactionsInMessage() {
+    wait.until(ExpectedConditions.visibilityOf(NodesId));
+    NodesId.click();
+    System.out.println("Assert 1 - SortIdOrderAsc");
+    String url=driver.getCurrentUrl();
+    System.out.println(url);
+    wait.until(ExpectedConditions.visibilityOf(SortIdOrderAscAssert));
+    System.out.println("Assert 2 - SortIdOrderDesc");
+    wait.until(ExpectedConditions.visibilityOf(NodesId));
+    NodesId.click();
+    url=driver.getCurrentUrl();
+    System.out.println(url);
+
+    }
 
 }

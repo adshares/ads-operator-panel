@@ -1,4 +1,4 @@
-package ui.ads.operator.panel.pages;
+package ads.operator.panel.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -22,6 +22,7 @@ public class DashboardPage {
   @FindBy(xpath = "//*[@href='/blockexplorer/transactions']")                                                           private WebElement ViewAllTransactions;
   @FindBy(css = "[class='block_id']")                                                                                   private WebElement TransactionsBlock;
   @FindBy(css = "[class='message_id']")                                                                                 private WebElement TransactionsMessage;
+  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::td[3]//descendant::a[1]")  private WebElement TransactionsMessage2;
   @FindBy(css = "[class='sender_address']")                                                                             private WebElement TransactionsFrom;
   @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::td[4]//descendant::a[1]")  private WebElement TransactionsFrom2;
   @FindBy(css = "[class='target_address']")                                                                             private WebElement TransactionsTo;
@@ -135,6 +136,20 @@ public class DashboardPage {
     search.sendKeys(search_x);
     driver.findElement(By.id("search")).sendKeys(Keys.ENTER);
     System.out.println("Click - Search [ "+search_x+" ]");
+    url();
+  }
+
+  public void firstMessage() {
+    wait.until(ExpectedConditions.visibilityOf(TransactionsMessage2));
+    TransactionsMessage2.click();
+    System.out.println("Click - TransactionsMessage");
+    url();
+  }
+
+  public void firstTo() {
+    wait.until(ExpectedConditions.visibilityOf(TransactionsTo));
+    TransactionsTo.click();
+    System.out.println("Click - TransactionsTo");
     url();
   }
 }

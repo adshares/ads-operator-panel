@@ -1,50 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TEST_temp" parallel="false">
-
-
-  <test name="TC_11" group-by-instances="true">
-    <classes>
-      <class name="ads.operator.panel.Blockexplorer">
-        <methods>
-          <include name="dashboard"/>
-          <include name="firstTransaction"/>
-          <include name="detailedDataTransaction"/>
-        </methods>
-      </class>
-    </classes>
-  </test>
-  <test name="TC_12" group-by-instances="true">
-    <classes>
-      <class name="ads.operator.panel.Blockexplorer">
-        <methods>
-          <include name="dashboard"/>
-          <include name="searchTransaction"/>
-        </methods>
-      </class>
-    </classes>
-  </test>
-  <test name="TC_WM_11" group-by-instances="true">
+<suite name="TS_WM_4 - Information about the messege" parallel="false">
+  <test name="TC_WM_15" group-by-instances="true">
     <classes>
       <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
-          <include name="firstTransaction"/>
-          <include name="detailedDataTransaction"/>
+          <include name="firstMessage"/>
+          <include name="detailedDataMessage"/>
         </methods>
       </class>
     </classes>
   </test>
-  <test name="TC_WM_12" group-by-instances="true">
+  <test name="TC_WM_16" group-by-instances="true">
     <classes>
       <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
-          <include name="searchTransaction"/>
+          <include name="firstMessage"/>
+          <include name="sortingTransactionsInMessage"/>
         </methods>
       </class>
     </classes>
   </test>
-
-
+  <test name="TC_WM_17" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="messageSearchn"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_18" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="searchMessageNoPosition"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
 </suite>
