@@ -28,15 +28,6 @@ export class TransactionPage extends React.PureComponent {
       this.props.dispatch(loadTransaction(id));
     }
   }
-
-  componentDidUpdate(prevProps) {
-    const newId = this.props.match.params.id;
-    const oldId = prevProps.match.params.id;
-    if (oldId !== newId) {
-      this.props.dispatch(loadTransaction(newId));
-    }
-  }
-
   render() {
     const { id } = this.props.match.params;
 
@@ -46,7 +37,6 @@ export class TransactionPage extends React.PureComponent {
       message_id: <FormattedMessage {...messages.fieldMessageId} />,
       sender_address: <FormattedMessage {...messages.fieldSenderAddress} />,
       target_address: <FormattedMessage {...messages.fieldTargetAddress} />,
-      amount: <FormattedMessage {...messages.fieldAmount} />,
       sender_fee: <FormattedMessage {...messages.fieldSenderFee} />,
       size: <FormattedMessage {...messages.fieldSize} />,
       type: <FormattedMessage {...messages.fieldType} />,

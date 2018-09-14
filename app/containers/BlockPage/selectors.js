@@ -1,28 +1,22 @@
-import formatDate from 'lib/formatDate';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
+/**
+ * Direct selector to the blockPage state domain
+ */
+
 const selectBlockPageDomain = state => state.get('blockPage', initialState);
 
-const makeSelectBlock = () =>
-  createSelector(selectBlockPageDomain, globalState => {
-    const block = globalState.get('block').toJS();
+/**
+ * Other specific selectors
+ */
 
-    if (block.data.time) {
-      block.data.time = formatDate(block.data.time);
-    }
+/**
+ * Default selector used by BlockPage
+ */
 
-    if (block.data.dividend_pay) {
-      block.data.dividend_pay =
-        block.data.dividend_pay === true ? 'true' : 'false';
-    }
+const makeSelectBlockPage = () =>
+  createSelector(selectBlockPageDomain, substate => substate.toJS());
 
-    return block;
-  });
-
-const makeSelectMessages = () =>
-  createSelector(selectBlockPageDomain, globalState =>
-    globalState.get('messages').toJS(),
-  );
-
-export { makeSelectBlock, makeSelectMessages };
+export default makeSelectBlockPage;
+export { selectBlockPageDomain };

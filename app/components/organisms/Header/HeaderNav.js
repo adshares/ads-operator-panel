@@ -32,6 +32,7 @@ export const MobileHamburgerMenu = props => (
     bgcolor={palette.darkblue}
     style={{ gridArea: 'navbar' }}
     onMouseEnter={props.handleMouseEnter}
+    onBlur={props.handleBlur}
   >
     <FaBars />
   </IconButton>
@@ -39,4 +40,5 @@ export const MobileHamburgerMenu = props => (
 
 MobileHamburgerMenu.propTypes = {
   handleMouseEnter: PropTypes.func,
+  handleBlur: PropTypes.func,
 };

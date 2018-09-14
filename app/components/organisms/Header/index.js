@@ -5,6 +5,7 @@ import Img from './../../atoms/Img';
 import Brand from '../../molecules/Brand';
 import Logo from '../../assets/adshares.png';
 import { HeaderWrapper } from './HeaderLayout';
+
 import { HeaderNav, MobileHamburgerMenu } from './HeaderNav';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -30,9 +31,12 @@ class Header extends React.Component {
   }
 
   handleResize() {
-    this.setState({
-      mobileDevice: window.matchMedia('(max-width: 768px)').matches,
-    });
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (this.state.mobileDevice === isMobile) {
+      this.setState({
+        mobileDevice: window.matchMedia('(max-width: 768px)').matches,
+      });
+    }
   }
 
   render() {
@@ -50,7 +54,10 @@ class Header extends React.Component {
         )}
 
         {(!this.state.mobileDevice || this.state.showNavigation) && (
-          <HeaderNav handleMouseLeave={() => this.toggleMenuOpen(false)} />
+          <HeaderNav
+            handleMouseLeave={() => this.toggleMenuOpen(false)}
+            handleBlur={() => this.toggleMenuOpen(false)}
+          />
         )}
 
         <Route

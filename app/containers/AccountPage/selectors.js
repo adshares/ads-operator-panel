@@ -1,5 +1,3 @@
-import formatMoney from 'lib/formatMoney';
-import formatDate from 'lib/formatDate';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -13,27 +11,9 @@ const selectAccountPageDomain = state => state.get('accountPage', initialState);
  * Other specific selectors
  */
 const makeSelectAccount = () =>
-  createSelector(selectAccountPageDomain, globalState => {
-    const account = globalState.get('account').toJS();
-
-    if (account.data.balance) {
-      account.data.balance = formatMoney(account.data.balance);
-    }
-
-    if (account.data.local_change) {
-      account.data.local_change = formatDate(account.data.local_change);
-    }
-
-    if (account.data.remote_change) {
-      account.data.remote_change = formatDate(account.data.remote_change);
-    }
-
-    if (account.data.time) {
-      account.data.time = formatDate(account.data.time);
-    }
-
-    return account;
-  });
+  createSelector(selectAccountPageDomain, globalState =>
+    globalState.get('account').toJS(),
+  );
 
 const makeSelectTransactions = () =>
   createSelector(
@@ -41,60 +21,27 @@ const makeSelectTransactions = () =>
     (stateOwn, propsOwn) => propsOwn.match.params.id,
     (globalState, accountId) => {
       const transactions = globalState.get('transactions').toJS();
-      const data = [];
-      transactions.data.forEach(rawTransaction => {
-        const transaction = rawTransaction;
-        const senderAddress = transaction.sender_address;
-        const { type } = transaction;
-        if (type === 'send_one') {
-          if (senderAddress === accountId) {
-            transaction.direction = 'out';
-            transaction.address = transaction.target_address;
-          } else {
-            transaction.direction = 'in';
-            transaction.address = transaction.sender_address;
-          }
-        } else if (type === 'send_many' && transaction.wires.length > 0) {
-          if (senderAddress === accountId) {
-            let amount = 0;
-            const targetAddress = [];
+      transactions.data.forEach(transaction => {
+        if (transaction.type === 'send_many' && transaction.wires.length > 0) {
+          const targetAddress = [];
+          let amount = 0;
+          transaction.wires.forEach(target => {
+            if (
+              transaction.sender_address !== accountId &&
+              target.target_address !== accountId
+            ) {
+              return;
+            }
 
-            transaction.wires.forEach(target => {
-              amount += parseInt(target.amount, 10);
-              targetAddress.push(target.target_address);
-            });
+            targetAddress.push(target.target_address);
+            amount += parseInt(target.amount, 10);
+          });
 
-            transaction.direction = 'out';
-            transaction.address =
-              targetAddress.length === 1 ? targetAddress[0] : targetAddress;
-            transaction.amount = amount;
-            transaction.targetAddress = targetAddress;
-          } else {
-            transaction.direction = 'in';
-            transaction.address = transaction.sender_address;
-            transaction.wires.every(target => {
-              if (target.target_address === accountId) {
-                transaction.amount = target.amount;
-                return false;
-              }
-
-              return true;
-            });
-          }
+          transaction.target_address = targetAddress.join(', '); // eslint-disable-line
+          transaction.amount = amount; // eslint-disable-line
         }
-
-        if (transaction.amount) {
-          transaction.amount = formatMoney(transaction.amount);
-        }
-
-        if (transaction.time) {
-          transaction.time = formatDate(transaction.time);
-        }
-
-        data.push(transaction);
       });
 
-      transactions.data = data;
       return transactions;
     },
   );

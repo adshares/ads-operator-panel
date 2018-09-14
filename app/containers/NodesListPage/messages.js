@@ -39,4 +39,12 @@ export default defineMessages({
     id: 'app.containers.NodesListPage.fieldStatus',
     defaultMessage: 'Status',
   },
+  sorting: {
+    id: 'app.containers.NodesListPage.sorting',
+    defaultMessage: 'Unsupported sorting fields !',
+  },
+  ordering: {
+    id: 'app.containers.NodesListPage.ordering',
+    defaultMessage: 'Unsupported ordering fields !',
+  },
 });

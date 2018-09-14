@@ -33,7 +33,7 @@ function nodePageReducer(state = initialState, action) {
       return state
         .setIn(['node', 'loading'], true)
         .setIn(['node', 'error'], false)
-        .setIn(['node', 'data'], fromJS({}));
+        .setIn(['node', 'data'], {});
     case LOAD_NODE_SUCCESS:
       return state
         .setIn(['node', 'loading'], false)
@@ -43,12 +43,12 @@ function nodePageReducer(state = initialState, action) {
       return state
         .setIn(['node', 'loading'], false)
         .setIn(['node', 'error'], fromJS(action.error))
-        .setIn(['node', 'data'], fromJS({}));
+        .setIn(['node', 'data'], {});
     case LOAD_ACCOUNTS:
       return state
         .setIn(['accounts', 'loading'], true)
         .setIn(['accounts', 'error'], false)
-        .setIn(['accounts', 'data'], fromJS([]));
+        .setIn(['accounts', 'data'], []);
     case LOAD_ACCOUNTS_SUCCESS:
       return state
         .setIn(['accounts', 'loading'], false)
@@ -58,7 +58,7 @@ function nodePageReducer(state = initialState, action) {
       return state
         .setIn(['accounts', 'loading'], false)
         .setIn(['accounts', 'error'], fromJS(action.error))
-        .setIn(['accounts', 'data'], fromJS([]));
+        .setIn(['accounts', 'data'], []);
     default:
       return state;
   }

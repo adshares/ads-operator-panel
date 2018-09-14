@@ -25,23 +25,23 @@ export default defineMessages({
   },
   columnBlockId: {
     id: 'app.containers.TransactionsListPage.columnBlockId',
-    defaultMessage: 'Block',
+    defaultMessage: 'Block Id',
   },
   columnMessageId: {
     id: 'app.containers.TransactionsListPage.columnMessageId',
-    defaultMessage: 'Message',
+    defaultMessage: 'Message Id',
   },
   columnSenderAddress: {
     id: 'app.containers.TransactionsListPage.columnSenderAddress',
-    defaultMessage: 'From',
+    defaultMessage: 'Sender Address',
   },
   columnTargetAddress: {
     id: 'app.containers.TransactionsListPage.columnTargetAddress',
-    defaultMessage: 'To',
+    defaultMessage: 'Target Address',
   },
-  columnAmount: {
-    id: 'app.containers.TransactionsListPage.columnAmount',
-    defaultMessage: 'Amount',
+  columnSenderFee: {
+    id: 'app.containers.TransactionsListPage.columnSenderFee',
+    defaultMessage: 'Sender Fee',
   },
   columnSize: {
     id: 'app.containers.TransactionsListPage.columnSize',
@@ -54,5 +54,13 @@ export default defineMessages({
   columnTime: {
     id: 'app.containers.TransactionsListPage.columnTime',
     defaultMessage: 'Time',
+  },
+  sorting: {
+    id: 'app.containers.TransactionsListPage.sorting',
+    defaultMessage: 'Unsupported sorting fields !',
+  },
+  ordering: {
+    id: 'app.containers.TransactionsListPage.ordering',
+    defaultMessage: 'Unsupported ordering fields !',
   },
 });

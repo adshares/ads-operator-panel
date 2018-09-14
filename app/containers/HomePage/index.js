@@ -10,21 +10,16 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.props.history.push('/blockexplorer');
-  }
-
   render() {
-    return <div>Home Page</div>;
+    return (
+      <h1>
+        <FormattedMessage {...messages.header} />
+      </h1>
+    );
   }
 }
-
-HomePage.propTypes = {
-  history: PropTypes.object.isRequired,
-};
