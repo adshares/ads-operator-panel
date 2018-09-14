@@ -7,6 +7,7 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
+import { setActiveBreakpoint } from './containers/AppWrapper/actions';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -43,6 +44,9 @@ export default function configureStore(initialState = {}, history) {
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry
 
+  if (typeof window !== 'undefined') {
+    store.dispatch(setActiveBreakpoint('initial', window.innerWidth));
+  }
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {

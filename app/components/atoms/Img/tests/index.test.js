@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -11,6 +12,7 @@ const renderComponent = (props = {}) =>
 describe('<Img />', () => {
   it('should render an <img> tag', () => {
     const renderedComponent = renderComponent();
+    console.log(renderedComponent);
     expect(renderedComponent.is('img')).toBe(true);
   });
 

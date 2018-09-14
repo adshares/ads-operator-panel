@@ -7,12 +7,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
+import connect from 'react-redux/es/connect/connect';
+
 import { SearchWrapper } from './styled';
 import Button from '../../atoms/Button/styled';
 import Input from '../../atoms/Input';
 import Form from '../../atoms/Form';
-
 import { palette } from '../../../styleUtils/variables';
+import { breakpoints } from '../../../utils/breakpoints';
+import { breakpointIsLessThan } from '../../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 class Search extends React.PureComponent {
@@ -62,14 +65,11 @@ class Search extends React.PureComponent {
     };
   }
 
-  componentWillMount() {
-    // noinspection JSAnnotator
-    this.setState({
-      mobileDevice: window.matchMedia('(max-width: 768px)').matches,
-    });
-  }
-
   render() {
+    const smallScreen = breakpointIsLessThan(
+      breakpoints.tabletMd,
+      this.props.breakpoint.size,
+    );
     const showInputButton = (
       <Button
         color={palette.white}
@@ -81,7 +81,7 @@ class Search extends React.PureComponent {
     );
     return (
       <SearchWrapper>
-        {(!this.state.mobileDevice || this.state.inputShown) && (
+        {(!smallScreen || this.state.inputShown) && (
           <Form onSubmit={this.handleSubmit}>
             <Input
               type="text"
@@ -100,7 +100,7 @@ class Search extends React.PureComponent {
             </Button>
           </Form>
         )}
-        {this.state.mobileDevice && !this.state.inputShown && showInputButton}
+        {smallScreen && !this.state.inputShown && showInputButton}
       </SearchWrapper>
     );
   }
@@ -108,6 +108,11 @@ class Search extends React.PureComponent {
 
 Search.propTypes = {
   history: PropTypes.object,
+  breakpoint: PropTypes.object,
 };
 
-export default Search;
+const mapStateToProps = state => ({
+  breakpoint: state.get('breakpoint'),
+});
+
+export default connect(mapStateToProps)(Search);

@@ -1,13 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Search from './../../molecules/Search';
 import Img from './../../atoms/Img';
 import Brand from '../../molecules/Brand';
 import Logo from '../../assets/adshares.png';
 import { HeaderWrapper } from './HeaderLayout';
+import { breakpoints } from '../../../utils/breakpoints';
 import { HeaderNav, MobileHamburgerMenu } from './HeaderNav';
+import { breakpointIsLessThan } from '../../../utils/responsiveHelpers';
 
-/* eslint-disable react/prefer-stateless-function */
 class Header extends React.Component {
   toggleMenuOpen = state => {
     this.setState({
@@ -15,27 +18,20 @@ class Header extends React.Component {
     });
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
-      mobileDevice: '',
+      showNavigation: false,
     };
   }
 
-  componentWillMount() {
-    this.setState({
-      mobileDevice: window.matchMedia('(max-width: 768px)').matches,
-    });
-    window.addEventListener('resize', () => this.handleResize);
-  }
-
-  handleResize() {
-    this.setState({
-      mobileDevice: window.matchMedia('(max-width: 768px)').matches,
-    });
-  }
-
   render() {
+    const smallScreen = breakpointIsLessThan(
+      breakpoints.tabletMd,
+      this.props.breakpoint.size,
+    );
+    const { showNavigation } = this.state;
     return (
       <HeaderWrapper>
         <Brand>
@@ -43,13 +39,13 @@ class Header extends React.Component {
           <strong>ADS Operator</strong>
         </Brand>
 
-        {this.state.mobileDevice && (
+        {smallScreen && (
           <MobileHamburgerMenu
             handleMouseEnter={() => this.toggleMenuOpen(true)}
           />
         )}
 
-        {(!this.state.mobileDevice || this.state.showNavigation) && (
+        {(!smallScreen || showNavigation) && (
           <HeaderNav handleMouseLeave={() => this.toggleMenuOpen(false)} />
         )}
 
@@ -62,6 +58,11 @@ class Header extends React.Component {
   }
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+  breakpoint: PropTypes.object,
+};
 
-export default Header;
+const mapStateToProps = state => ({
+  breakpoint: state.get('breakpoint'),
+});
+export default connect(mapStateToProps)(Header);

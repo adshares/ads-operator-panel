@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mediaQuery } from '../../styleUtils/variables';
+import { breakpoints } from '../../utils/breakpoints';
 import { scaleIn } from '../../styleUtils/keyframes';
 
 export default styled.nav`
@@ -7,7 +7,7 @@ export default styled.nav`
   display: flex;
   justify-content: center;
 
-  @media (max-width: ${mediaQuery.tablet}) {
+  @media (max-width: ${breakpoints.tabletMd}px) {
     flex-direction: column;
     position: absolute;
     background: inherit;

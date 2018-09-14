@@ -4,12 +4,18 @@ import { shallow } from 'enzyme';
 import Search from '../index';
 
 describe('<Search />', () => {
+  beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      value: jest.fn(() => ({ matches: true })),
+    });
+  });
+
   it('should render <SearchWrapper>, form and input elements', () => {
     const renderedComponent = shallow(<Search history={{}} />);
 
     expect(renderedComponent.find('SearchWrapper').length).toEqual(1);
-    expect(renderedComponent.find('form').length).toEqual(1);
-    expect(renderedComponent.find('input').length).toEqual(1);
+    expect(renderedComponent.find('Form').length).toEqual(1);
+    expect(renderedComponent.find('Input').length).toEqual(1);
   });
 
   it('should redirect to node view page when recognized node id', () => {
@@ -28,7 +34,7 @@ describe('<Search />', () => {
     const renderedComponent = shallow(<Search history={history} />);
     renderedComponent.setState({ value: '0001' });
 
-    const form = renderedComponent.find('form');
+    const form = renderedComponent.find('Form');
     form.simulate('submit', fakeEvent);
 
     expect(history.value).toEqual('/blockexplorer/nodes/0001');
@@ -50,7 +56,7 @@ describe('<Search />', () => {
     const renderedComponent = shallow(<Search history={history} />);
     renderedComponent.setState({ value: 'FF112233' });
 
-    const form = renderedComponent.find('form');
+    const form = renderedComponent.find('Form');
     form.simulate('submit', fakeEvent);
 
     expect(history.value).toEqual('/blockexplorer/blocks/FF112233');
@@ -72,7 +78,7 @@ describe('<Search />', () => {
     const renderedComponent = shallow(<Search history={history} />);
     renderedComponent.setState({ value: '0001:00000001' });
 
-    const form = renderedComponent.find('form');
+    const form = renderedComponent.find('Form');
     form.simulate('submit', fakeEvent);
 
     expect(history.value).toEqual('/blockexplorer/messages/0001:00000001');
@@ -94,7 +100,7 @@ describe('<Search />', () => {
     const renderedComponent = shallow(<Search history={history} />);
     renderedComponent.setState({ value: '0001-00000000-9B6F' });
 
-    const form = renderedComponent.find('form');
+    const form = renderedComponent.find('Form');
     form.simulate('submit', fakeEvent);
 
     expect(history.value).toEqual('/blockexplorer/accounts/0001-00000000-9B6F');
@@ -116,7 +122,7 @@ describe('<Search />', () => {
     const renderedComponent = shallow(<Search history={history} />);
     renderedComponent.setState({ value: '0001:00000001:0001' });
 
-    const form = renderedComponent.find('form');
+    const form = renderedComponent.find('Form');
     form.simulate('submit', fakeEvent);
 
     expect(history.value).toEqual(
@@ -140,7 +146,7 @@ describe('<Search />', () => {
     const renderedComponent = shallow(<Search history={history} />);
     renderedComponent.setState({ value: '01:001:01' });
 
-    const form = renderedComponent.find('form');
+    const form = renderedComponent.find('Form');
     form.simulate('submit', fakeEvent);
 
     expect(history.value).toEqual(null);
@@ -162,7 +168,7 @@ describe('<Search />', () => {
     const renderedComponent = shallow(<Search history={history} />);
     renderedComponent.setState({ value: 'abcdef11' });
 
-    const form = renderedComponent.find('form');
+    const form = renderedComponent.find('Form');
     form.simulate('submit', fakeEvent);
 
     expect(history.value).toEqual('/blockexplorer/blocks/ABCDEF11');

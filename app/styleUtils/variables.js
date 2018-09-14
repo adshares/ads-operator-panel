@@ -1,10 +1,3 @@
-export const mediaQuery = {
-  mobile: '576px',
-  tablet: '768px',
-  laptop: '992px',
-  desktop: '1200px',
-};
-
 export const palette = {
   blue: '#007bff',
   darkblue: '#0867ce',

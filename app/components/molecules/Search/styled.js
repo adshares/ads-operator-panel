@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { mediaQuery } from './../../../styleUtils/variables';
+import { breakpoints } from './../../../utils/breakpoints';
 import {rotateIn} from './../../../styleUtils/keyframes';
 
 export const SearchWrapper = styled.span`  
@@ -10,7 +10,7 @@ export const SearchWrapper = styled.span`
   justify-content: flex-end;
   
   input {
-    @media (max-width: ${mediaQuery.tablet}) {
+    @media (max-width: ${breakpoints.tabletMd}px) {
       transform: rotateX(90deg);
       animation: ${rotateIn} 0.2s ease-in;
       animation-fill-mode: forwards;

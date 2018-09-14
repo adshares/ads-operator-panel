@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mediaQuery } from '../../styleUtils/variables';
+import { breakpoints } from '../../utils/breakpoints';
 
 export default styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export default styled.div`
     top: 3px;
     left: 10px;
 
-    @media (max-width: ${mediaQuery.tablet}) {
+    @media (max-width: ${breakpoints.tabletMd}px) {
       display: none;
     }
   }

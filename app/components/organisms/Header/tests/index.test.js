@@ -4,12 +4,18 @@ import { shallow } from 'enzyme';
 import Header from '../index';
 
 describe('<Header />', () => {
-  it('Expect to have unit tests specified', () => {
-    const renderedComponent = shallow(<Header />);
+  beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      value: jest.fn(() => ({ matches: false })),
+    });
+  });
 
+  it('Should render HeaderWrapper, HeaderNav, Route and Brand', () => {
+    const renderedComponent = shallow(<Header />);
     expect(renderedComponent.find('HeaderWrapper').length).toEqual(1);
-    expect(renderedComponent.find('NavBar').length).toEqual(1);
+    expect(renderedComponent.find('MobileHamburgerMenu').length).toEqual(0);
+    expect(renderedComponent.find('HeaderNav').length).toEqual(1);
     expect(renderedComponent.find('Route').length).toEqual(1);
-    expect(renderedComponent.find('Img').length).toEqual(1);
+    expect(renderedComponent.find('Brand').length).toEqual(1);
   });
 });
