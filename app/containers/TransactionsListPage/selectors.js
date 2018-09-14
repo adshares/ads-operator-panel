@@ -1,5 +1,4 @@
-import formatMoney from 'lib/formatMoney';
-import formatDate from 'lib/formatDate';
+import moment from 'moment';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -9,8 +8,11 @@ const selectTransactionsListPageDomain = state =>
 const makeSelectTransactions = () =>
   createSelector(selectTransactionsListPageDomain, globalState => {
     const transactions = globalState.toJS();
-    transactions.data.forEach(rawTransaction => {
-      const transaction = rawTransaction;
+    transactions.data.forEach(transaction => {
+      if (transaction.time) {
+        const date = moment.parseZone(transaction.time);
+        transaction.time = date.format('YYYY-MM-DD HH:MM:ss'); // eslint-disable-line
+      }
 
       if (transaction.type === 'send_many' && transaction.wires.length > 0) {
         const targetAddress = [];
@@ -20,15 +22,8 @@ const makeSelectTransactions = () =>
           amount += parseInt(target.amount, 10);
         });
 
-        transaction.target_address =
-          targetAddress.length === 1 ? targetAddress[0] : targetAddress;
-        transaction.amount = formatMoney(amount);
-      } else if (transaction.type === 'send_one') {
-        transaction.amount = formatMoney(transaction.amount);
-      }
-
-      if (transaction.time) {
-        transaction.time = formatDate(transaction.time);
+        transaction.target_address = targetAddress.join(', '); // eslint-disable-line
+        transaction.amount = amount; // eslint-disable-line
       }
     });
 

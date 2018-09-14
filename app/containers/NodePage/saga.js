@@ -21,14 +21,7 @@ export function* getNode(action) {
 
 export function* getAccounts(action) {
   try {
-    const accounts = yield call(
-      api.fetchAccountsByNodeId,
-      action.nodeId,
-      action.limit,
-      action.offset,
-      action.sort,
-      action.order,
-    );
+    const accounts = yield call(api.fetchAccountsByNodeId, action.nodeId);
     yield put(accountsLoaded(accounts));
   } catch (err) {
     yield put(accountsLoadingError(err));

@@ -34,14 +34,10 @@ export function nodeLoadingError(error) {
   };
 }
 
-export function loadAccounts(nodeId, limit, offset, sort, order) {
+export function loadAccounts(nodeId) {
   return {
     type: LOAD_ACCOUNTS,
     nodeId,
-    limit,
-    offset,
-    sort,
-    order,
   };
 }
 

@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMsg from 'components/ErrorMsg';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
-import { TableDataSetWrapper } from './styled';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
@@ -37,7 +36,7 @@ class TableDataSet extends React.PureComponent {
           ? TableDataSet.reverseOrder(this.props.orderBy)
           : this.props.orderBy;
 
-      const link = `${this.props.link}?page=1&sort=${columnId}&order=${order}`;
+      const link = `${this.props.link}/1/${columnId}/${order}`;
 
       return (
         <th scope="col" key={`${this.props.name}_${columnId}`}>
@@ -92,23 +91,13 @@ class TableDataSet extends React.PureComponent {
       typeof this.props.ceilConfiguration[columnName] === 'function'
     ) {
       return (
-        <td
-          key={`${row.id}_${columnName}_${value.toString()}`}
-          className={columnName}
-        >
-          {this.props.ceilConfiguration[columnName](value, row)}
+        <td key={`${row.id}_${columnName}_${value.toString()}`}>
+          {this.props.ceilConfiguration[columnName](value)}
         </td>
       );
     }
 
-    return (
-      <td
-        key={`${row.id}_${columnName}_${value.toString()}`}
-        className={columnName}
-      >
-        {value}
-      </td>
-    );
+    return <td key={`${row.id}_${columnName}_${value.toString()}`}>{value}</td>;
   }
 
   render() {
@@ -130,12 +119,12 @@ class TableDataSet extends React.PureComponent {
     }
 
     return (
-      <TableDataSetWrapper>
-        <table className="table table-striped">
+      <div className="row">
+        <table className="table">
           {this.renderHeader()}
           <tbody>{this.renderRows()}</tbody>
         </table>
-      </TableDataSetWrapper>
+      </div>
     );
   }
 }

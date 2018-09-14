@@ -9,7 +9,7 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   header: {
     id: 'app.containers.TransactionPage.header',
-    defaultMessage: 'Transaction',
+    defaultMessage: 'Translation',
   },
   metaTitle: {
     id: 'app.containers.TransactionPage.metaTitle',
@@ -42,10 +42,6 @@ export default defineMessages({
   fieldSenderFee: {
     id: 'app.containers.TransactionPage.fieldSenderFee',
     defaultMessage: 'Sender Fee',
-  },
-  fieldAmount: {
-    id: 'app.containers.TransactionPage.fieldAmount',
-    defaultMessage: 'Amount',
   },
   fieldSize: {
     id: 'app.containers.TransactionPage.fieldSize',

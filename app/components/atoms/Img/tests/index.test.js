@@ -29,12 +29,6 @@ describe('<Img />', () => {
     expect(renderedComponent.prop('className')).toBeUndefined();
   });
 
-  it('should adopt a className attribute', () => {
-    const className = 'test';
-    const renderedComponent = renderComponent({ className });
-    expect(renderedComponent.hasClass(className)).toBe(true);
-  });
-
   it('should not adopt a srcset attribute', () => {
     const srcset = 'test-HD.png 2x';
     const renderedComponent = renderComponent({ srcset });

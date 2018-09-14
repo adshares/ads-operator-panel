@@ -4,57 +4,10 @@
  *
  */
 
-import {
-  LOAD_BLOCK,
-  LOAD_BLOCK_SUCCESS,
-  LOAD_BLOCK_ERROR,
-  LOAD_MESSAGES,
-  LOAD_MESSAGES_SUCCESS,
-  LOAD_MESSAGES_ERROR,
-} from './constants';
+import { DEFAULT_ACTION } from './constants';
 
-export function loadBlock(id) {
+export function defaultAction() {
   return {
-    type: LOAD_BLOCK,
-    id,
-  };
-}
-
-export function blockLoaded(data) {
-  return {
-    type: LOAD_BLOCK_SUCCESS,
-    data,
-  };
-}
-
-export function blockLoadingError(error) {
-  return {
-    type: LOAD_BLOCK_ERROR,
-    error,
-  };
-}
-
-export function loadMessages(blockId, limit, offset, sort, order) {
-  return {
-    type: LOAD_MESSAGES,
-    blockId,
-    limit,
-    offset,
-    sort,
-    order,
-  };
-}
-
-export function messagesLoaded(data) {
-  return {
-    type: LOAD_MESSAGES_SUCCESS,
-    data,
-  };
-}
-
-export function messagesLoadingError(error) {
-  return {
-    type: LOAD_MESSAGES_ERROR,
-    error,
+    type: DEFAULT_ACTION,
   };
 }

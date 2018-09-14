@@ -1,4 +1,3 @@
-import formatMoney from 'lib/formatMoney';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -12,27 +11,13 @@ const selectNodePageDomain = state => state.get('nodePage', initialState);
  * Other specific selectors
  */
 const makeSelectNode = () =>
-  createSelector(selectNodePageDomain, globalState => {
-    const node = globalState.get('node').toJS();
-
-    if (node.data.balance) {
-      node.data.balance = formatMoney(node.data.balance);
-    }
-
-    return node;
-  });
+  createSelector(selectNodePageDomain, globalState =>
+    globalState.get('node').toJS(),
+  );
 
 const makeSelectAccounts = () =>
-  createSelector(selectNodePageDomain, globalState => {
-    const accounts = globalState.get('accounts').toJS();
-    accounts.data.map(item => {
-      const account = item;
-      account.balance = formatMoney(account.balance);
-
-      return account;
-    });
-
-    return accounts;
-  });
+  createSelector(selectNodePageDomain, globalState =>
+    globalState.get('accounts').toJS(),
+  );
 
 export { makeSelectNode, makeSelectAccounts };

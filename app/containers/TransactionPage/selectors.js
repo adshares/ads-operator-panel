@@ -1,5 +1,5 @@
-import formatMoney from 'lib/formatMoney';
-import formatDate from 'lib/formatDate';
+import moment from 'moment';
+
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -16,23 +16,14 @@ const makeSelectTransaction = () =>
       data.wires.forEach(target => {
         targetAddress.push(target.target_address);
         amount += parseInt(target.amount, 10);
-
-        target.amount = formatMoney(target.amount); // eslint-disable-line
       });
 
       data.target_address = targetAddress.join(', ');
-      data.amount = formatMoney(amount);
-    } else if (data.type === 'send_one') {
-      data.amount = formatMoney(data.amount);
+      data.amount = amount;
     }
 
-    if (data.sender_fee) {
-      data.sender_fee = formatMoney(data.sender_fee);
-    }
-
-    if (data.time) {
-      data.time = formatDate(data.time);
-    }
+    const date = moment.parseZone(data.time);
+    data.time = date.format('YYYY-MM-DD HH:MM:ss');
 
     transaction.data = data;
 

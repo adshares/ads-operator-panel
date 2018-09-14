@@ -11,7 +11,7 @@ function fetchBlocks(limit = 5, offset = 0, sort = 'id', order = 'desc') {
 }
 
 function fetchTransactions(
-  limit = 10,
+  limit = 5,
   offset = 0,
   sort = 'block_id',
   order = 'desc',
@@ -25,68 +25,20 @@ function fetchNode(id) {
   return send(`api/v1/blockexplorer/nodes/${id}`);
 }
 
-function fetchAccountsByNodeId(
-  nodeId,
-  limit = 5,
-  offset = 0,
-  sort = 'id',
-  order = 'desc',
-) {
-  return send(
-    `api/v1/blockexplorer/nodes/${nodeId}/accounts?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
-  );
+function fetchAccountsByNodeId(nodeId) {
+  return send(`api/v1/blockexplorer/nodes/${nodeId}/accounts`);
 }
 
 function fetchAccountsById(id) {
   return send(`api/v1/blockexplorer/accounts/${id}`);
 }
 
-function fetchTransactionsByAccountId(
-  accountId,
-  limit = 5,
-  offset = 0,
-  sort = 'block_id',
-  order = 'desc',
-) {
-  return send(
-    `api/v1/blockexplorer/accounts/${accountId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
-  );
+function fetchTransactionsByAccountId(accountId) {
+  return send(`api/v1/blockexplorer/accounts/${accountId}/transactions`);
 }
 
 function fetchTransaction(id) {
   return send(`api/v1/blockexplorer/transactions/${id}`);
-}
-
-function fetchBlock(id) {
-  return send(`api/v1/blockexplorer/blocks/${id}`);
-}
-
-function fetchMessagesByBlockId(
-  blockId,
-  limit = 5,
-  offset = 0,
-  sort = 'id',
-  order = 'desc',
-) {
-  return send(
-    `api/v1/blockexplorer/blocks/${blockId}/messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
-  );
-}
-
-function fetchMessage(id) {
-  return send(`api/v1/blockexplorer/messages/${id}`);
-}
-
-function fetchTransactionsByMessageId(
-  messageId,
-  limit = 5,
-  offset = 0,
-  sort = 'id',
-  order = 'desc',
-) {
-  return send(
-    `api/v1/blockexplorer/messages/${messageId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
-  );
 }
 
 function send(url, params) {
@@ -114,8 +66,4 @@ export default {
   fetchAccountsById,
   fetchTransactionsByAccountId,
   fetchTransaction,
-  fetchBlock,
-  fetchMessagesByBlockId,
-  fetchMessage,
-  fetchTransactionsByMessageId,
 };
