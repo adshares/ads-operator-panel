@@ -1,5 +1,6 @@
-package ads.operator.panel.pages.message;
+package ads.operator.panel.pages.transaction;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,21 +9,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class MessagePage {
+public class ToPage {
 
 //  Assert
   @FindBy(xpath = "//*[contains(text(), 'Id')]")                                                                        private WebElement IdAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Node Id')]")                                                                   private WebElement NodeIdAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Block Id')]")                                                                  private WebElement BlockIdAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Transactions')]")                                                              private WebElement TransactionsAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Length')]")                                                                    private WebElement LengthAssert;
-  @FindBy(xpath = "//*[contains(text(), 'Failed to fetch')]")                                                           private WebElement FailedToFetchAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Balance')]")                                                                   private WebElement BalanceAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Status')]")                                                                    private WebElement StatusAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Public Key')]")                                                                private WebElement PublicKeyAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Last Active Time')]")                                                          private WebElement LastActiveTimeAssert;
+  @FindBy(xpath = "//*[@class='list-group']//descendant::li[6]//descendant::span[2]")                                   private WebElement TimeAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=id&order=desc')]")                                                          private WebElement SortIdOrderDescAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=id&order=asc')]")                                                           private WebElement SortIdOrderAscAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=block_id&order=desc')]")                                                    private WebElement SortBlockOrderDescAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=block_id&order=asc')]")                                                     private WebElement SortBlockOrderAscAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=type&order=desc')]")                                                        private WebElement SortTypeOrderDescAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=type&order=asc')]")                                                         private WebElement SortTypeOrderAscAssert;
+  @FindBy(xpath = "//*[contains(text(), 'Failed to fetch')]")                                                           private WebElement FailedToFetchAssert;
   //Button
   @FindBy(xpath = "//*[contains(text(), 'Table')]")                                                                     private WebElement Table;
   @FindBy(xpath = "//*[contains(text(), 'Code')]")                                                                      private WebElement Code;
@@ -43,32 +45,35 @@ public class MessagePage {
   private WebDriver driver;
   private WebDriverWait wait;
 
-  public MessagePage(WebDriver driver) {
+  public ToPage(WebDriver driver) {
     this.driver = driver;
     wait = new WebDriverWait(driver, 30);
     PageFactory.initElements(driver, this);
   }
 
-  public void detailedDataMessage () {
+  public void detailedDataTo () {
     wait.until(ExpectedConditions.visibilityOf(IdAssert));
     Assert.assertEquals("Id", IdAssert.getText());
     System.out.print("Assert - Id, ");
-    wait.until(ExpectedConditions.visibilityOf(NodeIdAssert));
-    Assert.assertEquals("Node Id", NodeIdAssert.getText());
-    System.out.print("Node Id, ");
-    wait.until(ExpectedConditions.visibilityOf(BlockIdAssert));
-    Assert.assertEquals("Block Id", BlockIdAssert.getText());
-    System.out.print("Block Id, ");
-    wait.until(ExpectedConditions.visibilityOf(TransactionsAssert));
-    Assert.assertEquals("Transactions", TransactionsAssert.getText());
-    System.out.print("Transactions, ");
-    wait.until(ExpectedConditions.visibilityOf(LengthAssert));
-    Assert.assertEquals("Length", LengthAssert.getText());
-    System.out.println("Length");
+    wait.until(ExpectedConditions.visibilityOf(BalanceAssert));
+    Assert.assertEquals("Balance", BalanceAssert.getText());
+    System.out.print("Balance, ");
+    wait.until(ExpectedConditions.visibilityOf(StatusAssert));
+    Assert.assertEquals("Status", StatusAssert.getText());
+    System.out.print("Status, ");
+    wait.until(ExpectedConditions.visibilityOf(PublicKeyAssert));
+    Assert.assertEquals("Public Key", PublicKeyAssert.getText());
+    System.out.print("Public Key, ");
+    wait.until(ExpectedConditions.visibilityOf(LastActiveTimeAssert));
+    Assert.assertEquals("Last Active Time", LastActiveTimeAssert.getText());
+    System.out.print("Last Active Time, ");
+    wait.until(ExpectedConditions.visibilityOf(TimeAssert));
+    Assert.assertEquals("Time", TimeAssert.getText());
+    System.out.println("Time");
     copyCode();
   }
 
-  public void  searchMessageNoPosition () {
+  public void  searchFromNoPosition () {
     wait.until(ExpectedConditions.visibilityOf(FailedToFetchAssert));
     Assert.assertEquals("Failed to fetch", FailedToFetchAssert.getText());
     System.out.println("Assert - Failed to fetch");
@@ -76,7 +81,7 @@ public class MessagePage {
     copyCode();
   }
 
-  public void sortingMessages() {
+  public void sortingTransactionsInAccount() {
     wait.until(ExpectedConditions.visibilityOf(SortBlockOrderAscAssert));
     wait.until(ExpectedConditions.visibilityOf(NodesId));
     NodesId.click();
@@ -115,14 +120,24 @@ public class MessagePage {
 
   }
   private void nextPrevious() {
+  if(!driver.findElements(By.xpath("//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")).isEmpty()){
+    System.out.println("---------- next page ----------");
     String url=driver.getCurrentUrl();
     System.out.println(url);
+    wait.until(ExpectedConditions.visibilityOf(Previous));
     wait.until(ExpectedConditions.visibilityOf(Next));
     Next.click();
     url=driver.getCurrentUrl();
     System.out.println(url);
     wait.until(ExpectedConditions.visibilityOf(Previous));
+    wait.until(ExpectedConditions.visibilityOf(Next));
     Previous.click();
+  }else{
+    String url=driver.getCurrentUrl();
+    System.out.println(url);
+    System.out.println("---------- no page ----------");
+    System.out.println("Skip >>>>>");
+  }
   }
   private void copyCode() {
     wait.until(ExpectedConditions.visibilityOf(Copy));
@@ -135,21 +150,5 @@ public class MessagePage {
     Copy.click();
     System.out.println("Click - Copy");
   }
-
-
-  public void sortingTransactionsInMessage() {
-    wait.until(ExpectedConditions.visibilityOf(NodesId));
-    NodesId.click();
-    System.out.println("Assert 1 - SortIdOrderAsc");
-    String url=driver.getCurrentUrl();
-    System.out.println(url);
-    wait.until(ExpectedConditions.visibilityOf(SortIdOrderAscAssert));
-    System.out.println("Assert 2 - SortIdOrderDesc");
-    wait.until(ExpectedConditions.visibilityOf(NodesId));
-    NodesId.click();
-    url=driver.getCurrentUrl();
-    System.out.println(url);
-
-    }
 
 }

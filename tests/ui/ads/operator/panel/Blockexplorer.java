@@ -1,12 +1,14 @@
 package ads.operator.panel;
 
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 import ads.operator.panel.pages.DashboardPage;
 import ads.operator.panel.pages.block.BlockPage;
-import ads.operator.panel.pages.message.MessagePage;
 import ads.operator.panel.pages.node.NodePage;
+import ads.operator.panel.pages.transaction.FromPage;
+import ads.operator.panel.pages.transaction.MessagePage;
+import ads.operator.panel.pages.transaction.ToPage;
 import ads.operator.panel.pages.transaction.TransactionPage;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import ui.ads.operator.panel.setup.BrowserTestCase;
 
 public class Blockexplorer extends BrowserTestCase {
@@ -23,12 +25,17 @@ public class Blockexplorer extends BrowserTestCase {
   private String search_transaction_1 = "0020:00000E79:0001";
   private String search_message_0 = "F001:00000001";
   private String search_message_1 = "0003:00000C55";
+  private String search_from_0 = "F001-00000001-0001";
+  private String search_from_1 = "001B-00000000-D99B";
+
 
   private DashboardPage dashboardPage;
   private NodePage nodePage;
   private BlockPage blockPage;
   private TransactionPage transactionPage;
   private MessagePage messagePage;
+  private FromPage fromPage;
+  private ToPage toPage;
 
   @BeforeTest
   public void setUp() {
@@ -222,7 +229,7 @@ public class Blockexplorer extends BrowserTestCase {
     transactionPage = new TransactionPage(driver);
     transactionPage.sortingTransactions();
   }
-//  message
+//  transaction_message
   @Test
   public void detailedDataMessage() {
     System.out.println("---------- TC_15 ----------");
@@ -250,6 +257,70 @@ public class Blockexplorer extends BrowserTestCase {
     dashboardPage.search(search_message_0);
     messagePage = new MessagePage(driver);
     messagePage.searchMessageNoPosition();
+  }
+
+//  transaction_from
+  @Test
+  public void detailedDataFrom() {
+    System.out.println("---------- TC_19 ----------");
+    fromPage = new FromPage(driver);
+    fromPage.detailedDataFrom();
+  }
+  @Test
+  public void sortingTransactionsInAccount() {
+    System.out.println("---------- TC_20 ----------");
+    fromPage = new FromPage(driver);
+    fromPage.sortingTransactionsInAccount();
+  }
+  @Test
+  public void fromSearchn() {
+    System.out.println("---------- TC_21 ----------");
+    dashboardPage = new DashboardPage(driver);
+    dashboardPage.search(search_from_1);
+    fromPage = new FromPage(driver);
+    fromPage.detailedDataFrom();
+  }
+  @Test
+  public void fromSearchnNoPosition() {
+    System.out.println("---------- TC_22 ----------");
+    dashboardPage = new DashboardPage(driver);
+    dashboardPage.search(search_from_0);
+    fromPage = new FromPage(driver);
+    fromPage.searchFromNoPosition();
+  }
+  //  transaction_to
+  @Test
+  public void detailedDataTo() {
+    System.out.println("---------- TC_23 ----------");
+    toPage = new ToPage(driver);
+    toPage.detailedDataTo();
+  }
+  //  dashboard
+  @Test
+  public void detailedDataHomePage() {
+    System.out.println("---------- TC_24 ----------");
+    dashboardPage = new DashboardPage(driver);
+    dashboardPage.detailedDataHomePage();
+  }
+  @Test
+  public void homeBlockexplorer() {
+    System.out.println("---------- TC_25 ----------");
+    dashboardPage = new DashboardPage(driver);
+    dashboardPage.homeBlockexplorer_1();
+    dashboardPage.homeBlockexplorer_2();
+    dashboardPage.homeBlockexplorer_3();
+  }
+  @Test
+  public void searchCorrect() {
+    System.out.println("---------- TC_26 ----------");
+    dashboardPage = new DashboardPage(driver);
+    dashboardPage.searchCorrect();
+  }
+  @Test
+  public void searchInCorrect() {
+    System.out.println("---------- TC_27 ----------");
+    dashboardPage = new DashboardPage(driver);
+    dashboardPage.searchInCorrect();
   }
 
 

@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TS_5 - Information about the from" parallel="methods" thread-count="1" verbose="3">
-  <test name="TC_19" group-by-instances="true">
+<suite name="TS_WM_5 - Information about the from" parallel="methods" thread-count="1" verbose="3">
+  <test name="TC_WM_19" group-by-instances="true">
     <classes>
       <class name="ads.operator.panel.Blockexplorer">
         <methods>
-          <include name="dashboard"/>
+          <include name="dashboard_WM"/>
           <include name="firstFrom"/>
           <include name="detailedDataFrom"/>
         </methods>
       </class>
     </classes>
   </test>
-  <test name="TC_20" group-by-instances="true">
+  <test name="TC_WM_20" group-by-instances="true">
     <classes>
       <class name="ads.operator.panel.Blockexplorer">
         <methods>
-          <include name="dashboard"/>
+          <include name="dashboard_WM"/>
           <include name="firstFrom"/>
           <include name="sortingTransactionsInAccount"/>
         </methods>
       </class>
     </classes>
   </test>
-  <test name="TC_21" group-by-instances="true">
+  <test name="TC_WM_21" group-by-instances="true">
     <classes>
       <class name="ads.operator.panel.Blockexplorer">
         <methods>
-          <include name="dashboard"/>
+          <include name="dashboard_WM"/>
           <include name="fromSearchn"/>
         </methods>
       </class>
     </classes>
   </test>
-  <test name="TC_22" group-by-instances="true">
+  <test name="TC_WM_22" group-by-instances="true">
     <classes>
       <class name="ads.operator.panel.Blockexplorer">
         <methods>
-          <include name="dashboard"/>
+          <include name="dashboard_WM"/>
           <include name="fromSearchnNoPosition"/>
         </methods>
       </class>

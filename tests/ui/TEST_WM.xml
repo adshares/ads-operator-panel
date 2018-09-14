@@ -190,4 +190,97 @@
       </class>
     </classes>
   </test>
+  <test name="TC_WM_19" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="firstFrom"/>
+          <include name="detailedDataFrom"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_20" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="firstFrom"/>
+          <include name="sortingTransactionsInAccount"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_21" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="fromSearchn"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_22" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="fromSearchnNoPosition"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_23" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="firstTo"/>
+          <include name="detailedDataTo"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_24" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="detailedDataHomePage"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_25" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="homeBlockexplorer"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_26" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="searchCorrect"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_WM_27" group-by-instances="true">
+    <classes>
+      <class name="ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="searchInCorrect"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
 </suite>

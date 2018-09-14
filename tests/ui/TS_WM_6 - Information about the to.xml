@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TEST_temp" parallel="false">
-
-
-  <test name="TC_WM_25" group-by-instances="true">
+<suite name="TS_WM_6 - Information about the to" parallel="methods" thread-count="1" verbose="3">
+  <test name="TC_WM_23" group-by-instances="true">
     <classes>
       <class name="ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
-          <include name="homeBlockexplorer"/>
+          <include name="firstTo"/>
+          <include name="detailedDataTo"/>
         </methods>
       </class>
     </classes>
   </test>
-
-
 </suite>
