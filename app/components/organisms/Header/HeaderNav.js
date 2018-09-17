@@ -13,10 +13,10 @@ export const HeaderNav = props => (
     <HeaderLink to="/blockexplorer">
       <FormattedMessage {...messages.blockexplorer} />
     </HeaderLink>
-    <HeaderLink to="/dashboard">
+    <HeaderLink to="/home">
       <FormattedMessage {...messages.dashboard} />
     </HeaderLink>
-    <HeaderLink to="/administrator">
+    <HeaderLink to="/home">
       <FormattedMessage {...messages.administrator} />
     </HeaderLink>
   </NavBar>

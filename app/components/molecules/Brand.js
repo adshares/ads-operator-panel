@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { breakpoints } from '../../utils/breakpoints';
 
-export default styled.div`
+export const Brand = styled.div`
   display: flex;
   align-items: center;
   grid-area: brand;
@@ -17,3 +17,6 @@ export default styled.div`
     }
   }
 `;
+
+Brand.displayName = 'Brand';
+export default Brand;

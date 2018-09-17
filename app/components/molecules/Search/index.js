@@ -7,10 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
-import connect from 'react-redux/es/connect/connect';
-
 import { SearchWrapper } from './styled';
-import Button from '../../atoms/Button/styled';
+import Button from '../../atoms/Button/index';
 import Input from '../../atoms/Input';
 import Form from '../../atoms/Form';
 import { palette } from '../../../styleUtils/variables';
@@ -70,10 +68,10 @@ class Search extends React.PureComponent {
       breakpoints.tabletMd,
       this.props.breakpoint.size,
     );
+
     const showInputButton = (
       <Button
         color={palette.white}
-        bgcolor={palette.darkblue}
         onClick={() => this.toggleSearchInput(true)}
       >
         <FaSearch />
@@ -91,11 +89,7 @@ class Search extends React.PureComponent {
               focused={palette.darkblue}
               onChange={this.onInput}
             />
-            <Button
-              color={palette.white}
-              bgcolor={palette.darkblue}
-              type="submit"
-            >
+            <Button color={palette.white} type="submit">
               <FaSearch />
             </Button>
           </Form>
@@ -111,8 +105,4 @@ Search.propTypes = {
   breakpoint: PropTypes.object,
 };
 
-const mapStateToProps = state => ({
-  breakpoint: state.get('breakpoint'),
-});
-
-export default connect(mapStateToProps)(Search);
+export default Search;

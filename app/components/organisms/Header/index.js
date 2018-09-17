@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Search from './../../molecules/Search';
@@ -51,7 +50,12 @@ class Header extends React.Component {
 
         <Route
           path="/:path"
-          render={props => <Search history={props.history} />}
+          render={props => (
+            <Search
+              history={props.history}
+              breakpoint={this.props.breakpoint}
+            />
+          )}
         />
       </HeaderWrapper>
     );
@@ -62,7 +66,4 @@ Header.propTypes = {
   breakpoint: PropTypes.object,
 };
 
-const mapStateToProps = state => ({
-  breakpoint: state.get('breakpoint'),
-});
-export default connect(mapStateToProps)(Header);
+export default Header;

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
-export default styled.form`
+export const Form = styled.form`
   display: flex;
 `;
+
+Form.displayName = 'Form';
+export default Form;

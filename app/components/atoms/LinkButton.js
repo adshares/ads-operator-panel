@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default styled(NavLink)`
+export const LinkButton = styled(NavLink)`
   display: inline-flex;
   padding: 32px 24px;
   text-decoration: none;
@@ -48,3 +48,6 @@ export default styled(NavLink)`
     }
   }
 `;
+
+LinkButton.displayName = 'LinkButton';
+export default LinkButton;

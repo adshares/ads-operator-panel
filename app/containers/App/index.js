@@ -26,14 +26,14 @@ import AccountPage from 'containers/AccountPage/Loadable';
 import TransactionPage from 'containers/TransactionPage/Loadable';
 import MessagePage from 'containers/MessagePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/organisms/Header';
+import HeaderWrapper from 'containers/HeaderWrapper/HeaderWrapper';
 import config from 'config';
 import { AppContainer } from './styled';
 
 export default function App() {
   return (
     <AppContainer>
-      <Header />
+      <HeaderWrapper />
       <Breadcrumbs mappedRoutes={config.routes} />
       <Switch>
         <Route exact path="/" component={HomePage} />

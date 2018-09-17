@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.input`
+export const Input = styled.input`
   padding: ${props =>
     props.padding ||
     `calc(var(--spacing-factor) * 3) calc(var(--spacing-factor) * 4)`};
@@ -14,3 +14,6 @@ export default styled.input`
     border-bottom-color: ${props => props.focus || `var(--white)`};
   }
 `;
+
+Input.displayName = 'Input';
+export default Input;

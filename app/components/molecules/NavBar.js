@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints } from '../../utils/breakpoints';
 import { scaleIn } from '../../styleUtils/keyframes';
 
-export default styled.nav`
+export const NavBar = styled.nav`
   grid-area: navbar;
   display: flex;
   justify-content: center;
@@ -19,3 +19,6 @@ export default styled.nav`
     animation-fill-mode: forwards;
   }
 `;
+
+NavBar.displayName = 'NavBar';
+export default NavBar;

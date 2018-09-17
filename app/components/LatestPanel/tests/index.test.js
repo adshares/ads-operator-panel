@@ -34,7 +34,6 @@ describe('<LatestPanel />', () => {
     const renderedComponent = mountWrap(
       <LatestPanel tabs={tabs} loading={false} error={false} />,
     );
-
     expect(renderedComponent.find('ul').length).toEqual(1);
     expect(renderedComponent.find('li').length).toEqual(3);
   });
