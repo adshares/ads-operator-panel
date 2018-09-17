@@ -70,10 +70,7 @@ class Search extends React.PureComponent {
     );
 
     const showInputButton = (
-      <Button
-        color={palette.white}
-        onClick={() => this.toggleSearchInput(true)}
-      >
+      <Button color={palette.white} click={() => this.toggleSearchInput(true)}>
         <FaSearch />
       </Button>
     );
