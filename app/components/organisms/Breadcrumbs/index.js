@@ -3,6 +3,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';
+import Breadcrumb from './Breadcrumb';
+import BreadcrumbActive from './BreadcrumbActive';
 
 const BreadcrumbsWrapper = props => {
   return (
@@ -11,7 +13,6 @@ const BreadcrumbsWrapper = props => {
       render={rest => (
           <Breadcrumbs
           mappedRoutes={props.mappedRoutes}
-          WrapperComponent={props.WrapperComponent}
           ActiveLinkComponent={props.ActiveLinkComponent}
           LinkComponent={props.LinkComponent}
           rootName={props.rootName}
@@ -23,15 +24,13 @@ const BreadcrumbsWrapper = props => {
 };
 
 BreadcrumbsWrapper.defaultProps = {
-  WrapperComponent: props => <ol className="breadcrumb">{props.children}</ol>,
-  ActiveLinkComponent: props => <li className="active">{props.children}</li>,
-  LinkComponent: props => <li>{props.children}</li>,
+  ActiveLinkComponent: props => <BreadcrumbActive>{props.children}</BreadcrumbActive>,
+  LinkComponent: props => <Breadcrumb>{props.children}</Breadcrumb>,
   rootName: '',
 };
 
 BreadcrumbsWrapper.propTypes = {
   mappedRoutes: PropTypes.shape({}).isRequired,
-  WrapperComponent: PropTypes.func,
   ActiveLinkComponent: PropTypes.func,
   LinkComponent: PropTypes.func,
   rootName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),

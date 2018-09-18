@@ -3,6 +3,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import BreadcrumbsItem, { isDefined } from './BreadcrumbsItem';
+import BreadcrumbsWrapper from './breadcrumbWrapper';
 
 const getPaths = (pathname, rootName = null) => {
   const paths = [
@@ -43,7 +44,7 @@ const Breadcrumbs = props => {
   const paths = getPaths(path);
 
   return (
-    <WrapperComponent>
+    <BreadcrumbsWrapper>
       {paths.map((p, idx) => (
         <Route
           key={idx}
@@ -58,7 +59,7 @@ const Breadcrumbs = props => {
           )}
         />
       ))}
-    </WrapperComponent>
+    </BreadcrumbsWrapper>
   );
 };
 
