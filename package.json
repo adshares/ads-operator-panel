@@ -123,7 +123,8 @@
       "!app/containers/*/messages.js",
       "!app/components/*/styled.js",
       "!app/containers/*/styled.js",
-      "!app/containers/*/selectors.js"
+      "!app/containers/*/selectors.js",
+      "!app/components/atoms/*.{js}"
     ],
     "coverageThreshold": {
       "global": {
