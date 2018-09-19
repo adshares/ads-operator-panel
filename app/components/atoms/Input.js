@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
+  width: ${props => props.width || `auto`};
   padding: ${props =>
     props.padding ||
     `calc(var(--spacing-factor) * 3) calc(var(--spacing-factor) * 4)`};

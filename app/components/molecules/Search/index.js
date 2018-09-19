@@ -12,8 +12,6 @@ import Button from '../../atoms/Button/index';
 import Input from '../../atoms/Input';
 import Form from '../../atoms/Form';
 import { palette } from '../../../styleUtils/variables';
-import { breakpoints } from '../../../utils/breakpoints';
-import { breakpointIsLessThan } from '../../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 class Search extends React.PureComponent {
@@ -37,12 +35,6 @@ class Search extends React.PureComponent {
 
     this.setState({
       value: '',
-      inputShown: false,
-    });
-  };
-  toggleSearchInput = bool => {
-    this.setState({
-      inputShown: bool,
     });
   };
 
@@ -51,7 +43,6 @@ class Search extends React.PureComponent {
 
     this.state = {
       value: '',
-      inputShown: false,
     };
 
     this.urlMap = {
@@ -64,34 +55,23 @@ class Search extends React.PureComponent {
   }
 
   render() {
-    const smallScreen = breakpointIsLessThan(
-      breakpoints.tabletMd,
-      this.props.breakpoint.size,
-    );
-
-    const showInputButton = (
-      <Button color={palette.white} click={() => this.toggleSearchInput(true)}>
-        <FaSearch />
-      </Button>
-    );
     return (
       <SearchWrapper>
-        {(!smallScreen || this.state.inputShown) && (
-          <Form onSubmit={this.handleSubmit}>
-            <Input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="SEARCH"
-              focused={palette.darkblue}
-              onChange={this.onInput}
-            />
-            <Button color={palette.white} type="submit">
-              <FaSearch />
-            </Button>
-          </Form>
-        )}
-        {smallScreen && !this.state.inputShown && showInputButton}
+        <Form onSubmit={this.handleSubmit} width="100%">
+          <Input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="SEARCH"
+            focused={palette.darkblue}
+            width="100%"
+            onChange={this.onInput}
+            value={this.state.value}
+          />
+          <Button color={palette.white} type="submit">
+            <FaSearch />
+          </Button>
+        </Form>
       </SearchWrapper>
     );
   }
@@ -99,7 +79,6 @@ class Search extends React.PureComponent {
 
 Search.propTypes = {
   history: PropTypes.object,
-  breakpoint: PropTypes.object,
 };
 
 export default Search;

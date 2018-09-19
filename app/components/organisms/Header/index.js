@@ -34,7 +34,7 @@ class Header extends React.Component {
     return (
       <HeaderWrapper>
         <Brand>
-          <Img src={Logo} alt="Adshares" height="42px" />
+          <Img src={Logo} alt="Adshares" height="52px" />
           <strong>ADS Operator</strong>
         </Brand>
 
