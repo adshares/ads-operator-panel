@@ -10,7 +10,7 @@ injectGlobal`
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
-  --red: #ff6762;
+  --red: #dc3545;
   --orange: #fd7e14;
   --yellow: #ffc107;
   --green: #28a745;
