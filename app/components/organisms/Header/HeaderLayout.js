@@ -3,6 +3,7 @@ import { breakpoints } from '../../../utils/breakpoints';
 
 export const HeaderWrapper = styled.header`
   width: 100%;
+  grid-area: header;
   display: grid;
   grid-gap: 2px;
   grid-template:

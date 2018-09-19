@@ -6,6 +6,7 @@ injectGlobal`
   --blue: #007bff;
   --dark-blue: #0867ce;
   --light-blue: #1988ff;
+  --ultra-light-blue: #b6d9fe;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
