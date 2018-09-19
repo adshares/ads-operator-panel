@@ -9,7 +9,7 @@ const BreadcrumbsWrapper = props => {
     <Route
       path="/:path"
       render={rest => (
-        <Breadcrumbs
+          <Breadcrumbs
           mappedRoutes={props.mappedRoutes}
           WrapperComponent={props.WrapperComponent}
           ActiveLinkComponent={props.ActiveLinkComponent}
