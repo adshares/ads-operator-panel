@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { breakpoints } from '../../utils/breakpoints';
+import testImage from './assets/test.png';
 
 export const AppContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: grid;
   grid-gap: 16px;
@@ -19,6 +20,13 @@ export const AppContainer = styled.div`
       '. breadcrumbs .' 40px
       '. container  .' 1fr / 24px 1fr 24px;
   }
+
+  ${({ testEnv }) =>
+    testEnv &&
+    `
+    background-image: url(${testImage});
+    background-repeat: repeat; 
+  `};
 `;
 
 AppContainer.displayName = 'AppContainer';

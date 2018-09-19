@@ -30,10 +30,11 @@ import config from 'config';
 import { AppContainer } from './styled';
 import { ContainerWrapper } from './containerWrapper';
 import Breadcrumbs from '../../components/organisms/Breadcrumbs/index';
+import { TEST_ENV_ACTIVE } from '../../utils/checkEnv';
 
 export default function App() {
   return (
-    <AppContainer>
+    <AppContainer testEnv={TEST_ENV_ACTIVE}>
       <HeaderWrapper />
       <Breadcrumbs mappedRoutes={config.routes} />
       <ContainerWrapper>

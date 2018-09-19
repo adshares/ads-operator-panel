@@ -9,6 +9,7 @@ import { HeaderWrapper } from './HeaderLayout';
 import { breakpoints } from '../../../utils/breakpoints';
 import { HeaderNav, MobileHamburgerMenu } from './HeaderNav';
 import { breakpointIsLessThan } from '../../../utils/responsiveHelpers';
+import { TEST_ENV_ACTIVE } from '../../../utils/checkEnv';
 
 class Header extends React.Component {
   toggleMenuOpen = state => {
@@ -31,11 +32,12 @@ class Header extends React.Component {
       this.props.breakpoint.size,
     );
     const { showNavigation } = this.state;
+
     return (
       <HeaderWrapper>
-        <Brand>
+        <Brand testEnv={TEST_ENV_ACTIVE}>
           <Img src={Logo} alt="Adshares" height="52px" />
-          <strong>ADS Operator</strong>
+          <strong>{TEST_ENV_ACTIVE ? 'ADS Test Net' : 'ADS Operator'}</strong>
         </Brand>
 
         {smallScreen && (
