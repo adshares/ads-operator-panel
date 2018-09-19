@@ -21,7 +21,10 @@ export const breakpointIsGreaterThan = (
       ? breakpointFromString(breakpointToCompare)
       : breakpointToCompare;
 
-  if (currentBreakpointSize === null || currentBreakpointSize > comparison) {
+  if (
+    currentBreakpointSize === null ||
+    currentBreakpointSize > comparison(breakpointToCompare)
+  ) {
     return true;
   }
   return false;
@@ -31,23 +34,25 @@ export const breakpointIsLessThan = (
   breakpointToCompare,
   currentBreakpointSize,
 ) => {
-  const comparison =
-    typeof breakpointToCompare === 'string'
-      ? breakpointFromString(breakpointToCompare)
-      : breakpointToCompare;
-
-  if (currentBreakpointSize !== null && currentBreakpointSize <= comparison) {
+  if (
+    currentBreakpointSize !== null &&
+    currentBreakpointSize <= comparison(breakpointToCompare)
+  ) {
     return true;
   }
   return false;
 };
 
-function breakpointFromString(string) {
+const comparison = breakpointToCompare =>
+  typeof breakpointToCompare === 'string'
+    ? breakpointFromString(breakpointToCompare)
+    : breakpointToCompare;
+
+const breakpointFromString = string => {
   const breakpoint = breakpoints[string];
 
   if (!breakpoint) {
     throw new Error(`Bad breakpoint variable given: ${string}`);
   }
-
   return breakpoint;
-}
+};
