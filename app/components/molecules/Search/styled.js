@@ -5,6 +5,7 @@ import { rotateIn } from './../../../styleUtils/keyframes';
 export const SearchWrapper = styled.span`
   grid-area: search;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: flex-end;
 
