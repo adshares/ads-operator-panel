@@ -8,7 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import TableDataSet from 'components/TableDataSet';
-import { LatestPanelWrapper, List, ListItem, Button } from './styled';
+import { LatestPanelWrapper, ListItem, Button } from './styled';
+import List from '../atoms/List';
 
 /* eslint-disable react/prefer-stateless-function */
 class LatestPanel extends React.PureComponent {
@@ -36,7 +37,7 @@ class LatestPanel extends React.PureComponent {
 
   renderTabs() {
     return this.props.tabs.map(tab => (
-      <ListItem className="nav-item" key={`tab_${tab.id}}`}>
+      <ListItem key={`tab_${tab.id}}`}>
         <Button
           className={this.state.selectedTabId === tab.id ? 'active' : ''}
           key={`button_${tab.id}`}
@@ -51,7 +52,7 @@ class LatestPanel extends React.PureComponent {
   renderViewAll(link) {
     if (link && link.length > 0) {
       return (
-        <ListItem className="nav-item view-all">
+        <ListItem>
           <Link to={link}>View all</Link>
         </ListItem>
       );
@@ -74,13 +75,11 @@ class LatestPanel extends React.PureComponent {
     const currentTab = this.getSelectedTab(this.state.selectedTabId);
 
     return (
-      <LatestPanelWrapper>
-        <div className="row">
-          <List className="nav">
-            {this.renderTabs()}
-            {this.renderViewAll(currentTab.link)}
-          </List>
-        </div>
+      <LatestPanelWrapper gridArea={this.props.gridArea}>
+        <List>
+          {this.renderTabs()}
+          {this.renderViewAll(currentTab.link)}
+        </List>
         <TableDataSet
           name={currentTab.name}
           columns={currentTab.columns}
@@ -96,6 +95,7 @@ class LatestPanel extends React.PureComponent {
 
 LatestPanel.propTypes = {
   tabs: PropTypes.array,
+  gridArea: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };

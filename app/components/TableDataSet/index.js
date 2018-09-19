@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMsg from 'components/ErrorMsg';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
-import { TableDataSetWrapper } from './styled';
+import { ScrollableWrapper, TableDataSetWrapper } from './styled';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
@@ -130,12 +130,12 @@ class TableDataSet extends React.PureComponent {
     }
 
     return (
-      <TableDataSetWrapper>
-        <table className="table table-striped">
+      <ScrollableWrapper>
+        <TableDataSetWrapper className="table table-striped">
           {this.renderHeader()}
           <tbody>{this.renderRows()}</tbody>
-        </table>
-      </TableDataSetWrapper>
+        </TableDataSetWrapper>
+      </ScrollableWrapper>
     );
   }
 }

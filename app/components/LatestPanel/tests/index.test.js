@@ -127,30 +127,6 @@ describe('<LatestPanel />', () => {
     ).toEqual(false);
   });
 
-  it('when `link` property is not empty .view-all class should be presented', () => {
-    const tabs = [
-      {
-        id: 'block',
-        name: 'Blocks',
-        link: '/api/nodes',
-        data: [],
-        columns: {},
-      },
-    ];
-
-    const renderedComponent = mountWrap(
-      <LatestPanel tabs={tabs} loading={false} error={false} />,
-    );
-
-    expect(renderedComponent.find('ListItem').length).toEqual(2);
-    expect(
-      renderedComponent
-        .find('ListItem')
-        .at(1)
-        .hasClass('view-all'),
-    ).toEqual(true);
-  });
-
   it('when `link` property is empty .view-all class should not be presented', () => {
     const tabs = [
       {
