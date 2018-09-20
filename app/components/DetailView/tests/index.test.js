@@ -11,7 +11,7 @@ describe('<DetailView />', () => {
     expect(renderedComponent.find('LatestPanelWrapper').length).toEqual(1);
   });
 
-  it('should render two tabs for table and code', () => {
+  it('should render two tabs for Table and code', () => {
     const renderedComponent = shallow(
       <DetailView data={{}} fields={{}} loading={false} error={false} />,
     );
@@ -64,7 +64,7 @@ describe('<DetailView />', () => {
     expect(renderedComponent.find('SyntaxHighlighter').length).toEqual(1);
   });
 
-  it('should render table view when table tab is selected', () => {
+  it('should render Table view when Table tab is selected', () => {
     const renderedComponent = shallow(
       <DetailView data={{}} fields={{}} loading={false} error={false} />,
     );

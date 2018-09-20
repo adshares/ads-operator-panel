@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints } from '../../utils/breakpoints';
 
 export const AppContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: grid;
   grid-gap: 16px;

@@ -152,6 +152,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         />
         <LatestPanel
           gridArea="latestTrans"
+          minTableWidth="1024px"
           tabs={[transactionTab]}
           loading={this.props.transactions.loading}
           error={this.props.transactions.error}

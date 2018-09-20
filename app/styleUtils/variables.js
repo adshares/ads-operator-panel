@@ -1,7 +1,7 @@
 export const palette = {
-  blue: '#007bff',
-  darkblue: '#0867ce',
-  lightblue: '#218cff',
+  blue: '#105992',
+  darkblue: '#00415a',
+  lightblue: '#4688cc',
   indigo: '#6610f2',
   purple: '#6f42c1',
   pink: '#e83e8c',

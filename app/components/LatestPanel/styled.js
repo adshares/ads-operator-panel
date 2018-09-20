@@ -1,40 +1,25 @@
 import styled from 'styled-components';
+import List from '../atoms/List';
 
 export const LatestPanelWrapper = styled.div`
-  color: #6c7a89;
+  color: var(--gray);
   grid-area: ${props => props.gridArea || `panel`};
+
+  table {
+    min-width: ${props => props.minTableWidth || `500px`};
+  }
 `;
 
-export const List = styled.ul`
-  display: inline;
-  border-bottom: 3px solid #bdc3c7;
-  width: 100%;
+export const LatestPanelList = styled(List)`
+  border-bottom: 1px solid var(--light-gray);
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const ListItem = styled.li`
-  color: #6c7a89;
-  float: left;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const Button = styled.button`
-  margin-right: 20px;
-
-  &:hover {
-    cursor: pointer;
-  }
-  &:focus {
-    outline: 0;
-  }
-  &.active {
-    border-bottom: 4px solid #5dbcd2;
-  }
+  color: var(--gray);
 `;
 
 LatestPanelWrapper.displayName = 'LatestPanelWrapper';
 List.displayName = 'List';
 ListItem.displayName = 'ListItem';
-Button.displayName = 'Button';

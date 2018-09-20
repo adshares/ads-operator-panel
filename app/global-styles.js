@@ -3,9 +3,9 @@ import { injectGlobal } from 'styled-components';
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
 :root {
-  --blue: #007bff;
-  --dark-blue: #0867ce;
-  --light-blue: #1988ff;
+  --blue: #105992;
+  --dark-blue: 	#00415a;
+  --light-blue: #4688cc;
   --ultra-light-blue: #b6d9fe;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -18,6 +18,7 @@ injectGlobal`
   --cyan: #17a2b8;
   --white: #fff;
   --gray: #6c757d;
+  --light-gray: #dedede;
   --gray-dark: #343a40;
   --primary: #007bff;
   --secondary: #6c757d;
@@ -62,5 +63,13 @@ injectGlobal`
   label {
     font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
+  }
+  
+  a {
+  color: var(--light-blue);
+  
+  &:hover {
+  color: var(--blue);
+  }
   }
 `;
