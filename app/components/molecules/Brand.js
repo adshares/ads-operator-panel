@@ -10,7 +10,8 @@ export const Brand = styled.div`
   ${({ testEnv }) =>
     testEnv &&
     `
-      color: var(--yellow);
+      color: var(--red);
+      font-weight: 600;
     `};
 
   strong {
