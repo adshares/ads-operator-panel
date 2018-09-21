@@ -8,7 +8,7 @@ export const BreadcrumbsWrapper = styled(List)`
   width: 100%;
 
   @media (max-width: ${breakpoints.tabletMd}px) {
-    padding: 24px;
+    padding: calc(var(--spacing-factor) * 3);
   }
 `;
 

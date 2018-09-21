@@ -17,8 +17,11 @@ injectGlobal`
   --teal: #20c997;
   --cyan: #17a2b8;
   --white: #fff;
-  --gray: #6c757d;
+  --white-gray: #fafafa;
+  --grayish-white: #f2f2f2;
   --light-gray: #dedede;
+  --dust-gray: #a5a7aa;
+  --gray: #6c757d;
   --gray-dark: #343a40;
   --primary: #007bff;
   --secondary: #6c757d;

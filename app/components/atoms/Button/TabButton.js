@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const TabButton = styled.button`
-  padding: 8px 16px;
-  margin-right: 24px;
-  background: #f2f2f2;
+  padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
+  margin-right: calc(var(--spacing-factor) * 3);
+  background: var(--ultra-light-gray);
   border-radius: 3px 3px 0 3px;
 
   &:focus {

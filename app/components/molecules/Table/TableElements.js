@@ -1,16 +1,21 @@
 import styled from 'styled-components';
+import { fadeIn } from '../../../styleUtils/keyframes';
 
 export const Table = styled.table`
   min-width: 100%;
   table-layout: fixed;
   width: 100%;
   background-color: transparent;
-  margin-top: 32px;
+  margin-top: calc(var(--spacing-factor) * 4);
+  opacity: 0;
+  transform: scale(0.9);
+  animation: ${fadeIn} 0.5s;
+  animation-fill-mode: forwards;
 `;
 
 export const TableRow = styled.tr`
   background-color: var(--white);
-  border: 4px solid #fafafa;
+  border: 4px solid var(--white-gray);
   height: 76px;
 
   &:hover {
@@ -39,15 +44,15 @@ export const TableCell = styled.td`
 export const TableHeader = styled.th`
   text-align: center;
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
-  background-color: #fafafa;
-  color: #a5a7aa;
+  background-color: var(--white-gray);
+  color: var(--dust-gray);
 `;
 export const TableNoData = styled.div`
   text-align: center;
   font-size: 21px;
   padding: calc(var(--spacing-factor) * 4);
-  background-color: #fafafa;
-  color: #a5a7aa;
+  background-color: var(--white-gray);
+  color: var(--dust-gray);
 `;
 
 TableHeader.displayName = 'TableHeader';

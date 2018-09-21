@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { FaBars } from 'react-icons/fa';
 import NavBar from '../../molecules/NavBar';
-import HeaderLink from '../../atoms/LinkButton';
+import HeaderLink from '../../atoms/Button/LinkButton';
 import messages from './messages';
 import IconButton from '../../atoms/Button/styledButton';
 import { palette } from '../../../styleUtils/variables';
