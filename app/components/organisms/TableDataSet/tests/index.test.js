@@ -83,7 +83,7 @@ describe('<TableDataSet />', () => {
   });
 
   it('should render <ErrorMsg> element when error occurs', () => {
-    const renderedComponent = mount(
+    const renderedComponent = shallow(
       <TableDataSet
         name="table-test"
         columns={{ id: 'Id' }}
