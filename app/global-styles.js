@@ -3,9 +3,9 @@ import { injectGlobal } from 'styled-components';
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
 :root {
-  --blue: #007bff;
-  --dark-blue: #0867ce;
-  --light-blue: #1988ff;
+  --blue: #105992;
+  --dark-blue: 	#00415a;
+  --light-blue: #4688cc;
   --ultra-light-blue: #b6d9fe;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -17,6 +17,10 @@ injectGlobal`
   --teal: #20c997;
   --cyan: #17a2b8;
   --white: #fff;
+  --white-gray: #fafafa;
+  --grayish-white: #f2f2f2;
+  --light-gray: #dedede;
+  --dust-gray: #a5a7aa;
   --gray: #6c757d;
   --gray-dark: #343a40;
   --primary: #007bff;
@@ -62,5 +66,13 @@ injectGlobal`
   label {
     font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
+  }
+  
+  a {
+  color: var(--light-blue);
+  
+  &:hover {
+  color: var(--blue);
+  }
   }
 `;

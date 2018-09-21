@@ -125,7 +125,8 @@
       "!app/components/*/*/styled.js",
       "!app/containers/*/styled.js",
       "!app/containers/*/selectors.js",
-      "!app/components/atoms/*.{js}"
+      "!app/components/atoms/*.{js}",
+      "!app/components/atoms/Button/.{js}"
     ],
     "coverageThreshold": {
       "global": {

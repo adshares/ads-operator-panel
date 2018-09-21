@@ -138,30 +138,25 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <div className="row area-one">
-          <span className="col-md-5 col-xs-12">
-            <LatestPanel
-              tabs={[nodeTab]}
-              loading={this.props.nodes.loading}
-              error={this.props.nodes.error}
-            />
-          </span>
-          <span className="col-md-1 col-xs-12" />
-          <span className="col-md-6 col-xs-12">
-            <LatestPanel
-              tabs={[blockTab]}
-              loading={this.props.blocks.loading}
-              error={this.props.blocks.error}
-            />
-          </span>
-        </div>
-        <div className="row area-two">
-          <LatestPanel
-            tabs={[transactionTab]}
-            loading={this.props.transactions.loading}
-            error={this.props.transactions.error}
-          />
-        </div>
+        <LatestPanel
+          gridArea="node"
+          tabs={[nodeTab]}
+          loading={this.props.nodes.loading}
+          error={this.props.nodes.error}
+        />
+        <LatestPanel
+          gridArea="block"
+          tabs={[blockTab]}
+          loading={this.props.blocks.loading}
+          error={this.props.blocks.error}
+        />
+        <LatestPanel
+          gridArea="latestTrans"
+          minTableWidth="1024px"
+          tabs={[transactionTab]}
+          loading={this.props.transactions.loading}
+          error={this.props.transactions.error}
+        />
       </BlockexplorerWrapper>
     );
   }

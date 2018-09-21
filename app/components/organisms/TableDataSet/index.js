@@ -10,7 +10,15 @@ import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMsg from 'components/ErrorMsg';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
-import { TableDataSetWrapper } from './styled';
+import {
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+  Table,
+  TableNoData,
+} from '../../molecules/Table/TableElements';
+import { ScrollableWrapper } from '../../atoms/ScrollableWrapper';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
@@ -40,19 +48,19 @@ class TableDataSet extends React.PureComponent {
       const link = `${this.props.link}?page=1&sort=${columnId}&order=${order}`;
 
       return (
-        <th scope="col" key={`${this.props.name}_${columnId}`}>
+        <TableHeader scope="col" key={`${this.props.name}_${columnId}`}>
           <Link to={link}>
             {columnName}
             {columnId === this.props.sortBy ? TableDataSet.sortIcon(order) : ''}
           </Link>
-        </th>
+        </TableHeader>
       );
     }
 
     return (
-      <th scope="col" key={`${this.props.name}_${columnId}`}>
+      <TableHeader scope="col" key={`${this.props.name}_${columnId}`}>
         {columnName}
-      </th>
+      </TableHeader>
     );
   }
 
@@ -83,7 +91,7 @@ class TableDataSet extends React.PureComponent {
       cells.push(this.renderCell(columnHeader, value, row));
     });
 
-    return <tr key={`row_${row.id}`}>{cells}</tr>;
+    return <TableRow key={`row_${row.id}`}>{cells}</TableRow>;
   }
 
   renderCell(columnName, value, row) {
@@ -92,22 +100,21 @@ class TableDataSet extends React.PureComponent {
       typeof this.props.ceilConfiguration[columnName] === 'function'
     ) {
       return (
-        <td
+        <TableCell
           key={`${row.id}_${columnName}_${value.toString()}`}
           className={columnName}
         >
           {this.props.ceilConfiguration[columnName](value, row)}
-        </td>
+        </TableCell>
       );
     }
-
     return (
-      <td
+      <TableCell
         key={`${row.id}_${columnName}_${value.toString()}`}
         className={columnName}
       >
         {value}
-      </td>
+      </TableCell>
     );
   }
 
@@ -123,19 +130,19 @@ class TableDataSet extends React.PureComponent {
     if (this.props.data.length === 0) {
       const message = this.props.messageNoData || 'No data to display';
       return (
-        <div className="row">
+        <TableNoData>
           <strong>{message}</strong>
-        </div>
+        </TableNoData>
       );
     }
 
     return (
-      <TableDataSetWrapper>
-        <table className="table table-striped">
+      <ScrollableWrapper>
+        <Table>
           {this.renderHeader()}
-          <tbody>{this.renderRows()}</tbody>
-        </table>
-      </TableDataSetWrapper>
+          <TableBody>{this.renderRows()}</TableBody>
+        </Table>
+      </ScrollableWrapper>
     );
   }
 }

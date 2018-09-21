@@ -34,7 +34,7 @@ const getPaths = (pathname, rootName = null) => {
 };
 
 const Breadcrumbs = props => {
-  const { location, mappedRoutes, WrapperComponent, rootName } = props;
+  const { location, mappedRoutes, rootName } = props;
   const path = location.pathname;
 
   if (isDefined(rootName))

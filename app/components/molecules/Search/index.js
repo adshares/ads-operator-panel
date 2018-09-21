@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
 import { SearchWrapper } from './styled';
-import Button from '../../atoms/Button/index';
+import Button from '../../atoms/Button/Button';
 import Input from '../../atoms/Input';
 import Form from '../../atoms/Form';
 import { palette } from '../../../styleUtils/variables';

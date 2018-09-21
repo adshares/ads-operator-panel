@@ -15,10 +15,9 @@ export const AppContainer = styled.div`
     '. container . ';
 
   @media (max-width: ${breakpoints.tabletMd}px) {
-    grid-template:
-      'header header header' 74px
-      '. breadcrumbs .' 40px
-      '. container  .' 1fr / 24px 1fr 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   ${({ testEnv }) =>

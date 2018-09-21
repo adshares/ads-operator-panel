@@ -81,74 +81,50 @@ describe('<LatestPanel />', () => {
 
     expect(
       renderedComponent
-        .find('ListItem Button')
+        .find('ListItem TabButton')
         .at(0)
         .hasClass('active'),
     ).toEqual(true);
     expect(
       renderedComponent
-        .find('ListItem Button')
+        .find('ListItem TabButton')
         .at(1)
         .hasClass('active'),
     ).toEqual(false);
 
     renderedComponent
-      .find('ListItem Button')
+      .find('ListItem TabButton')
       .at(1)
       .simulate('click');
     expect(
       renderedComponent
-        .find('ListItem Button')
+        .find('ListItem TabButton')
         .at(0)
         .hasClass('active'),
     ).toEqual(false);
     expect(
       renderedComponent
-        .find('ListItem Button')
+        .find('ListItem TabButton')
         .at(1)
         .hasClass('active'),
     ).toEqual(true);
 
     renderedComponent
-      .find('ListItem Button')
+      .find('ListItem TabButton')
       .at(0)
       .simulate('click');
     expect(
       renderedComponent
-        .find('ListItem Button')
+        .find('ListItem TabButton')
         .at(0)
         .hasClass('active'),
     ).toEqual(true);
     expect(
       renderedComponent
-        .find('ListItem Button')
+        .find('ListItem TabButton')
         .at(1)
         .hasClass('active'),
     ).toEqual(false);
-  });
-
-  it('when `link` property is not empty .view-all class should be presented', () => {
-    const tabs = [
-      {
-        id: 'block',
-        name: 'Blocks',
-        link: '/api/nodes',
-        data: [],
-        columns: {},
-      },
-    ];
-
-    const renderedComponent = mountWrap(
-      <LatestPanel tabs={tabs} loading={false} error={false} />,
-    );
-
-    expect(renderedComponent.find('ListItem').length).toEqual(2);
-    expect(
-      renderedComponent
-        .find('ListItem')
-        .at(1)
-        .hasClass('view-all'),
-    ).toEqual(true);
   });
 
   it('when `link` property is empty .view-all class should not be presented', () => {

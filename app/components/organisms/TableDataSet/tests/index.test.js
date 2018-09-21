@@ -21,7 +21,7 @@ describe('<TableDataSet />', () => {
     expect(renderedComponent.find('strong').text()).toEqual('no data');
   });
 
-  it('should render an <table> tag and th when columns exist and data is not empty', () => {
+  it('should render an <Table> tag and th when columns exist and data is not empty', () => {
     const renderedComponent = mount(
       <TableDataSet
         name="table-test"

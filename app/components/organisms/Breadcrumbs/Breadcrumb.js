@@ -4,7 +4,7 @@ export const Breadcrumb = styled.li`
   display: block;
   padding: 0 var(--spacing-factor);
   margin-right: calc(var(--spacing-factor) * 2);
-  color: var(--dark-blue);
+  color: var(--blue);
   position: relative;
   text-decoration: none;
   text-align: center;

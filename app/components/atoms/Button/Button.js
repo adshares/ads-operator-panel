@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledButton = styled.button`
+export const Button = styled.button`
   padding: ${props => props.padding || `calc(var(--spacing-factor) * 3)`};
   color: ${props => props.color || `var(--white)`};
   background-color: ${props => props.bgcolor || `var(--dark-blue)`};
@@ -17,5 +17,5 @@ export const StyledButton = styled.button`
   }
 `;
 
-StyledButton.displayName = 'StyledButton';
-export default StyledButton;
+Button.displayName = 'Button';
+export default Button;
