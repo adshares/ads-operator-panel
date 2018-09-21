@@ -1,28 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import StyledButton from './styledButton';
+import styled from 'styled-components';
 
-const Button = props => (
-  <StyledButton
-    onClick={props.click}
-    type={props.type}
-    role={props.role}
-    padding={props.padding}
-    bgcolor={props.bgcolor}
-    color={props.color}
-  >
-    {props.children}
-  </StyledButton>
-);
+export const Button = styled.button`
+  padding: ${props => props.padding || `calc(var(--spacing-factor) * 3)`};
+  color: ${props => props.color || `var(--white)`};
+  background-color: ${props => props.bgcolor || `var(--dark-blue)`};
+  border: 1px solid ${props => props.bgcolor || `var(--dark-blue)`};
 
-Button.propTypes = {
-  click: PropTypes.func,
-  type: PropTypes.string,
-  role: PropTypes.string,
-  padding: PropTypes.string,
-  bgcolor: PropTypes.string,
-  color: PropTypes.string,
-  children: PropTypes.element,
-};
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+    outline: none;
+  }
 
+  &:disabled {
+    opacity: 0.5;
+  }
+`;
+
+Button.displayName = 'Button';
 export default Button;

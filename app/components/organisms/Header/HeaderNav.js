@@ -5,7 +5,7 @@ import { FaBars } from 'react-icons/fa';
 import NavBar from '../../molecules/NavBar';
 import HeaderLink from '../../atoms/Button/LinkButton';
 import messages from './messages';
-import IconButton from '../../atoms/Button/styledButton';
+import IconButton from '../../atoms/Button/Button';
 import { palette } from '../../../styleUtils/variables';
 
 export const HeaderNav = props => (
