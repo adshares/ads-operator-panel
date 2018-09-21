@@ -118,6 +118,7 @@
       "!app/global-styles.js",
       "!app/*/*/Loadable.{js,jsx}",
       "!app/components/Breadcrumbs/*.{js,jsx}",
+      "!app/components/atoms/*.{js,jsx}",
       "!app/config.js",
       "!app/components/*/messages.js",
       "!app/containers/*/messages.js",
