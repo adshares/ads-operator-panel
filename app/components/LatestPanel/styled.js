@@ -4,10 +4,6 @@ import List from '../atoms/List';
 export const LatestPanelWrapper = styled.div`
   color: var(--gray);
   grid-area: ${props => props.gridArea || `panel`};
-
-  table {
-    min-width: ${props => props.minTableWidth || `500px`};
-  }
 `;
 
 export const LatestPanelList = styled(List)`

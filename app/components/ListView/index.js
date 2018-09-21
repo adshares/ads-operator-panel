@@ -80,8 +80,15 @@ class ListView extends React.PureComponent {
     const page = parseInt(parsedQuery.page || 1, 10);
     const sort = parsedQuery.sort || this.props.defaultSort;
     const order = parsedQuery.order || this.props.defaultOrder;
-
-    if (!this.props.sortingColumns.includes(sort)) {
+    const {
+      sortingColumns,
+      name,
+      columns,
+      link,
+      list,
+      tableMinWidth,
+    } = this.props;
+    if (!sortingColumns.includes(sort)) {
       return (
         <ErrorMsg
           error={this.context.intl.formatMessage(listViewMessages.sorting)}
@@ -100,27 +107,26 @@ class ListView extends React.PureComponent {
     return (
       <ListViewWrapper>
         <TableDataSet
-          name={this.props.name}
-          columns={this.props.columns}
-          link={this.props.link}
-          sortingColumns={this.props.sortingColumns}
+          name={name}
+          columns={columns}
+          link={link}
+          sortingColumns={sortingColumns}
           sortBy={sort}
           orderBy={order}
           ceilConfiguration={ceilConfiguration}
           data={
-            this.props.list.data.length > config.limit
-              ? this.props.list.data.slice(0, -1)
-              : this.props.list.data
+            list.data.length > config.limit ? list.data.slice(0, -1) : list.data
           }
-          loading={this.props.list.loading}
-          error={this.props.list.error}
+          loading={list.loading}
+          error={list.error}
+          tableMinWidth={tableMinWidth}
         />
         <Pagination
-          link={this.props.link}
+          link={link}
           page={page}
           sort={sort}
           order={order}
-          nextPage={this.props.list.data.length > config.limit}
+          nextPage={list.data.length > config.limit}
         />
       </ListViewWrapper>
     );
@@ -139,6 +145,7 @@ ListView.propTypes = {
   defaultOrder: PropTypes.string,
   link: PropTypes.string.isRequired,
   onPageChange: PropTypes.func,
+  tableMinWidth: PropTypes.string,
 };
 
 ListView.defaultProps = {

@@ -20,6 +20,7 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadNodes } from './actions';
+import { Title } from '../../components/atoms/Title';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodesListPage extends React.Component {
@@ -32,7 +33,6 @@ export class NodesListPage extends React.Component {
       status: <FormattedMessage {...messages.fieldStatus} />,
     };
     const sortingColumns = ['id'];
-
     return (
       <div>
         <Helmet>
@@ -42,9 +42,7 @@ export class NodesListPage extends React.Component {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <h3>
-          <FormattedMessage {...messages.header} />
-        </h3>
+        <Title>{messages.header.defaultMessage}</Title>
         <ListView
           name="nodes"
           urlParams={this.props.match.params}
@@ -56,6 +54,7 @@ export class NodesListPage extends React.Component {
           messages={messages}
           link="/blockexplorer/nodes"
           onPageChange={this.props.onPageChange}
+          tableMinWidth="600px"
         />
       </div>
     );

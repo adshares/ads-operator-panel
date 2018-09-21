@@ -140,19 +140,21 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         </Helmet>
         <LatestPanel
           gridArea="node"
+          tableMinWidth="500px"
           tabs={[nodeTab]}
           loading={this.props.nodes.loading}
           error={this.props.nodes.error}
         />
         <LatestPanel
           gridArea="block"
+          tableMinWidth="500px"
           tabs={[blockTab]}
           loading={this.props.blocks.loading}
           error={this.props.blocks.error}
         />
         <LatestPanel
           gridArea="latestTrans"
-          minTableWidth="1024px"
+          tableMinWidth="1024px"
           tabs={[transactionTab]}
           loading={this.props.transactions.loading}
           error={this.props.transactions.error}

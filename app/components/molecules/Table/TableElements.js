@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { fadeIn } from '../../../styleUtils/keyframes';
 
 export const Table = styled.table`
-  min-width: 100%;
+  min-width: ${props => props.tableMinWidth || `auto`};
   table-layout: fixed;
   width: 100%;
   background-color: transparent;
@@ -16,11 +16,12 @@ export const Table = styled.table`
 export const TableRow = styled.tr`
   background-color: var(--white);
   border: 4px solid var(--white-gray);
-  height: 76px;
+  transition: transform 0.25s ease-in;
 
   &:hover {
     position: relative;
-    border-right: 2px solid var(--light-blue);
+    transform: scale(1.05);
+    box-shadow: 0px 1px 0px #f8f9fa, 2px 1px 0px var(--blue);
   }
 `;
 
@@ -32,8 +33,9 @@ export const TableCell = styled.td`
   vertical-align: middle;
   text-align: center;
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
-  min-width: 150px;
-  word-break: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   &.balance,
   &.amount {
