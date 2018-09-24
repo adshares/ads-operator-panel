@@ -7,8 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaExclamationTriangle } from 'react-icons/fa/index';
-import { InfoSection } from '../atoms/InfoSection';
-import { palette } from '../../styleUtils/variables';
+import { InfoSection } from '../../atoms/InfoSection';
+import { palette } from '../../../styleUtils/variables';
 
 const ErrorMsg = props => {
   const msg =

@@ -7,7 +7,6 @@ describe('<ErrorMsg />', () => {
   it('should render with text message', () => {
     const msg = 'Some error';
     const wrapper = shallow(<ErrorMsg error={msg} />);
-    console.log(wrapper.debug());
     expect(
       wrapper
         .find('InfoSection .message')

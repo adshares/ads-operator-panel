@@ -1,7 +1,8 @@
 import { injectGlobal } from 'styled-components';
-
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
+@import url('https://fonts.googleapis.com/css?family=Cousine:400,700');
+
 :root {
   --blue: #105992;
   --dark-blue: 	#00415a;
@@ -41,6 +42,35 @@ injectGlobal`
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 16px;
 }
+
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/fonts/cousine/Cousine-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/fonts/cousine/Cousine-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/fonts/cousine/Cousine-Italic.ttf") format("ttf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/fonts/cousine/Cousine-BoldItalic.ttf") format("ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
   html,
   body {
     height: 100%;

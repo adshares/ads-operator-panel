@@ -16,6 +16,12 @@ export const HeaderWrapper = styled.header`
       '. brand . search navbar'
       / 20px 1fr 20px 2fr 80px;
   }
+
+  @media (max-width: ${breakpoints.mobileLg}px) {
+    grid-template:
+      '. brand . search navbar'
+      / 20px 56px 20px 2fr 80px;
+  }
 `;
 
 HeaderWrapper.displayName = 'HeaderWrapper';
