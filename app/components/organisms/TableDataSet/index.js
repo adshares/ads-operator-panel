@@ -119,16 +119,17 @@ class TableDataSet extends React.PureComponent {
   }
 
   render() {
-    if (this.props.error) {
-      return <ErrorMsg error={this.props.error} />;
+    const { error, data, loading, messageNoData, tableMinWidth } = this.props;
+    if (error) {
+      return <ErrorMsg error={error} />;
     }
 
-    if (this.props.loading) {
+    if (loading) {
       return <LoadingIndicator />;
     }
 
-    if (this.props.data.length === 0) {
-      const message = this.props.messageNoData || 'No data to display';
+    if (data.length === 0) {
+      const message = messageNoData || 'No data to display';
       return (
         <TableNoData>
           <strong>{message}</strong>
@@ -138,7 +139,7 @@ class TableDataSet extends React.PureComponent {
 
     return (
       <ScrollableWrapper>
-        <Table>
+        <Table tableMinWidth={tableMinWidth}>
           {this.renderHeader()}
           <TableBody>{this.renderRows()}</TableBody>
         </Table>
@@ -159,6 +160,7 @@ TableDataSet.propTypes = {
   messageNoData: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  tableMinWidth: PropTypes.string,
 };
 
 TableDataSet.defaultProps = {

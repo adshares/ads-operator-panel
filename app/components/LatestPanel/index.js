@@ -71,14 +71,11 @@ class LatestPanel extends React.PureComponent {
     if (!this.props.tabs || this.props.tabs.length === 0) {
       return <div />;
     }
-
     const currentTab = this.getSelectedTab(this.state.selectedTabId);
+    const { gridArea, loading, error, tableMinWidth } = this.props;
 
     return (
-      <LatestPanelWrapper
-        gridArea={this.props.gridArea}
-        minTableWidth={this.props.minTableWidth}
-      >
+      <LatestPanelWrapper gridArea={gridArea}>
         <LatestPanelList>
           {this.renderTabs()}
           {this.renderViewAll(currentTab.link)}
@@ -88,8 +85,9 @@ class LatestPanel extends React.PureComponent {
           columns={currentTab.columns}
           data={currentTab.data}
           ceilConfiguration={currentTab.ceilConfiguration || null}
-          loading={this.props.loading}
-          error={this.props.error}
+          loading={loading}
+          error={error}
+          tableMinWidth={tableMinWidth}
         />
       </LatestPanelWrapper>
     );
@@ -99,7 +97,7 @@ class LatestPanel extends React.PureComponent {
 LatestPanel.propTypes = {
   tabs: PropTypes.array,
   gridArea: PropTypes.string,
-  minTableWidth: PropTypes.string,
+  tableMinWidth: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };

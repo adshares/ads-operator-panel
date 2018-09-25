@@ -117,16 +117,16 @@
       "!app/app.js",
       "!app/global-styles.js",
       "!app/*/*/Loadable.{js,jsx}",
-      "!app/components/Breadcrumbs/*.{js,jsx}",
+      "!app/components/organisms/Breadcrumbs/*.{js,jsx}",
       "!app/config.js",
-      "!app/components/*/messages.js",
+
+      "!app/components/**/messages.js",
+      "!app/components/**/styled.js",
+      "!app/components/**/Loadable.js",
+
       "!app/containers/*/messages.js",
-      "!app/components/*/styled.js",
-      "!app/components/*/*/styled.js",
       "!app/containers/*/styled.js",
-      "!app/containers/*/selectors.js",
-      "!app/components/atoms/*.{js}",
-      "!app/components/atoms/Button/.{js}"
+      "!app/containers/*/selectors.js"
     ],
     "coverageThreshold": {
       "global": {
