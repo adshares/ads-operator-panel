@@ -6,7 +6,7 @@ export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
   background-color: transparent;
-  margin-top: calc(var(--spacing-factor) * 4);
+  margin-top: ${props => props.margintop || `0`};
   opacity: 0;
   transform: scale(0.9);
   animation: ${fadeIn} 0.5s;
@@ -16,13 +16,16 @@ export const Table = styled.table`
 export const TableRow = styled.tr`
   background-color: var(--white);
   border: 4px solid var(--white-gray);
-  transition: transform 0.25s ease-in;
 
+  ${({ showHoverAnimation }) =>
+    showHoverAnimation &&
+    `
   &:hover {
     position: relative;
     transform: scale(1.05);
     box-shadow: 0px 1px 0px #f8f9fa, 2px 1px 0px var(--blue);
   }
+`};
 `;
 
 export const TableBody = styled.tbody`
@@ -31,11 +34,12 @@ export const TableBody = styled.tbody`
 
 export const TableCell = styled.td`
   vertical-align: middle;
-  text-align: center;
+  text-align: ${props => props.textalign || `center`};
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
   overflow: hidden;
-  white-space: nowrap;
+  white-space: ${props => props.whitespace || 'nowrap'};
   text-overflow: ellipsis;
+  word-break: ${props => props.textwrap || 'keep-all'};
 
   &.balance,
   &.amount {
@@ -44,9 +48,10 @@ export const TableCell = styled.td`
 `;
 
 export const TableHeader = styled.th`
-  text-align: center;
+  width: ${props => props.width || `auto`};
+  text-align: ${props => props.textalign || `center`};
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
-  background-color: var(--white-gray);
+  background-color: ${props => props.bgcolor || `var(--white-gray)`};
   color: var(--dust-gray);
 `;
 export const TableNoData = styled.div`

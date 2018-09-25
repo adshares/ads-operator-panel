@@ -13,6 +13,7 @@ export const palette = {
   cyan: '#17a2b8',
   white: '#fff',
   gray: '#6c757d',
+  lightgray: '#dedede',
   graydark: '#343a40',
   primary: '#007bff',
   secondary: '#6c757d',

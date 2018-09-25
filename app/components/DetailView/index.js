@@ -7,15 +7,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
+import config from 'config';
 import { darcula } from 'react-syntax-highlighter/styles/hljs';
 import { FormattedMessage } from 'react-intl';
 import { FaAlignJustify, FaCode } from 'react-icons/fa';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
-  Button,
   LatestPanelWrapper,
-  List,
-  ListItem,
   IconWrapper,
   CopyToClipboardWrapper,
 } from './styled';
@@ -23,6 +21,19 @@ import ErrorMsg from '../ErrorMsg';
 import LoadingIndicator from '../LoadingIndicator';
 import messages from './messages';
 import { TEST_ENV_ACTIVE } from '../../utils/checkEnv';
+import { TabButton } from '../atoms/Button/TabButton';
+import List from '../atoms/List';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from '../molecules/Table/TableElements';
+import Button from '../atoms/Button/Button';
+import { palette } from '../../styleUtils/variables';
+import { ScrollableWrapper } from '../atoms/ScrollableWrapper';
+import Container from '../atoms/Container';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailView extends React.PureComponent {
@@ -72,16 +83,14 @@ class DetailView extends React.PureComponent {
 
   renderTabs() {
     return this.tabs.map(tab => (
-      <ListItem className="nav-item" key={`tab_${tab.id}}`}>
-        <Button
-          className={this.state.selectedTabId === tab.id ? 'active' : ''}
-          key={`button_${tab.id}`}
-          onClick={() => this.handleTabSelection(tab.id)}
-        >
-          {this.renderIcon(tab.icon)}
-          <FormattedMessage {...messages[tab.id]} />
-        </Button>
-      </ListItem>
+      <TabButton
+        key={`tab_${tab.id}}`}
+        className={this.state.selectedTabId === tab.id ? 'active' : ''}
+        onClick={() => this.handleTabSelection(tab.id)}
+      >
+        {this.renderIcon(tab.icon)}
+        <FormattedMessage {...messages[tab.id]} />
+      </TabButton>
     ));
   }
 
@@ -96,15 +105,17 @@ class DetailView extends React.PureComponent {
 
     if (this.state.selectedTabId === this.tabs[1].id) {
       return (
-        <div
+        <Container
+          padding="16px"
+          bgcolor={palette.white}
+          borderTop={palette.lightgray}
           key="highlight_code"
           style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
-          className="list-group-item row"
         >
           <SyntaxHighlighter language="json" style={darcula}>
             {this.getData()}
           </SyntaxHighlighter>
-        </div>
+        </Container>
       );
     }
 
@@ -113,24 +124,38 @@ class DetailView extends React.PureComponent {
       Object.entries(this.props.fields).forEach(([columnId, columnValue]) => {
         if (this.props.data[columnId] !== undefined) {
           rows.push(
-            <li
-              key={`column_${columnId}`}
-              style={{
-                background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)',
-              }}
-              className="list-group-item row"
-            >
-              <span className="row">
-                <strong className="col-md-3">{columnValue}</strong>
-                <span className="col-md-9">{this.props.data[columnId]}</span>
-              </span>
-            </li>,
+            <TableRow key={`column_${columnId}`}>
+              <TableHeader textalign="left" bgcolor={palette.white} width="25%">
+                {columnValue}
+              </TableHeader>
+              <TableCell
+                textalign="left"
+                textwrap="break-word"
+                whitespace="unset"
+              >
+                {this.props.data[columnId]}
+              </TableCell>
+            </TableRow>,
           );
         }
       });
     }
 
-    return <ul className="list-group">{rows}</ul>;
+    return (
+      <Container
+        padding="16px"
+        bgcolor={palette.white}
+        borderTop={palette.lightgray}
+        key="highlight_code"
+        style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
+      >
+        <ScrollableWrapper>
+          <Table tableMinWidth={config.tablesMinWidth.tableMd}>
+            <TableBody>{rows}</TableBody>
+          </Table>
+        </ScrollableWrapper>
+      </Container>
+    );
   }
 
   getData() {
@@ -138,19 +163,19 @@ class DetailView extends React.PureComponent {
   }
 
   render() {
-    const buttonClassName = this.state.copied ? 'btn-secondary' : 'btn-primary';
-
+    const bgColor = this.state.copied ? palette.lightblue : palette.blue;
     return (
-      <LatestPanelWrapper className="row">
-        <List className="nav">{this.renderTabs()}</List>
-        <div className="col-md-12">{this.renderContent()}</div>
+      <LatestPanelWrapper>
+        <List>{this.renderTabs()}</List>
+
+        {this.renderContent()}
         <CopyToClipboardWrapper>
           <CopyToClipboard
             text={this.getData()}
             onCopy={() => this.setState({ copied: true })}
           >
-            <Button type="button" className={`btn ${buttonClassName}`}>
-              Copy
+            <Button padding="8px 24px" bgcolor={bgColor}>
+              {this.state.copied ? 'copied' : 'copy'}
             </Button>
           </CopyToClipboard>
         </CopyToClipboardWrapper>

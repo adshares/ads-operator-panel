@@ -91,7 +91,11 @@ class TableDataSet extends React.PureComponent {
       cells.push(this.renderCell(columnHeader, value, row));
     });
 
-    return <TableRow key={`row_${row.id}`}>{cells}</TableRow>;
+    return (
+      <TableRow key={`row_${row.id}`} showHoverAnimation>
+        {cells}
+      </TableRow>
+    );
   }
 
   renderCell(columnName, value, row) {
