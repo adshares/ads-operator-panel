@@ -24,8 +24,15 @@ const routes = {
   '/blockexplorer/messages': null,
 };
 
+const tablesMinWidth = {
+  tableSm: '500px',
+  tableMd: '600px',
+  tableLg: '1024px',
+};
+
 export default {
   limit: process.env.LIMIT,
   date_format: 'YYYY-MM-DD HH:mm:ss',
   routes,
+  tablesMinWidth,
 };

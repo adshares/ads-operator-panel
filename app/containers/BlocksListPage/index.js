@@ -61,7 +61,7 @@ export class BlocksListPage extends React.PureComponent {
           messages={messages}
           link="/blockexplorer/blocks"
           onPageChange={this.props.onPageChange}
-          tableMinWidth="600px"
+          tableMinWidth={config.tablesMinWidth.tableMd}
         />
       </div>
     );
