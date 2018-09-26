@@ -117,15 +117,12 @@ describe('<TableDataSet />', () => {
     const ceilConfiguration = {
       id: value => <p>{value}</p>,
     };
-    const renderedComponent = shallow(
+    const renderedComponent = mount(
       <TableDataSet
         name="table-test"
-        columns={{ id: 'Id', title: 'Title' }}
-        sortingColumns={['id']}
-        ceilConfiguration={ceilConfiguration}
-        sortBy="id"
-        orderBy="desc"
+        columns={{ id: 'Id' }}
         data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: '2' }]}
+        ceilConfiguration={ceilConfiguration}
         loading={false}
         error={false}
       />,

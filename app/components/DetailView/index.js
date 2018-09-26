@@ -19,7 +19,7 @@ import {
   IconWrapper,
   CopyToClipboardWrapper,
 } from './styled';
-import ErrorMsg from '../ErrorMsg';
+import ErrorMsg from '../molecules/ErrorMsg';
 import LoadingIndicator from '../LoadingIndicator';
 import messages from './messages';
 import { TEST_ENV_ACTIVE } from '../../utils/checkEnv';

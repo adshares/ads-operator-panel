@@ -6,25 +6,25 @@ import Breadcrumbs from './Breadcrumbs';
 import Breadcrumb from './Breadcrumb';
 import BreadcrumbActive from './BreadcrumbActive';
 
-const BreadcrumbsWrapper = props => {
-  return (
-    <Route
-      path="/:path"
-      render={rest => (
-          <Breadcrumbs
-          mappedRoutes={props.mappedRoutes}
-          ActiveLinkComponent={props.ActiveLinkComponent}
-          LinkComponent={props.LinkComponent}
-          rootName={props.rootName}
-          {...rest}
-        />
-      )}
-    />
-  );
-};
+const BreadcrumbsWrapper = props => (
+  <Route
+    path="/:path"
+    render={rest => (
+      <Breadcrumbs
+        mappedRoutes={props.mappedRoutes}
+        ActiveLinkComponent={props.ActiveLinkComponent}
+        LinkComponent={props.LinkComponent}
+        rootName={props.rootName}
+        {...rest}
+      />
+    )}
+  />
+);
 
 BreadcrumbsWrapper.defaultProps = {
-  ActiveLinkComponent: props => <BreadcrumbActive>{props.children}</BreadcrumbActive>,
+  ActiveLinkComponent: props => (
+    <BreadcrumbActive>{props.children}</BreadcrumbActive>
+  ),
   LinkComponent: props => <Breadcrumb>{props.children}</Breadcrumb>,
   rootName: '',
 };
@@ -34,6 +34,10 @@ BreadcrumbsWrapper.propTypes = {
   ActiveLinkComponent: PropTypes.func,
   LinkComponent: PropTypes.func,
   rootName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 };
 
 export default BreadcrumbsWrapper;
