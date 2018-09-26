@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const TabButton = styled.button`
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
   border: 1px solid var(--grayish-white);
-  background-color: var(--white);
+  background-color: var(--grayish-white);
   cursor: pointer;
 
   &:focus {
@@ -13,6 +13,6 @@ export const TabButton = styled.button`
     active &&
     `
     border-bottom: 2px solid var(--light-blue);
-    background-color: var(--grayish-white);`};
+    background-color: var(--white);`};
 `;
 TabButton.displayName = 'TabButton';
