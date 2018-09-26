@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
@@ -140,21 +141,21 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         </Helmet>
         <LatestPanel
           gridArea="node"
-          tableMinWidth="500px"
+          tableMinWidth={config.tablesMinWidth.tableSm}
           tabs={[nodeTab]}
           loading={this.props.nodes.loading}
           error={this.props.nodes.error}
         />
         <LatestPanel
           gridArea="block"
-          tableMinWidth="500px"
+          tableMinWidth={config.tablesMinWidth.tableSm}
           tabs={[blockTab]}
           loading={this.props.blocks.loading}
           error={this.props.blocks.error}
         />
         <LatestPanel
           gridArea="latestTrans"
-          tableMinWidth="1024px"
+          tableMinWidth={config.tablesMinWidth.tableLg}
           tabs={[transactionTab]}
           loading={this.props.transactions.loading}
           error={this.props.transactions.error}

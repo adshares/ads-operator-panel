@@ -54,7 +54,7 @@ export class NodesListPage extends React.Component {
           messages={messages}
           link="/blockexplorer/nodes"
           onPageChange={this.props.onPageChange}
-          tableMinWidth="600px"
+          tableMinWidth={config.tablesMinWidth.tableMd}
         />
       </div>
     );

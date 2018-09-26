@@ -22,6 +22,7 @@ import {
 import ErrorMsg from '../molecules/ErrorMsg';
 import LoadingIndicator from '../LoadingIndicator';
 import messages from './messages';
+import { TEST_ENV_ACTIVE } from '../../utils/checkEnv';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailView extends React.PureComponent {
@@ -95,7 +96,11 @@ class DetailView extends React.PureComponent {
 
     if (this.state.selectedTabId === this.tabs[1].id) {
       return (
-        <div key="highlight_code" className="list-group-item row">
+        <div
+          key="highlight_code"
+          style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
+          className="list-group-item row"
+        >
           <SyntaxHighlighter language="json" style={darcula}>
             {this.getData()}
           </SyntaxHighlighter>
@@ -108,7 +113,13 @@ class DetailView extends React.PureComponent {
       Object.entries(this.props.fields).forEach(([columnId, columnValue]) => {
         if (this.props.data[columnId] !== undefined) {
           rows.push(
-            <li key={`column_${columnId}`} className="list-group-item row">
+            <li
+              key={`column_${columnId}`}
+              style={{
+                background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)',
+              }}
+              className="list-group-item row"
+            >
               <span className="row">
                 <strong className="col-md-3">{columnValue}</strong>
                 <span className="col-md-9">{this.props.data[columnId]}</span>
