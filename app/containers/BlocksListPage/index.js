@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import ListView from 'components/ListView';
+import ListView from 'components/organisms/ListView';
 
 import { makeSelectBlocks } from './selectors';
 import reducer from './reducer';

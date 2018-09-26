@@ -12,22 +12,22 @@ import { darcula } from 'react-syntax-highlighter/styles/hljs';
 import { FaAlignJustify, FaCode } from 'react-icons/fa';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { LatestPanelWrapper, CopyToClipboardWrapper } from './styled';
-import ErrorMsg from '../ErrorMsg';
-import LoadingIndicator from '../LoadingIndicator';
+import ErrorMsg from '../../molecules/ErrorMsg/index';
+import LoadingIndicator from '../../LoadingIndicator/index';
 import messages from './messages';
-import { TEST_ENV_ACTIVE } from '../../utils/checkEnv';
+import { TEST_ENV_ACTIVE } from '../../../utils/checkEnv';
 import {
   Table,
   TableBody,
   TableCell,
   TableHeader,
   TableRow,
-} from '../molecules/Table/TableElements';
-import Button from '../atoms/Button/Button';
-import { palette } from '../../styleUtils/variables';
-import { ScrollableWrapper } from '../atoms/ScrollableWrapper';
-import Container from '../atoms/Container';
-import Tabs from '../molecules/Tabs/Tabs';
+} from '../../molecules/Table/TableElements';
+import Button from '../../atoms/Button/Button';
+import { palette } from '../../../styleUtils/variables';
+import { ScrollableWrapper } from '../../atoms/ScrollableWrapper';
+import Container from '../../atoms/Container';
+import Tabs from '../../molecules/Tabs/Tabs';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailView extends React.PureComponent {

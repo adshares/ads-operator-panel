@@ -8,8 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { LatestPanelWrapper, ListItem, LatestPanelList } from './styled';
-import TableDataSet from '../organisms/TableDataSet';
-import Tabs from '../molecules/Tabs/Tabs';
+import TableDataSet from '../TableDataSet/index';
+import Tabs from '../../molecules/Tabs/Tabs';
 
 /* eslint-disable react/prefer-stateless-function */
 class LatestPanel extends React.PureComponent {

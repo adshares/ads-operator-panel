@@ -8,7 +8,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
-import ErrorMsg from 'components/ErrorMsg';
+import ErrorMsg from 'components/molecules/ErrorMsg';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import {
   TableBody,

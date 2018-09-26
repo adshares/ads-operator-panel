@@ -35,13 +35,13 @@ const Tabs = props => (
 );
 
 Tabs.propTypes = {
-  tabs: PropTypes.arrayOf(PropTypes.object.isRequired),
+  tabs: PropTypes.array.isRequired,
   messages: PropTypes.object,
-  selectedTabId: PropTypes.oneOf(
+  selectedTabId: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.string,
     PropTypes.number,
-  ),
+  ]),
 };
 
 export default Tabs;

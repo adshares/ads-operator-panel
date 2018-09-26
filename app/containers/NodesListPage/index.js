@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
-import ListView from 'components/ListView';
+import ListView from 'components/organisms/ListView';
 import makeSelectNodesListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';

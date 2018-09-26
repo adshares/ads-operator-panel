@@ -11,10 +11,10 @@ import { intlShape } from 'react-intl';
 import queryString from 'query-string';
 import config from 'config';
 import Pagination from 'components/Pagination/Loadable';
-import ErrorMsg from 'components/ErrorMsg';
+import ErrorMsg from 'components/molecules/ErrorMsg';
 import { ListViewWrapper } from './styled';
 import listViewMessages from './messages';
-import TableDataSet from '../organisms/TableDataSet';
+import TableDataSet from '../TableDataSet/index';
 
 /* eslint-disable react/prefer-stateless-function */
 class ListView extends React.PureComponent {

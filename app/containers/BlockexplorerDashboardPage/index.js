@@ -15,7 +15,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import LatestPanel from 'components/LatestPanel';
+import LatestPanel from 'components/organisms/LatestPanel';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import {
   makeSelectLatestNodes,
