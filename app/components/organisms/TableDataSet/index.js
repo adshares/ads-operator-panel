@@ -98,6 +98,7 @@ class TableDataSet extends React.PureComponent {
           key={`${row.id}_${columnHeader}_${value.toString()}`}
           columnName={columnHeader}
           value={cellValue}
+          breakpoint={this.props.breakpoint}
         />,
       );
     });
@@ -152,6 +153,7 @@ TableDataSet.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   tableMinWidth: PropTypes.string,
+  breakpoint: PropTypes.object,
 };
 
 TableDataSet.defaultProps = {

@@ -114,6 +114,7 @@ export class BlockPage extends React.PureComponent {
           messages={messages}
           link={`/blockexplorer/blocks/${id}/messages`}
           onPageChange={this.props.onPageChange}
+          breakpoint={this.props.breakpoint}
         />
       </BlockPageWrapper>
     );
@@ -127,15 +128,19 @@ BlockPage.propTypes = {
   block: PropTypes.object.isRequired,
   messages: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 BlockPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = createStructuredSelector({
-  block: makeSelectBlock(),
-  messages: makeSelectMessages(),
+const mapStateToProps = state => ({
+  ...createStructuredSelector({
+    block: makeSelectBlock(),
+    messages: makeSelectMessages(),
+  })(state),
+  breakpoint: state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -43,7 +43,6 @@ export const TableCellStyled = styled.td`
   .ellipsisActive {
     display: block;
     padding: -(var(--spacing-factor));
-    min-width: 12ch;
     font-family: inherit;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -69,6 +68,7 @@ export const TableCellStyled = styled.td`
   .balance,
   .amount {
     text-align: right;
+    min-width: 12ch;
   }
 
   .id,

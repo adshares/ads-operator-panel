@@ -37,6 +37,7 @@ export class BlocksListPage extends React.PureComponent {
     };
 
     const sortingColumns = ['id'];
+    const { match, location, blocks, onPageChange, breakpoint } = this.props;
 
     return (
       <div>
@@ -52,16 +53,17 @@ export class BlocksListPage extends React.PureComponent {
         </Title>
         <ListView
           name="blocks"
-          urlParams={this.props.match.params}
-          query={this.props.location.search}
-          list={this.props.blocks}
+          urlParams={match.params}
+          query={location.search}
+          list={blocks}
           columns={columns}
           sortingColumns={sortingColumns}
           defaultSort="id"
           messages={messages}
           link="/blockexplorer/blocks"
-          onPageChange={this.props.onPageChange}
+          onPageChange={onPageChange}
           tableMinWidth={config.tablesMinWidth.tableMd}
+          breakpoint={breakpoint}
         />
       </div>
     );
@@ -74,14 +76,18 @@ BlocksListPage.propTypes = {
   location: PropTypes.object,
   blocks: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 BlocksListPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = createStructuredSelector({
-  blocks: makeSelectBlocks(),
+const mapStateToProps = state => ({
+  ...createStructuredSelector({
+    blocks: makeSelectBlocks(),
+  })(state),
+  breakpoint: state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

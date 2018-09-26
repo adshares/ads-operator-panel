@@ -56,13 +56,20 @@ class LatestPanel extends React.PureComponent {
       return <div />;
     }
     const currentTab = this.getSelectedTab(this.state.selectedTabId);
-    const { gridArea, loading, error, tableMinWidth } = this.props;
+    const {
+      gridArea,
+      loading,
+      error,
+      tableMinWidth,
+      breakpoint,
+      tabs,
+    } = this.props;
 
     return (
       <LatestPanelWrapper gridArea={gridArea}>
         <LatestPanelList>
           <Tabs
-            tabs={this.props.tabs}
+            tabs={tabs}
             selectedTabId={this.state.selectedTabId}
             handleClick={id => this.handleTabSelection(id)}
           />
@@ -76,6 +83,7 @@ class LatestPanel extends React.PureComponent {
           loading={loading}
           error={error}
           tableMinWidth={tableMinWidth}
+          breakpoint={breakpoint}
         />
       </LatestPanelWrapper>
     );
@@ -88,6 +96,7 @@ LatestPanel.propTypes = {
   tableMinWidth: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  breakpoint: PropTypes.object,
 };
 
 export default LatestPanel;
