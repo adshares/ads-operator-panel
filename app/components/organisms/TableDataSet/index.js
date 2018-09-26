@@ -98,7 +98,6 @@ class TableDataSet extends React.PureComponent {
           key={`${row.id}_${columnHeader}_${value.toString()}`}
           columnName={columnHeader}
           value={cellValue}
-          row={row}
         />,
       );
     });

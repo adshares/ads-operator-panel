@@ -28,14 +28,12 @@ class TableCell extends React.PureComponent {
   isEllipsisActive = () => this.contentElement.offsetWidth < this.contentElement.scrollWidth;
 
   render() {
-    const { columnName, value, row } = this.props;
+    const { columnName, value } = this.props;
     const classes = `${columnName} ${this.state.ellipsisClass}`;
 
     return (
       <TableCellStyled
-        className={columnName}
-        key={`${row.id}_${columnName}_${typeof value !== 'object' ? value.toString() : row.id}`}
-      >
+        className={columnName}>
         <div
           className={classes}
           ref={el => {
@@ -56,7 +54,6 @@ TableCell.propTypes = {
     PropTypes.number,
     PropTypes.element,
   ]),
-  row: PropTypes.object,
 };
 
 export default TableCell;
