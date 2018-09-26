@@ -20,10 +20,20 @@ class TableCell extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.setState({
-      ellipsisClass:  this.isEllipsisActive() ? 'ellipsisActive' : '',
-    });
+    this.checkTextOverflow();
+
+    window.addEventListener('resize', () => this.checkTextOverflow())
   }
+
+  checkTextOverflow = () => {
+    const isEllipsisActive = this.isEllipsisActive();
+
+    if (isEllipsisActive !== !!this.state.ellipsisClass) {
+      this.setState({
+        ellipsisClass:  this.isEllipsisActive() ? 'ellipsisActive' : '',
+      });
+    }
+  };
 
   isEllipsisActive = () => this.contentElement.offsetWidth < this.contentElement.scrollWidth;
 
