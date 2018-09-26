@@ -9,20 +9,13 @@ import PropTypes from 'prop-types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import config from 'config';
 import { darcula } from 'react-syntax-highlighter/styles/hljs';
-import { FormattedMessage } from 'react-intl';
 import { FaAlignJustify, FaCode } from 'react-icons/fa';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import {
-  LatestPanelWrapper,
-  IconWrapper,
-  CopyToClipboardWrapper,
-} from './styled';
+import { LatestPanelWrapper, CopyToClipboardWrapper } from './styled';
 import ErrorMsg from '../ErrorMsg';
 import LoadingIndicator from '../LoadingIndicator';
 import messages from './messages';
 import { TEST_ENV_ACTIVE } from '../../utils/checkEnv';
-import { TabButton } from '../atoms/Button/TabButton';
-import List from '../atoms/List';
 import {
   Table,
   TableBody,
@@ -34,6 +27,7 @@ import Button from '../atoms/Button/Button';
 import { palette } from '../../styleUtils/variables';
 import { ScrollableWrapper } from '../atoms/ScrollableWrapper';
 import Container from '../atoms/Container';
+import Tabs from '../molecules/Tabs/Tabs';
 
 /* eslint-disable react/prefer-stateless-function */
 class DetailView extends React.PureComponent {
@@ -55,43 +49,18 @@ class DetailView extends React.PureComponent {
       selectedTabId: this.tabs[0].id,
       copied: false,
     };
-
-    this.handleTabSelection = this.handleTabSelection.bind(this);
   }
 
-  handleTabSelection(tabId) {
+  handleTabSelection = tabId => {
     const selectedTab = this.getSelectedTab(tabId);
-
     this.setState({
       selectedTabId: selectedTab.id,
     });
-  }
+  };
 
   getSelectedTab(tabId) {
     const tab = this.tabs.filter(item => item.id === tabId);
-
     return tab[0];
-  }
-
-  renderIcon(icon) {
-    if (typeof icon === 'object') {
-      return <IconWrapper>{icon}</IconWrapper>;
-    }
-
-    return null;
-  }
-
-  renderTabs() {
-    return this.tabs.map(tab => (
-      <TabButton
-        key={`tab_${tab.id}}`}
-        className={this.state.selectedTabId === tab.id ? 'active' : ''}
-        onClick={() => this.handleTabSelection(tab.id)}
-      >
-        {this.renderIcon(tab.icon)}
-        <FormattedMessage {...messages[tab.id]} />
-      </TabButton>
-    ));
   }
 
   renderContent() {
@@ -166,7 +135,12 @@ class DetailView extends React.PureComponent {
     const bgColor = this.state.copied ? palette.lightblue : palette.blue;
     return (
       <LatestPanelWrapper>
-        <List>{this.renderTabs()}</List>
+        <Tabs
+          tabs={this.tabs}
+          messages={messages}
+          selectedTabId={this.state.selectedTabId}
+          handleClick={id => this.handleTabSelection(id)}
+        />
 
         {this.renderContent()}
         <CopyToClipboardWrapper>

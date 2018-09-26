@@ -8,8 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { LatestPanelWrapper, ListItem, LatestPanelList } from './styled';
-import { TabButton } from '../atoms/Button/TabButton';
 import TableDataSet from '../organisms/TableDataSet';
+import Tabs from '../molecules/Tabs/Tabs';
 
 /* eslint-disable react/prefer-stateless-function */
 class LatestPanel extends React.PureComponent {
@@ -23,31 +23,15 @@ class LatestPanel extends React.PureComponent {
         selectedTabId: defaultTab.id,
       };
     }
-
-    this.handleTabSelection = this.handleTabSelection.bind(this);
   }
 
-  handleTabSelection(tabId) {
+  handleTabSelection = tabId => {
     const selectedTab = this.getSelectedTab(tabId);
 
     this.setState({
       selectedTabId: selectedTab.id,
     });
-  }
-
-  renderTabs() {
-    return this.props.tabs.map(tab => (
-      <ListItem key={`tab_${tab.id}}`}>
-        <TabButton
-          className={this.state.selectedTabId === tab.id ? 'active' : ''}
-          key={`button_${tab.id}`}
-          onClick={() => this.handleTabSelection(tab.id)}
-        >
-          {tab.name}
-        </TabButton>
-      </ListItem>
-    ));
-  }
+  };
 
   renderViewAll(link) {
     if (link && link.length > 0) {
@@ -77,7 +61,11 @@ class LatestPanel extends React.PureComponent {
     return (
       <LatestPanelWrapper gridArea={gridArea}>
         <LatestPanelList>
-          {this.renderTabs()}
+          <Tabs
+            tabs={this.props.tabs}
+            selectedTabId={this.state.selectedTabId}
+            handleClick={id => this.handleTabSelection(id)}
+          />
           {this.renderViewAll(currentTab.link)}
         </LatestPanelList>
         <TableDataSet
