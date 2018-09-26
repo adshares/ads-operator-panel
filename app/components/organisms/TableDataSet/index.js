@@ -12,13 +12,13 @@ import ErrorMsg from 'components/molecules/ErrorMsg';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import {
   TableBody,
-  TableCell,
   TableHeader,
   TableRow,
   Table,
   TableNoData,
 } from '../../molecules/Table/TableElements';
 import { ScrollableWrapper } from '../../atoms/ScrollableWrapper';
+import TableCell from '../../molecules/Table/TableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
@@ -86,39 +86,26 @@ class TableDataSet extends React.PureComponent {
 
   renderSingleRow(row) {
     const cells = [];
+
     Object.entries(this.props.columns).forEach(([columnHeader]) => {
       const value = row[columnHeader] !== undefined ? row[columnHeader] : '--';
-      cells.push(this.renderCell(columnHeader, value, row));
+      const cellValue =
+        typeof this.props.ceilConfiguration[columnHeader] === 'function'
+          ? this.props.ceilConfiguration[columnHeader](value, row)
+          : value;
+      cells.push(
+        <TableCell
+          key={`${row.id}_${columnHeader}_${value.toString()}`}
+          columnName={columnHeader}
+          value={cellValue}
+        />,
+      );
     });
 
     return (
       <TableRow key={`row_${row.id}`} showHoverAnimation>
         {cells}
       </TableRow>
-    );
-  }
-
-  renderCell(columnName, value, row) {
-    if (
-      this.props.ceilConfiguration &&
-      typeof this.props.ceilConfiguration[columnName] === 'function'
-    ) {
-      return (
-        <TableCell
-          key={`${row.id}_${columnName}_${value.toString()}`}
-          className={columnName}
-        >
-          {this.props.ceilConfiguration[columnName](value, row)}
-        </TableCell>
-      );
-    }
-    return (
-      <TableCell
-        key={`${row.id}_${columnName}_${value.toString()}`}
-        className={columnName}
-      >
-        {value}
-      </TableCell>
     );
   }
 

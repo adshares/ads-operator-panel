@@ -19,7 +19,7 @@ import { TEST_ENV_ACTIVE } from '../../../utils/checkEnv';
 import {
   Table,
   TableBody,
-  TableCell,
+  TableCellStyled,
   TableHeader,
   TableRow,
 } from '../../molecules/Table/TableElements';
@@ -78,6 +78,7 @@ class DetailView extends React.PureComponent {
           padding="16px"
           bgcolor={palette.white}
           borderTop={palette.lightgray}
+          minheight="400px"
           key="highlight_code"
           style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
         >
@@ -97,13 +98,13 @@ class DetailView extends React.PureComponent {
               <TableHeader textalign="left" bgcolor={palette.white} width="25%">
                 {columnValue}
               </TableHeader>
-              <TableCell
+              <TableCellStyled
                 textalign="left"
                 textwrap="break-word"
                 whitespace="unset"
               >
                 {this.props.data[columnId]}
-              </TableCell>
+              </TableCellStyled>
             </TableRow>,
           );
         }
@@ -115,6 +116,7 @@ class DetailView extends React.PureComponent {
         padding="16px"
         bgcolor={palette.white}
         borderTop={palette.lightgray}
+        minheight="400px"
         key="highlight_code"
         style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
       >

@@ -32,18 +32,50 @@ export const TableBody = styled.tbody`
   position: relative;
 `;
 
-export const TableCell = styled.td`
+export const TableCellStyled = styled.td`
   vertical-align: middle;
   text-align: ${props => props.textalign || `center`};
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
-  overflow: hidden;
   white-space: ${props => props.whitespace || 'nowrap'};
-  text-overflow: ellipsis;
   word-break: ${props => props.textwrap || 'keep-all'};
+  position: relative;
 
-  &.balance,
-  &.amount {
+  .ellipsisActive {
+    display: block;
+    padding: -(var(--spacing-factor));
+    min-width: 12ch;
+    font-family: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover {
+      position: absolute;
+      background-color: var(--white);
+      padding: 0 calc(var(--spacing-factor) * 3);
+      transform: translateX(-45px);
+      z-index: 10;
+      top: -1px;
+      display: flex;
+      height: 44px;
+      align-items: center;
+    }
+
+    &.time:hover {
+      padding: 0 calc(var(--spacing-factor) * 4);
+      border-right: 2px solid var(--blue);
+    }
+  }
+
+  .balance,
+  .amount {
     text-align: right;
+  }
+
+  .id,
+  .balance,
+  .amount {
+    font-family: 'Cousine', monospace;
+    letter-spacing: 0.5px;
   }
 `;
 
@@ -64,6 +96,6 @@ export const TableNoData = styled.div`
 
 TableHeader.displayName = 'TableHeader';
 TableRow.displayName = 'TableRow';
-TableCell.displayName = 'TableCell';
+TableCellStyled.displayName = 'TableCellStyled';
 TableBody.displayName = 'TableBody';
 Table.displayName = 'Table';
