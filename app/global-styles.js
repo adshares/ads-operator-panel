@@ -1,7 +1,6 @@
 import { injectGlobal } from 'styled-components';
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
-@import url('https://fonts.googleapis.com/css?family=Cousine:400,700');
 
 :root {
   --blue: #105992;
