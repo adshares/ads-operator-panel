@@ -93,6 +93,6 @@ export const TableNoData = styled.div`
 
 TableHeader.displayName = 'TableHeader';
 TableRow.displayName = 'TableRow';
-TableCellStyled.displayName = 'TableCell';
+TableCellStyled.displayName = 'TableCellStyled';
 TableBody.displayName = 'TableBody';
 Table.displayName = 'Table';

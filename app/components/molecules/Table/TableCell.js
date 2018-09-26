@@ -18,9 +18,10 @@ class TableCell extends React.PureComponent {
       ellipsisClass: '',
     };
   }
+
   componentDidMount() {
     this.setState({
-      ellipsisClass:  this.isEllipsisActive() ? 'ellipsisActive' : ' ',
+      ellipsisClass:  this.isEllipsisActive() ? 'ellipsisActive' : '',
     });
   }
 
@@ -30,11 +31,10 @@ class TableCell extends React.PureComponent {
     const { columnName, value, row } = this.props;
     const classes = `${columnName} ${this.state.ellipsisClass}`;
 
-
     return (
       <TableCellStyled
         className={columnName}
-        key={`${row.id}_${columnName}_${value.toString()}`}
+        key={`${row.id}_${columnName}_${typeof value !== 'object' ? value.toString() : row.id}`}
       >
         <div
           className={classes}
