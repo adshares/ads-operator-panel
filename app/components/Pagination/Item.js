@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 /**
  *
  * Pagination Item
@@ -7,43 +8,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { PaginationListElement } from './styled';
 
-/* eslint-disable react/prefer-stateless-function */
-class Item extends React.PureComponent {
-  renderElement(label) {
-    if (!this.props.page || !this.props.link) {
-      return <span className="page-link">{label}</span>;
+const Item = props => {
+  const renderElement = label => {
+    if (!props.page || !props.link) {
+      return <span>{label}</span>;
     }
 
-    return (
-      <Link className="page-link" to={this.props.link}>
-        {label}
-      </Link>
-    );
+    return <Link to={props.link}>{label}</Link>;
+  };
+
+  const label = props.label ? props.label : props.page;
+
+  if (!label) {
+    return <li />;
   }
 
-  render() {
-    const label = this.props.label ? this.props.label : this.props.page;
-    if (!label) {
-      return <li />;
-    }
-
-    let itemClassName = this.props.active ? 'page-item active' : 'page-item';
-
-    if (this.props.disabled === true) {
-      itemClassName += ' disabled';
-    }
-
-    return <li className={itemClassName}>{this.renderElement(label)}</li>;
-  }
-}
+  return (
+    <PaginationListElement active={props.active} disabled={props.disabled}>
+      {renderElement(label)}
+    </PaginationListElement>
+  );
+};
 
 Item.propTypes = {
   disabled: PropTypes.bool,
   active: PropTypes.bool,
   page: PropTypes.number,
-  link: PropTypes.string,
   label: PropTypes.string,
+  link: PropTypes.string,
 };
 
 Item.defaultProps = {
