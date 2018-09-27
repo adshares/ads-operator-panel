@@ -37,11 +37,7 @@ const Tabs = props => (
 Tabs.propTypes = {
   tabs: PropTypes.array.isRequired,
   messages: PropTypes.object,
-  selectedTabId: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  selectedTabId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default Tabs;

@@ -76,9 +76,9 @@ class DetailView extends React.PureComponent {
       return (
         <Container
           padding="16px"
-          bgcolor={palette.white}
+          bgColor={palette.white}
           borderTop={palette.lightgray}
-          minheight="400px"
+          minHeight="400px"
           key="highlight_code"
           style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
         >
@@ -114,9 +114,9 @@ class DetailView extends React.PureComponent {
     return (
       <Container
         padding="16px"
-        bgcolor={palette.white}
+        bgColor={palette.white}
         borderTop={palette.lightgray}
-        minheight="400px"
+        minHeight="400px"
         key="highlight_code"
         style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
       >
