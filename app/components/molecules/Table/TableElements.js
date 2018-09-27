@@ -7,10 +7,14 @@ export const Table = styled.table`
   width: 100%;
   background-color: transparent;
   margin-top: ${props => props.margintop || `0`};
-  opacity: 0;
-  transform: scale(0.9);
   animation: ${fadeIn} 0.5s;
   animation-fill-mode: forwards;
+  ${({ showIntroAnimation }) =>
+    showIntroAnimation &&
+    `
+    opacity:0;
+    transform: scale(0.95);
+`};
 `;
 
 export const TableRow = styled.tr`
