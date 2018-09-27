@@ -67,6 +67,4 @@ TableCell.propTypes = {
   ]),
 };
 
-
-
 export default TableCell;
