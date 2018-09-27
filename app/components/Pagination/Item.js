@@ -12,7 +12,7 @@ import { PaginationListElement } from './styled';
 
 const Item = props => {
   const renderElement = label => {
-    if (!props.page || !props.link) {
+    if (props.disabled || !props.link || !props.page) {
       return <span>{label}</span>;
     }
 
