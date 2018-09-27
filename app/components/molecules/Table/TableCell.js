@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableCellStyled } from '../../molecules/Table/TableElements';
+import { TableCellStyled } from './TableElements';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableCell extends React.PureComponent {
@@ -20,10 +20,19 @@ class TableCell extends React.PureComponent {
   }
 
   componentDidMount() {
+    this.checkTextOverflow();
+  }
+  componentWillUpdate(nextProps) {
+    if (nextProps.breakpoint.name !== this.props.breakpoint.name) {
+      this.checkTextOverflow();
+    }
+  }
+
+  checkTextOverflow = () => {
     this.setState({
       ellipsisClass:  this.isEllipsisActive() ? 'ellipsisActive' : '',
     });
-  }
+  };
 
   isEllipsisActive = () => this.contentElement.offsetWidth < this.contentElement.scrollWidth;
 
@@ -33,7 +42,8 @@ class TableCell extends React.PureComponent {
 
     return (
       <TableCellStyled
-        className={columnName}>
+        className={columnName}
+      >
         <div
           className={classes}
           ref={el => {
@@ -49,6 +59,7 @@ class TableCell extends React.PureComponent {
 
 TableCell.propTypes = {
   columnName: PropTypes.string,
+  breakpoint: PropTypes.object,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

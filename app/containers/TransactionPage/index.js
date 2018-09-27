@@ -18,7 +18,7 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadTransaction } from './actions';
-import DetailView from '../../components/DetailView';
+import DetailView from '../../components/organisms/DetailView';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransactionPage extends React.PureComponent {

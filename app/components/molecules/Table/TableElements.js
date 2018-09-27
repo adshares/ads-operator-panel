@@ -6,23 +6,30 @@ export const Table = styled.table`
   table-layout: fixed;
   width: 100%;
   background-color: transparent;
-  margin-top: calc(var(--spacing-factor) * 4);
-  opacity: 0;
-  transform: scale(0.9);
+  margin-top: ${props => props.margintop || `0`};
   animation: ${fadeIn} 0.5s;
   animation-fill-mode: forwards;
+  ${({ showIntroAnimation }) =>
+    showIntroAnimation &&
+    `
+    opacity:0;
+    transform: scale(0.95);
+`};
 `;
 
 export const TableRow = styled.tr`
   background-color: var(--white);
   border: 4px solid var(--white-gray);
-  transition: transform 0.25s ease-in;
 
+  ${({ showHoverAnimation }) =>
+    showHoverAnimation &&
+    `
   &:hover {
     position: relative;
     transform: scale(1.05);
     box-shadow: 0px 1px 0px #f8f9fa, 2px 1px 0px var(--blue);
   }
+`};
 `;
 
 export const TableBody = styled.tbody`
@@ -31,17 +38,16 @@ export const TableBody = styled.tbody`
 
 export const TableCellStyled = styled.td`
   vertical-align: middle;
-  text-align: center;
+  text-align: ${props => props.textalign || `center`};
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
+  white-space: ${props => props.whitespace || 'nowrap'};
+  word-break: ${props => props.textwrap || 'keep-all'};
   position: relative;
-  white-space: nowrap;
 
   .ellipsisActive {
     display: block;
     padding: -(var(--spacing-factor));
-    min-width: 12ch;
     font-family: inherit;
-    position: relative;
     overflow: hidden;
     text-overflow: ellipsis;
 
@@ -66,6 +72,7 @@ export const TableCellStyled = styled.td`
   .balance,
   .amount {
     text-align: right;
+    min-width: 12ch;
   }
 
   .id,
@@ -77,12 +84,12 @@ export const TableCellStyled = styled.td`
 `;
 
 export const TableHeader = styled.th`
-  text-align: center;
+  width: ${props => props.width || `auto`};
+  text-align: ${props => props.textalign || `center`};
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
-  background-color: var(--white-gray);
+  background-color: ${props => props.bgcolor || `var(--white-gray)`};
   color: var(--dust-gray);
 `;
-
 export const TableNoData = styled.div`
   text-align: center;
   font-size: 21px;

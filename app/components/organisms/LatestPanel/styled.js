@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import List from '../atoms/List';
+import List from '../../atoms/List';
 
 export const LatestPanelWrapper = styled.div`
   color: var(--gray);

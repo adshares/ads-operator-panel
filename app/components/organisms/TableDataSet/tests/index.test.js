@@ -22,7 +22,7 @@ describe('<TableDataSet />', () => {
   });
 
   it('should render an <Table> tag and th when columns exist and data is not empty', () => {
-    const renderedComponent = mount(
+    const renderedComponent = shallow(
       <TableDataSet
         name="table-test"
         columns={{ id: 'Id' }}
@@ -32,12 +32,12 @@ describe('<TableDataSet />', () => {
       />,
     );
 
-    expect(renderedComponent.find('table').length).toEqual(1);
-    expect(renderedComponent.find('th').length).toEqual(1);
+    expect(renderedComponent.find('Table').length).toEqual(1);
+    expect(renderedComponent.find('TableHeader').length).toEqual(1);
   });
 
   it('should render rows if data are not empty', () => {
-    const renderedComponent = mount(
+    const renderedComponent = shallow(
       <TableDataSet
         name="table-test"
         columns={{ id: 'Id', name: 'Name' }}
@@ -46,10 +46,9 @@ describe('<TableDataSet />', () => {
         error={false}
       />,
     );
-
-    expect(renderedComponent.find('table').length).toEqual(1);
-    expect(renderedComponent.find('tbody tr').length).toEqual(2);
-    expect(renderedComponent.find('tbody td').length).toEqual(4);
+    expect(renderedComponent.find('Table').length).toEqual(1);
+    expect(renderedComponent.find('TableBody TableRow').length).toEqual(2);
+    expect(renderedComponent.find('TableCell').length).toEqual(4);
   });
 
   it('should render ceil only if column header exists', () => {
