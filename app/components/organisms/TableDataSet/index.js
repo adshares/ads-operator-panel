@@ -19,9 +19,28 @@ import {
 } from '../../molecules/Table/TableElements';
 import { ScrollableWrapper } from '../../atoms/ScrollableWrapper';
 import TableCell from '../../molecules/Table/TableCell';
+import { palette } from '../../../styleUtils/variables';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableDataSet extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showIntroAnimation: true,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.sortBy !== this.props.sortBy ||
+      nextProps.orderBy !== this.props.orderBy
+    ) {
+      this.setState({
+        showIntroAnimation: false,
+      });
+    }
+  }
+
   renderHeader() {
     const headers = [];
     Object.entries(this.props.columns).forEach(([columnId, columnName]) => {
@@ -117,7 +136,9 @@ class TableDataSet extends React.PureComponent {
     }
 
     if (loading) {
-      return <LoadingIndicator />;
+      return (
+        <LoadingIndicator width="100%" height="100vh" bgcolor={palette.white} />
+      );
     }
 
     if (data.length === 0) {
@@ -131,7 +152,11 @@ class TableDataSet extends React.PureComponent {
 
     return (
       <ScrollableWrapper>
-        <Table tableMinWidth={tableMinWidth}>
+        <Table
+          tableMinWidth={tableMinWidth}
+          showIntroAnimation={this.state.showIntroAnimation}
+          ref
+        >
           {this.renderHeader()}
           <TableBody>{this.renderRows()}</TableBody>
         </Table>

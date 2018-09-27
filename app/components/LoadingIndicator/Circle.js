@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
@@ -22,8 +21,8 @@ const Circle = props => {
     position: absolute;
     left: 0;
     top: 0;
-    ${props.rotate && 
-  `
+    ${props.rotate &&
+      `
         -webkit-transform: rotate(${props.rotate}deg);
         -ms-transform: rotate(${props.rotate}deg);
         transform: rotate(${props.rotate}deg);
@@ -33,13 +32,14 @@ const Circle = props => {
       margin: 0 auto;
       width: 15%;
       height: 15%;
-      background-color: #999;
+      background-color: var(--light-blue);
       border-radius: 100%;
       animation: ${circleFadeDelay} 1.2s infinite ease-in-out both;
-      ${props.delay && `
+      ${props.delay &&
+        `
         -webkit-animation-delay: ${props.delay}s;
         animation-delay: ${props.delay}s;
-      `}
+      `};
     }
   `;
   return <CirclePrimitive />;

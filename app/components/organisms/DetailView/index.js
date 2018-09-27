@@ -121,7 +121,10 @@ class DetailView extends React.PureComponent {
         style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
       >
         <ScrollableWrapper>
-          <Table tableMinWidth={config.tablesMinWidth.tableMd}>
+          <Table
+            tableMinWidth={config.tablesMinWidth.tableMd}
+            showIntroAnimation
+          >
             <TableBody>{rows}</TableBody>
           </Table>
         </ScrollableWrapper>
