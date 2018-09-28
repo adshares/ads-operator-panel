@@ -10,11 +10,12 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import LatestPanel from 'components/LatestPanel';
+import LatestPanel from 'components/organisms/LatestPanel';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import {
   makeSelectLatestNodes,
@@ -129,6 +130,8 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       },
     };
 
+    const { nodes, blocks, breakpoint, transactions } = this.props;
+
     return (
       <BlockexplorerWrapper>
         <Helmet>
@@ -138,30 +141,30 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <div className="row area-one">
-          <span className="col-md-5 col-xs-12">
-            <LatestPanel
-              tabs={[nodeTab]}
-              loading={this.props.nodes.loading}
-              error={this.props.nodes.error}
-            />
-          </span>
-          <span className="col-md-1 col-xs-12" />
-          <span className="col-md-6 col-xs-12">
-            <LatestPanel
-              tabs={[blockTab]}
-              loading={this.props.blocks.loading}
-              error={this.props.blocks.error}
-            />
-          </span>
-        </div>
-        <div className="row area-two">
-          <LatestPanel
-            tabs={[transactionTab]}
-            loading={this.props.transactions.loading}
-            error={this.props.transactions.error}
-          />
-        </div>
+        <LatestPanel
+          gridArea="node"
+          tableMinWidth={config.tablesMinWidth.tableSm}
+          tabs={[nodeTab]}
+          loading={nodes.loading}
+          error={nodes.error}
+          breakpoint={breakpoint}
+        />
+        <LatestPanel
+          gridArea="block"
+          tableMinWidth={config.tablesMinWidth.tableSm}
+          tabs={[blockTab]}
+          loading={blocks.loading}
+          error={blocks.error}
+          breakpoint={breakpoint}
+        />
+        <LatestPanel
+          gridArea="latestTrans"
+          tableMinWidth={config.tablesMinWidth.tableLg}
+          tabs={[transactionTab]}
+          loading={transactions.loading}
+          error={transactions.error}
+          breakpoint={breakpoint}
+        />
       </BlockexplorerWrapper>
     );
   }
@@ -173,16 +176,20 @@ BlockexplorerDashboardPage.propTypes = {
   nodes: PropTypes.object,
   blocks: PropTypes.object,
   transactions: PropTypes.object,
+  breakpoint: PropTypes.object,
 };
 
 BlockexplorerDashboardPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = createStructuredSelector({
-  nodes: makeSelectLatestNodes(),
-  blocks: makeSelectLatestBlocks(),
-  transactions: makeSelectLatestTransactions(),
+const mapStateToProps = state => ({
+  ...createStructuredSelector({
+    nodes: makeSelectLatestNodes(),
+    blocks: makeSelectLatestBlocks(),
+    transactions: makeSelectLatestTransactions(),
+  })(state),
+  breakpoint: state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

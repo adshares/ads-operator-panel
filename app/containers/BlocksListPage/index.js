@@ -14,13 +14,14 @@ import { Helmet } from 'react-helmet';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import ListView from 'components/ListView';
+import ListView from 'components/organisms/ListView';
 
 import { makeSelectBlocks } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadBlocks } from './actions';
+import { Title } from '../../components/atoms/Title';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlocksListPage extends React.PureComponent {
@@ -36,6 +37,7 @@ export class BlocksListPage extends React.PureComponent {
     };
 
     const sortingColumns = ['id'];
+    const { match, location, blocks, onPageChange, breakpoint } = this.props;
 
     return (
       <div>
@@ -46,20 +48,22 @@ export class BlocksListPage extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <h3>
+        <Title>
           <FormattedMessage {...messages.header} />
-        </h3>
+        </Title>
         <ListView
           name="blocks"
-          urlParams={this.props.match.params}
-          query={this.props.location.search}
-          list={this.props.blocks}
+          urlParams={match.params}
+          query={location.search}
+          list={blocks}
           columns={columns}
           sortingColumns={sortingColumns}
           defaultSort="id"
           messages={messages}
           link="/blockexplorer/blocks"
-          onPageChange={this.props.onPageChange}
+          onPageChange={onPageChange}
+          tableMinWidth={config.tablesMinWidth.tableMd}
+          breakpoint={breakpoint}
         />
       </div>
     );
@@ -72,14 +76,18 @@ BlocksListPage.propTypes = {
   location: PropTypes.object,
   blocks: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 BlocksListPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = createStructuredSelector({
-  blocks: makeSelectBlocks(),
+const mapStateToProps = state => ({
+  ...createStructuredSelector({
+    blocks: makeSelectBlocks(),
+  })(state),
+  breakpoint: state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

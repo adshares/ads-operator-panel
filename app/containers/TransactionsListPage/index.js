@@ -15,13 +15,14 @@ import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
-import ListView from 'components/ListView';
+import ListView from 'components/organisms/ListView';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import { makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadTransactions } from './actions';
+import { Title } from '../../components/atoms/Title';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransactionsListPage extends React.PureComponent {
@@ -75,9 +76,9 @@ export class TransactionsListPage extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <h3>
+        <Title>
           <FormattedMessage {...messages.header} />
-        </h3>
+        </Title>
         <ListView
           name="nodes"
           urlParams={this.props.match.params}
@@ -90,6 +91,7 @@ export class TransactionsListPage extends React.PureComponent {
           messages={messages}
           link="/blockexplorer/transactions"
           onPageChange={this.props.onPageChange}
+          tableMinWidth="1024px"
         />
       </div>
     );

@@ -21,7 +21,7 @@ describe('<NodesListPage />', () => {
         nodes={nodes}
       />,
     );
-    expect(renderedComponent.find('h3').length).toEqual(1);
+    expect(renderedComponent.find('Title').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 });
