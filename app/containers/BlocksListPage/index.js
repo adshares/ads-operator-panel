@@ -83,11 +83,9 @@ BlocksListPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = state => ({
-  ...createStructuredSelector({
-    blocks: makeSelectBlocks(),
-  })(state),
-  breakpoint: state.get('breakpoint'),
+const mapStateToProps = createStructuredSelector({
+  blocks: makeSelectBlocks(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -76,11 +76,9 @@ NodesListPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = state => ({
-  ...createStructuredSelector({
-    nodes: makeSelectNodesListPage(),
-  })(state),
-  breakpoint: state.get('breakpoint'),
+const mapStateToProps = createStructuredSelector({
+  nodes: makeSelectNodesListPage(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {
