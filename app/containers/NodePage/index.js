@@ -119,6 +119,7 @@ export class NodePage extends React.PureComponent {
           link={`/blockexplorer/nodes/${id}/accounts`}
           onPageChange={onPageChange}
           breakpoint={breakpoint}
+          tableMinWidth={config.tablesMinWidth.tableLg}
         />
       </NodePageWrapper>
     );
@@ -139,12 +140,10 @@ NodePage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = state => ({
-  ...createStructuredSelector({
-    node: makeSelectNode(),
-    accounts: makeSelectAccounts(),
-  })(state),
-  breakpoint: state.get('breakpoint'),
+const mapStateToProps = createStructuredSelector({
+  node: makeSelectNode(),
+  accounts: makeSelectAccounts(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {
