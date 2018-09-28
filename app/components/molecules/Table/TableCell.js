@@ -59,7 +59,7 @@ class TableCell extends React.PureComponent {
 
 TableCell.propTypes = {
   columnName: PropTypes.string,
-  breakpoint: PropTypes.object,
+  breakpoint: PropTypes.object.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
