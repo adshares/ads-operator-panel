@@ -23,7 +23,7 @@ class TableCell extends React.PureComponent {
     this.checkTextOverflow();
   }
   componentWillUpdate(nextProps) {
-    if (nextProps.breakpoint.name !== this.props.breakpoint.name) {
+    if (nextProps.breakpoint && (nextProps.breakpoint.name !== this.props.breakpoint.name)) {
       this.checkTextOverflow();
     }
   }
@@ -59,7 +59,7 @@ class TableCell extends React.PureComponent {
 
 TableCell.propTypes = {
   columnName: PropTypes.string,
-  breakpoint: PropTypes.object,
+  breakpoint: PropTypes.object.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

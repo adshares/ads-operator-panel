@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -74,6 +75,8 @@ export class TransactionPage extends React.PureComponent {
           data={this.props.transaction.data}
           loading={this.props.transaction.loading}
           error={this.props.transaction.error}
+          breakpoint={this.props.breakpoint}
+          tableMinWidth={config.tablesMinWidth.tableLg}
         />
       </div>
     );
@@ -84,10 +87,14 @@ TransactionPage.propTypes = {
   match: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   transaction: PropTypes.object.isRequired,
+  breakpoint: PropTypes.object,
 };
 
-const mapStateToProps = createStructuredSelector({
-  transaction: makeSelectTransaction(),
+const mapStateToProps = state => ({
+  ...createStructuredSelector({
+    transaction: makeSelectTransaction(),
+  })(state),
+  breakpoint: state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

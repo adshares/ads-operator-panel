@@ -145,9 +145,12 @@ AccountPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = createStructuredSelector({
-  account: makeSelectAccount(),
-  transactions: makeSelectTransactions(),
+const mapStateToProps = state => ({
+  ...createStructuredSelector({
+    account: makeSelectAccount(),
+    transactions: makeSelectTransactions(),
+  })(state),
+  breakpoint: state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

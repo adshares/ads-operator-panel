@@ -91,7 +91,8 @@ export class TransactionsListPage extends React.PureComponent {
           messages={messages}
           link="/blockexplorer/transactions"
           onPageChange={this.props.onPageChange}
-          tableMinWidth="1024px"
+          tableMinWidth={config.tablesMinWidth.tableLg}
+          breakpoint={this.props.breakpoint}
         />
       </div>
     );
@@ -104,14 +105,18 @@ TransactionsListPage.propTypes = {
   location: PropTypes.object,
   transactions: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 TransactionsListPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = createStructuredSelector({
-  transactions: makeSelectTransactions(),
+const mapStateToProps = state => ({
+  ...createStructuredSelector({
+    transactions: makeSelectTransactions(),
+  })(state),
+  breakpoint: state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

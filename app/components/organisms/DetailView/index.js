@@ -78,7 +78,6 @@ class DetailView extends React.PureComponent {
           padding="16px"
           bgColor={palette.white}
           borderTop={palette.lightgray}
-          minHeight="400px"
           key="highlight_code"
           style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
         >
@@ -116,7 +115,6 @@ class DetailView extends React.PureComponent {
         padding="16px"
         bgColor={palette.white}
         borderTop={palette.lightgray}
-        minHeight="400px"
         key="highlight_code"
         style={{ background: TEST_ENV_ACTIVE && 'rgba(255, 255, 255, .4)' }}
       >
