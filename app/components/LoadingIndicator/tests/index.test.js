@@ -6,6 +6,6 @@ import LoadingIndicator from '../index';
 describe('<LoadingIndicator />', () => {
   it('should render 13 divs', () => {
     const renderedComponent = mount(<LoadingIndicator />);
-    expect(renderedComponent.find('div').length).toEqual(13);
+    expect(renderedComponent.find('div').length).toEqual(14);
   });
 });

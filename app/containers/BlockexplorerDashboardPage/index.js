@@ -15,7 +15,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import LatestPanel from 'components/LatestPanel';
+import LatestPanel from 'components/organisms/LatestPanel';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import {
   makeSelectLatestNodes,
@@ -130,6 +130,8 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       },
     };
 
+    const { nodes, blocks, breakpoint, transactions } = this.props;
+
     return (
       <BlockexplorerWrapper>
         <Helmet>
@@ -143,22 +145,25 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
           gridArea="node"
           tableMinWidth={config.tablesMinWidth.tableSm}
           tabs={[nodeTab]}
-          loading={this.props.nodes.loading}
-          error={this.props.nodes.error}
+          loading={nodes.loading}
+          error={nodes.error}
+          breakpoint={breakpoint}
         />
         <LatestPanel
           gridArea="block"
           tableMinWidth={config.tablesMinWidth.tableSm}
           tabs={[blockTab]}
-          loading={this.props.blocks.loading}
-          error={this.props.blocks.error}
+          loading={blocks.loading}
+          error={blocks.error}
+          breakpoint={breakpoint}
         />
         <LatestPanel
           gridArea="latestTrans"
           tableMinWidth={config.tablesMinWidth.tableLg}
           tabs={[transactionTab]}
-          loading={this.props.transactions.loading}
-          error={this.props.transactions.error}
+          loading={transactions.loading}
+          error={transactions.error}
+          breakpoint={breakpoint}
         />
       </BlockexplorerWrapper>
     );
@@ -171,6 +176,7 @@ BlockexplorerDashboardPage.propTypes = {
   nodes: PropTypes.object,
   blocks: PropTypes.object,
   transactions: PropTypes.object,
+  breakpoint: PropTypes.object,
 };
 
 BlockexplorerDashboardPage.contextTypes = {
@@ -181,6 +187,7 @@ const mapStateToProps = createStructuredSelector({
   nodes: makeSelectLatestNodes(),
   blocks: makeSelectLatestBlocks(),
   transactions: makeSelectLatestTransactions(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

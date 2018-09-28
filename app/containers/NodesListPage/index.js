@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
-import ListView from 'components/ListView';
+import ListView from 'components/organisms/ListView';
 import makeSelectNodesListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -33,6 +33,7 @@ export class NodesListPage extends React.Component {
       status: <FormattedMessage {...messages.fieldStatus} />,
     };
     const sortingColumns = ['id'];
+    const { match, location, nodes, onPageChange, breakpoint } = this.props;
     return (
       <div>
         <Helmet>
@@ -45,16 +46,17 @@ export class NodesListPage extends React.Component {
         <Title>{messages.header.defaultMessage}</Title>
         <ListView
           name="nodes"
-          urlParams={this.props.match.params}
-          query={this.props.location.search}
-          list={this.props.nodes}
+          urlParams={match.params}
+          query={location.search}
+          list={nodes}
           columns={columns}
           sortingColumns={sortingColumns}
           defaultSort="id"
           messages={messages}
           link="/blockexplorer/nodes"
-          onPageChange={this.props.onPageChange}
+          onPageChange={onPageChange}
           tableMinWidth={config.tablesMinWidth.tableMd}
+          breakpoint={breakpoint}
         />
       </div>
     );
@@ -67,6 +69,7 @@ NodesListPage.propTypes = {
   location: PropTypes.object,
   nodes: PropTypes.object,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 NodesListPage.contextTypes = {
@@ -75,6 +78,7 @@ NodesListPage.contextTypes = {
 
 const mapStateToProps = createStructuredSelector({
   nodes: makeSelectNodesListPage(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

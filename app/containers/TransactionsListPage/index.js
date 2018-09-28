@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
-import ListView from 'components/ListView';
+import ListView from 'components/organisms/ListView';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import { makeSelectTransactions } from './selectors';
 import reducer from './reducer';
@@ -91,7 +91,8 @@ export class TransactionsListPage extends React.PureComponent {
           messages={messages}
           link="/blockexplorer/transactions"
           onPageChange={this.props.onPageChange}
-          tableMinWidth="1024px"
+          tableMinWidth={config.tablesMinWidth.tableLg}
+          breakpoint={this.props.breakpoint}
         />
       </div>
     );
@@ -104,6 +105,7 @@ TransactionsListPage.propTypes = {
   location: PropTypes.object,
   transactions: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 TransactionsListPage.contextTypes = {
@@ -112,6 +114,7 @@ TransactionsListPage.contextTypes = {
 
 const mapStateToProps = createStructuredSelector({
   transactions: makeSelectTransactions(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

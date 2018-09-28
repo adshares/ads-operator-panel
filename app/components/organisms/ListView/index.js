@@ -14,7 +14,7 @@ import Pagination from 'components/Pagination/Loadable';
 import ErrorMsg from 'components/molecules/ErrorMsg';
 import { ListViewWrapper } from './styled';
 import listViewMessages from './messages';
-import TableDataSet from '../organisms/TableDataSet';
+import TableDataSet from '../TableDataSet/index';
 
 /* eslint-disable react/prefer-stateless-function */
 class ListView extends React.PureComponent {
@@ -87,6 +87,7 @@ class ListView extends React.PureComponent {
       link,
       list,
       tableMinWidth,
+      breakpoint,
     } = this.props;
     if (!sortingColumns.includes(sort)) {
       return (
@@ -120,6 +121,7 @@ class ListView extends React.PureComponent {
           loading={list.loading}
           error={list.error}
           tableMinWidth={tableMinWidth}
+          breakpoint={breakpoint}
         />
         <Pagination
           link={link}
@@ -146,6 +148,7 @@ ListView.propTypes = {
   link: PropTypes.string.isRequired,
   onPageChange: PropTypes.func,
   tableMinWidth: PropTypes.string,
+  breakpoint: PropTypes.object.isRequired,
 };
 
 ListView.defaultProps = {

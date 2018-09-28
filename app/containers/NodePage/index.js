@@ -15,8 +15,8 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import DetailView from 'components/DetailView';
-import ListView from 'components/ListView';
+import DetailView from 'components/organisms/DetailView';
+import ListView from 'components/organisms/ListView';
 import { makeSelectAccounts, makeSelectNode } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -77,6 +77,14 @@ export class NodePage extends React.PureComponent {
       messages.metaDescription,
       { id },
     );
+    const {
+      node,
+      match,
+      location,
+      accounts,
+      onPageChange,
+      breakpoint,
+    } = this.props;
 
     return (
       <NodePageWrapper>
@@ -91,24 +99,27 @@ export class NodePage extends React.PureComponent {
         </h3>
         <DetailView
           fields={fields}
-          data={this.props.node.data}
-          loading={this.props.node.loading}
-          error={this.props.node.error}
+          data={node.data}
+          loading={node.loading}
+          error={node.error}
+          breakpoint={breakpoint}
         />
         <h4>
           <FormattedMessage {...messages.accountTabTitle} />
         </h4>
         <ListView
           name="accounts"
-          urlParams={this.props.match.params}
-          query={this.props.location.search}
-          list={this.props.accounts}
+          urlParams={match.params}
+          query={location.search}
+          list={accounts}
           columns={accountTab.columns}
           sortingColumns={['id']}
           defaultSort="id"
           messages={messages}
           link={`/blockexplorer/nodes/${id}/accounts`}
-          onPageChange={this.props.onPageChange}
+          onPageChange={onPageChange}
+          breakpoint={breakpoint}
+          tableMinWidth={config.tablesMinWidth.tableLg}
         />
       </NodePageWrapper>
     );
@@ -122,6 +133,7 @@ NodePage.propTypes = {
   node: PropTypes.object,
   accounts: PropTypes.object,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 NodePage.contextTypes = {
@@ -131,6 +143,7 @@ NodePage.contextTypes = {
 const mapStateToProps = createStructuredSelector({
   node: makeSelectNode(),
   accounts: makeSelectAccounts(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

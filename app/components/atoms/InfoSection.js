@@ -3,7 +3,6 @@ import { fadeIn } from '../../styleUtils/keyframes';
 
 export const InfoSection = styled.section`
   margin-bottom: calc(var(--spacing-factor) * 3);
-  margin-top: var(--spacing-factor);
   padding: calc(var(--spacing-factor) * 5);
   display: flex;
   align-items: center;

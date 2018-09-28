@@ -15,8 +15,8 @@ import { Link } from 'react-router-dom';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import DetailView from 'components/DetailView';
-import ListView from 'components/ListView';
+import DetailView from 'components/organisms/DetailView';
+import ListView from 'components/organisms/ListView';
 import { makeSelectBlock, makeSelectMessages } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -114,6 +114,7 @@ export class BlockPage extends React.PureComponent {
           messages={messages}
           link={`/blockexplorer/blocks/${id}/messages`}
           onPageChange={this.props.onPageChange}
+          breakpoint={this.props.breakpoint}
         />
       </BlockPageWrapper>
     );
@@ -127,6 +128,7 @@ BlockPage.propTypes = {
   block: PropTypes.object.isRequired,
   messages: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 BlockPage.contextTypes = {
@@ -136,6 +138,7 @@ BlockPage.contextTypes = {
 const mapStateToProps = createStructuredSelector({
   block: makeSelectBlock(),
   messages: makeSelectMessages(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

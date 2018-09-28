@@ -15,8 +15,8 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import DetailView from 'components/DetailView';
-import ListView from 'components/ListView';
+import DetailView from 'components/organisms/DetailView';
+import ListView from 'components/organisms/ListView';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import { makeSelectAccount, makeSelectTransactions } from './selectors';
 import reducer from './reducer';
@@ -126,6 +126,8 @@ export class AccountPage extends React.PureComponent {
           messages={messages}
           link={link}
           onPageChange={this.props.onPageChange}
+          tableMinWidth={config.tablesMinWidth.tableLg}
+          breakpoint={this.props.breakpoint}
         />
       </AccountPageWrapper>
     );
@@ -139,6 +141,7 @@ AccountPage.propTypes = {
   account: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 AccountPage.contextTypes = {
@@ -148,6 +151,7 @@ AccountPage.contextTypes = {
 const mapStateToProps = createStructuredSelector({
   account: makeSelectAccount(),
   transactions: makeSelectTransactions(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

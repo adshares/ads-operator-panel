@@ -7,8 +7,8 @@ export const Input = styled.input`
     `calc(var(--spacing-factor) * 3) calc(var(--spacing-factor) * 4)`};
   color: ${props => props.color || `var(--white)`};
   background-color: ${props =>
-    props.bgcolor ? props.bgcolor : `var(--light-blue)`};
-  border: 1px solid ${props => props.bgcolor || `var(--light-blue)`};
+    props.bgColor ? props.bgColor : `var(--light-blue)`};
+  border: 1px solid ${props => props.bgColor || `var(--light-blue)`};
 
   &:focus {
     outline: none;
