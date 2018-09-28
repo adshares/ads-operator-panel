@@ -148,7 +148,7 @@ ListView.propTypes = {
   link: PropTypes.string.isRequired,
   onPageChange: PropTypes.func,
   tableMinWidth: PropTypes.string,
-  breakpoint: PropTypes.object,
+  breakpoint: PropTypes.object.isRequired,
 };
 
 ListView.defaultProps = {

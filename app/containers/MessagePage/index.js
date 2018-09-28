@@ -109,6 +109,7 @@ export class MessagePage extends React.PureComponent {
           data={this.props.message.data}
           loading={this.props.message.loading}
           error={this.props.message.error}
+          tableMinWidth={config.tablesMinWidth.tableLg}
         />
         <h4>
           <FormattedMessage {...messages.transactionTabTitle} />
@@ -125,6 +126,8 @@ export class MessagePage extends React.PureComponent {
           messages={messages}
           link={link}
           onPageChange={this.props.onPageChange}
+          breakpoint={this.props.breakpoint}
+          tableMinWidth={config.tablesMinWidth.tableLg}
         />
       </MessagePageWrapper>
     );
@@ -138,6 +141,7 @@ MessagePage.propTypes = {
   message: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
   onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object.isRequired,
 };
 
 MessagePage.contextTypes = {
@@ -147,6 +151,7 @@ MessagePage.contextTypes = {
 const mapStateToProps = createStructuredSelector({
   message: makeSelectMessage(),
   transactions: makeSelectTransactions(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {
