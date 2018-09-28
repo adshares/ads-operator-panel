@@ -25,10 +25,10 @@ import LanguageProvider from 'containers/LanguageProvider';
 
 // Load the favicon
 /* eslint-disable import/no-unresolved, import/extensions */
-import '!file-loader?name=[name].[ext]!./images/favicon.ico';
-import '!file-loader?name=[name].[ext]!./images/favicon-32x32.png';
-import '!file-loader?name=[name].[ext]!./images/favicon-48x48.png';
-import '!file-loader?name=[name].[ext]!./images/favicon-96x96.png';
+import '!file-loader?name=[name].[ext]!./assets/images/favicon.ico';
+import '!file-loader?name=[name].[ext]!./assets/images/favicon-32x32.png';
+import '!file-loader?name=[name].[ext]!./assets/images/favicon-48x48.png';
+import '!file-loader?name=[name].[ext]!./assets/images/favicon-96x96.png';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
@@ -38,6 +38,7 @@ import { translationMessages } from './i18n';
 
 // Import CSS reset and Global Styles
 import './global-styles';
+import AppWrapper from './containers/AppWrapper/index';
 
 // Create redux store with history
 const initialState = {};
@@ -48,11 +49,13 @@ const MOUNT_NODE = document.getElementById('app');
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </LanguageProvider>
+      <AppWrapper>
+        <LanguageProvider messages={messages}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </AppWrapper>
     </Provider>,
     MOUNT_NODE,
   );
