@@ -90,11 +90,9 @@ TransactionPage.propTypes = {
   breakpoint: PropTypes.object,
 };
 
-const mapStateToProps = state => ({
-  ...createStructuredSelector({
-    transaction: makeSelectTransaction(),
-  })(state),
-  breakpoint: state.get('breakpoint'),
+const mapStateToProps = createStructuredSelector({
+  transaction: makeSelectTransaction(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -112,11 +112,9 @@ TransactionsListPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = state => ({
-  ...createStructuredSelector({
-    transactions: makeSelectTransactions(),
-  })(state),
-  breakpoint: state.get('breakpoint'),
+const mapStateToProps = createStructuredSelector({
+  transactions: makeSelectTransactions(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

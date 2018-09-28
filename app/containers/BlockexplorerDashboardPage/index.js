@@ -183,13 +183,11 @@ BlockexplorerDashboardPage.contextTypes = {
   intl: intlShape,
 };
 
-const mapStateToProps = state => ({
-  ...createStructuredSelector({
-    nodes: makeSelectLatestNodes(),
-    blocks: makeSelectLatestBlocks(),
-    transactions: makeSelectLatestTransactions(),
-  })(state),
-  breakpoint: state.get('breakpoint'),
+const mapStateToProps = createStructuredSelector({
+  nodes: makeSelectLatestNodes(),
+  blocks: makeSelectLatestBlocks(),
+  transactions: makeSelectLatestTransactions(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {
