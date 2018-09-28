@@ -1,4 +1,4 @@
-package ads.operator.panel.pages.transaction;
+package ui.ads.operator.panel.pages.transaction;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +28,7 @@ public class ToPage {
   //Button
   @FindBy(xpath = "//*[contains(text(), 'Table')]")                                                                     private WebElement Table;
   @FindBy(xpath = "//*[contains(text(), 'Code')]")                                                                      private WebElement Code;
-  @FindBy(css = "[type='button']")                                                                                      private WebElement Copy;
+  @FindBy(xpath = "//section//div[2]//button")                                                                          private WebElement Copy;
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
   @FindBy(xpath = "//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")                     private WebElement ThreeDots;

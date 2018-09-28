@@ -3,7 +3,7 @@
 <suite name="TS_4 - Information about the messege" parallel="false">
   <test name="TC_15" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="firstMessage"/>
@@ -14,7 +14,7 @@
   </test>
   <test name="TC_16" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="firstMessage"/>
@@ -25,7 +25,7 @@
   </test>
   <test name="TC_17" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="messageSearchn"/>
@@ -35,7 +35,7 @@
   </test>
   <test name="TC_18" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="searchMessageNoPosition"/>

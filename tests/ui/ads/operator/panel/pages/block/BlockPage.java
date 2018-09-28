@@ -1,4 +1,4 @@
-package ads.operator.panel.pages.block;
+package ui.ads.operator.panel.pages.block;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class BlockPage {
-
   //  Assert
   @FindBy(xpath = "//*[contains(text(), 'Id')]")                                                                        private WebElement IdAssert;
   @FindBy(xpath = "//*[contains(text(), 'Messages')]")                                                                  private WebElement MessagesAssert;
@@ -29,16 +28,15 @@ public class BlockPage {
   //Button
   @FindBy(xpath = "//*[contains(text(), 'Table')]")                                                                     private WebElement Table;
   @FindBy(xpath = "//*[contains(text(), 'Code')]")                                                                      private WebElement Code;
-  @FindBy(css = "[type='button']")                                                                                      private WebElement Copy;
+  @FindBy(xpath = "//section//div[2]//button")                                                                          private WebElement Copy;
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
   //  Message
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement MessageIdAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement MessageNodeIdAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[3]")                                               private WebElement MessageTransactionsAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::td[1]")                                               private WebElement FirstMessagesId;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::td[1]")                                               private WebElement FirstTransactionsId;
-  @FindBy(xpath = "//*[@class='breadcrumb']")                                               private WebElement test;
+  @FindBy(xpath = "//section//thead//th[1]//span")                                                                      private WebElement MessageIdAssert;
+  @FindBy(xpath = "//section//thead//th[2]//span")                                                                      private WebElement MessageNodeIdAssert;
+  @FindBy(xpath = "//section//thead//th[3]//span")                                                                      private WebElement MessageTransactionsAssert;
+  @FindBy(xpath = "//section//td[1]")                                                                                   private WebElement FirstMessagesId;
+  @FindBy(xpath = "//section//td[1]")                                                                                   private WebElement FirstTransactionsId;
 
   private WebDriver driver;
   private WebDriverWait wait;
@@ -96,16 +94,19 @@ public class BlockPage {
   }
 
   public void sortingSccountsInBlock() {
-    wait.until(ExpectedConditions.visibilityOf(MessageIdAssert));
-    Assert.assertEquals("Id", MessageIdAssert.getText());
-    System.out.println("Assert - Message Id");
-    wait.until(ExpectedConditions.visibilityOf(MessageNodeIdAssert));
-    Assert.assertEquals("Node Id", MessageNodeIdAssert.getText());
-    System.out.println("Assert - Message Node Id");
-    wait.until(ExpectedConditions.visibilityOf(MessageTransactionsAssert));
-    Assert.assertEquals("Transactions", MessageTransactionsAssert.getText());
-    System.out.println("Assert - Message Transactions");
-
+    if(!driver.findElements(By.xpath("//section//thead//th[1]//span")).isEmpty()) {
+      wait.until(ExpectedConditions.visibilityOf(MessageIdAssert));
+      Assert.assertEquals("Id", MessageIdAssert.getText());
+      System.out.println("Assert - Message Id");
+      wait.until(ExpectedConditions.visibilityOf(MessageNodeIdAssert));
+      Assert.assertEquals("Node Id", MessageNodeIdAssert.getText());
+      System.out.println("Assert - Message Node Id");
+      wait.until(ExpectedConditions.visibilityOf(MessageTransactionsAssert));
+      Assert.assertEquals("Transactions", MessageTransactionsAssert.getText());
+      System.out.println("Assert - Message Transactions");
+    }else{
+      System.out.println("Skip >>>>> No message in Block");
+    }
     wait.until(ExpectedConditions.visibilityOf(Copy));
     Copy.click();
     System.out.println("Click - Copy");
@@ -115,35 +116,36 @@ public class BlockPage {
     wait.until(ExpectedConditions.visibilityOf(Copy));
     Copy.click();
     System.out.println("Click - Copy");
-    wait.until(ExpectedConditions.visibilityOf(MessageIdAssert));
-    MessageIdAssert.click();
-    System.out.println("Click - Messages Id");
-    String url=driver.getCurrentUrl();
-    System.out.println(url);
-
-    if(!driver.findElements(By.xpath("//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")).isEmpty()){
-      System.out.println("---------- Next&Previous_test ----------");
-      wait.until(ExpectedConditions.visibilityOf(Next));
-      Next.click();
-      System.out.println("Click - Next");
-      wait.until(ExpectedConditions.visibilityOf(Previous));
-      Previous.click();
-      System.out.println("Click - Previous");
-    }else{
-      System.out.println("---------- no_Next&Previous_test ----------");
-      System.out.println("Skip >>>>>");
-    }
-
-    if(!driver.findElements(By.xpath("//*[@class='table table-striped']//descendant::th[1]")).isEmpty()){
-      System.out.println("---------- MessageIdAssert_test ----------");
+    if(!driver.findElements(By.xpath("//section//thead//th[1]//span")).isEmpty()) {
       wait.until(ExpectedConditions.visibilityOf(MessageIdAssert));
       MessageIdAssert.click();
       System.out.println("Click - Messages Id");
-      url=driver.getCurrentUrl();
+      String url=driver.getCurrentUrl();
       System.out.println(url);
-    }else{
-      System.out.println("---------- no_MessageIdAssert_test ----------");
-      System.out.println("Skip >>>>>");
+      if(!driver.findElements(By.xpath("//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")).isEmpty()){
+        System.out.println("---------- Next&Previous_test ----------");
+        wait.until(ExpectedConditions.visibilityOf(Next));
+        Next.click();
+        System.out.println("Click - Next");
+        wait.until(ExpectedConditions.visibilityOf(Previous));
+        Previous.click();
+        System.out.println("Click - Previous");
+      }else{
+        System.out.println("---------- no_Next&Previous_test ----------");
+        System.out.println("Skip >>>>>");
+      }
+      if(!driver.findElements(By.xpath("//*[@class='table table-striped']//descendant::th[1]")).isEmpty()){
+        System.out.println("---------- MessageIdAssert_test ----------");
+        wait.until(ExpectedConditions.visibilityOf(MessageIdAssert));
+        MessageIdAssert.click();
+        System.out.println("Click - Messages Id");
+        url=driver.getCurrentUrl();
+        System.out.println(url);
+      }else{
+        System.out.println("---------- no_MessageIdAssert_test ----------");
+        System.out.println("Skip >>>>>");
+      }
+    }else{System.out.println("Skip >>>>>");
     }
   }
 

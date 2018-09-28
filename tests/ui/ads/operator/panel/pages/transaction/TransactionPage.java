@@ -1,4 +1,4 @@
-package ads.operator.panel.pages.transaction;
+package ui.ads.operator.panel.pages.transaction;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -32,13 +32,13 @@ public class TransactionPage {
   //Button
   @FindBy(xpath = "//*[contains(text(), 'Table')]")                                                                     private WebElement Table;
   @FindBy(xpath = "//*[contains(text(), 'Code')]")                                                                      private WebElement Code;
-  @FindBy(css = "[type='button']")                                                                                      private WebElement Copy;
+  @FindBy(xpath = "//section//div[2]//button")                                                                          private WebElement Copy;
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
   @FindBy(xpath = "//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")                     private WebElement ThreeDots;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement NodesId;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement Block;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[7]")                                               private WebElement Type;
+  @FindBy(xpath = "//section//thead//th[1]")                                                                            private WebElement NodesId;
+  @FindBy(xpath = "//section//thead//th[2]")                                                                            private WebElement Block;
+  @FindBy(xpath = "//section//thead//th[7]")                                                                            private WebElement Type;
   //  Accounts
   @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement AccountIdAssert;
   @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement AccountBalanceAssert;
@@ -94,8 +94,6 @@ public class TransactionPage {
     wait.until(ExpectedConditions.visibilityOf(FailedToFetchAssert));
     Assert.assertEquals("Failed to fetch", FailedToFetchAssert.getText());
     System.out.println("Assert - Failed to fetch");
-
-    copyCode();
   }
 
   public void sortingTransactions() {

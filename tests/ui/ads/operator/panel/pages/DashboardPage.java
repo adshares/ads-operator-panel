@@ -1,4 +1,4 @@
-package ads.operator.panel.pages;
+package ui.ads.operator.panel.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -12,51 +12,45 @@ import org.testng.Assert;
 import ui.ads.operator.panel.tools.Maps;
 
 public class DashboardPage {
-
 //  get:
   @FindBy(xpath = "//*[contains(@href,'/blockexplorer/nodes/')]")                                                       private WebElement NodesId;
-
   @FindBy(xpath = "//*[contains(@href,'/blockexplorer/blocks/')]")                                                      private WebElement BlocksId;
   @FindBy(xpath = "//*[contains(@href,'/blockexplorer/transactions/')]")                                                private WebElement TransactionsId;
+  @FindBy(xpath = "//section//descendant::table[3]//td[2]//a[1]")                                                       private WebElement TransactionsBlock;
+  @FindBy(xpath = "//section//descendant::table[3]//td[3]//a[1]")                                                       private WebElement TransactionsMessage;
+  @FindBy(xpath = "//section//descendant::table[3]//td[4]//a[1]")                                                       private WebElement TransactionsFrom;
+  @FindBy(xpath = "//section//descendant::table[3]//td[5]//a[1]")                                                       private WebElement TransactionsTo;
+
   @FindBy(xpath = "//*[@href='/blockexplorer/nodes']")                                                                  private WebElement ViewAllNodes;
   @FindBy(xpath = "//*[@href='/blockexplorer/blocks']")                                                                 private WebElement ViewAllBlocks;
   @FindBy(xpath = "//*[@href='/blockexplorer/transactions']")                                                           private WebElement ViewAllTransactions;
-  @FindBy(css = "[class='block_id']")                                                                                   private WebElement TransactionsBlock;
-  @FindBy(css = "[class='message_id']")                                                                                 private WebElement TransactionsMessage;
-  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::td[3]//descendant::a[1]")  private WebElement TransactionsMessage2;
-  @FindBy(css = "[class='sender_address']")                                                                             private WebElement TransactionsFrom;
-  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::td[4]//descendant::a[1]")  private WebElement TransactionsFrom2;
-  @FindBy(css = "[class='target_address']")                                                                             private WebElement TransactionsTo;
-  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::td[5]//descendant::a[1]")  private WebElement TransactionsTo2;
-  @FindBy(css = "[class='col-md-9']")                                                                                   private WebElement test2;
-  @FindBy(xpath = "//*[@class='row styled__HeaderWrapper-kockOB gCffOb']//descendant::span[3]")                         private WebElement blockexplorer;
-  @FindBy(xpath = "//*[@class='breadcrumb']//descendant::a[1]")                                                         private WebElement home;
-  @FindBy(xpath = "//*[@class='breadcrumb']//descendant::a[2]")                                                         private WebElement homeBlockexplorer;
+
+  @FindBy(xpath = "//body//header//nav//a")                                                                             private WebElement blockexplorer;
+  @FindBy(xpath = "//body//li[1]")                                                                                      private WebElement home;
+  @FindBy(xpath = "//body//li[2]")                                                                                      private WebElement homeBlockexplorer;
   @FindBy(id="search")                                                                                                  private WebElement search;
 //  Assert
-@FindBy(xpath = "//*[contains(text(), 'Failed to fetch')]")                                                             private WebElement AssertFailedToFetch;
-  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::button[1]")                    private WebElement AssertNodes;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[1]//descendant::th[1]")  private WebElement AssertNodes_Id;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[1]//descendant::th[2]")  private WebElement AssertNodes_Accounts;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[1]//descendant::th[3]")  private WebElement AssertNodes_Messages;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[1]//descendant::th[4]")  private WebElement AssertNodes_Balance;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[1]//descendant::th[5]")  private WebElement AssertNodes_Status;
-  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::button[2]")                    private WebElement AssertBlocks;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[2]//descendant::th[1]")  private WebElement AssertBlocks_Id;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[2]//descendant::th[2]")  private WebElement AssertBlocks_Messages;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[2]//descendant::th[3]")  private WebElement AssertBlocks_Transactions;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[2]//descendant::th[4]")  private WebElement AssertBlocks_Time;
-  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::button[3]")                    private WebElement AssertLatestTransactions;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[1]")  private WebElement AssertLatestTransactions_Id;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[2]")  private WebElement AssertLatestTransactions_Block;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[3]")  private WebElement AssertLatestTransactions_Message;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[4]")  private WebElement AssertLatestTransactions_From;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[5]")  private WebElement AssertLatestTransactions_To;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[6]")  private WebElement AssertLatestTransactions_Amount;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[7]")  private WebElement AssertLatestTransactions_Type;
-    @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::table[3]//descendant::th[8]")  private WebElement AssertLatestTransactions_Time;
-
-  @FindBy(xpath = "//*[@class='styled__BlockexplorerWrapper-kqUyRv byCFeK']//descendant::button[1]")                    private WebElement Assert_1;
+  @FindBy(xpath = "//*[contains(text(), 'Failed to fetch')]")                                                           private WebElement AssertFailedToFetch;
+    @FindBy(xpath = "//section//descendant::button[1]")                                                                 private WebElement AssertNodes;
+      @FindBy(xpath = "//section//descendant::table[1]//descendant::th[1]")                                             private WebElement AssertNodes_Id;
+      @FindBy(xpath = "//section//descendant::table[1]//descendant::th[2]")                                             private WebElement AssertNodes_Accounts;
+      @FindBy(xpath = "//section//descendant::table[1]//descendant::th[3]")                                             private WebElement AssertNodes_Messages;
+      @FindBy(xpath = "//section//descendant::table[1]//descendant::th[4]")                                             private WebElement AssertNodes_Balance;
+      @FindBy(xpath = "//section//descendant::table[1]//descendant::th[5]")                                             private WebElement AssertNodes_Status;
+    @FindBy(xpath = "//section//descendant::button[2]")                                                                 private WebElement AssertBlocks;
+      @FindBy(xpath = "//section//descendant::table[2]//descendant::th[1]")                                             private WebElement AssertBlocks_Id;
+      @FindBy(xpath = "//section//descendant::table[2]//descendant::th[2]")                                             private WebElement AssertBlocks_Messages;
+      @FindBy(xpath = "//section//descendant::table[2]//descendant::th[3]")                                             private WebElement AssertBlocks_Transactions;
+      @FindBy(xpath = "//section//descendant::table[2]//descendant::th[4]")                                             private WebElement AssertBlocks_Time;
+    @FindBy(xpath = "//section//descendant::button[3]")                                                                 private WebElement AssertLatestTransactions;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[1]")                                             private WebElement AssertLatestTransactions_Id;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[2]")                                             private WebElement AssertLatestTransactions_Block;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[3]")                                             private WebElement AssertLatestTransactions_Message;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[4]")                                             private WebElement AssertLatestTransactions_From;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[5]")                                             private WebElement AssertLatestTransactions_To;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[6]")                                             private WebElement AssertLatestTransactions_Amount;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[7]")                                             private WebElement AssertLatestTransactions_Type;
+      @FindBy(xpath = "//section//descendant::table[3]//descendant::th[8]")                                             private WebElement AssertLatestTransactions_Time;
 
   private WebDriver driver;
   private WebDriverWait wait;
@@ -153,8 +147,8 @@ public class DashboardPage {
   }
 
   public void firstFrom() {
-    wait.until(ExpectedConditions.visibilityOf(TransactionsFrom2));
-    TransactionsFrom2.click();
+    wait.until(ExpectedConditions.visibilityOf(TransactionsFrom));
+    TransactionsFrom.click();
     System.out.println("Click - TransactionsFrom2");
     url();
   }
@@ -168,15 +162,15 @@ public class DashboardPage {
   }
 
   public void firstMessage() {
-    wait.until(ExpectedConditions.visibilityOf(TransactionsMessage2));
-    TransactionsMessage2.click();
+    wait.until(ExpectedConditions.visibilityOf(TransactionsMessage));
+    TransactionsMessage.click();
     System.out.println("Click - TransactionsMessage");
     url();
   }
 
   public void firstTo() {
-    wait.until(ExpectedConditions.visibilityOf(TransactionsTo2));
-    TransactionsTo2.click();
+    wait.until(ExpectedConditions.visibilityOf(TransactionsTo));
+    TransactionsTo.click();
     System.out.println("Click - TransactionsTo");
     url();
   }

@@ -1,21 +1,23 @@
-package ads.operator.panel;
+package ui.ads.operator.panel;
 
-import ads.operator.panel.pages.DashboardPage;
-import ads.operator.panel.pages.block.BlockPage;
-import ads.operator.panel.pages.node.NodePage;
-import ads.operator.panel.pages.transaction.FromPage;
-import ads.operator.panel.pages.transaction.MessagePage;
-import ads.operator.panel.pages.transaction.ToPage;
-import ads.operator.panel.pages.transaction.TransactionPage;
+import ui.ads.operator.panel.pages.DashboardPage;
+import ui.ads.operator.panel.pages.block.BlockPage;
+import ui.ads.operator.panel.pages.node.NodePage;
+import ui.ads.operator.panel.pages.transaction.FromPage;
+import ui.ads.operator.panel.pages.transaction.MessagePage;
+import ui.ads.operator.panel.pages.transaction.ToPage;
+import ui.ads.operator.panel.pages.transaction.TransactionPage;
+import ui.ads.operator.panel.tools.Maps;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ui.ads.operator.panel.setup.BrowserTestCase;
 
 public class Blockexplorer extends BrowserTestCase {
 
-
-  private String url = "https://operator.e11.click/blockexplorer";
+  private String url_panel = "https://operator.e11.click/blockexplorer";
   private String url_wiremock = "http://localhost:3000/blockexplorer";
+  private String url=url_wiremock;
+
   private String search_node_0 = "F000";
   private String search_node_1 = "0001";
   private String search_node_3 = "0003";
@@ -39,6 +41,8 @@ public class Blockexplorer extends BrowserTestCase {
 
   @BeforeTest
   public void setUp() {
+    Maps.createUrl();
+    Maps.url("url", url);
   }
 
   @Test
@@ -46,12 +50,6 @@ public class Blockexplorer extends BrowserTestCase {
     System.out.println("---------- dashboard ----------");
     dashboardPage = new DashboardPage(driver);
     dashboardPage.dashboard(url);
-  }
-  @Test
-  public void dashboard_WM() {
-    System.out.println("---------- dashboard_wiremock ----------");
-    dashboardPage = new DashboardPage(driver);
-    dashboardPage.dashboard(url_wiremock);
   }
 
   @Test
