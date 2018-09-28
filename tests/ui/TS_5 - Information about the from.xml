@@ -3,7 +3,7 @@
 <suite name="TS_5 - Information about the from" parallel="methods" thread-count="1" verbose="3">
   <test name="TC_19" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="firstFrom"/>
@@ -14,7 +14,7 @@
   </test>
   <test name="TC_20" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="firstFrom"/>
@@ -25,7 +25,7 @@
   </test>
   <test name="TC_21" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="fromSearchn"/>
@@ -35,7 +35,7 @@
   </test>
   <test name="TC_22" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="fromSearchnNoPosition"/>

@@ -31,10 +31,10 @@ public class NodePage {
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
   //  Accounts
-  @FindBy(xpath = "//section//th[1]")                                                                       private WebElement AccountIdAssert;
-  @FindBy(xpath = "//section//th[2]")                                                                       private WebElement AccountBalanceAssert;
-  @FindBy(xpath = "//section//th[3]")                                                                       private WebElement AccountStatusAssert;
-  @FindBy(xpath = "//section//th[4]")                                                                       private WebElement AccountPublicKeyAssert;
+  @FindBy(xpath = "//section//th[1]")                                                                                   private WebElement AccountIdAssert;
+  @FindBy(xpath = "//section//th[2]")                                                                                   private WebElement AccountBalanceAssert;
+  @FindBy(xpath = "//section//th[3]")                                                                                   private WebElement AccountStatusAssert;
+  @FindBy(xpath = "//section//th[4]")                                                                                   private WebElement AccountPublicKeyAssert;
 
 
   private WebDriver driver;

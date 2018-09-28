@@ -5,7 +5,7 @@
 
   <test name="TC_WM_25" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard_WM"/>
           <include name="homeBlockexplorer"/>

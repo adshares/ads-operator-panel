@@ -40,10 +40,10 @@ public class TransactionPage {
   @FindBy(xpath = "//section//thead//th[2]")                                                                            private WebElement Block;
   @FindBy(xpath = "//section//thead//th[7]")                                                                            private WebElement Type;
   //  Accounts
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement AccountIdAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement AccountBalanceAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[3]")                                               private WebElement AccountStatusAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[4]")                                               private WebElement AccountPublicKeyAssert;
+  @FindBy(xpath = "//section//th[1]")                                                                                   private WebElement AccountIdAssert;
+  @FindBy(xpath = "//section//th[2]")                                                                                   private WebElement AccountBalanceAssert;
+  @FindBy(xpath = "//section//th[3]")                                                                                   private WebElement AccountStatusAssert;
+  @FindBy(xpath = "//section//th[4]")                                                                                   private WebElement AccountPublicKeyAssert;
 
 
   private WebDriver driver;

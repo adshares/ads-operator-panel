@@ -17,7 +17,8 @@ public class FromPage {
   @FindBy(xpath = "//*[contains(text(), 'Status')]")                                                                    private WebElement StatusAssert;
   @FindBy(xpath = "//*[contains(text(), 'Public Key')]")                                                                private WebElement PublicKeyAssert;
   @FindBy(xpath = "//*[contains(text(), 'Last Active Time')]")                                                          private WebElement LastActiveTimeAssert;
-  @FindBy(xpath = "//*[@class='list-group']//descendant::li[6]//descendant::span[2]")                                   private WebElement TimeAssert;
+  @FindBy(xpath = "//tr[6]//span")                                                                                      private WebElement TimeAssert;
+  @FindBy(xpath = "//li[6]//span//span")                                                                                private WebElement TimeAssert2;
   @FindBy(xpath = "//*[contains(@href,'sort=id&order=desc')]")                                                          private WebElement SortIdOrderDescAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=id&order=asc')]")                                                           private WebElement SortIdOrderAscAssert;
   @FindBy(xpath = "//*[contains(@href,'sort=block_id&order=desc')]")                                                    private WebElement SortBlockOrderDescAssert;
@@ -28,18 +29,18 @@ public class FromPage {
   //Button
   @FindBy(xpath = "//*[contains(text(), 'Table')]")                                                                     private WebElement Table;
   @FindBy(xpath = "//*[contains(text(), 'Code')]")                                                                      private WebElement Code;
-  @FindBy(xpath = "//section//div[2]//button")                                                                          private WebElement Copy;
+  @FindBy(xpath = "//*[contains(text(), 'Code')]")                                                                          private WebElement Copy;
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
-  @FindBy(xpath = "//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")                     private WebElement ThreeDots;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement NodesId;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement Block;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[7]")                                               private WebElement Type;
+  @FindBy(xpath = "//*[contains(text(), '...')]")                                                                       private WebElement ThreeDots;
+  @FindBy(xpath = "//section//thead//th[1]")                                                                            private WebElement NodesId;
+  @FindBy(xpath = "//section//thead//th[2]")                                                                            private WebElement Block;
+  @FindBy(xpath = "//section//thead//th[7]")                                                                            private WebElement Type;
   //  Accounts
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement AccountIdAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement AccountBalanceAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[3]")                                               private WebElement AccountStatusAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[4]")                                               private WebElement AccountPublicKeyAssert;
+  @FindBy(xpath = "//section//th[1]")                                                                                   private WebElement AccountIdAssert;
+  @FindBy(xpath = "//section//th[2]")                                                                                   private WebElement AccountBalanceAssert;
+  @FindBy(xpath = "//section//th[3]")                                                                                   private WebElement AccountStatusAssert;
+  @FindBy(xpath = "//section//th[4]")                                                                                   private WebElement AccountPublicKeyAssert;
 
 
   private WebDriver driver;
@@ -67,8 +68,13 @@ public class FromPage {
     wait.until(ExpectedConditions.visibilityOf(LastActiveTimeAssert));
     Assert.assertEquals("Last Active Time", LastActiveTimeAssert.getText());
     System.out.print("Last Active Time, ");
-    wait.until(ExpectedConditions.visibilityOf(TimeAssert));
-    Assert.assertEquals("Time", TimeAssert.getText());
+    if(!driver.findElements(By.xpath("//tr[6]//span")).isEmpty()){
+      wait.until(ExpectedConditions.visibilityOf(TimeAssert));
+      Assert.assertEquals("Time", TimeAssert.getText());
+    }else{
+      wait.until(ExpectedConditions.visibilityOf(TimeAssert2));
+      Assert.assertEquals("Time", TimeAssert2.getText());
+    }
     System.out.println("Time");
     copyCode();
   }
@@ -120,7 +126,7 @@ public class FromPage {
 
   }
   private void nextPrevious() {
-  if(!driver.findElements(By.xpath("//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")).isEmpty()){
+  if(!driver.findElements(By.xpath("//*[contains(text(), '...')]")).isEmpty()){
     System.out.println("---------- next page ----------");
     String url=driver.getCurrentUrl();
     System.out.println(url);

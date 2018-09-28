@@ -1,5 +1,6 @@
 package ui.ads.operator.panel.pages.transaction;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,14 +31,14 @@ public class MessagePage {
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
   @FindBy(xpath = "//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")                     private WebElement ThreeDots;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement NodesId;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement Block;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[7]")                                               private WebElement Type;
+  @FindBy(xpath = "//section//thead//th[1]")                                                                            private WebElement NodesId;
+  @FindBy(xpath = "//section//thead//th[2]")                                                                            private WebElement Block;
+  @FindBy(xpath = "//section//thead//th[7]")                                                                            private WebElement Type;
   //  Accounts
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[1]")                                               private WebElement AccountIdAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[2]")                                               private WebElement AccountBalanceAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[3]")                                               private WebElement AccountStatusAssert;
-  @FindBy(xpath = "//*[@class='table table-striped']//descendant::th[4]")                                               private WebElement AccountPublicKeyAssert;
+  @FindBy(xpath = "//section//th[1]")                                                                                   private WebElement AccountIdAssert;
+  @FindBy(xpath = "//section//th[2]")                                                                                   private WebElement AccountBalanceAssert;
+  @FindBy(xpath = "//section//th[3]")                                                                                   private WebElement AccountStatusAssert;
+  @FindBy(xpath = "//section//th[4]")                                                                                   private WebElement AccountPublicKeyAssert;
 
 
   private WebDriver driver;
@@ -72,8 +73,6 @@ public class MessagePage {
     wait.until(ExpectedConditions.visibilityOf(FailedToFetchAssert));
     Assert.assertEquals("Failed to fetch", FailedToFetchAssert.getText());
     System.out.println("Assert - Failed to fetch");
-
-    copyCode();
   }
 
   public void sortingMessages() {
@@ -138,18 +137,20 @@ public class MessagePage {
 
 
   public void sortingTransactionsInMessage() {
-    wait.until(ExpectedConditions.visibilityOf(NodesId));
-    NodesId.click();
-    System.out.println("Assert 1 - SortIdOrderAsc");
-    String url=driver.getCurrentUrl();
-    System.out.println(url);
-    wait.until(ExpectedConditions.visibilityOf(SortIdOrderAscAssert));
-    System.out.println("Assert 2 - SortIdOrderDesc");
-    wait.until(ExpectedConditions.visibilityOf(NodesId));
-    NodesId.click();
-    url=driver.getCurrentUrl();
-    System.out.println(url);
-
+    if(!driver.findElements(By.xpath("//*[contains(@href,'sort=id&order=desc')]")).isEmpty()){
+      wait.until(ExpectedConditions.visibilityOf(NodesId));
+      NodesId.click();
+    }else{
+      System.out.println("Skip >>>>> Click - NodeId");
     }
+    System.out.println(driver.getCurrentUrl());
+    wait.until(ExpectedConditions.visibilityOf(SortIdOrderAscAssert));
+    wait.until(ExpectedConditions.visibilityOf(NodesId));
+    NodesId.click();
+    System.out.println(driver.getCurrentUrl());
+    wait.until(ExpectedConditions.visibilityOf(NodesId));
+    NodesId.click();
+    System.out.println(driver.getCurrentUrl());
+  }
 
 }

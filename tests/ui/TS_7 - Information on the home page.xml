@@ -3,7 +3,7 @@
 <suite name="TS_7 - Information on the home page" parallel="methods" thread-count="1" verbose="3">
   <test name="TC_24" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="detailedDataHomePage"/>
@@ -13,7 +13,7 @@
   </test>
   <test name="TC_25" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="homeBlockexplorer"/>
@@ -23,7 +23,7 @@
   </test>
   <test name="TC_26" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="searchCorrect"/>
@@ -33,7 +33,7 @@
   </test>
   <test name="TC_27" group-by-instances="true">
     <classes>
-      <class name="ads.operator.panel.Blockexplorer">
+      <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
           <include name="dashboard"/>
           <include name="searchInCorrect"/>
