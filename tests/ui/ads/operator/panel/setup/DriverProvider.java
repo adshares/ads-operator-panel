@@ -40,7 +40,8 @@ class DriverProvider {
     if (driver == null) {
       System.setProperty("webdriver.chrome.driver", getWebDriverFile("chromedriver").getAbsolutePath());
       ChromeOptions chromeOptions = new ChromeOptions();
-      chromeOptions.addArguments("--start-maximized");
+      chromeOptions.addArguments("--headless");
+//       chromeOptions.addArguments("--start-maximized");
       driver = new ChromeDriver(chromeOptions);
     }
     return driver;
