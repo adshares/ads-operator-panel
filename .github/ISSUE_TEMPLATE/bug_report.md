@@ -26,6 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment (please complete the following information):**
 
  - OS name and version: [e.g. Ubuntu 18.04 x64]
+ - Browser name and version: [e.g. Chrome 69.0.3497.92]
  - API URL [e.g. http://ads-operator.adshares.net/]
 
 **Additional context**
