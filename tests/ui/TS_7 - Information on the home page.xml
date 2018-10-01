@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TS_7 - Information on the home page" parallel="methods" thread-count="1" verbose="3">
+  <test name="TC_24" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="detailedDataHomePage"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_25" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="homeBlockexplorer"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_26" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="searchCorrect"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_27" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="searchInCorrect"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
+
