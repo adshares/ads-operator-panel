@@ -15,6 +15,12 @@
 [![Build Status](https://travis-ci.org/adshares/ads-operator-panel.svg?branch=master)](https://travis-ci.org/adshares/ads-operator-panel#master "Master")
 [![Build Status](https://travis-ci.org/adshares/ads-operator-panel.svg?branch=develop)](https://travis-ci.org/adshares/ads-operator-panel#develop "Develop")
 
+ADS Operator Panel is an application (SPA) to explore ADS Blockchain. It allows to:
+* browsing nodes and accounts
+* browsing blocks and messages
+* browsing transactions
+* searching by nodes, accounts, blocks, messages, transactions
+
 
 ## Getting Started
 
