@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/v1/blockexplorer/blocks/9[^.]{7}/messages\\?.*"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": []
+  }
+}

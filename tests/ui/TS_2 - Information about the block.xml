@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TS_2 - Information about the block" parallel="methods" thread-count="1" verbose="3">
+  <test name="TC_6" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="firstBlock"/>
+          <include name="detailedDataBlock"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_7" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="firstBlock"/>
+          <include name="sortingSccountsInBlock"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_8" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="searchForABlock"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_9" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="blockSearchnNoPosition"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="TC_10" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="viewAllBlock"/>
+          <include name="sortingBlocks"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
+

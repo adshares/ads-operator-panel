@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern":
+      "/api/v1/blockexplorer/accounts/[0-8]{1}[^.]{3}-[^.]{8}-[^.]{4}"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": {
+      "address": "0001-00000000-9B6F",
+      "balance": 49720605984886,
+      "hash":
+        "2AFD530307AEB00EC8D70812A09C14A5628C5303B0572B837362F81C2029A981",
+      "local_change": "2018-09-07T15:41:20+02:00",
+      "msid": 7,
+      "paired_node": 0,
+      "public_key":
+        "1F24B5CD538D30BED7657F86B850BFE63A6226E97F25C62F80526AC1D4254BE0",
+      "remote_change": "2018-09-11T10:17:04+02:00",
+      "status": 0,
+      "time": "2018-09-07T15:42:28+02:00",
+      "id": "0001-00000000-9B6F"
+    }
+  }
+}
