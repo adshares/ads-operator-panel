@@ -24,7 +24,7 @@ To submit the patch open a new [GitHub pull request][pr].
 Some things that will increase the chance that your pull request is accepted:
 
 - Write tests.
-- Follow [PSR2 coding style guide][style].
+- Follow [ESLint code style][style] (Look at config file: `.eslintrc.js`).
 - Write a [good commit message][commit].
 - Ensure the PR description clearly describes the problem and solution. 
 - Include the relevant issue number if applicable.
