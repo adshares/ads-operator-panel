@@ -28,8 +28,8 @@ Clone the repo: `git@github.com:adshares/ads-operator-panel.git` and follow the 
  
 
 ## Documentation
-* [Installation](https://github.com/adshares/ads-operator-operator/wiki/Installation)
-* [Quality](https://github.com/adshares/ads-operator-operator/wiki/Quality)
+* [Installation](https://github.com/adshares/ads-operator-panel/wiki/Installation)
+* [Quality](https://github.com/adshares/ads-operator-panel/wiki/Quality)
 
 
 ## Contributing
