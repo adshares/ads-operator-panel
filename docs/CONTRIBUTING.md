@@ -24,7 +24,7 @@ To submit the patch open a new [GitHub pull request][pr].
 Some things that will increase the chance that your pull request is accepted:
 
 - Write tests.
-- Follow [ESLint code style][style]
+- Follow [ESLint code style][style-eslint], [Prettier code formatter][style-prettier], [Stylelint linter][style-stylelint]
 - Write a [good commit message][commit].
 - Ensure the PR description clearly describes the problem and solution. 
 - Include the relevant issue number if applicable.
@@ -35,5 +35,7 @@ Some things that will increase the chance that your pull request is accepted:
 [telegram]: https://t.me/adshares
 [tech_email]: mailto:tech@adshares.net
 [pr]: https://github.com/adshares/ads-operator-panel/compare/
-[style]: https://eslint.org/
+[style-eslint]: https://eslint.org/
+[style-prettier]: https://github.com/prettier/prettier 
+[style-stylelint]: https://stylelint.io/
 [commit]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
