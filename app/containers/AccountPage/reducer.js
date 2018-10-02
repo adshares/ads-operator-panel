@@ -33,7 +33,7 @@ function accountPageReducer(state = initialState, action) {
       return state
         .setIn(['account', 'loading'], true)
         .setIn(['account', 'error'], false)
-        .setIn(['account', 'data'], {});
+        .setIn(['account', 'data'], fromJS({}));
     case LOAD_ACCOUNT_SUCCESS:
       return state
         .setIn(['account', 'loading'], false)
@@ -43,12 +43,12 @@ function accountPageReducer(state = initialState, action) {
       return state
         .setIn(['account', 'loading'], false)
         .setIn(['account', 'error'], fromJS(action.error))
-        .setIn(['account', 'data'], {});
+        .setIn(['account', 'data'], fromJS({}));
     case LOAD_TRANSACTIONS:
       return state
         .setIn(['transactions', 'loading'], true)
         .setIn(['transactions', 'error'], false)
-        .setIn(['transactions', 'data'], []);
+        .setIn(['transactions', 'data'], fromJS([]));
     case LOAD_TRANSACTIONS_SUCCESS:
       return state
         .setIn(['transactions', 'loading'], false)
@@ -58,7 +58,7 @@ function accountPageReducer(state = initialState, action) {
       return state
         .setIn(['transactions', 'loading'], false)
         .setIn(['transactions', 'error'], fromJS(action.error))
-        .setIn(['transactions', 'data'], []);
+        .setIn(['transactions', 'data'], fromJS([]));
     default:
       return state;
   }

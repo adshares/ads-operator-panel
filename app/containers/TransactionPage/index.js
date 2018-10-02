@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -18,7 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadTransaction } from './actions';
-import DetailView from '../../components/DetailView';
+import DetailView from '../../components/organisms/DetailView';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransactionPage extends React.PureComponent {
@@ -28,6 +29,15 @@ export class TransactionPage extends React.PureComponent {
       this.props.dispatch(loadTransaction(id));
     }
   }
+
+  componentDidUpdate(prevProps) {
+    const newId = this.props.match.params.id;
+    const oldId = prevProps.match.params.id;
+    if (oldId !== newId) {
+      this.props.dispatch(loadTransaction(newId));
+    }
+  }
+
   render() {
     const { id } = this.props.match.params;
 
@@ -37,6 +47,7 @@ export class TransactionPage extends React.PureComponent {
       message_id: <FormattedMessage {...messages.fieldMessageId} />,
       sender_address: <FormattedMessage {...messages.fieldSenderAddress} />,
       target_address: <FormattedMessage {...messages.fieldTargetAddress} />,
+      amount: <FormattedMessage {...messages.fieldAmount} />,
       sender_fee: <FormattedMessage {...messages.fieldSenderFee} />,
       size: <FormattedMessage {...messages.fieldSize} />,
       type: <FormattedMessage {...messages.fieldType} />,
@@ -64,6 +75,8 @@ export class TransactionPage extends React.PureComponent {
           data={this.props.transaction.data}
           loading={this.props.transaction.loading}
           error={this.props.transaction.error}
+          breakpoint={this.props.breakpoint}
+          tableMinWidth={config.tablesMinWidth.tableLg}
         />
       </div>
     );
@@ -74,10 +87,12 @@ TransactionPage.propTypes = {
   match: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   transaction: PropTypes.object.isRequired,
+  breakpoint: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   transaction: makeSelectTransaction(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {

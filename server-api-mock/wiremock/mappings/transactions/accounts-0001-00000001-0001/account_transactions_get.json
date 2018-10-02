@@ -1,0 +1,216 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern":
+      "/api/v1/blockexplorer/accounts/[0-8]{1}[^.]{3}-[^.]{8}-[^.]{4}/transactions\\?.*"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": [
+      {
+        "block_id": "5B965200",
+        "id": "0003:00000C55:0001",
+        "message_id": "0003:00000C55",
+        "type": "send_one",
+        "size": 125,
+        "amount": "5391141",
+        "message": 0,
+        "msg_id": "3170",
+        "node": 3,
+        "sender_address": "0003-00000002-FFAE",
+        "sender_fee": 10000,
+        "signature":
+          "D836A3E62A60DA9B84C5F939AE9856BFB31992E06E2528AF06E0B8843F270EF46E743A0015F6F6E581DDC745512FB0A0474147941800497B115D61318977A505",
+        "target_address": "001B-00000000-D99B",
+        "target_node": 27,
+        "target_user": 0,
+        "time": "2018-09-10T13:17:06+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0004:00000C99:0001",
+        "message_id": "0004:00000C99",
+        "type": "send_one",
+        "size": 125,
+        "amount": "4279756",
+        "message": 0,
+        "msg_id": "3249",
+        "node": 4,
+        "sender_address": "0004-00000002-987A",
+        "sender_fee": 10000,
+        "signature":
+          "1E2A7AEE9CBCCC755DB9CE413EC948D807BB2FD6F171824F960F66553D75E2067227C9A3E7D34849E48B3A979A5E1E9378D7C8C462C063ECA05A3D43117FB20C",
+        "target_address": "0009-00000000-9942",
+        "target_node": 9,
+        "target_user": 0,
+        "time": "2018-09-10T13:16:16+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0006:00000C49:0001",
+        "message_id": "0006:00000C49",
+        "type": "send_one",
+        "size": 125,
+        "amount": "7834844",
+        "message": 0,
+        "msg_id": "3175",
+        "node": 6,
+        "sender_address": "0006-00000002-DCF9",
+        "sender_fee": 10000,
+        "signature":
+          "9D8B00B4F96EB047881C15DED7275CC50BAE24E98CC720B59AA5104C5D34B77A0749500C637FF0E19CF188253151FFB7B6303D0A215CF818AAEBD38AE4AF0102",
+        "target_address": "0011-00000003-AF56",
+        "target_node": 17,
+        "target_user": 3,
+        "time": "2018-09-10T13:17:45+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0007:00000D45:0001",
+        "message_id": "0007:00000D45",
+        "type": "send_one",
+        "size": 125,
+        "amount": "14192191",
+        "message": 0,
+        "msg_id": "3408",
+        "node": 7,
+        "sender_address": "0007-00000002-76A8",
+        "sender_fee": 14192,
+        "signature":
+          "65051E7E803F8E64929538427F9DB3C5F657834488877F4BFAA6C2D1E156E68F24F22068D55FB22D82DBB3C291743852D03CAE41B5F1911CDE8E15D756F4980F",
+        "target_address": "0016-00000002-D8A3",
+        "target_node": 22,
+        "target_user": 2,
+        "time": "2018-09-10T13:16:48+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0008:00000C75:0001",
+        "message_id": "0008:00000C75",
+        "type": "send_one",
+        "size": 125,
+        "amount": "2244471",
+        "message": 0,
+        "msg_id": "3216",
+        "node": 8,
+        "sender_address": "0008-00000002-1351",
+        "sender_fee": 10000,
+        "signature":
+          "F875125B83D4EDE009DEF82D440CE989D293CC6796D1D8F89C4A14C58DFAFE2EAA1C954BFE86D4AEC1064A7BE0A750B9061EF6CDCF2CF63EBCE2F413A9395300",
+        "target_address": "0019-00000000-9D18",
+        "target_node": 25,
+        "target_user": 0,
+        "time": "2018-09-10T13:16:15+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0008:00000C76:0001",
+        "message_id": "0008:00000C76",
+        "type": "send_one",
+        "size": 125,
+        "amount": "9668043",
+        "message": 0,
+        "msg_id": "3217",
+        "node": 8,
+        "sender_address": "0008-00000002-1351",
+        "sender_fee": 10000,
+        "signature":
+          "8FDEBDEE61A12BF2DFC7634D39B88A53B56F037F6E7C2483BDE594D6052DEABAEB498F26BDA0A2D6C86A35B964CC73F05116C01CE9CA5370751131543951480C",
+        "target_address": "000A-00000002-57D2",
+        "target_node": 10,
+        "target_user": 2,
+        "time": "2018-09-10T13:16:54+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0008:00000C77:0001",
+        "message_id": "0008:00000C77",
+        "type": "send_one",
+        "size": 125,
+        "amount": "1393466",
+        "message": 0,
+        "msg_id": "3218",
+        "node": 8,
+        "sender_address": "0008-00000002-1351",
+        "sender_fee": 10000,
+        "signature":
+          "93056D97167598D037ECE3CF93DB3F508C654E73EABBE4CCCC42248DC29197BA39FABC592231DFA12978E686F8ED3FCC5BF91E23AEE770D5382D6C6C33220702",
+        "target_address": "001C-00000000-BE4F",
+        "target_node": 28,
+        "target_user": 0,
+        "time": "2018-09-10T13:17:04+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0008:00000C78:0001",
+        "message_id": "0008:00000C78",
+        "type": "send_one",
+        "size": 125,
+        "amount": "11539653",
+        "message": 0,
+        "msg_id": "3219",
+        "node": 8,
+        "sender_address": "0008-00000002-1351",
+        "sender_fee": 11538,
+        "signature":
+          "78FFAA9119BE5D23ADDDCE44FAB8288867249162F76EA46C8D6097219C13BDFDD5A2E94403F2C040F43C002B4DBCFD9CCB9EEF1CAB553E904CB2DD9EEFA09505",
+        "target_address": "000F-00000000-54C7",
+        "target_node": 15,
+        "target_user": 0,
+        "time": "2018-09-10T13:17:10+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "0009:00000C3D:0001",
+        "message_id": "0009:00000C3D",
+        "type": "send_one",
+        "size": 125,
+        "amount": "4123539",
+        "message": 0,
+        "msg_id": "3153",
+        "node": 9,
+        "sender_address": "0009-00000002-B900",
+        "sender_fee": 10000,
+        "signature":
+          "5F5A20847E093C1249673B282995D72C98034EEDDEFC8365FAB1C84A83625C10915FE02395B1F2AAF134503ED26D7AD53F0516699819A767D08B96A513E88903",
+        "target_address": "0003-00000000-DFEC",
+        "target_node": 3,
+        "target_user": 0,
+        "time": "2018-09-10T13:16:06+02:00",
+        "user": 2
+      },
+      {
+        "block_id": "5B965200",
+        "id": "000A:00000BF8:0001",
+        "message_id": "000A:00000BF8",
+        "type": "send_one",
+        "size": 125,
+        "amount": "1435317",
+        "message": 0,
+        "msg_id": "3080",
+        "node": 10,
+        "sender_address": "000A-00000002-57D2",
+        "sender_fee": 10000,
+        "signature":
+          "6AB9D730A3F9385AFFA58C6CCCBDA603A7EFC924A0C72C660D6E65CCAB2BF318B25295A51840B01BD14009DC689696BAD09486882FB3F4F14C9850A12C36E508",
+        "target_address": "0017-00000002-72F2",
+        "target_node": 23,
+        "target_user": 2,
+        "time": "2018-09-10T13:16:43+02:00",
+        "user": 2
+      }
+    ]
+  }
+}

@@ -39,9 +39,21 @@ export default defineMessages({
     id: 'app.containers.NodePage.fieldStatus',
     defaultMessage: 'Status',
   },
+  fieldIp: {
+    id: 'app.containers.NodePage.fieldIp',
+    defaultMessage: 'Ip',
+  },
+  fieldPublicKey: {
+    id: 'app.containers.NodePage.fieldPublicKey',
+    defaultMessage: 'Public Key',
+  },
+  fieldMtim: {
+    id: 'app.containers.NodePage.fieldMtim',
+    defaultMessage: 'Last Message Time',
+  },
   accountTabTitle: {
     id: 'app.containers.NodePage.accountTabTitle',
-    defaultMessage: 'Account',
+    defaultMessage: 'Accounts',
   },
   accountColumnId: {
     id: 'app.containers.NodePage.accountColumnId',
@@ -50,5 +62,13 @@ export default defineMessages({
   accountBalance: {
     id: 'app.containers.NodePage.balance',
     defaultMessage: 'Balance',
+  },
+  accountStatus: {
+    id: 'app.containers.NodePage.status',
+    defaultMessage: 'Status',
+  },
+  accountPublicKey: {
+    id: 'app.containers.NodePage.publicKey',
+    defaultMessage: 'Public Key',
   },
 });

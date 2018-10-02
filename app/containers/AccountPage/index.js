@@ -12,14 +12,16 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
+import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import DetailView from 'components/DetailView';
+import DetailView from 'components/organisms/DetailView';
+import ListView from 'components/organisms/ListView';
+import TransactionAddressLink from 'components/TransactionAddressLink';
 import { makeSelectAccount, makeSelectTransactions } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadAccount, loadTransactions } from './actions';
-import LatestPanel from '../../components/LatestPanel';
 import { AccountPageWrapper } from './styled';
 import messages from './messages';
 
@@ -30,37 +32,61 @@ export class AccountPage extends React.PureComponent {
 
     if (id) {
       this.props.dispatch(loadAccount(id));
-      this.props.dispatch(loadTransactions(id));
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { id } = this.props.match.params;
+    if (prevProps.match.params.id !== id) {
+      this.props.dispatch(loadAccount(id));
+      this.props.dispatch(loadTransactions(id, config.limit + 1, 0));
     }
   }
 
   render() {
     const { id } = this.props.match.params;
+    const nodeId =
+      this.props.match.params.nodeId || this.props.account.data.node_id;
 
     const fields = {
       id: <FormattedMessage {...messages.fieldId} />,
       balance: <FormattedMessage {...messages.fieldBalance} />,
-      msid: <FormattedMessage {...messages.fieldMsid} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
+      public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+      local_change: <FormattedMessage {...messages.fieldLocalChange} />,
       time: <FormattedMessage {...messages.fieldTime} />,
     };
 
-    const link = '/blockexplorer/transactions';
-    const transactionTab = {
-      id: 'transactions',
-      name: <FormattedMessage {...messages.transactionTabTitle} />,
-      data: this.props.transactions.data,
-      columns: {
-        id: <FormattedMessage {...messages.columnId} />,
-        type: <FormattedMessage {...messages.columnType} />,
-        sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
-        target_address: <FormattedMessage {...messages.columnTargetAddress} />,
-        amount: <FormattedMessage {...messages.columnAmount} />,
-        time: <FormattedMessage {...messages.columnTime} />,
-      },
-      ceilConfiguration: {
-        id: value => <Link to={`${link}/${value}`}>{value}</Link>,
-      },
+    const columns = {
+      id: <FormattedMessage {...messages.columnId} />,
+      block_id: <FormattedMessage {...messages.columnBlockId} />,
+      message_id: <FormattedMessage {...messages.columnMessageId} />,
+      address: <FormattedMessage {...messages.columnAddress} />,
+      direction: <FormattedMessage {...messages.columnDirection} />,
+      amount: <FormattedMessage {...messages.columnAmount} />,
+      type: <FormattedMessage {...messages.columnType} />,
+      time: <FormattedMessage {...messages.columnTime} />,
+    };
+
+    const link = `/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`;
+
+    const ceilConfiguration = {
+      id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+      block_id: value => (
+        <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
+      ),
+      message_id: (value, row) => (
+        <Link to={`blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+          {value}
+        </Link>
+      ),
+      address: (value, row) => (
+        <TransactionAddressLink
+          transactionLink={link}
+          transactionId={row.id}
+          address={value}
+        />
+      ),
     };
 
     const metaDescription = this.context.intl.formatMessage(
@@ -85,10 +111,23 @@ export class AccountPage extends React.PureComponent {
           loading={this.props.account.loading}
           error={this.props.account.error}
         />
-        <LatestPanel
-          tabs={[transactionTab]}
-          loading={this.props.transactions.loading}
-          error={this.props.transactions.error}
+        <h4>
+          <FormattedMessage {...messages.transactionTabTitle} />
+        </h4>
+        <ListView
+          name="transactions"
+          urlParams={this.props.match.params}
+          query={this.props.location.search}
+          list={this.props.transactions}
+          columns={columns}
+          ceilConfiguration={ceilConfiguration}
+          sortingColumns={['id', 'block_id', 'type']}
+          defaultSort="block_id"
+          messages={messages}
+          link={link}
+          onPageChange={this.props.onPageChange}
+          tableMinWidth={config.tablesMinWidth.tableLg}
+          breakpoint={this.props.breakpoint}
         />
       </AccountPageWrapper>
     );
@@ -97,9 +136,12 @@ export class AccountPage extends React.PureComponent {
 
 AccountPage.propTypes = {
   match: PropTypes.object,
+  location: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   account: PropTypes.object.isRequired,
   transactions: PropTypes.object.isRequired,
+  onPageChange: PropTypes.func,
+  breakpoint: PropTypes.object,
 };
 
 AccountPage.contextTypes = {
@@ -109,11 +151,19 @@ AccountPage.contextTypes = {
 const mapStateToProps = createStructuredSelector({
   account: makeSelectAccount(),
   transactions: makeSelectTransactions(),
+  breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onPageChange: (id, page, sort, order) => {
+      const offset = (page - 1) * config.limit;
+
+      return dispatch(
+        loadTransactions(id, config.limit + 1, offset, sort, order),
+      );
+    },
   };
 }
 

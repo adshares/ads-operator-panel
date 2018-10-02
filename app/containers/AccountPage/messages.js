@@ -21,19 +21,31 @@ export default defineMessages({
   },
   transactionTabTitle: {
     id: 'app.containers.AccountPage.transactionTabTitle',
-    defaultMessage: 'Transaction',
+    defaultMessage: 'Transactions',
   },
   columnId: {
     id: 'app.containers.AccountPage.columnId',
     defaultMessage: 'Id',
   },
+  columnBlockId: {
+    id: 'app.containers.AccountPage.columnBlockId',
+    defaultMessage: 'Block',
+  },
+  columnMessageId: {
+    id: 'app.containers.AccountPage.columnMessageId',
+    defaultMessage: 'Message',
+  },
+  columnDirection: {
+    id: 'app.containers.AccountPage.columnDirection',
+    defaultMessage: 'Direction',
+  },
   columnType: {
     id: 'app.containers.AccountPage.columnType',
     defaultMessage: 'Type',
   },
-  columnSenderAddress: {
-    id: 'app.containers.AccountPage.columnSenderAddress',
-    defaultMessage: 'From',
+  columnAddress: {
+    id: 'app.containers.AccountPage.columnAddress',
+    defaultMessage: 'Address',
   },
   columnTargetAddress: {
     id: 'app.containers.AccountPage.columnTargetAddress',
@@ -55,10 +67,6 @@ export default defineMessages({
     id: 'app.containers.AccountPage.fieldBalance',
     defaultMessage: 'Balance',
   },
-  fieldMsid: {
-    id: 'app.containers.AccountPage.fieldMsid',
-    defaultMessage: 'Messages',
-  },
   fieldStatus: {
     id: 'app.containers.AccountPage.fieldStatus',
     defaultMessage: 'Status',
@@ -66,5 +74,17 @@ export default defineMessages({
   fieldTime: {
     id: 'app.containers.AccountPage.fieldTime',
     defaultMessage: 'Time',
+  },
+  fieldPublicKey: {
+    id: 'app.containers.AccountPage.fieldPublicKey',
+    defaultMessage: 'Public Key',
+  },
+  fieldLocalChange: {
+    id: 'app.containers.AccountPage.fieldLocalChange',
+    defaultMessage: 'Last Active Time',
+  },
+  multiTransaction: {
+    id: 'app.containers.AccountPage.multiTransaction',
+    defaultMessage: 'Multi Transaction',
   },
 });

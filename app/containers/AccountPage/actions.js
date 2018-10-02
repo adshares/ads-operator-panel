@@ -34,10 +34,14 @@ export function accountLoadingError(error) {
   };
 }
 
-export function loadTransactions(accountId) {
+export function loadTransactions(accountId, limit, offset, sort, order) {
   return {
     type: LOAD_TRANSACTIONS,
     accountId,
+    limit,
+    offset,
+    sort,
+    order,
   };
 }
 

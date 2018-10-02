@@ -116,14 +116,24 @@
       "!app/*/RbGenerated*/*.{js,jsx}",
       "!app/app.js",
       "!app/global-styles.js",
-      "!app/*/*/Loadable.{js,jsx}"
+      "!app/*/*/Loadable.{js,jsx}",
+      "!app/components/organisms/Breadcrumbs/*.{js,jsx}",
+      "!app/config.js",
+
+      "!app/components/**/messages.js",
+      "!app/components/**/styled.js",
+      "!app/components/**/Loadable.js",
+
+      "!app/containers/*/messages.js",
+      "!app/containers/*/styled.js",
+      "!app/containers/*/selectors.js"
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 45,
-        "branches": 45,
-        "functions": 45,
-        "lines": 45
+        "statements": 65,
+        "branches": 65,
+        "functions": 65,
+        "lines": 65
       }
     },
     "moduleDirectories": [
@@ -163,6 +173,7 @@
     "minimist": "1.2.0",
     "moment": "^2.22.2",
     "prop-types": "15.6.1",
+    "query-string": "^6.1.0",
     "react": "16.4.1",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "16.4.1",
@@ -179,6 +190,7 @@
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
     "sanitize.css": "4.1.0",
+    "sinon": "^6.1.5",
     "styled-components": "3.3.2",
     "warning": "4.0.1",
     "whatwg-fetch": "2.0.4"
@@ -231,7 +243,6 @@
     "ngrok": "3.0.1",
     "node-plop": "0.15.0",
     "null-loader": "0.1.1",
-    "offline-plugin": "5.0.5",
     "plop": "2.0.0",
     "pre-commit": "1.2.2",
     "prettier": "1.13.5",
