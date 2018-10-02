@@ -24,7 +24,10 @@ To submit the patch open a new [GitHub pull request][pr].
 Some things that will increase the chance that your pull request is accepted:
 
 - Write tests.
-- Follow [ESLint code style][style-eslint], [Prettier code formatter][style-prettier], [Stylelint linter][style-stylelint]
+- Follow 
+[ESLint code style][style-eslint] (.eslintrc.js), 
+[Prettier code formatter][style-prettier] (.prettierrc), 
+[Stylelint linter][style-stylelint] (.stylelintrc)
 - Write a [good commit message][commit].
 - Ensure the PR description clearly describes the problem and solution. 
 - Include the relevant issue number if applicable.
