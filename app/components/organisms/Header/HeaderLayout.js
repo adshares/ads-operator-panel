@@ -8,7 +8,7 @@ export const HeaderWrapper = styled.header`
   grid-gap: 2px;
   grid-template:
     '. brand  navbar . search .'
-    / 1fr 2fr 1fr 2fr 3fr 1fr;
+    70px / 1.2fr 2fr 1fr 2fr 3fr 1.2fr;
   background: var(--blue);
 
   @media (max-width: ${breakpoints.tabletMd}px) {
