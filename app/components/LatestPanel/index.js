@@ -72,7 +72,6 @@ class LatestPanel extends React.PureComponent {
     }
 
     const currentTab = this.getSelectedTab(this.state.selectedTabId);
-
     return (
       <LatestPanelWrapper>
         <div className="row">

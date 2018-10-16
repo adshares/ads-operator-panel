@@ -31,6 +31,8 @@ import {
 } from './actions';
 import messages from './messages';
 import { BlockexplorerWrapper } from './styled';
+import { breakpointIsLessThan } from '../../utils/responsiveHelpers';
+import { breakpoints } from '../../utils/breakpoints';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockexplorerDashboardPage extends React.PureComponent {
@@ -41,6 +43,8 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
   }
 
   render() {
+    const { nodes, blocks, breakpoint, transactions } = this.props;
+
     const nodeColumns = {
       id: <FormattedMessage {...messages.nodeColumnId} />,
       account_count: <FormattedMessage {...messages.nodeColumnAccountCount} />,
@@ -62,6 +66,20 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       id: <FormattedMessage {...messages.transactionColumnId} />,
       block_id: <FormattedMessage {...messages.transactionColumnBlockId} />,
       message_id: <FormattedMessage {...messages.transactionColumnMessageId} />,
+      sender_address: (
+        <FormattedMessage {...messages.transactionColumnSenderAddress} />
+      ),
+      target_address: (
+        <FormattedMessage {...messages.transactionColumnTargetAddress} />
+      ),
+      amount: <FormattedMessage {...messages.transactionColumnAmount} />,
+      type: <FormattedMessage {...messages.transactionColumnType} />,
+      time: <FormattedMessage {...messages.transactionColumnTime} />,
+    };
+
+    const transactionMobileColumns = {
+      id: <FormattedMessage {...messages.transactionColumnId} />,
+      block_id: <FormattedMessage {...messages.transactionColumnBlockId} />,
       sender_address: (
         <FormattedMessage {...messages.transactionColumnSenderAddress} />
       ),
@@ -100,7 +118,12 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       name: this.context.intl.formatMessage(messages.transactionTabTitle),
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
-      columns: transactionColumns,
+      columns: breakpointIsLessThan(
+        breakpoints.tabletLg,
+        this.props.breakpoint.size,
+      )
+        ? transactionMobileColumns
+        : transactionColumns,
       ceilConfiguration: {
         id: value => (
           <Link to={`blockexplorer/transactions/${value}`}>{value}</Link>
@@ -129,8 +152,6 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         ),
       },
     };
-
-    const { nodes, blocks, breakpoint, transactions } = this.props;
 
     return (
       <BlockexplorerWrapper>

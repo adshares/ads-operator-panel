@@ -54,13 +54,16 @@ export const TableCellStyled = styled.td`
     &:hover {
       position: absolute;
       background-color: var(--white);
-      padding: 0 calc(var(--spacing-factor) * 3);
-      transform: translateX(-45px);
+      padding: 0 calc(var(--spacing-factor) * 2);
       z-index: 10;
       top: -1px;
       display: flex;
       height: 44px;
       align-items: center;
+
+      &:not(.id):not(.block_id) {
+        transform: translateX(-25px);
+      }
     }
 
     &.time:hover {
@@ -80,6 +83,14 @@ export const TableCellStyled = styled.td`
   .amount {
     font-family: 'Cousine', monospace;
     letter-spacing: 0.5px;
+  }
+
+  & div a {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    padding-right: calc(var(--spacing-factor) * 5);
+    margin-right: calc(var(--spacing-factor) * (-5));
   }
 `;
 

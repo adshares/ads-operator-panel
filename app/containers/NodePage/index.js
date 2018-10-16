@@ -23,6 +23,8 @@ import saga from './saga';
 import { loadAccounts, loadNode } from './actions';
 import { NodePageWrapper } from './styled';
 import messages from './messages';
+import { breakpointIsLessThan } from '../../utils/responsiveHelpers';
+import { breakpoints } from '../../utils/breakpoints';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodePage extends React.PureComponent {
@@ -58,16 +60,27 @@ export class NodePage extends React.PureComponent {
     };
 
     const link = '/blockexplorer/accounts';
+    const accountMobileColumns = {
+      id: this.context.intl.formatMessage(messages.accountColumnId),
+      balance: this.context.intl.formatMessage(messages.accountBalance),
+      status: this.context.intl.formatMessage(messages.accountStatus),
+    };
+
+    const accountColumns = {
+      ...accountMobileColumns,
+      public_key: this.context.intl.formatMessage(messages.accountPublicKey),
+    };
+
     const accountTab = {
       id: 'account',
       name: this.context.intl.formatMessage(messages.accountTabTitle),
       data: this.props.accounts.data,
-      columns: {
-        id: this.context.intl.formatMessage(messages.accountColumnId),
-        balance: this.context.intl.formatMessage(messages.accountBalance),
-        status: this.context.intl.formatMessage(messages.accountStatus),
-        public_key: this.context.intl.formatMessage(messages.accountPublicKey),
-      },
+      columns: breakpointIsLessThan(
+        breakpoints.tabletLg,
+        this.props.breakpoint.size,
+      )
+        ? accountMobileColumns
+        : accountColumns,
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
       },
@@ -119,7 +132,7 @@ export class NodePage extends React.PureComponent {
           link={`/blockexplorer/nodes/${id}/accounts`}
           onPageChange={onPageChange}
           breakpoint={breakpoint}
-          tableMinWidth={config.tablesMinWidth.tableLg}
+          tableMinWidth={config.tablesMinWidth.tableMd}
         />
       </NodePageWrapper>
     );
