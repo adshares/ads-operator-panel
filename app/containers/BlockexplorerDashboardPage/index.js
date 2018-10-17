@@ -12,6 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -33,6 +34,8 @@ import messages from './messages';
 import { BlockexplorerWrapper } from './styled';
 import { breakpointIsLessThan } from '../../utils/responsiveHelpers';
 import { breakpoints } from '../../utils/breakpoints';
+import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
+import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockexplorerDashboardPage extends React.PureComponent {
@@ -44,13 +47,30 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
   render() {
     const { nodes, blocks, breakpoint, transactions } = this.props;
+    const isMobile = breakpointIsLessThan(
+      breakpoints.tabletLg,
+      this.props.breakpoint.size,
+    );
 
-    const nodeColumns = {
+    const nodeColumnsMobile = {
+      id: <FormattedMessage {...messages.nodeColumnId} />,
+      balance: <FormattedMessage {...messages.nodeColumnBalance} />,
+      status: <FormattedMessage {...messages.nodeColumnStatus} />,
+    };
+    const nodeColumnsDesktop = {
       id: <FormattedMessage {...messages.nodeColumnId} />,
       account_count: <FormattedMessage {...messages.nodeColumnAccountCount} />,
       msid: <FormattedMessage {...messages.nodeColumnMsid} />,
       balance: <FormattedMessage {...messages.nodeColumnBalance} />,
       status: <FormattedMessage {...messages.nodeColumnStatus} />,
+    };
+    const nodeColumns = isMobile ? nodeColumnsMobile : nodeColumnsDesktop;
+    const blockColumnsMobile = {
+      id: <FormattedMessage {...messages.blockColumnId} />,
+      message_and_transaction_count: (
+        <FormattedMessage {...messages.blockColumnMessageAndTransactionCount} />
+      ),
+      time: <FormattedMessage {...messages.blockColumnTime} />,
     };
 
     const blockColumns = {
@@ -99,6 +119,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       columns: nodeColumns,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
+        status: value => <StatusTableCell value={value} />,
       },
     };
 
@@ -107,9 +128,10 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       name: this.context.intl.formatMessage(messages.blockTabTitle),
       link: '/blockexplorer/blocks',
       data: this.props.blocks.data,
-      columns: blockColumns,
+      columns: isMobile ? blockColumnsMobile : blockColumns,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
+        time: value => moment(value).fromNow(),
       },
     };
 
@@ -118,12 +140,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       name: this.context.intl.formatMessage(messages.transactionTabTitle),
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
-      columns: breakpointIsLessThan(
-        breakpoints.tabletLg,
-        this.props.breakpoint.size,
-      )
-        ? transactionMobileColumns
-        : transactionColumns,
+      columns: isMobile ? transactionMobileColumns : transactionColumns,
       ceilConfiguration: {
         id: value => (
           <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
@@ -150,6 +167,8 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
             address={value}
           />
         ),
+        time: value => moment(value).fromNow(),
+        type: value => <TypeTableCell value={value} />,
       },
     };
 
@@ -164,7 +183,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         </Helmet>
         <LatestPanel
           gridArea="node"
-          tableMinWidth={config.tablesMinWidth.tableSm}
+          tableMinWidth={config.tablesMinWidth.tableXs}
           tabs={[nodeTab]}
           loading={nodes.loading}
           error={nodes.error}

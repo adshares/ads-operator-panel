@@ -28,7 +28,7 @@ injectGlobal`
   --info: #17a2b8;
   --warning: #ffc107;
   --danger: #dc3545;
-  --light: #c0d9f3;
+  --light: #f1f1f1;
   --dark: #343a40;
   --spacing-factor: 8px;
   --breakpoint-xs: 0;

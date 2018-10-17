@@ -16,6 +16,9 @@ const makeSelectBlocks = () =>
       const block = rawBlock;
       block.time = formatDate(block.time);
       block.votes = `${block.vote_yes}/${block.vote_total}`;
+      block.message_and_transaction_count = `${block.message_count} / ${
+        block.transaction_count
+      }`;
 
       return block;
     });

@@ -64,7 +64,6 @@ class LatestPanel extends React.PureComponent {
       breakpoint,
       tabs,
     } = this.props;
-
     return (
       <LatestPanelWrapper gridArea={gridArea}>
         <LatestPanelList>

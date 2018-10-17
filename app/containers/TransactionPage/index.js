@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import config from 'config';
+import moment from 'moment';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -20,6 +21,7 @@ import saga from './saga';
 import messages from './messages';
 import { loadTransaction } from './actions';
 import DetailView from '../../components/organisms/DetailView';
+import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransactionPage extends React.PureComponent {
@@ -41,17 +43,26 @@ export class TransactionPage extends React.PureComponent {
   render() {
     const { id } = this.props.match.params;
 
-    const fields = {
-      id: <FormattedMessage {...messages.fieldId} />,
-      block_id: <FormattedMessage {...messages.fieldBlockId} />,
-      message_id: <FormattedMessage {...messages.fieldMessageId} />,
-      sender_address: <FormattedMessage {...messages.fieldSenderAddress} />,
-      target_address: <FormattedMessage {...messages.fieldTargetAddress} />,
-      amount: <FormattedMessage {...messages.fieldAmount} />,
-      sender_fee: <FormattedMessage {...messages.fieldSenderFee} />,
-      size: <FormattedMessage {...messages.fieldSize} />,
-      type: <FormattedMessage {...messages.fieldType} />,
-      time: <FormattedMessage {...messages.fieldTime} />,
+    const transactionConfig = {
+      columns: {
+        id: <FormattedMessage {...messages.fieldId} />,
+        block_id: <FormattedMessage {...messages.fieldBlockId} />,
+        message_id: <FormattedMessage {...messages.fieldMessageId} />,
+        sender_address: <FormattedMessage {...messages.fieldSenderAddress} />,
+        target_address: <FormattedMessage {...messages.fieldTargetAddress} />,
+        amount: <FormattedMessage {...messages.fieldAmount} />,
+        sender_fee: <FormattedMessage {...messages.fieldSenderFee} />,
+        size: <FormattedMessage {...messages.fieldSize} />,
+        type: <FormattedMessage {...messages.fieldType} />,
+        time: <FormattedMessage {...messages.fieldTime} />,
+      },
+      data: this.props.transaction.data,
+      ceilConfiguration: {
+        time: value => moment(value).fromNow(),
+        type: () => (
+          <TypeTableCell value={transactionConfig.data.type} showDesc />
+        ),
+      },
     };
 
     const metaDescription = this.context.intl.formatMessage(
@@ -71,8 +82,9 @@ export class TransactionPage extends React.PureComponent {
           <FormattedMessage {...messages.header} /> #{id}
         </h3>
         <DetailView
-          fields={fields}
-          data={this.props.transaction.data}
+          fields={transactionConfig.columns}
+          data={transactionConfig.data}
+          ceilConfiguration={transactionConfig.ceilConfiguration}
           loading={this.props.transaction.loading}
           error={this.props.transaction.error}
           breakpoint={this.props.breakpoint}

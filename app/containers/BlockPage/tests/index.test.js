@@ -2,6 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
 import { BlockPage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<BlockPage />', () => {
   const location = { search: '' };
@@ -30,6 +36,7 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        breakpoint={breakpoint}
       />,
     );
     expect(renderedComponent.find('h3').length).toEqual(1);
@@ -64,6 +71,7 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -97,6 +105,7 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -137,6 +146,7 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        breakpoint={breakpoint}
       />,
     );
 

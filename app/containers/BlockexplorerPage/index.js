@@ -10,12 +10,13 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment';
 import { FormattedMessage, intlShape } from 'react-intl';
-import Search from 'components/Search';
+import Search from 'components/organisms/Search';
 import Card from 'components/Card';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import LatestPanel from 'components/LatestPanel';
+import LatestPanel from 'components/organisms/LatestPanel';
 
 import {
   makeSelectLatestNodes,
@@ -73,6 +74,10 @@ export class Blockexplorer extends React.PureComponent {
       time: <FormattedMessage {...messages.transactionColumnTime} />,
     };
 
+    const ceilConfiguration = {
+      time: value => moment(value).fromNow(),
+    };
+
     const nodeTab = {
       id: 'node',
       name: this.context.intl.formatMessage(messages.nodeTabTitle),
@@ -87,6 +92,7 @@ export class Blockexplorer extends React.PureComponent {
       link: '/blockexplorer/blocks',
       data: this.props.blocks.data,
       columns: blockColumns,
+      ceilConfiguration,
     };
 
     const transactionTab = {
@@ -95,6 +101,7 @@ export class Blockexplorer extends React.PureComponent {
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
       columns: transactionColumns,
+      ceilConfiguration,
     };
 
     return (

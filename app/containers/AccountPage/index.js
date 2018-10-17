@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
 import config from 'config';
@@ -24,6 +25,9 @@ import saga from './saga';
 import { loadAccount, loadTransactions } from './actions';
 import { AccountPageWrapper } from './styled';
 import messages from './messages';
+import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
+import DirectionTableCell from '../../components/molecules/Table/IconCells/DirectionTableCell';
+import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class AccountPage extends React.PureComponent {
@@ -47,14 +51,21 @@ export class AccountPage extends React.PureComponent {
     const { id } = this.props.match.params;
     const nodeId =
       this.props.match.params.nodeId || this.props.account.data.node_id;
+    const accountConfig = {
+      columns: {
+        id: <FormattedMessage {...messages.fieldId} />,
+        balance: <FormattedMessage {...messages.fieldBalance} />,
+        status: <FormattedMessage {...messages.fieldStatus} />,
+        public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+        local_change: <FormattedMessage {...messages.fieldLocalChange} />,
+        time: <FormattedMessage {...messages.fieldTime} />,
+      },
 
-    const fields = {
-      id: <FormattedMessage {...messages.fieldId} />,
-      balance: <FormattedMessage {...messages.fieldBalance} />,
-      status: <FormattedMessage {...messages.fieldStatus} />,
-      public_key: <FormattedMessage {...messages.fieldPublicKey} />,
-      local_change: <FormattedMessage {...messages.fieldLocalChange} />,
-      time: <FormattedMessage {...messages.fieldTime} />,
+      ceilConfiguration: {
+        time: value => moment(value).fromNow(),
+        local_change: value => moment(value).fromNow(),
+        status: value => <StatusTableCell value={value} showDesc />,
+      },
     };
 
     const columns = {
@@ -87,6 +98,9 @@ export class AccountPage extends React.PureComponent {
           address={value}
         />
       ),
+      type: value => <TypeTableCell value={value} />,
+      direction: value => <DirectionTableCell value={value} />,
+      time: value => moment(value).fromNow(),
     };
 
     const metaDescription = this.context.intl.formatMessage(
@@ -106,10 +120,11 @@ export class AccountPage extends React.PureComponent {
           <FormattedMessage {...messages.header} /> #{id}
         </h3>
         <DetailView
-          fields={fields}
+          fields={accountConfig.columns}
           data={this.props.account.data}
           loading={this.props.account.loading}
           error={this.props.account.error}
+          ceilConfiguration={accountConfig.ceilConfiguration}
         />
         <h4>
           <FormattedMessage {...messages.transactionTabTitle} />

@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
@@ -24,6 +25,7 @@ import saga from './saga';
 import messages from './messages';
 import { loadMessage, loadTransactions } from './actions';
 import { MessagePageWrapper } from './styled';
+import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class MessagePage extends React.PureComponent {
@@ -49,14 +51,33 @@ export class MessagePage extends React.PureComponent {
     const blockId =
       this.props.match.params.blockId || this.props.message.data.block_id;
 
-    const fields = {
-      id: <FormattedMessage {...messages.fieldId} />,
-      node_id: <FormattedMessage {...messages.fieldNodeId} />,
-      block_id: <FormattedMessage {...messages.fieldBlockId} />,
-      transaction_count: (
-        <FormattedMessage {...messages.fieldTransactionCount} />
-      ),
-      length: <FormattedMessage {...messages.fieldLength} />,
+    const messageConfig = {
+      columns: {
+        id: <FormattedMessage {...messages.fieldId} />,
+        node_id: <FormattedMessage {...messages.fieldNodeId} />,
+        block_id: <FormattedMessage {...messages.fieldBlockId} />,
+        transaction_count: (
+          <FormattedMessage {...messages.fieldTransactionCount} />
+        ),
+        length: <FormattedMessage {...messages.fieldLength} />,
+      },
+      messageData: this.props.message.data,
+      ceilConfiguration: {
+        node_id: () => (
+          <Link
+            to={`/blockexplorer/nodes/${messageConfig.messageData.node_id}`}
+          >
+            {messageConfig.messageData.node_id}
+          </Link>
+        ),
+        block_id: () => (
+          <Link
+            to={`/blockexplorer/blocks/${messageConfig.messageData.block_id}`}
+          >
+            {messageConfig.messageData.block_id}
+          </Link>
+        ),
+      },
     };
 
     const columns = {
@@ -86,6 +107,8 @@ export class MessagePage extends React.PureComponent {
           address={value}
         />
       ),
+      type: value => <TypeTableCell value={value} />,
+      time: value => moment(value).fromNow(),
     };
 
     const metaDescription = this.context.intl.formatMessage(
@@ -105,8 +128,9 @@ export class MessagePage extends React.PureComponent {
           <FormattedMessage {...messages.header} /> #{id}
         </h3>
         <DetailView
-          fields={fields}
+          fields={messageConfig.columns}
           data={this.props.message.data}
+          ceilConfiguration={messageConfig.ceilConfiguration}
           loading={this.props.message.loading}
           error={this.props.message.error}
           tableMinWidth={config.tablesMinWidth.tableLg}

@@ -25,6 +25,7 @@ import { NodePageWrapper } from './styled';
 import messages from './messages';
 import { breakpointIsLessThan } from '../../utils/responsiveHelpers';
 import { breakpoints } from '../../utils/breakpoints';
+import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodePage extends React.PureComponent {
@@ -48,15 +49,20 @@ export class NodePage extends React.PureComponent {
   render() {
     const { id } = this.props.match.params;
 
-    const fields = {
-      id: <FormattedMessage {...messages.fieldId} />,
-      account_count: <FormattedMessage {...messages.fieldAccountCount} />,
-      msid: <FormattedMessage {...messages.fieldMsid} />,
-      balance: <FormattedMessage {...messages.fieldBalance} />,
-      status: <FormattedMessage {...messages.fieldStatus} />,
-      ipv4: <FormattedMessage {...messages.fieldIp} />,
-      public_key: <FormattedMessage {...messages.fieldPublicKey} />,
-      mtim: <FormattedMessage {...messages.fieldMtim} />,
+    const nodeConfig = {
+      columns: {
+        id: <FormattedMessage {...messages.fieldId} />,
+        account_count: <FormattedMessage {...messages.fieldAccountCount} />,
+        msid: <FormattedMessage {...messages.fieldMsid} />,
+        balance: <FormattedMessage {...messages.fieldBalance} />,
+        status: <FormattedMessage {...messages.fieldStatus} />,
+        ipv4: <FormattedMessage {...messages.fieldIp} />,
+        public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+        mtim: <FormattedMessage {...messages.fieldMtim} />,
+      },
+      ceilConfiguration: {
+        status: value => <StatusTableCell value={value} showDesc />,
+      },
     };
 
     const link = '/blockexplorer/accounts';
@@ -86,6 +92,13 @@ export class NodePage extends React.PureComponent {
       },
     };
 
+    const ceilConfiguration = {
+      id: value => (
+        <Link to={`/blockexplorer/nodes/${id}/accounts/${value}`}>{value}</Link>
+      ),
+      status: value => <StatusTableCell value={value} />,
+    };
+
     const metaDescription = this.context.intl.formatMessage(
       messages.metaDescription,
       { id },
@@ -111,11 +124,12 @@ export class NodePage extends React.PureComponent {
           <FormattedMessage {...messages.header} /> #{id}
         </h3>
         <DetailView
-          fields={fields}
+          fields={nodeConfig.columns}
           data={node.data}
           loading={node.loading}
           error={node.error}
           breakpoint={breakpoint}
+          ceilConfiguration={nodeConfig.ceilConfiguration}
         />
         <h4>
           <FormattedMessage {...messages.accountTabTitle} />
@@ -126,6 +140,7 @@ export class NodePage extends React.PureComponent {
           query={location.search}
           list={accounts}
           columns={accountTab.columns}
+          ceilConfiguration={ceilConfiguration}
           sortingColumns={['id']}
           defaultSort="id"
           messages={messages}
