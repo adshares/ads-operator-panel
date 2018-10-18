@@ -76,7 +76,7 @@ export class AccountPage extends React.PureComponent {
         <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
       ),
       message_id: (value, row) => (
-        <Link to={`blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+        <Link to={`/blockexplorer/blocks/${row.block_id}/messages/${value}`}>
           {value}
         </Link>
       ),
