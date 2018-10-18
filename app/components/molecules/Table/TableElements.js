@@ -42,9 +42,7 @@ export const TableRow = styled.tr`
       }
       @media (min-width: ${breakpoints.tabletLg}px) {
         &:hover {
-          position: relative;
-          transform: scale(1.05);
-          box-shadow: 0px 1px 0px #f8f9fa, 2px 1px 0px var(--blue);
+          border-right: 2px solid var(--blue);
         }
       }
 `};
@@ -73,7 +71,7 @@ export const TableCellStyled = styled.td`
 
     &:hover {
       position: absolute;
-      padding: 0 calc(var(--spacing-factor) * 2);
+      padding-right: calc(var(--spacing-factor) * 2);
       z-index: 10;
       top: 0;
       display: flex;
@@ -81,7 +79,7 @@ export const TableCellStyled = styled.td`
       align-items: center;
 
       &:not(.id):not(.block_id) {
-        transform: translateX(-25px);
+        left: calc(var(--spacing-factor));
       }
     }
 
@@ -131,6 +129,11 @@ export const TableNoData = styled.div`
 
 export const IconCellDescription = styled.span`
   padding-left: var(--spacing-factor);
+  color: var(--moon-gray);
+`;
+
+export const IconTableCell = styled.div`
+  color: ${props => props.color || 'var(--gray)'};
 `;
 
 TableHeader.displayName = 'TableHeader';
@@ -139,3 +142,4 @@ TableCellStyled.displayName = 'TableCellStyled';
 TableBody.displayName = 'TableBody';
 Table.displayName = 'Table';
 IconCellDescription.displayName = 'IconCellDescription';
+IconTableCell.displayName = 'IconTableCell';

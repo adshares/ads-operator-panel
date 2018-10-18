@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 /**
  *
  * StatusTableCell
@@ -6,12 +7,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaTrash, FaTrophy, FaStar, FaShieldAlt } from 'react-icons/fa';
-import { IconCellDescription } from '../TableElements';
+import {
+  FaAsterisk,
+  FaTimes,
+  FaTrophy,
+  FaStar,
+  FaShieldAlt,
+} from 'react-icons/fa';
+import { IconCellDescription, IconTableCell } from '../TableElements';
 
 const StatusTableCell = ({ value, showDesc }) => {
   const getTitle = () => {
     let title;
+
     switch (value) {
       case 0:
         title = 'normal';
@@ -27,7 +35,7 @@ const StatusTableCell = ({ value, showDesc }) => {
         break;
 
       default:
-        title = 'normal';
+        title = 'special';
         break;
     }
     return title;
@@ -40,26 +48,27 @@ const StatusTableCell = ({ value, showDesc }) => {
         icon = <FaShieldAlt />;
         break;
       case 1:
-        icon = <FaTrash />;
+        icon = <FaTimes color="var(--red)" />;
         break;
       case 2:
-        icon = <FaStar />;
+        icon = <FaStar color="var(--yellow)" />;
         break;
       case 6:
-        icon = <FaTrophy />;
+        icon = <FaTrophy color="var(--yellow)" />;
         break;
 
       default:
-        icon = <FaShieldAlt />;
+        icon = <FaAsterisk />;
         break;
     }
     return icon;
   };
+
   const icon = getIcon();
   const title = getTitle();
 
   return (
-    <div title={title}>
+    <IconTableCell title={title}>
       {showDesc ? (
         <div>
           {icon} <IconCellDescription>{title}</IconCellDescription>
@@ -67,7 +76,7 @@ const StatusTableCell = ({ value, showDesc }) => {
       ) : (
         icon
       )}
-    </div>
+    </IconTableCell>
   );
 };
 

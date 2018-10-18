@@ -6,9 +6,9 @@ const TYPE_DEFAULT = 'send_one';
 describe('<TypeTableCell />', () => {
   it('should render <TypeTableCell />', () => {
     const renderedComponent = shallow(<TypeTableCell value={TYPE_DEFAULT} />);
-    expect(renderedComponent.find('div').length).toEqual(1);
-    expect(renderedComponent.find('FaSquare').length).toEqual(1);
-    expect(renderedComponent.find('FaClone').length).toEqual(0);
+    expect(renderedComponent.find('IconTableCell').length).toEqual(1);
+    expect(renderedComponent.find('FaLongArrowAltRight').length).toEqual(1);
+    expect(renderedComponent.find('FaLongArrowAltLeft').length).toEqual(0);
     expect(renderedComponent.find('IconCellDescription').length).toEqual(0);
   });
 

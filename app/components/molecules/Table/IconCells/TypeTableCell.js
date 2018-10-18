@@ -6,16 +6,50 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaSquare, FaClone } from 'react-icons/fa';
-import { IconCellDescription } from '../TableElements';
+import {
+  FaLongArrowAltLeft,
+  FaLongArrowAltRight,
+  FaBullhorn,
+} from 'react-icons/fa';
+import { IconCellDescription, IconTableCell } from '../TableElements';
+import CombinedIcon from '../../../atoms/CombinedIcon';
 const TYPE_DEFAULT = 'send_one';
+const DIRECTION_OUT = 'out';
 
-const TypeTableCell = ({ value, showDesc }) => {
-  const icon = value === TYPE_DEFAULT ? <FaSquare /> : <FaClone />;
+const SendToManyIcon = () => (
+  <CombinedIcon reversed>
+    <FaLongArrowAltRight />
+    <FaLongArrowAltRight />
+    <FaLongArrowAltRight />
+  </CombinedIcon>
+);
+const FromManyIcon = () => (
+  <CombinedIcon>
+    <FaLongArrowAltLeft />
+    <FaLongArrowAltLeft />
+    <FaLongArrowAltLeft />
+  </CombinedIcon>
+);
+
+const TypeTableCell = ({ value, showDesc, direction }) => {
+  const getIcon = () => {
+    if (value === 'broadcast') {
+      return <FaBullhorn color="var(--light-blue)" />;
+    } else if (direction && direction === DIRECTION_OUT) {
+      return value === TYPE_DEFAULT ? <FaLongArrowAltLeft /> : <FromManyIcon />;
+    }
+    return value === TYPE_DEFAULT ? (
+      <FaLongArrowAltRight />
+    ) : (
+      <SendToManyIcon />
+    );
+  };
+
+  const icon = getIcon();
   const title = typeof value === 'string' && value.replace('_', ' ');
 
   return (
-    <div title={title}>
+    <IconTableCell title={title} color="var(--green)">
       {showDesc ? (
         <div>
           {icon} <IconCellDescription>{title}</IconCellDescription>
@@ -23,7 +57,7 @@ const TypeTableCell = ({ value, showDesc }) => {
       ) : (
         icon
       )}
-    </div>
+    </IconTableCell>
   );
 };
 
@@ -34,6 +68,7 @@ TypeTableCell.propTypes = {
     PropTypes.element,
   ]).isRequired,
   showDesc: PropTypes.bool,
+  direction: PropTypes.string,
 };
 
 export default TypeTableCell;

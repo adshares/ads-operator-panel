@@ -26,7 +26,6 @@ import { loadAccount, loadTransactions } from './actions';
 import { AccountPageWrapper } from './styled';
 import messages from './messages';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
-import DirectionTableCell from '../../components/molecules/Table/IconCells/DirectionTableCell';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -73,7 +72,6 @@ export class AccountPage extends React.PureComponent {
       block_id: <FormattedMessage {...messages.columnBlockId} />,
       message_id: <FormattedMessage {...messages.columnMessageId} />,
       address: <FormattedMessage {...messages.columnAddress} />,
-      direction: <FormattedMessage {...messages.columnDirection} />,
       amount: <FormattedMessage {...messages.columnAmount} />,
       type: <FormattedMessage {...messages.columnType} />,
       time: <FormattedMessage {...messages.columnTime} />,
@@ -98,8 +96,9 @@ export class AccountPage extends React.PureComponent {
           address={value}
         />
       ),
-      type: value => <TypeTableCell value={value} />,
-      direction: value => <DirectionTableCell value={value} />,
+      type: (value, row) => (
+        <TypeTableCell value={value} direction={row.direction} />
+      ),
       time: value => moment(value).fromNow(),
     };
 

@@ -12,7 +12,7 @@ injectGlobal`
   --red: #dc3545;
   --orange: #fd7e14;
   --yellow: #ffc107;
-  --green: #28a745;
+  --green: #009c0f;
   --teal: #20c997;
   --cyan: #17a2b8;
   --white: #fff;
