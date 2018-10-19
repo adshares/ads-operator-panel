@@ -10,50 +10,65 @@ import {
   FaLongArrowAltLeft,
   FaLongArrowAltRight,
   FaBullhorn,
+  FaAsterisk,
 } from 'react-icons/fa';
-import { IconCellDescription, IconTableCell } from '../TableElements';
+import {
+  IconCellDescription,
+  IconTableCell,
+  IconTableCellWrapper,
+} from '../TableElements';
 import CombinedIcon from '../../../atoms/CombinedIcon';
 const TYPE_DEFAULT = 'send_one';
+const TYPES = ['send_one', 'send_many', 'broadcast'];
 const DIRECTION_OUT = 'out';
 
 const SendToManyIcon = () => (
-  <CombinedIcon reversed>
-    <FaLongArrowAltRight />
+  <CombinedIcon>
     <FaLongArrowAltRight />
     <FaLongArrowAltRight />
   </CombinedIcon>
 );
+
 const FromManyIcon = () => (
   <CombinedIcon>
-    <FaLongArrowAltLeft />
     <FaLongArrowAltLeft />
     <FaLongArrowAltLeft />
   </CombinedIcon>
 );
 
 const TypeTableCell = ({ value, showDesc, direction }) => {
-  const getIcon = () => {
-    if (value === 'broadcast') {
-      return <FaBullhorn color="var(--light-blue)" />;
-    } else if (direction && direction === DIRECTION_OUT) {
-      return value === TYPE_DEFAULT ? <FaLongArrowAltLeft /> : <FromManyIcon />;
+  const getData = () => {
+    let icon;
+    const desc = typeof value === 'string' && value.replace('_', ' ');
+
+    if (!TYPES.includes(value)) {
+      return {
+        desc: 'special',
+        icon: <FaAsterisk />,
+      };
     }
-    return value === TYPE_DEFAULT ? (
-      <FaLongArrowAltRight />
-    ) : (
-      <SendToManyIcon />
-    );
+    if (value === 'broadcast') {
+      icon = <FaBullhorn color="var(--light-blue)" />;
+    } else if (direction && direction === DIRECTION_OUT) {
+      icon = value === TYPE_DEFAULT ? <FaLongArrowAltLeft /> : <FromManyIcon />;
+    } else {
+      icon =
+        value === TYPE_DEFAULT ? <FaLongArrowAltRight /> : <SendToManyIcon />;
+    }
+    return {
+      icon,
+      desc,
+    };
   };
 
-  const icon = getIcon();
-  const title = typeof value === 'string' && value.replace('_', ' ');
+  const { icon, desc } = getData();
 
   return (
-    <IconTableCell title={title} color="var(--green)">
+    <IconTableCell title={showDesc ? '' : desc} color="var(--green)">
       {showDesc ? (
-        <div>
-          {icon} <IconCellDescription>{title}</IconCellDescription>
-        </div>
+        <IconTableCellWrapper>
+          {icon} <IconCellDescription>{desc}</IconCellDescription>
+        </IconTableCellWrapper>
       ) : (
         icon
       )}

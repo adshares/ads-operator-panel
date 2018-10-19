@@ -7,71 +7,39 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FaAsterisk,
-  FaTimes,
-  FaTrophy,
-  FaStar,
-  FaShieldAlt,
-} from 'react-icons/fa';
+import { FaTimes, FaTrophy, FaStar, FaShieldAlt } from 'react-icons/fa';
 import { IconCellDescription, IconTableCell } from '../TableElements';
 
 const StatusTableCell = ({ value, showDesc }) => {
-  const getTitle = () => {
-    let title;
-
-    switch (value) {
-      case 0:
-        title = 'normal';
-        break;
-      case 1:
-        title = 'deleted';
-        break;
-      case 2:
-        title = 'vip';
-        break;
-      case 6:
-        title = 'super vip';
-        break;
-
-      default:
-        title = 'special';
-        break;
-    }
-    return title;
-  };
-
-  const getIcon = () => {
+  const getData = () => {
+    let desc;
     let icon;
-    switch (value) {
-      case 0:
-        icon = <FaShieldAlt />;
-        break;
-      case 1:
-        icon = <FaTimes color="var(--red)" />;
-        break;
-      case 2:
-        icon = <FaStar color="var(--yellow)" />;
-        break;
-      case 6:
-        icon = <FaTrophy color="var(--yellow)" />;
-        break;
-
-      default:
-        icon = <FaAsterisk />;
-        break;
+    if (value & 1) {
+      desc = 'deleted';
+      icon = <FaTimes color="var(--red)" />;
+    } else if (value & 4) {
+      desc = 'super vip';
+      icon = <FaTrophy color="var(--yellow)" />;
+    } else if (value & 2) {
+      desc = 'vip';
+      icon = <FaStar color="var(--yellow)" />;
+    } else {
+      desc = 'normal';
+      icon = <FaShieldAlt />;
     }
-    return icon;
+    return {
+      desc,
+      icon,
+    };
   };
 
-  const icon = getIcon();
-  const title = getTitle();
-
+  const { icon, desc } = getData();
+  console.log('---', desc);
   return (
-    <IconTableCell title={title}>
+    <IconTableCell title={desc}>
       {showDesc ? (
         <div>
-          {icon} <IconCellDescription>{title}</IconCellDescription>
+          {icon} <IconCellDescription>{desc}</IconCellDescription>
         </div>
       ) : (
         icon

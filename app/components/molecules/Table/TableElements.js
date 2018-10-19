@@ -136,6 +136,11 @@ export const IconTableCell = styled.div`
   color: ${props => props.color || 'var(--gray)'};
 `;
 
+export const IconTableCellWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 TableHeader.displayName = 'TableHeader';
 TableRow.displayName = 'TableRow';
 TableCellStyled.displayName = 'TableCellStyled';
@@ -143,3 +148,4 @@ TableBody.displayName = 'TableBody';
 Table.displayName = 'Table';
 IconCellDescription.displayName = 'IconCellDescription';
 IconTableCell.displayName = 'IconTableCell';
+IconTableCellWrapper.displayName = 'IconTableCellWrapper';
