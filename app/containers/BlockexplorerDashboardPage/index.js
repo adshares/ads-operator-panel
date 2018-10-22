@@ -76,11 +76,11 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
     const nodeTab = {
       id: 'node',
       name: this.context.intl.formatMessage(messages.nodeTabTitle),
-      link: 'blockexplorer/nodes',
+      link: '/blockexplorer/nodes',
       data: this.props.nodes.data,
       columns: nodeColumns,
       ceilConfiguration: {
-        id: value => <Link to={`blockexplorer/nodes/${value}`}>{value}</Link>,
+        id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
       },
     };
 
@@ -91,7 +91,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       data: this.props.blocks.data,
       columns: blockColumns,
       ceilConfiguration: {
-        id: value => <Link to={`blockexplorer/blocks/${value}`}>{value}</Link>,
+        id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
       },
     };
 
@@ -103,13 +103,13 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       columns: transactionColumns,
       ceilConfiguration: {
         id: value => (
-          <Link to={`blockexplorer/transactions/${value}`}>{value}</Link>
+          <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
         ),
         block_id: value => (
-          <Link to={`blockexplorer/blocks/${value}`}>{value}</Link>
+          <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
         ),
         message_id: (value, row) => (
-          <Link to={`blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+          <Link to={`/blockexplorer/blocks/${row.block_id}/messages/${value}`}>
             {value}
           </Link>
         ),

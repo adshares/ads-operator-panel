@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TEST_temp" parallel="false">
+
+
+  <test name="TC_WM_25" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard_WM"/>
+          <include name="homeBlockexplorer"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+
+</suite>
