@@ -23,8 +23,7 @@ import saga from './saga';
 import messages from './messages';
 import { loadBlocks } from './actions';
 import { Title } from '../../components/atoms/Title';
-import { breakpointIsLessThan } from '../../utils/responsiveHelpers';
-import { breakpoints } from '../../utils/breakpoints';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlocksListPage extends React.PureComponent {
@@ -49,16 +48,13 @@ export class BlocksListPage extends React.PureComponent {
 
     const ceilConfiguration = {
       id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
-      time: value => moment(value).fromNow(),
+      time: value => <div title={value}> {moment(value).fromNow()} </div>,
     };
 
     const sortingColumns = ['id'];
     const { match, location, blocks, onPageChange, breakpoint } = this.props;
 
-    const isMobile = breakpointIsLessThan(
-      breakpoints.tabletLg,
-      this.props.breakpoint.size,
-    );
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
 
     return (
       <div>

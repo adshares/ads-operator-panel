@@ -43,6 +43,10 @@ export const breakpointIsLessThan = (
   return false;
 };
 
+export const breakpointIsMobile = currentBreakpointSize =>
+  currentBreakpointSize !== null &&
+  currentBreakpointSize <= breakpoints.tabletLg;
+
 const comparison = breakpointToCompare =>
   typeof breakpointToCompare === 'string'
     ? breakpointFromString(breakpointToCompare)

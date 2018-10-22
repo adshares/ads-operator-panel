@@ -36,7 +36,9 @@ class Header extends React.Component {
     return (
       <HeaderWrapper>
         <Brand testEnv={TEST_ENV_ACTIVE}>
-          <Img src={Logo} alt="Adshares" height="52px" />
+          <a href="https://adshares.net/">
+            <Img src={Logo} alt="Adshares" height="52px" />
+          </a>
           <strong>{TEST_ENV_ACTIVE ? 'ADS TESTNET' : 'ADS Operator'}</strong>
         </Brand>
 

@@ -13,7 +13,6 @@ import { compose } from 'redux';
 import moment from 'moment';
 import { FormattedMessage, intlShape } from 'react-intl';
 import Search from 'components/organisms/Search';
-import Card from 'components/Card';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LatestPanel from 'components/organisms/LatestPanel';
@@ -75,7 +74,7 @@ export class Blockexplorer extends React.PureComponent {
     };
 
     const ceilConfiguration = {
-      time: value => moment(value).fromNow(),
+      time: value => <div title={value}> {moment(value).fromNow()} </div>,
     };
 
     const nodeTab = {
@@ -113,10 +112,6 @@ export class Blockexplorer extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <div className="row">
-          <Card />
-          <Card />
-        </div>
         <div className="row">
           <div className="col-md-12 col-xs-6">
             <Search />

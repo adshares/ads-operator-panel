@@ -34,7 +34,6 @@ const StatusTableCell = ({ value, showDesc }) => {
   };
 
   const { icon, desc } = getData();
-  console.log('---', desc);
   return (
     <IconTableCell title={desc}>
       {showDesc ? (

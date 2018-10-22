@@ -59,10 +59,18 @@ export class AccountPage extends React.PureComponent {
         local_change: <FormattedMessage {...messages.fieldLocalChange} />,
         time: <FormattedMessage {...messages.fieldTime} />,
       },
-
+      data: this.props.account.data,
       ceilConfiguration: {
-        time: value => moment(value).fromNow(),
-        local_change: value => moment(value).fromNow(),
+        time: () => (
+          <div title={accountConfig.data.time}>
+            {moment(accountConfig.data.time).fromNow()}
+          </div>
+        ),
+        local_change: () => (
+          <div title={accountConfig.data.time}>
+            {moment(accountConfig.data.time).fromNow()}
+          </div>
+        ),
         status: value => <StatusTableCell value={value} showDesc />,
       },
     };
@@ -99,7 +107,9 @@ export class AccountPage extends React.PureComponent {
       type: (value, row) => (
         <TypeTableCell value={value} direction={row.direction} />
       ),
-      time: value => moment(value).fromNow(),
+      time: (value, row) => (
+        <div title={row.time}> {moment(row.time).fromNow()} </div>
+      ),
     };
 
     const metaDescription = this.context.intl.formatMessage(

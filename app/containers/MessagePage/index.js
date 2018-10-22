@@ -108,7 +108,7 @@ export class MessagePage extends React.PureComponent {
         />
       ),
       type: value => <TypeTableCell value={value} />,
-      time: value => moment(value).fromNow(),
+      time: value => <div title={value}> {moment(value).fromNow()} </div>,
     };
 
     const metaDescription = this.context.intl.formatMessage(

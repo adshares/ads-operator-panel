@@ -58,7 +58,11 @@ export class TransactionPage extends React.PureComponent {
       },
       data: this.props.transaction.data,
       ceilConfiguration: {
-        time: value => moment(value).fromNow(),
+        time: () => (
+          <div title={transactionConfig.data.time}>
+            {moment(transactionConfig.data.time).fromNow()}
+          </div>
+        ),
         type: () => (
           <TypeTableCell value={transactionConfig.data.type} showDesc />
         ),

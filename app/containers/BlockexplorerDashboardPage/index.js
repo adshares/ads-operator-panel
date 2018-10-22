@@ -32,8 +32,7 @@ import {
 } from './actions';
 import messages from './messages';
 import { BlockexplorerWrapper } from './styled';
-import { breakpointIsLessThan } from '../../utils/responsiveHelpers';
-import { breakpoints } from '../../utils/breakpoints';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 
@@ -47,10 +46,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
   render() {
     const { nodes, blocks, breakpoint, transactions } = this.props;
-    const isMobile = breakpointIsLessThan(
-      breakpoints.tabletLg,
-      this.props.breakpoint.size,
-    );
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
 
     const nodeColumnsMobile = {
       id: <FormattedMessage {...messages.nodeColumnId} />,
@@ -99,7 +95,6 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
     const transactionMobileColumns = {
       id: <FormattedMessage {...messages.transactionColumnId} />,
-      block_id: <FormattedMessage {...messages.transactionColumnBlockId} />,
       sender_address: (
         <FormattedMessage {...messages.transactionColumnSenderAddress} />
       ),
@@ -131,7 +126,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       columns: isMobile ? blockColumnsMobile : blockColumns,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
-        time: value => moment(value).fromNow(),
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
     };
 
@@ -167,7 +162,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
             address={value}
           />
         ),
-        time: value => moment(value).fromNow(),
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
         type: value => <TypeTableCell value={value} />,
       },
     };

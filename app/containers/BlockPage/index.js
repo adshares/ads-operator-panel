@@ -45,7 +45,7 @@ export class BlockPage extends React.PureComponent {
 
   render() {
     const { id } = this.props.match.params;
-    const blockData = {
+    const blockConfig = {
       columns: {
         id: <FormattedMessage {...messages.fieldId} />,
         message_count: <FormattedMessage {...messages.fieldMessageCount} />,
@@ -63,8 +63,13 @@ export class BlockPage extends React.PureComponent {
         vip_hash: <FormattedMessage {...messages.fieldVipHash} />,
         time: <FormattedMessage {...messages.fieldTime} />,
       },
+      data: this.props.block.data,
       ceilConfiguration: {
-        time: value => moment(value).fromNow(),
+        time: () => (
+          <div title={blockConfig.data.time}>
+            {moment(blockConfig.data.time).fromNow()}
+          </div>
+        ),
       },
     };
 
@@ -105,11 +110,11 @@ export class BlockPage extends React.PureComponent {
           <FormattedMessage {...messages.header} /> #{id}
         </h3>
         <DetailView
-          fields={blockData.columns}
-          data={this.props.block.data}
+          fields={blockConfig.columns}
+          data={blockConfig.data}
           loading={this.props.block.loading}
           error={this.props.block.error}
-          ceilConfiguration={blockData.ceilConfiguration}
+          ceilConfiguration={blockConfig.ceilConfiguration}
         />
         <h4>
           <FormattedMessage {...messages.messageTabTitle} />

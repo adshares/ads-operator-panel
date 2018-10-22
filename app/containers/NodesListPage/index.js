@@ -23,16 +23,12 @@ import messages from './messages';
 import { loadNodes } from './actions';
 import { Title } from '../../components/atoms/Title';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
-import { breakpointIsLessThan } from '../../utils/responsiveHelpers';
-import { breakpoints } from '../../utils/breakpoints';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodesListPage extends React.Component {
   render() {
-    const isMobile = breakpointIsLessThan(
-      breakpoints.tabletLg,
-      this.props.breakpoint.size,
-    );
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
 
     const columnsMobile = {
       id: <FormattedMessage {...messages.fieldId} />,
