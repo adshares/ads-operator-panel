@@ -227,7 +227,6 @@ public class Blockexplorer extends BrowserTestCase {
     transactionPage = new TransactionPage(driver);
     transactionPage.sortingTransactions();
   }
-//  transaction_message
   @Test
   public void detailedDataMessage() {
     System.out.println("---------- TC_15 ----------");
