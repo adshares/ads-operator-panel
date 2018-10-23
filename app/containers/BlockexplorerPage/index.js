@@ -76,7 +76,7 @@ export class Blockexplorer extends React.PureComponent {
     const nodeTab = {
       id: 'node',
       name: this.context.intl.formatMessage(messages.nodeTabTitle),
-      link: 'blockexplorer/nodes',
+      link: '/blockexplorer/nodes',
       data: this.props.nodes.data,
       columns: nodeColumns,
     };
