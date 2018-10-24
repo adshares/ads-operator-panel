@@ -63,6 +63,11 @@ export default defineMessages({
     id: 'app.containers.BlockexplorerDashboardPage.blockColumnTransactionCount',
     defaultMessage: 'Transactions',
   },
+  blockColumnMessageAndTransactionCount: {
+    id:
+      'app.containers.BlockexplorerDashboardPage.columnMessageAndTransactionCount',
+    defaultMessage: 'Message / Transactions',
+  },
   blockColumnTime: {
     id: 'app.containers.BlockexplorerDashboardPage.blockColumnTime',
     defaultMessage: 'Time',

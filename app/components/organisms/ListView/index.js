@@ -104,7 +104,6 @@ class ListView extends React.PureComponent {
         />
       );
     }
-
     return (
       <ListViewWrapper>
         <TableDataSet

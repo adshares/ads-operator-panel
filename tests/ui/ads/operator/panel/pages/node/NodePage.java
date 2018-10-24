@@ -117,7 +117,8 @@ public class NodePage {
     System.out.println(url);
 
     if(!driver.findElements(By.xpath("//*[@class='pagination justify-content-center flex-wrap']//descendant::span[3]")).isEmpty()){
-      System.out.println("---------- sorting_test ----------");
+      System.out.println("---------- Next/Previous ----------");
+      wait.until(ExpectedConditions.visibilityOf(Previous));
       wait.until(ExpectedConditions.visibilityOf(Next));
       Next.click();
       System.out.println("Click - Next");
@@ -125,7 +126,8 @@ public class NodePage {
       Previous.click();
       System.out.println("Click - Previous");
     }else{
-      System.out.println("---------- no_sorting_test ----------");
+      System.out.println("---------- no_Next/Previous ----------");
+      System.out.println("Skip >>>>>");
     }
   }
 

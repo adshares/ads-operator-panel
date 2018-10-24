@@ -3,6 +3,12 @@ import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
 import messages from 'containers/BlocksListPage/messages';
 import ListView from '../index';
+import { breakpoints } from '../../../../utils/breakpoints';
+
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<ListView />', () => {
   it('should render <ErrorMsg> when sorting column is wrong', () => {
@@ -19,6 +25,7 @@ describe('<ListView />', () => {
         sortingColumns={availableColumns}
         messages={messages}
         link="/blocks"
+        breakpoint={breakpoint}
       />,
     );
 
@@ -38,6 +45,7 @@ describe('<ListView />', () => {
         sortingColumns={availableColumns}
         messages={messages}
         link="/blocks"
+        breakpoint={breakpoint}
       />,
     );
 
@@ -70,6 +78,7 @@ describe('<ListView />', () => {
         messages={messages}
         link="/blocks"
         onPageChange={onPageChange}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -103,6 +112,7 @@ describe('<ListView />', () => {
         messages={messages}
         link="/blocks"
         onPageChange={onPageChange}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -135,6 +145,7 @@ describe('<ListView />', () => {
         messages={messages}
         link="/blocks"
         onPageChange={onPageChange}
+        breakpoint={breakpoint}
       />,
     );
     const newQuery = '?sort=id&order=asc';

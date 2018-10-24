@@ -1,6 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import TableCell from '../TableCell';
+import { breakpoints } from '../../../../utils/breakpoints';
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 const renderComponent = props => (
   <table>
     <tbody>
@@ -13,13 +18,17 @@ const renderComponent = props => (
 
 describe('<TableCell />', () => {
   it('should render <TableCell />', () => {
-    const renderedComponent = mount(renderComponent({ value: 'test' }));
+    const renderedComponent = mount(
+      renderComponent({ value: 'test', breakpoint }),
+    );
     expect(renderedComponent.find('TableCellStyled').length).toEqual(1);
     expect(renderedComponent.find('div').length).toEqual(1);
   });
 
   it('should render proper text from props', () => {
-    const renderedComponent = mount(renderComponent({ value: 'test' }));
+    const renderedComponent = mount(
+      renderComponent({ value: 'test', breakpoint }),
+    );
 
     expect(
       renderedComponent
@@ -31,7 +40,9 @@ describe('<TableCell />', () => {
 
   it('should render element form props', () => {
     const element = <a href="test">test</a>;
-    const renderedComponent = mount(renderComponent({ value: element }));
+    const renderedComponent = mount(
+      renderComponent({ value: element, breakpoint }),
+    );
 
     expect(renderedComponent.find('a').length).toEqual(1);
     expect(

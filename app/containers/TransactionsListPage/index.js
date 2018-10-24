@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
@@ -23,6 +24,7 @@ import saga from './saga';
 import messages from './messages';
 import { loadTransactions } from './actions';
 import { Title } from '../../components/atoms/Title';
+import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransactionsListPage extends React.PureComponent {
@@ -65,6 +67,8 @@ export class TransactionsListPage extends React.PureComponent {
           address={value}
         />
       ),
+      type: value => <TypeTableCell value={value} />,
+      time: value => <div title={value}> {moment(value).fromNow()} </div>,
     };
 
     return (

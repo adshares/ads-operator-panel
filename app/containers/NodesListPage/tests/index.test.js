@@ -1,6 +1,11 @@
 import React from 'react';
 import { shallowIntlWrap } from 'testHelper';
 import { NodesListPage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<NodesListPage />', () => {
   const location = { search: '' };
@@ -19,6 +24,7 @@ describe('<NodesListPage />', () => {
         location={location}
         dispatch={dispatch}
         nodes={nodes}
+        breakpoint={breakpoint}
       />,
     );
     expect(renderedComponent.find('Title').length).toEqual(1);

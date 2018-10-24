@@ -25,6 +25,7 @@ const routes = {
 };
 
 const tablesMinWidth = {
+  tableXs: '375px',
   tableSm: '500px',
   tableMd: '600px',
   tableLg: '1024px',
