@@ -10,6 +10,7 @@ import { breakpoints } from '../../../utils/breakpoints';
 import { HeaderNav, MobileHamburgerMenu } from './HeaderNav';
 import { breakpointIsLessThan } from '../../../utils/responsiveHelpers';
 import { TEST_ENV_ACTIVE } from '../../../utils/checkEnv';
+import LinkWhite from '../../atoms/Link';
 
 class Header extends React.Component {
   toggleMenuOpen = state => {
@@ -36,10 +37,10 @@ class Header extends React.Component {
     return (
       <HeaderWrapper>
         <Brand testEnv={TEST_ENV_ACTIVE}>
-          <a href="https://adshares.net/">
+          <LinkWhite to="/">
             <Img src={Logo} alt="Adshares" height="52px" />
-          </a>
-          <strong>{TEST_ENV_ACTIVE ? 'ADS TESTNET' : 'ADS Operator'}</strong>
+            <strong>{TEST_ENV_ACTIVE ? 'ADS TESTNET' : 'ADS Operator'}</strong>
+          </LinkWhite>
         </Brand>
 
         {smallScreen && (

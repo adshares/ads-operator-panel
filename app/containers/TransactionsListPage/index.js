@@ -25,10 +25,22 @@ import messages from './messages';
 import { loadTransactions } from './actions';
 import { Title } from '../../components/atoms/Title';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransactionsListPage extends React.PureComponent {
   render() {
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
+
+    const columnsMobile = {
+      id: <FormattedMessage {...messages.columnId} />,
+      sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
+      target_address: <FormattedMessage {...messages.columnTargetAddress} />,
+      amount: <FormattedMessage {...messages.columnAmount} />,
+      type: <FormattedMessage {...messages.columnType} />,
+      time: <FormattedMessage {...messages.columnTime} />,
+    };
+
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
       block_id: <FormattedMessage {...messages.columnBlockId} />,
@@ -88,7 +100,7 @@ export class TransactionsListPage extends React.PureComponent {
           urlParams={this.props.match.params}
           query={this.props.location.search}
           list={this.props.transactions}
-          columns={columns}
+          columns={isMobile ? columnsMobile : columns}
           sortingColumns={sortingColumns}
           ceilConfiguration={ceilConfiguration}
           defaultSort="block_id"
