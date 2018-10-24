@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.Objects;
+
 public class NodePage {
 
 //  Assert
@@ -30,14 +32,16 @@ public class NodePage {
   @FindBy(xpath = "//section//div[2]//button")                                                                          private WebElement Copy;
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
+  @FindBy(xpath = "//*[contains(text(), 'Nodes')]")                                                                     private WebElement Nodes;
   //  Accounts
   @FindBy(xpath = "//section//th[1]")                                                                                   private WebElement AccountIdAssert;
   @FindBy(xpath = "//section//th[2]")                                                                                   private WebElement AccountBalanceAssert;
   @FindBy(xpath = "//section//th[3]")                                                                                   private WebElement AccountStatusAssert;
   @FindBy(xpath = "//section//th[4]")                                                                                   private WebElement AccountPublicKeyAssert;
 
+  @FindBy(xpath = "//*[td][1]//div//div//*//*")                                                                         private WebElement ikon_status;
 
-  private WebDriver driver;
+    private WebDriver driver;
   private WebDriverWait wait;
 
   public NodePage(WebDriver driver) {
@@ -203,5 +207,63 @@ public class NodePage {
     System.out.println("Previous - Click");
     wait.until(ExpectedConditions.visibilityOf(AccountIdAssert));
     AccountIdAssert.click();
+  }
+  public void iconNode() {
+    wait.until(ExpectedConditions.visibilityOf(ikon_status));
+    iconNodeFor(25, "asc");
+    wait.until(ExpectedConditions.visibilityOf(IdAssert));
+    IdAssert.click();
+    System.out.println("Click - IdAssert");
+    iconNodeFor(25, "desc");
+
+    wait.until(ExpectedConditions.visibilityOf(ikon_status));
+  }
+  private void iconNodeFor(int max,String order) {
+    for (int s = 1; s < max; s++) {
+      wait.until(ExpectedConditions.visibilityOf(ikon_status));
+
+      String Nodes_id=String.format("//tr[%s]//td//div//a", s);
+      String id=driver.findElement(By.xpath(Nodes_id)).getText();
+      System.out.println("Id:     "+id);
+
+      String Nodes_icon=String.format("//*[td][%s]//div//div//*//*", s);
+      String icon_1=driver.findElement(By.xpath(Nodes_icon)).getAttribute("d");
+      if (Objects.equals(icon_1, "M496 128c0 221.282-135.934 344.645-221.539 380.308a48 48 0 0 1-36.923 0C130.495 463.713 16 326.487 16 128a48 48 0 0 1 29.539-44.308l192-80a48 48 0 0 1 36.923 0l192 80A48 48 0 0 1 496 128zM256 446.313l.066.034c93.735-46.689 172.497-156.308 175.817-307.729L256 65.333v380.98z")){
+        icon_1="normal";
+      }
+      if (Objects.equals(icon_1, "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z")){
+        icon_1="vip";
+      }
+      System.out.println("Icon_1: "+icon_1);
+
+      driver.findElement(By.xpath(Nodes_id)).click();
+
+      wait.until(ExpectedConditions.visibilityOf(ikon_status));
+      String icon_2 =ikon_status.getAttribute("d");
+      if (Objects.equals(icon_2, "M496 128c0 221.282-135.934 344.645-221.539 380.308a48 48 0 0 1-36.923 0C130.495 463.713 16 326.487 16 128a48 48 0 0 1 29.539-44.308l192-80a48 48 0 0 1 36.923 0l192 80A48 48 0 0 1 496 128zM256 446.313l.066.034c93.735-46.689 172.497-156.308 175.817-307.729L256 65.333v380.98z")){
+        icon_2="normal";
+      }
+      if (Objects.equals(icon_2, "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z")){
+        icon_2="vip";
+      }
+      System.out.println("Icon_2: "+icon_2);
+
+      if (Objects.equals(icon_1, icon_2)){
+        System.out.println(">>>>> Pass");
+      }else {
+        System.out.println(">>>>> Fail");
+      }
+      Assert.assertEquals(icon_1, icon_2);
+
+      if (Objects.equals(order, "desc")){
+        wait.until(ExpectedConditions.visibilityOf(Nodes));
+        Nodes.click();
+        wait.until(ExpectedConditions.visibilityOf(IdAssert));
+        IdAssert.click();
+      }else{
+        wait.until(ExpectedConditions.visibilityOf(Nodes));
+        Nodes.click();
+      }
+    }
   }
 }
