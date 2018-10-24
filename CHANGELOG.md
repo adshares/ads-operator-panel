@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Transaction page containing details
 - Search by node, block, transaction, account, message 
 - Breadcrumbs
+- Icon Table Cells
+- Relatively formatted date
+- Removed redundant columns on mobile view
+- Messages and transactions columns combined on mobile view 
 
 [Unreleased]: https://github.com/adshares/ads-operator-panel/compare/v0.1.0...HEAD
 
