@@ -62,7 +62,9 @@ export class NodePage extends React.PureComponent {
       },
       data: this.props.node.data,
       ceilConfiguration: {
-        status: value => <StatusTableCell value={value} showDesc />,
+        status: () => (
+          <StatusTableCell value={nodeConfig.data.status} showDesc />
+        ),
         mtim: () => (
           <div title={nodeConfig.data.mtim}>
             {moment(nodeConfig.data.mtim).fromNow()}
