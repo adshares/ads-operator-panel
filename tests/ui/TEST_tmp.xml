@@ -3,16 +3,28 @@
 <suite name="TEST_temp" parallel="false">
 
 
-  <test name="TC_WM_25" group-by-instances="true">
+  <test name="TC_20" group-by-instances="true">
     <classes>
       <class name="ui.ads.operator.panel.Blockexplorer">
         <methods>
-          <include name="dashboard_WM"/>
-          <include name="homeBlockexplorer"/>
+          <include name="dashboard"/>
+          <include name="firstFrom"/>
+          <include name="sortingTransactionsInAccount"/>
         </methods>
       </class>
     </classes>
   </test>
 
+  <test name="TC_14" group-by-instances="true">
+    <classes>
+      <class name="ui.ads.operator.panel.Blockexplorer">
+        <methods>
+          <include name="dashboard"/>
+          <include name="viewAllTransaction"/>
+          <include name="sortingTransactions"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
 
 </suite>

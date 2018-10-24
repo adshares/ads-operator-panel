@@ -105,9 +105,9 @@ class TableDataSet extends React.PureComponent {
 
   renderSingleRow(row) {
     const cells = [];
-
     Object.entries(this.props.columns).forEach(([columnHeader]) => {
       const value = row[columnHeader] !== undefined ? row[columnHeader] : '--';
+
       const cellValue =
         typeof this.props.ceilConfiguration[columnHeader] === 'function'
           ? this.props.ceilConfiguration[columnHeader](value, row)

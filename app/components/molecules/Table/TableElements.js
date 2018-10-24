@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { fadeIn } from '../../../styleUtils/keyframes';
+import { breakpoints } from '../../../utils/breakpoints';
 
 export const Table = styled.table`
   min-width: ${props => props.tableMinWidth || `auto`};
@@ -18,17 +19,32 @@ export const Table = styled.table`
 `;
 
 export const TableRow = styled.tr`
-  background-color: var(--white);
+  background-color: var(--white-gray);
   border: 4px solid var(--white-gray);
+
+  &:nth-of-type(odd) {
+    background-color: var(--white);
+  }
+
+  ${({ singleColorRow }) =>
+    singleColorRow &&
+    `
+      background: var(--white);
+`};
 
   ${({ showHoverAnimation }) =>
     showHoverAnimation &&
     `
-  &:hover {
-    position: relative;
-    transform: scale(1.05);
-    box-shadow: 0px 1px 0px #f8f9fa, 2px 1px 0px var(--blue);
-  }
+      @media (max-width: ${breakpoints.tabletLg}px) {
+        &:hover {
+          background-color: var(--light);
+        }
+      }
+      @media (min-width: ${breakpoints.tabletLg}px) {
+        &:hover {
+          border-right: 2px solid var(--blue);
+        }
+      }
 `};
 `;
 
@@ -43,6 +59,7 @@ export const TableCellStyled = styled.td`
   white-space: ${props => props.whitespace || 'nowrap'};
   word-break: ${props => props.textwrap || 'keep-all'};
   position: relative;
+  background-color: inherit;
 
   .ellipsisActive {
     display: block;
@@ -50,17 +67,20 @@ export const TableCellStyled = styled.td`
     font-family: inherit;
     overflow: hidden;
     text-overflow: ellipsis;
+    background-color: inherit;
 
     &:hover {
       position: absolute;
-      background-color: var(--white);
-      padding: 0 calc(var(--spacing-factor) * 3);
-      transform: translateX(-45px);
+      padding-right: calc(var(--spacing-factor) * 2);
       z-index: 10;
-      top: -1px;
+      top: 0;
       display: flex;
-      height: 44px;
+      height: 40px;
       align-items: center;
+
+      &:not(.id):not(.block_id) {
+        left: calc(var(--spacing-factor));
+      }
     }
 
     &.time:hover {
@@ -81,6 +101,14 @@ export const TableCellStyled = styled.td`
     font-family: 'Cousine', monospace;
     letter-spacing: 0.5px;
   }
+
+  & div a {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    padding-right: calc(var(--spacing-factor) * 5);
+    margin-right: calc(var(--spacing-factor) * (-5));
+  }
 `;
 
 export const TableHeader = styled.th`
@@ -90,6 +118,7 @@ export const TableHeader = styled.th`
   background-color: ${props => props.bgcolor || `var(--white-gray)`};
   color: var(--dust-gray);
 `;
+
 export const TableNoData = styled.div`
   text-align: center;
   font-size: 21px;
@@ -98,8 +127,25 @@ export const TableNoData = styled.div`
   color: var(--dust-gray);
 `;
 
+export const IconCellDescription = styled.span`
+  padding-left: var(--spacing-factor);
+  color: var(--moon-gray);
+`;
+
+export const IconTableCell = styled.div`
+  color: ${props => props.color || 'var(--gray)'};
+`;
+
+export const IconTableCellWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 TableHeader.displayName = 'TableHeader';
 TableRow.displayName = 'TableRow';
 TableCellStyled.displayName = 'TableCellStyled';
 TableBody.displayName = 'TableBody';
 Table.displayName = 'Table';
+IconCellDescription.displayName = 'IconCellDescription';
+IconTableCell.displayName = 'IconTableCell';
+IconTableCellWrapper.displayName = 'IconTableCellWrapper';

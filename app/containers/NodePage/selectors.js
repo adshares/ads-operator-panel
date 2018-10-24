@@ -1,4 +1,5 @@
 import formatMoney from 'lib/formatMoney';
+import formatDate from 'lib/formatDate';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -14,9 +15,11 @@ const selectNodePageDomain = state => state.get('nodePage', initialState);
 const makeSelectNode = () =>
   createSelector(selectNodePageDomain, globalState => {
     const node = globalState.get('node').toJS();
-
     if (node.data.balance) {
       node.data.balance = formatMoney(node.data.balance);
+    }
+    if (node.data.mtim) {
+      node.data.mtim = formatDate(node.data.mtim);
     }
 
     return node;

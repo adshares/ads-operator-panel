@@ -2,6 +2,11 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { shallowWrap } from 'testHelper';
 import TableDataSet from '../index';
+import { breakpoints } from '../../../../utils/breakpoints';
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<TableDataSet />', () => {
   it('should render <strong> element when data is empty', () => {
@@ -13,6 +18,7 @@ describe('<TableDataSet />', () => {
         loading={false}
         error={false}
         messageNoData="no data"
+        breakpoint={breakpoint}
       />,
     );
 
@@ -29,6 +35,7 @@ describe('<TableDataSet />', () => {
         data={[{ id: 1 }]}
         loading={false}
         error={false}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -44,6 +51,7 @@ describe('<TableDataSet />', () => {
         data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: 'name-2' }]}
         loading={false}
         error={false}
+        breakpoint={breakpoint}
       />,
     );
     expect(renderedComponent.find('Table').length).toEqual(1);
@@ -59,6 +67,7 @@ describe('<TableDataSet />', () => {
         data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: '2' }]}
         loading={false}
         error={false}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -75,6 +84,7 @@ describe('<TableDataSet />', () => {
         data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: '2' }]}
         loading
         error={false}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -89,6 +99,7 @@ describe('<TableDataSet />', () => {
         data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: '2' }]}
         loading={false}
         error={{ message: 'test' }}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -106,6 +117,7 @@ describe('<TableDataSet />', () => {
         data={[{ id: '0001', name: 'name-1' }, { id: '0002', name: '2' }]}
         loading={false}
         error={false}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -124,6 +136,7 @@ describe('<TableDataSet />', () => {
         ceilConfiguration={ceilConfiguration}
         loading={false}
         error={false}
+        breakpoint={breakpoint}
       />,
     );
 

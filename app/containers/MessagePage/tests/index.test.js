@@ -2,6 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
 import { MessagePage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<MessagePage />', () => {
   const location = { search: '' };
@@ -30,6 +36,7 @@ describe('<MessagePage />', () => {
         dispatch={dispatch}
         message={message}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
     expect(renderedComponent.find('h3').length).toEqual(1);
@@ -64,6 +71,7 @@ describe('<MessagePage />', () => {
         dispatch={dispatch}
         message={message}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -101,6 +109,7 @@ describe('<MessagePage />', () => {
         dispatch={dispatch}
         message={message}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -138,6 +147,7 @@ describe('<MessagePage />', () => {
         dispatch={dispatch}
         message={message}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -173,6 +183,7 @@ describe('<MessagePage />', () => {
         dispatch={dispatch}
         message={message}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -214,6 +225,7 @@ describe('<MessagePage />', () => {
         dispatch={dispatch}
         message={message}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
