@@ -1,5 +1,7 @@
 package ui.ads.operator.panel;
 
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import ui.ads.operator.panel.pages.DashboardPage;
 import ui.ads.operator.panel.pages.block.BlockPage;
 import ui.ads.operator.panel.pages.node.NodePage;
@@ -7,10 +9,8 @@ import ui.ads.operator.panel.pages.transaction.FromPage;
 import ui.ads.operator.panel.pages.transaction.MessagePage;
 import ui.ads.operator.panel.pages.transaction.ToPage;
 import ui.ads.operator.panel.pages.transaction.TransactionPage;
-import ui.ads.operator.panel.tools.Maps;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 import ui.ads.operator.panel.setup.BrowserTestCase;
+import ui.ads.operator.panel.tools.Maps;
 
 public class Blockexplorer extends BrowserTestCase {
 
@@ -47,7 +47,7 @@ public class Blockexplorer extends BrowserTestCase {
 
   @Test
   public void dashboard() {
-    System.out.println("---------- dashboard ----------");
+    System.out.println("---------- dashboard website ----------");
     dashboardPage = new DashboardPage(driver);
     dashboardPage.dashboard(url);
   }
@@ -227,7 +227,6 @@ public class Blockexplorer extends BrowserTestCase {
     transactionPage = new TransactionPage(driver);
     transactionPage.sortingTransactions();
   }
-//  transaction_message
   @Test
   public void detailedDataMessage() {
     System.out.println("---------- TC_15 ----------");
@@ -320,6 +319,16 @@ public class Blockexplorer extends BrowserTestCase {
     dashboardPage = new DashboardPage(driver);
     dashboardPage.searchInCorrect();
   }
-
-
+  @Test
+  public void iconNode() {
+    System.out.println("---------- TC_28 ----------");
+    nodePage = new NodePage(driver);
+    nodePage.iconNode();
+  }
+  @Test
+  public void iconTransactions() {
+    System.out.println("---------- TC_29 ----------");
+    transactionPage = new TransactionPage(driver);
+    transactionPage.iconTransactions();
+  }
 }

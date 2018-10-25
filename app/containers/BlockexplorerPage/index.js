@@ -10,12 +10,12 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment';
 import { FormattedMessage, intlShape } from 'react-intl';
-import Search from 'components/Search';
-import Card from 'components/Card';
+import Search from 'components/organisms/Search';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import LatestPanel from 'components/LatestPanel';
+import LatestPanel from 'components/organisms/LatestPanel';
 
 import {
   makeSelectLatestNodes,
@@ -73,10 +73,14 @@ export class Blockexplorer extends React.PureComponent {
       time: <FormattedMessage {...messages.transactionColumnTime} />,
     };
 
+    const ceilConfiguration = {
+      time: value => <div title={value}> {moment(value).fromNow()} </div>,
+    };
+
     const nodeTab = {
       id: 'node',
       name: this.context.intl.formatMessage(messages.nodeTabTitle),
-      link: 'blockexplorer/nodes',
+      link: '/blockexplorer/nodes',
       data: this.props.nodes.data,
       columns: nodeColumns,
     };
@@ -87,6 +91,7 @@ export class Blockexplorer extends React.PureComponent {
       link: '/blockexplorer/blocks',
       data: this.props.blocks.data,
       columns: blockColumns,
+      ceilConfiguration,
     };
 
     const transactionTab = {
@@ -95,6 +100,7 @@ export class Blockexplorer extends React.PureComponent {
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
       columns: transactionColumns,
+      ceilConfiguration,
     };
 
     return (
@@ -106,10 +112,6 @@ export class Blockexplorer extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <div className="row">
-          <Card />
-          <Card />
-        </div>
         <div className="row">
           <div className="col-md-12 col-xs-6">
             <Search />

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const LinkButton = styled(NavLink)`
   display: inline-flex;
-  padding: 32px 24px;
+  padding: calc(var(--spacing-factor) * 3);
   text-decoration: none;
   -webkit-font-smoothing: antialiased;
   -webkit-touch-callout: none;

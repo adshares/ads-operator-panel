@@ -35,6 +35,11 @@ export default defineMessages({
     id: 'app.containers.BlocksListPage.columnTransactionCount',
     defaultMessage: 'Transactions',
   },
+
+  columnMessageAndTransactionCount: {
+    id: 'app.containers.BlocksListPage.columnMessageAndTransactionCount',
+    defaultMessage: 'Message / Transactions',
+  },
   columnTime: {
     id: 'app.containers.BlocksListPage.columnTime',
     defaultMessage: 'Time',

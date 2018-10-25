@@ -1,4 +1,3 @@
-/* eslint-disable react/no-did-mount-set-state,prettier/prettier */
 /**
  *
  * TableDataSet
@@ -11,6 +10,14 @@ import { TableCellStyled } from './TableElements';
 
 /* eslint-disable react/prefer-stateless-function */
 class TableCell extends React.PureComponent {
+  checkTextOverflow = () => {
+    this.setState({
+      ellipsisClass: this.isEllipsisActive() ? 'ellipsisActive' : '',
+    });
+  };
+
+  isEllipsisActive = () =>
+    this.contentElement.offsetWidth < this.contentElement.scrollWidth;
 
   constructor(props) {
     super(props);
@@ -22,28 +29,18 @@ class TableCell extends React.PureComponent {
   componentDidMount() {
     this.checkTextOverflow();
   }
+
   componentWillUpdate(nextProps) {
     if (nextProps.breakpoint.name !== this.props.breakpoint.name) {
       this.checkTextOverflow();
     }
   }
 
-  checkTextOverflow = () => {
-    this.setState({
-      ellipsisClass:  this.isEllipsisActive() ? 'ellipsisActive' : '',
-    });
-  };
-
-  isEllipsisActive = () => this.contentElement.offsetWidth < this.contentElement.scrollWidth;
-
   render() {
     const { columnName, value } = this.props;
     const classes = `${columnName} ${this.state.ellipsisClass}`;
-
     return (
-      <TableCellStyled
-        className={columnName}
-      >
+      <TableCellStyled className={columnName}>
         <div
           className={classes}
           ref={el => {

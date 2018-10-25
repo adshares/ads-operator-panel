@@ -1,0 +1,7 @@
+{
+  "name": "chromedriver",
+  "platform": "linux",
+  "bit": "64",
+  "version": "2.42.0",
+  "url": "http://chromedriver.storage.googleapis.com/2.42/chromedriver_linux64.zip"
+}

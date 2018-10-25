@@ -12,7 +12,7 @@ injectGlobal`
   --red: #dc3545;
   --orange: #fd7e14;
   --yellow: #ffc107;
-  --green: #28a745;
+  --green: #009c0f;
   --teal: #20c997;
   --cyan: #17a2b8;
   --white: #fff;
@@ -28,7 +28,7 @@ injectGlobal`
   --info: #17a2b8;
   --warning: #ffc107;
   --danger: #dc3545;
-  --light: #c0d9f3;
+  --light: #f1f1f1;
   --dark: #343a40;
   --spacing-factor: 8px;
   --breakpoint-xs: 0;

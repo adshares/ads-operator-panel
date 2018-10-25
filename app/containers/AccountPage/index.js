@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
 import config from 'config';
@@ -24,6 +25,8 @@ import saga from './saga';
 import { loadAccount, loadTransactions } from './actions';
 import { AccountPageWrapper } from './styled';
 import messages from './messages';
+import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
+import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class AccountPage extends React.PureComponent {
@@ -47,14 +50,29 @@ export class AccountPage extends React.PureComponent {
     const { id } = this.props.match.params;
     const nodeId =
       this.props.match.params.nodeId || this.props.account.data.node_id;
-
-    const fields = {
-      id: <FormattedMessage {...messages.fieldId} />,
-      balance: <FormattedMessage {...messages.fieldBalance} />,
-      status: <FormattedMessage {...messages.fieldStatus} />,
-      public_key: <FormattedMessage {...messages.fieldPublicKey} />,
-      local_change: <FormattedMessage {...messages.fieldLocalChange} />,
-      time: <FormattedMessage {...messages.fieldTime} />,
+    const accountConfig = {
+      columns: {
+        id: <FormattedMessage {...messages.fieldId} />,
+        balance: <FormattedMessage {...messages.fieldBalance} />,
+        status: <FormattedMessage {...messages.fieldStatus} />,
+        public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+        local_change: <FormattedMessage {...messages.fieldLocalChange} />,
+        time: <FormattedMessage {...messages.fieldTime} />,
+      },
+      data: this.props.account.data,
+      ceilConfiguration: {
+        time: () => (
+          <div title={accountConfig.data.time}>
+            {moment(accountConfig.data.time).fromNow()}
+          </div>
+        ),
+        local_change: () => (
+          <div title={accountConfig.data.time}>
+            {moment(accountConfig.data.time).fromNow()}
+          </div>
+        ),
+        status: value => <StatusTableCell value={value} showDesc />,
+      },
     };
 
     const columns = {
@@ -62,7 +80,6 @@ export class AccountPage extends React.PureComponent {
       block_id: <FormattedMessage {...messages.columnBlockId} />,
       message_id: <FormattedMessage {...messages.columnMessageId} />,
       address: <FormattedMessage {...messages.columnAddress} />,
-      direction: <FormattedMessage {...messages.columnDirection} />,
       amount: <FormattedMessage {...messages.columnAmount} />,
       type: <FormattedMessage {...messages.columnType} />,
       time: <FormattedMessage {...messages.columnTime} />,
@@ -76,7 +93,7 @@ export class AccountPage extends React.PureComponent {
         <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
       ),
       message_id: (value, row) => (
-        <Link to={`blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+        <Link to={`/blockexplorer/blocks/${row.block_id}/messages/${value}`}>
           {value}
         </Link>
       ),
@@ -86,6 +103,12 @@ export class AccountPage extends React.PureComponent {
           transactionId={row.id}
           address={value}
         />
+      ),
+      type: (value, row) => (
+        <TypeTableCell value={value} direction={row.direction} />
+      ),
+      time: (value, row) => (
+        <div title={row.time}> {moment(row.time).fromNow()} </div>
       ),
     };
 
@@ -106,10 +129,11 @@ export class AccountPage extends React.PureComponent {
           <FormattedMessage {...messages.header} /> #{id}
         </h3>
         <DetailView
-          fields={fields}
+          fields={accountConfig.columns}
           data={this.props.account.data}
           loading={this.props.account.loading}
           error={this.props.account.error}
+          ceilConfiguration={accountConfig.ceilConfiguration}
         />
         <h4>
           <FormattedMessage {...messages.transactionTabTitle} />

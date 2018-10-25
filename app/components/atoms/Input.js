@@ -4,7 +4,7 @@ export const Input = styled.input`
   width: ${props => props.width || `auto`};
   padding: ${props =>
     props.padding ||
-    `calc(var(--spacing-factor) * 3) calc(var(--spacing-factor) * 4)`};
+    `calc(var(--spacing-factor) * 2) calc(var(--spacing-factor) * 4)`};
   color: ${props => props.color || `var(--white)`};
   background-color: ${props =>
     props.bgColor ? props.bgColor : `var(--light-blue)`};

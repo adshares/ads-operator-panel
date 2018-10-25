@@ -33,14 +33,14 @@ public class ToPage {
   @FindBy(xpath = "//*[contains(text(), 'Previous')]")                                                                  private WebElement Previous;
   @FindBy(xpath = "//*[contains(text(), 'Next')]")                                                                      private WebElement Next;
   @FindBy(xpath = "//*[contains(text(), '...')]")                                                                       private WebElement ThreeDots;
-  @FindBy(xpath = "//section//thead//th[1]")                                                                            private WebElement NodesId;
-  @FindBy(xpath = "//section//thead//th[2]")                                                                            private WebElement Block;
-  @FindBy(xpath = "//section//thead//th[7]")                                                                            private WebElement Type;
+  @FindBy(xpath = "//section//thead//th//span[contains(text(), 'Id')]")                                                 private WebElement NodesId;
+  @FindBy(xpath = "//section//thead//th//span[contains(text(), 'Block')]")                                              private WebElement Block;
+  @FindBy(xpath = "//section//thead//th//span[contains(text(), 'Type')]")                                               private WebElement Type;
   //  Accounts
-  @FindBy(xpath = "//section//th[1]")                                                                                   private WebElement AccountIdAssert;
-  @FindBy(xpath = "//section//th[2]")                                                                                   private WebElement AccountBalanceAssert;
-  @FindBy(xpath = "//section//th[3]")                                                                                   private WebElement AccountStatusAssert;
-  @FindBy(xpath = "//section//th[4]")                                                                                   private WebElement AccountPublicKeyAssert;
+  @FindBy(xpath = "//section//th//span[contains(text(), 'Account Id')]")                                                private WebElement AccountIdAssert;
+  @FindBy(xpath = "//section//th//span[contains(text(), 'Balance')]")                                                   private WebElement AccountBalanceAssert;
+  @FindBy(xpath = "//section//th//span[contains(text(), 'Status')]")                                                    private WebElement AccountStatusAssert;
+  @FindBy(xpath = "//section//th//span[contains(text(), 'Public Key')]")                                                private WebElement AccountPublicKeyAssert;
 
 
   private WebDriver driver;
@@ -145,6 +145,7 @@ public class ToPage {
     System.out.println("Skip >>>>>");
   }
   }
+
   private void copyCode() {
     wait.until(ExpectedConditions.visibilityOf(Copy));
     Copy.click();

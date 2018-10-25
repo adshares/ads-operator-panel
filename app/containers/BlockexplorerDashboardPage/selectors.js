@@ -25,9 +25,13 @@ const makeSelectLatestBlocks = () =>
     const blocks = globalState.get('blocks').toJS();
 
     if (blocks.data) {
-      blocks.data.map(item => {
-        item.time = formatDate(item.time); // eslint-disable-line
-        return item;
+      blocks.data.map(rawBlock => {
+        const block = rawBlock;
+        block.time = formatDate(block.time);
+        block.message_and_transaction_count = `${block.message_count} / ${
+          block.transaction_count
+        }`;
+        return block;
       });
     }
 
