@@ -5,8 +5,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Changed
-- Handle trailing slash in url to make both urls correct
 
 ## [0.1.1] - 2018-10-25
 ### Added
@@ -22,8 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Display only previous element on the Breadcrumb list in mobile view 
 
 ### Fixed
-- Handle trailing slash in routes
-- Fix for long breadcrumbs on desktops 
+- Handle trailing slash in url to make both urls correct
+- Support for long breadcrumbs on desktops 
 
 ### Removed
 - Remove unused Card component
