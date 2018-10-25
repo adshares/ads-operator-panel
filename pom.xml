@@ -51,6 +51,12 @@
             <artifactId>guava</artifactId>
             <version>25.0-jre</version>
         </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-support</artifactId>
+        <version>3.14.0</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
 
     <build>
@@ -82,6 +88,7 @@
                         <suiteXmlFile>${project.build.testSourceDirectory}/TS_5 - Information about the from.xml</suiteXmlFile>
                         <suiteXmlFile>${project.build.testSourceDirectory}/TS_6 - Information about the to.xml</suiteXmlFile>
                         <suiteXmlFile>${project.build.testSourceDirectory}/TS_7 - Information on the home page.xml</suiteXmlFile>
+                        <suiteXmlFile>${project.build.testSourceDirectory}/TS_8 - Information icon.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
