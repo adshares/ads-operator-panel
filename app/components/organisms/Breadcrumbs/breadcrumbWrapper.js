@@ -6,6 +6,7 @@ export const BreadcrumbsWrapper = styled(List)`
   grid-area: breadcrumbs;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 
   @media (max-width: ${breakpoints.tabletMd}px) {
     padding: calc(var(--spacing-factor) * 3);
