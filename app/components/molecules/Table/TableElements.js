@@ -122,6 +122,7 @@ export const TableNoData = styled.div`
 export const IconCellDescription = styled.span`
   padding-left: var(--spacing-factor);
   color: var(--moon-gray);
+  text-transform: capitalize;
 `;
 
 export const IconTableCell = styled.div`
