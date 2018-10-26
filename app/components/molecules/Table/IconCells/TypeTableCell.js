@@ -24,15 +24,15 @@ const TYPE_DEFAULT = 'send_one';
 const TYPES = ['send_one', 'send_many', 'broadcast'];
 const DIRECTION_IN = 'in';
 
-const SendToManyIcon = ({ color }) => (
-  <CombinedIcon color={color || 'var(--green)'}>
+const SendToManyIcon = ({ iconColor }) => (
+  <CombinedIcon color={iconColor || 'var(--green)'}>
     <FaLongArrowAltRight />
     <FaLongArrowAltRight />
   </CombinedIcon>
 );
 
-const FromManyIcon = ({ color }) => (
-  <CombinedIcon color={color || 'var(--green)'}>
+const FromManyIcon = ({ iconColor }) => (
+  <CombinedIcon color={iconColor || 'var(--green)'}>
     <FaLongArrowAltLeft />
     <FaLongArrowAltLeft />
   </CombinedIcon>
@@ -61,7 +61,7 @@ const TypeTableCell = ({ value, showDesc, direction }) => {
           value === TYPE_DEFAULT ? (
             <FaLongArrowAltRight color="var(--green)" />
           ) : (
-            <SendToManyIcon color="var(--green)" />
+            <SendToManyIcon iconColor="var(--green)" />
           ),
         desc,
       };
@@ -74,7 +74,7 @@ const TypeTableCell = ({ value, showDesc, direction }) => {
           value === TYPE_DEFAULT ? (
             <FaLongArrowAltLeft color="var(--green)" />
           ) : (
-            <FromManyIcon color="var(--green)" />
+            <FromManyIcon iconColor="var(--green)" />
           ),
       };
     }
@@ -84,7 +84,7 @@ const TypeTableCell = ({ value, showDesc, direction }) => {
         value === TYPE_DEFAULT ? (
           <FaLongArrowAltRight color="var(--red)" />
         ) : (
-          <SendToManyIcon color="var(--red)" />
+          <SendToManyIcon iconColor="var(--red)" />
         ),
       desc,
     };
@@ -116,11 +116,11 @@ TypeTableCell.propTypes = {
 };
 
 SendToManyIcon.propTypes = {
-  color: PropTypes.string,
+  iconColor: PropTypes.string,
 };
 
 FromManyIcon.propTypes = {
-  color: PropTypes.string,
+  iconColor: PropTypes.string,
 };
 
 export default TypeTableCell;
