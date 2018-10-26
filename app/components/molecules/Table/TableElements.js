@@ -72,19 +72,19 @@ export const TableCellStyled = styled.td`
     &:hover {
       position: absolute;
       padding-right: calc(var(--spacing-factor) * 2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 10;
       top: 0;
-      display: flex;
       height: 40px;
-      align-items: center;
-
-      &:not(.id):not(.block_id) {
-        left: calc(var(--spacing-factor));
-      }
     }
+  }
 
-    &.time:hover {
-      padding: 0 calc(var(--spacing-factor) * 4);
+  &.time {
+    padding: 0;
+
+    &:hover {
       border-right: 2px solid var(--blue);
     }
   }
@@ -100,14 +100,6 @@ export const TableCellStyled = styled.td`
   .amount {
     font-family: 'Cousine', monospace;
     letter-spacing: 0.5px;
-  }
-
-  & div a {
-    display: inline-block;
-    position: relative;
-    z-index: 1;
-    padding-right: calc(var(--spacing-factor) * 5);
-    margin-right: calc(var(--spacing-factor) * (-5));
   }
 `;
 
@@ -130,6 +122,7 @@ export const TableNoData = styled.div`
 export const IconCellDescription = styled.span`
   padding-left: var(--spacing-factor);
   color: var(--moon-gray);
+  text-transform: capitalize;
 `;
 
 export const IconTableCell = styled.div`
