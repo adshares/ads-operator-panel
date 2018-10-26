@@ -116,11 +116,11 @@ TypeTableCell.propTypes = {
 };
 
 SendToManyIcon.propTypes = {
-  iconColor: PropTypes.string,
+  iconColor: PropTypes.string.isRequired,
 };
 
 FromManyIcon.propTypes = {
-  iconColor: PropTypes.string,
+  iconColor: PropTypes.string.isRequired,
 };
 
 export default TypeTableCell;
