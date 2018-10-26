@@ -17,6 +17,7 @@ import {
   IconTableCell,
   IconTableCellWrapper,
 } from '../TableElements';
+import { toTitleCase } from '../../../../utils/transformationHelpers';
 import CombinedIcon from '../../../atoms/CombinedIcon';
 
 const TYPE_DEFAULT = 'send_one';
@@ -39,7 +40,7 @@ const FromManyIcon = ({ color }) => (
 
 const TypeTableCell = ({ value, showDesc, direction }) => {
   const getData = () => {
-    const desc = typeof value === 'string' && value.split('_').join(' ');
+    const desc = typeof value === 'string' && toTitleCase(value, '_');
 
     if (!TYPES.includes(value)) {
       return {
