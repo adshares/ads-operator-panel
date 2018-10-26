@@ -23,15 +23,15 @@ const TYPE_DEFAULT = 'send_one';
 const TYPES = ['send_one', 'send_many', 'broadcast'];
 const DIRECTION_IN = 'in';
 
-const SendToManyIcon = () => (
-  <CombinedIcon>
+const SendToManyIcon = ({ color }) => (
+  <CombinedIcon color={color || 'var(--green)'}>
     <FaLongArrowAltRight />
     <FaLongArrowAltRight />
   </CombinedIcon>
 );
 
-const FromManyIcon = () => (
-  <CombinedIcon>
+const FromManyIcon = ({ color }) => (
+  <CombinedIcon color={color || 'var(--green)'}>
     <FaLongArrowAltLeft />
     <FaLongArrowAltLeft />
   </CombinedIcon>
@@ -44,38 +44,55 @@ const TypeTableCell = ({ value, showDesc, direction }) => {
     if (!TYPES.includes(value)) {
       return {
         desc,
-        icon: <FaAsterisk />,
-        color: 'var(--gray)',
+        icon: <FaAsterisk color="var(--gray)" />,
       };
     }
     if (value === 'broadcast') {
       return {
         desc,
-        color: 'var(--light-blue)',
-        icon: <FaBullhorn />,
+        icon: <FaBullhorn color="var(--light-blue)" />,
       };
     }
-    if (direction && direction === DIRECTION_IN) {
+
+    if (!direction) {
+      return {
+        icon:
+          value === TYPE_DEFAULT ? (
+            <FaLongArrowAltRight color="var(--green)" />
+          ) : (
+            <SendToManyIcon color="var(--green)" />
+          ),
+        desc,
+      };
+    }
+
+    if (direction === DIRECTION_IN) {
       return {
         desc,
-        color: 'var(--green)',
         icon:
-          value === TYPE_DEFAULT ? <FaLongArrowAltLeft /> : <FromManyIcon />,
+          value === TYPE_DEFAULT ? (
+            <FaLongArrowAltLeft color="var(--green)" />
+          ) : (
+            <FromManyIcon color="var(--green)" />
+          ),
       };
     }
 
     return {
       icon:
-        value === TYPE_DEFAULT ? <FaLongArrowAltRight /> : <SendToManyIcon />,
+        value === TYPE_DEFAULT ? (
+          <FaLongArrowAltRight color="var(--red)" />
+        ) : (
+          <SendToManyIcon color="var(--red)" />
+        ),
       desc,
-      color: 'var(--green)',
     };
   };
 
-  const { icon, desc, color } = getData();
+  const { icon, desc } = getData();
 
   return (
-    <IconTableCell title={showDesc ? '' : desc} color={color}>
+    <IconTableCell title={showDesc ? '' : desc}>
       {showDesc ? (
         <IconTableCellWrapper>
           {icon} <IconCellDescription>{desc}</IconCellDescription>
@@ -95,6 +112,14 @@ TypeTableCell.propTypes = {
   ]).isRequired,
   showDesc: PropTypes.bool,
   direction: PropTypes.string,
+};
+
+SendToManyIcon.propTypes = {
+  color: PropTypes.string,
+};
+
+FromManyIcon.propTypes = {
+  color: PropTypes.string,
 };
 
 export default TypeTableCell;

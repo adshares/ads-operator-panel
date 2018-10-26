@@ -79,9 +79,12 @@ export const TableCellStyled = styled.td`
       top: 0;
       height: 40px;
     }
+  }
 
-    &.time:hover {
-      padding: 0 calc(var(--spacing-factor) * 4);
+  &.time {
+    padding: 0;
+
+    &:hover {
       border-right: 2px solid var(--blue);
     }
   }
