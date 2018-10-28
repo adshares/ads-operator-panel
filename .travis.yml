@@ -36,7 +36,6 @@ before_script:
     sleep infinity
   - docker exec $BUILD_NAME apt-get -qq -y update
   - docker exec $BUILD_NAME apt-get -qq -y install chromium-browser xvfb
-  - docker exec $BUILD_NAME sh -e /etc/init.d/xvfb start
 
 jobs:
   include:
