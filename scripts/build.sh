@@ -17,9 +17,6 @@ if [ ! -v TRAVIS ]; then
   cd ${ADS_OPERATOR_PANEL_BUILD_PATH}/build
 fi
 
-# Create environment
-envsubst < environment.ts.dist | tee src/environments/environment.${APP_ENV}.ts
-
 # Install dependencies
 yarn install
 
