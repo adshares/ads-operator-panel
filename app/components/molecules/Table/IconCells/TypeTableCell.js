@@ -17,21 +17,22 @@ import {
   IconTableCell,
   IconTableCellWrapper,
 } from '../TableElements';
+import { toTitleCase } from '../../../../utils/transformationHelpers';
 import CombinedIcon from '../../../atoms/CombinedIcon';
 
 const TYPE_DEFAULT = 'send_one';
 const TYPES = ['send_one', 'send_many', 'broadcast'];
 const DIRECTION_IN = 'in';
 
-const SendToManyIcon = () => (
-  <CombinedIcon>
+const SendToManyIcon = ({ iconColor }) => (
+  <CombinedIcon color={iconColor || 'var(--green)'}>
     <FaLongArrowAltRight />
     <FaLongArrowAltRight />
   </CombinedIcon>
 );
 
-const FromManyIcon = () => (
-  <CombinedIcon>
+const FromManyIcon = ({ iconColor }) => (
+  <CombinedIcon color={iconColor || 'var(--green)'}>
     <FaLongArrowAltLeft />
     <FaLongArrowAltLeft />
   </CombinedIcon>
@@ -39,43 +40,60 @@ const FromManyIcon = () => (
 
 const TypeTableCell = ({ value, showDesc, direction }) => {
   const getData = () => {
-    const desc = typeof value === 'string' && value.split('_').join(' ');
+    const desc = typeof value === 'string' && toTitleCase(value, '_');
 
     if (!TYPES.includes(value)) {
       return {
         desc,
-        icon: <FaAsterisk />,
-        color: 'var(--gray)',
+        icon: <FaAsterisk color="var(--gray)" />,
       };
     }
     if (value === 'broadcast') {
       return {
         desc,
-        color: 'var(--light-blue)',
-        icon: <FaBullhorn />,
+        icon: <FaBullhorn color="var(--light-blue)" />,
       };
     }
-    if (direction && direction === DIRECTION_IN) {
+
+    if (!direction) {
+      return {
+        icon:
+          value === TYPE_DEFAULT ? (
+            <FaLongArrowAltRight color="var(--green)" />
+          ) : (
+            <SendToManyIcon iconColor="var(--green)" />
+          ),
+        desc,
+      };
+    }
+
+    if (direction === DIRECTION_IN) {
       return {
         desc,
-        color: 'var(--green)',
         icon:
-          value === TYPE_DEFAULT ? <FaLongArrowAltLeft /> : <FromManyIcon />,
+          value === TYPE_DEFAULT ? (
+            <FaLongArrowAltLeft color="var(--green)" />
+          ) : (
+            <FromManyIcon iconColor="var(--green)" />
+          ),
       };
     }
 
     return {
       icon:
-        value === TYPE_DEFAULT ? <FaLongArrowAltRight /> : <SendToManyIcon />,
+        value === TYPE_DEFAULT ? (
+          <FaLongArrowAltRight color="var(--red)" />
+        ) : (
+          <SendToManyIcon iconColor="var(--red)" />
+        ),
       desc,
-      color: 'var(--green)',
     };
   };
 
-  const { icon, desc, color } = getData();
+  const { icon, desc } = getData();
 
   return (
-    <IconTableCell title={showDesc ? '' : desc} color={color}>
+    <IconTableCell title={showDesc ? '' : desc}>
       {showDesc ? (
         <IconTableCellWrapper>
           {icon} <IconCellDescription>{desc}</IconCellDescription>
@@ -95,6 +113,14 @@ TypeTableCell.propTypes = {
   ]).isRequired,
   showDesc: PropTypes.bool,
   direction: PropTypes.string,
+};
+
+SendToManyIcon.propTypes = {
+  iconColor: PropTypes.string.isRequired,
+};
+
+FromManyIcon.propTypes = {
+  iconColor: PropTypes.string.isRequired,
 };
 
 export default TypeTableCell;
