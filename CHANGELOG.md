@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.2] - 2018-10-26
+## [0.1.2] - 2018-10-29
 ### Changed
 - Distinguish transactions direction by colors (green, red)
 - Transform icons titles text
@@ -28,8 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Display only previous element on the Breadcrumb list in mobile view 
 
 ### Fixed
-- Handle trailing slash in routes
-- Fix for long breadcrumbs on desktops 
+- Handle trailing slash in url to make both urls correct
+- Support for long breadcrumbs on desktops 
 
 ### Removed
 - Remove unused Card component
