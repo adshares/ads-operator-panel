@@ -11,10 +11,10 @@ if [ ! -v TRAVIS ]; then
   git clone \
     --depth=1 \
     https://github.com/adshares/ads-operator-panel.git \
-    --branch ${ADS_OPERATOR_PANEL_INSTALLATION_BRANCH} \
-    ${ADS_OPERATOR_PANEL_BUILD_PATH}/build
+    --branch ${ADS_OPERATOR_PANEL_BRANCH} \
+    ${BUILD_PATH}/build
 
-  cd ${ADS_OPERATOR_PANEL_BUILD_PATH}/build
+  cd ${BUILD_PATH}/build
 fi
 
 # Install dependencies
