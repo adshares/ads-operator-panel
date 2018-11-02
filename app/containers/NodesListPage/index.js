@@ -42,6 +42,7 @@ export class NodesListPage extends React.Component {
       msid: <FormattedMessage {...messages.fieldMsid} />,
       balance: <FormattedMessage {...messages.fieldBalance} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
+      version: <FormattedMessage {...messages.fieldVersion} />,
     };
 
     const columns = isMobile ? columnsMobile : columnsDesktop;
@@ -51,7 +52,7 @@ export class NodesListPage extends React.Component {
       status: value => <StatusTableCell value={value} />,
     };
 
-    const sortingColumns = ['id'];
+    const sortingColumns = ['id', 'version'];
     const { match, location, nodes, onPageChange, breakpoint } = this.props;
     return (
       <div>
