@@ -106,9 +106,9 @@ export class BlockPage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
           fields={blockConfig.columns}
           data={blockConfig.data}
@@ -116,9 +116,9 @@ export class BlockPage extends React.PureComponent {
           error={this.props.block.error}
           ceilConfiguration={blockConfig.ceilConfiguration}
         />
-        <h4>
+        <h2>
           <FormattedMessage {...messages.messageTabTitle} />
-        </h4>
+        </h2>
         <ListView
           name="messages"
           urlParams={this.props.match.params}

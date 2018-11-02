@@ -30,13 +30,14 @@ injectGlobal`
     --danger: #dc3545;
     --light: #f1f1f1;
     --dark: #343a40;
+    --box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.16);
     --spacing-factor: 8px;
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
-    --font-family-content:  Roboto, Arial, sans-serif;
+    --font-family-content:  Lato, Arial, sans-serif;
     --font-family-title: Lato, Arial, sans-serif;
     font-size: 16px;
   }
@@ -52,14 +53,9 @@ injectGlobal`
     font-family: var(--font-family-content);
   }
   
-  p,a,li,blockquote {
-    font-family: var(--font-family-content);
-    font-weight: 400;
-  }
-  
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-title);
-    font-weight: 700;
+    font-weight: 400;
   }
   
   h1 { 

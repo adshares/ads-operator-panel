@@ -125,9 +125,9 @@ export class AccountPage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
           fields={accountConfig.columns}
           data={this.props.account.data}
@@ -135,9 +135,9 @@ export class AccountPage extends React.PureComponent {
           error={this.props.account.error}
           ceilConfiguration={accountConfig.ceilConfiguration}
         />
-        <h4>
+        <h2>
           <FormattedMessage {...messages.transactionTabTitle} />
-        </h4>
+        </h2>
         <ListView
           name="transactions"
           urlParams={this.props.match.params}
