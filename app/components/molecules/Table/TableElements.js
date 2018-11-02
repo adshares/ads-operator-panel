@@ -25,9 +25,6 @@ export const TableRow = styled.tr`
   border-right: 2px solid var(--white);
   border-top: 1px solid var(--grayish-white);
 
-  &:nth-of-type(odd) {
-  }
-
   ${({ singleColorRow }) =>
     singleColorRow &&
     `
