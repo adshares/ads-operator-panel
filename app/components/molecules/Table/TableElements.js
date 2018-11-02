@@ -94,13 +94,6 @@ export const TableCellStyled = styled.td`
     text-align: right;
     min-width: 12ch;
   }
-
-  .id,
-  .balance,
-  .amount {
-    font-family: 'Cousine', monospace;
-    letter-spacing: 0.5px;
-  }
 `;
 
 export const TableHeader = styled.th`

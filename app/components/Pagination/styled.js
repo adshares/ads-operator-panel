@@ -12,6 +12,7 @@ export const PaginationListElement = styled.li`
   color: var(--light-blue);
   background-color: white;
   border: 1px solid var(--light-gray);
+  font-family: var(--font-family-title);
 
   &:first-of-type {
     border-bottom-left-radius: 3px;
