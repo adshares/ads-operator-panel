@@ -57,6 +57,7 @@ export class NodePage extends React.PureComponent {
         balance: <FormattedMessage {...messages.fieldBalance} />,
         status: <FormattedMessage {...messages.fieldStatus} />,
         ipv4: <FormattedMessage {...messages.fieldIp} />,
+        version: <FormattedMessage {...messages.fieldVersion} />,
         public_key: <FormattedMessage {...messages.fieldPublicKey} />,
         mtim: <FormattedMessage {...messages.fieldMtim} />,
       },
