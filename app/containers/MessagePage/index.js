@@ -124,9 +124,9 @@ export class MessagePage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
           fields={messageConfig.columns}
           data={this.props.message.data}
@@ -135,9 +135,9 @@ export class MessagePage extends React.PureComponent {
           error={this.props.message.error}
           tableMinWidth={config.tablesMinWidth.tableLg}
         />
-        <h4>
+        <h2>
           <FormattedMessage {...messages.transactionTabTitle} />
-        </h4>
+        </h2>
         <ListView
           name="transactions"
           urlParams={this.props.match.params}

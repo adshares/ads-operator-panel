@@ -5,6 +5,9 @@ export const Button = styled.button`
   color: ${props => props.color || `var(--white)`};
   background-color: ${props => props.bgcolor || `var(--dark-blue)`};
   border: 1px solid ${props => props.bgcolor || `var(--dark-blue)`};
+  cursor: pointer;
+  font-family: var(--font-family-title);
+  text-transform: uppercase;
 
   &:hover,
   &:focus {

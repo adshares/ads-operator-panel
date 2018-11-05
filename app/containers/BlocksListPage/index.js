@@ -22,7 +22,6 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadBlocks } from './actions';
-import { Title } from '../../components/atoms/Title';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -65,9 +64,9 @@ export class BlocksListPage extends React.PureComponent {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <Title>
+        <h1>
           <FormattedMessage {...messages.header} />
-        </Title>
+        </h1>
         <ListView
           name="blocks"
           urlParams={match.params}

@@ -21,7 +21,6 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadNodes } from './actions';
-import { Title } from '../../components/atoms/Title';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
@@ -62,7 +61,7 @@ export class NodesListPage extends React.Component {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <Title>{messages.header.defaultMessage}</Title>
+        <h1>{messages.header.defaultMessage}</h1>
         <ListView
           name="nodes"
           urlParams={match.params}

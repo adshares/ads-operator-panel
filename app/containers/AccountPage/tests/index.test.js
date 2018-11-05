@@ -38,7 +38,7 @@ describe('<AccountPage />', () => {
         breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('h3').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
