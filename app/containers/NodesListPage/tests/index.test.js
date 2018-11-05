@@ -27,7 +27,7 @@ describe('<NodesListPage />', () => {
         breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('Title').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 });

@@ -126,9 +126,9 @@ export class NodePage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
           fields={nodeConfig.columns}
           data={node.data}
@@ -137,9 +137,9 @@ export class NodePage extends React.PureComponent {
           breakpoint={breakpoint}
           ceilConfiguration={nodeConfig.ceilConfiguration}
         />
-        <h4>
+        <h2>
           <FormattedMessage {...messages.accountTabTitle} />
-        </h4>
+        </h2>
         <ListView
           name="accounts"
           urlParams={match.params}

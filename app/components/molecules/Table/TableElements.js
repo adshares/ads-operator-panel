@@ -10,6 +10,7 @@ export const Table = styled.table`
   margin-top: ${props => props.margintop || `0`};
   animation: ${fadeIn} 0.5s;
   animation-fill-mode: forwards;
+  box-shadow: var(--box-shadow);
   ${({ showIntroAnimation }) =>
     showIntroAnimation &&
     `
@@ -19,12 +20,10 @@ export const Table = styled.table`
 `;
 
 export const TableRow = styled.tr`
-  background-color: var(--white-gray);
-  border: 4px solid var(--white-gray);
-
-  &:nth-of-type(odd) {
-    background-color: var(--white);
-  }
+  background-color: var(--white);
+  border-left: 2px solid var(--white);
+  border-right: 2px solid var(--white);
+  border-top: 1px solid var(--grayish-white);
 
   ${({ singleColorRow }) =>
     singleColorRow &&
@@ -42,7 +41,7 @@ export const TableRow = styled.tr`
       }
       @media (min-width: ${breakpoints.tabletLg}px) {
         &:hover {
-          border-right: 2px solid var(--blue);
+          border-right-color: var(--blue);
         }
       }
 `};
@@ -94,21 +93,28 @@ export const TableCellStyled = styled.td`
     text-align: right;
     min-width: 12ch;
   }
-
-  .id,
-  .balance,
-  .amount {
-    font-family: 'Cousine', monospace;
-    letter-spacing: 0.5px;
-  }
 `;
 
-export const TableHeader = styled.th`
+export const TableHeaderRow = styled.tr`
+  border-left: 2px solid var(--white);
+  border-right: 2px solid var(--white);
+`;
+
+export const TableHeaderCell = styled.th`
   width: ${props => props.width || `auto`};
   text-align: ${props => props.textalign || `center`};
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
   background-color: ${props => props.bgcolor || `var(--white-gray)`};
-  color: var(--dust-gray);
+  color: var(--gray);
+  font-family: var(--font-family-title);
+  font-weight: 400;
+  text-transform: uppercase;
+  a {
+    color: var(--gray);
+    * {
+      vertical-align: middle;
+    }
+  }
 `;
 
 export const TableNoData = styled.div`
@@ -134,7 +140,8 @@ export const IconTableCellWrapper = styled.div`
   align-items: center;
 `;
 
-TableHeader.displayName = 'TableHeader';
+TableHeaderRow.displayName = 'TableHeaderRow';
+TableHeaderCell.displayName = 'TableHeaderCell';
 TableRow.displayName = 'TableRow';
 TableCellStyled.displayName = 'TableCellStyled';
 TableBody.displayName = 'TableBody';

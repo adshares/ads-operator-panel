@@ -82,9 +82,9 @@ export class TransactionPage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
           fields={transactionConfig.columns}
           data={transactionConfig.data}

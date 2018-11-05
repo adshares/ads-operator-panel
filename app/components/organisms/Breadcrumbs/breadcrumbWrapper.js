@@ -7,6 +7,7 @@ export const BreadcrumbsWrapper = styled(List)`
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
+  border-bottom: 1px solid var(--grayish-white);
 
   @media (max-width: ${breakpoints.tabletMd}px) {
     padding: calc(var(--spacing-factor) * 3);

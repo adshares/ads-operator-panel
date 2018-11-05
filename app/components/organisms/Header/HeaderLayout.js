@@ -10,6 +10,7 @@ export const HeaderWrapper = styled.header`
     '. brand  navbar . search .'
     70px / 1.2fr 2fr 1fr 2fr 3fr 1.2fr;
   background: var(--blue);
+  box-shadow: 0px 2px 8px 0 rgba(0, 0, 0, 0.16);
 
   @media (max-width: ${breakpoints.tabletMd}px) {
     grid-template:

@@ -8,12 +8,14 @@ export const Breadcrumb = styled.li`
   text-decoration: none;
   text-align: center;
   white-space: nowrap;
+  font-family: var(--font-family-title);
 
   &:after {
     content: '>';
-    margin: var(--spacing-factor);
+    margin: 0 var(--spacing-factor);
     border-color: transparent;
     border-left-color: var(--light-blue);
+    line-height: 24px;
   }
 
   @media screen and (max-width: ${breakpoints.tabletSm}px) {
