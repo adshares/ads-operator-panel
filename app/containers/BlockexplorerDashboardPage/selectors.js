@@ -50,9 +50,8 @@ const makeSelectLatestBlocks = () =>
   });
 
 const makeSelectLatestMessages = () =>
-  createSelector(
-    selectBlockexplorerDashboardPageDomain,
-    globalState => globalState.get('messages').toJS(),
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
+    const messages = globalState.get('messages').toJS();
 
     // if (messages.data) {
     //   messages.data.map(item => {
@@ -61,8 +60,8 @@ const makeSelectLatestMessages = () =>
     //   });
     // }
 
-    // return messages;
-  );
+    return messages;
+  });
 
 const makeSelectLatestTransactions = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
