@@ -4,7 +4,6 @@ import { breakpoints } from '../../../utils/breakpoints';
 
 export const Table = styled.table`
   min-width: ${props => props.tableMinWidth || `auto`};
-  //table-layout: fixed;
   width: 100%;
   background-color: transparent;
   margin-top: ${props => props.margintop || `0`};
