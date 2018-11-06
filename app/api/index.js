@@ -1,10 +1,10 @@
-function fetchNodes(limit = 5, offset = 0, sort = 'id', order = 'desc') {
+function fetchNodes(limit = 10, offset = 0, sort = 'id', order = 'desc') {
   return send(
     `api/v1/blockexplorer/nodes?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
-function fetchBlocks(limit = 5, offset = 0, sort = 'id', order = 'desc') {
+function fetchBlocks(limit = 10, offset = 0, sort = 'id', order = 'desc') {
   return send(
     `api/v1/blockexplorer/blocks?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
@@ -23,6 +23,12 @@ function fetchTransactions(
 
 function fetchNode(id) {
   return send(`api/v1/blockexplorer/nodes/${id}`);
+}
+
+function fetchAccounts(limit = 10, offset = 0, sort = 'id', order = 'desc') {
+  return send(
+    `api/v1/blockexplorer/accounts?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function fetchAccountsByNodeId(
@@ -59,6 +65,12 @@ function fetchTransaction(id) {
 
 function fetchBlock(id) {
   return send(`api/v1/blockexplorer/blocks/${id}`);
+}
+
+function fetchMessages(limit = 10, offset = 0, sort = 'id', order = 'desc') {
+  return send(
+    `api/v1/blockexplorer/messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function fetchMessagesByBlockId(
@@ -110,11 +122,13 @@ export default {
   fetchBlocks,
   fetchTransactions,
   fetchNode,
+  fetchAccounts,
   fetchAccountsByNodeId,
   fetchAccountsById,
   fetchTransactionsByAccountId,
   fetchTransaction,
   fetchBlock,
+  fetchMessages,
   fetchMessagesByBlockId,
   fetchMessage,
   fetchTransactionsByMessageId,

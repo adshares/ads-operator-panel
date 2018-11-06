@@ -6,16 +6,14 @@ export const BlockexplorerWrapper = styled.div`
   width: 100%;
   grid-gap: 24px;
   grid-template:
-    'node'
-    'block'
-    'latestTrans'
+    'latest'
+    'inventory'
     / 90vw;
 
   @media (min-width: ${breakpoints.tabletLg}px) {
     grid-template:
-      'node block'
-      'latestTrans latestTrans'
-      / 50% 1fr;
+      'latest inventory'
+      / 60% 1fr;
   }
 
   @media (min-width: ${breakpoints.desktopLg}px) {

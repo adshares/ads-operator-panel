@@ -9,7 +9,7 @@ import { initialState } from './reducer';
 const selectBlockexplorerDashboardPageDomain = state =>
   state.get('blockexplorerDashboardPage', initialState);
 
-const makeSelectLatestNodes = () =>
+const makeSelectTopNodes = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const nodes = globalState.get('nodes').toJS();
     nodes.data.map(item => {
@@ -18,6 +18,17 @@ const makeSelectLatestNodes = () =>
     });
 
     return nodes;
+  });
+
+const makeSelectTopAccounts = () =>
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
+    const accounts = globalState.get('accounts').toJS();
+    accounts.data.map(item => {
+      item.balance = formatMoney(item.balance); // eslint-disable-line
+      return item;
+    });
+
+    return accounts;
   });
 
 const makeSelectLatestBlocks = () =>
@@ -37,6 +48,21 @@ const makeSelectLatestBlocks = () =>
 
     return blocks;
   });
+
+const makeSelectLatestMessages = () =>
+  createSelector(
+    selectBlockexplorerDashboardPageDomain,
+    globalState => globalState.get('messages').toJS(),
+
+    // if (messages.data) {
+    //   messages.data.map(item => {
+    //     item.time = formatDate(item.time);
+    //     return item;
+    //   });
+    // }
+
+    // return messages;
+  );
 
 const makeSelectLatestTransactions = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
@@ -68,7 +94,9 @@ const makeSelectLatestTransactions = () =>
   });
 
 export {
-  makeSelectLatestNodes,
+  makeSelectTopNodes,
+  makeSelectTopAccounts,
   makeSelectLatestBlocks,
+  makeSelectLatestMessages,
   makeSelectLatestTransactions,
 };
