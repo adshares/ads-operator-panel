@@ -14,10 +14,8 @@ env:
     - HOST_PATH=/home/travis/build/adshares/ads-operator-panel
     - BUILD_PATH=/build/ads-operator-panel
     - BUILD_NAME=ads_operator_panel_build
-  matrix:
-    - >-
-      CHROME_BIN=chromium-browser
-      DISPLAY=:99.0
+    - CHROME_BIN=chromium-browser
+    - DISPLAY=:99.0
 
 before_script:
   ## Setup test environment
