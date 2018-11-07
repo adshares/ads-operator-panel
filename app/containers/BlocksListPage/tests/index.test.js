@@ -1,6 +1,11 @@
 import React from 'react';
 import { shallowIntlWrap } from 'testHelper';
 import { BlocksListPage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<BlocksListPage />', () => {
   const location = { search: '' };
@@ -19,9 +24,10 @@ describe('<BlocksListPage />', () => {
         location={location}
         dispatch={dispatch}
         blocks={blocks}
+        breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('Title').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 });

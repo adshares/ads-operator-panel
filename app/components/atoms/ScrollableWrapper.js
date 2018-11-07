@@ -4,7 +4,7 @@ import { breakpoints } from '../../utils/breakpoints';
 export const ScrollableWrapper = styled.div`
   position: relative;
 
-  @media (max-width: ${breakpoints.tabletLg}px) and (pointer: coarse) {
+  @media (max-width: ${breakpoints.desktopSm}px) {
     overflow: hidden;
     overflow-x: scroll;
     width: 100%;

@@ -1,20 +1,41 @@
 import styled from 'styled-components';
+import { breakpoints } from './../../../utils/breakpoints';
 
 export const Breadcrumb = styled.li`
   display: block;
-  padding: 0 var(--spacing-factor);
-  margin-right: calc(var(--spacing-factor) * 2);
   color: var(--blue);
   position: relative;
   text-decoration: none;
   text-align: center;
+  white-space: nowrap;
+  font-family: var(--font-family-title);
 
   &:after {
     content: '>';
-    position: absolute;
-    left: 105%;
+    margin: 0 var(--spacing-factor);
     border-color: transparent;
     border-left-color: var(--light-blue);
+    line-height: 24px;
+  }
+
+  @media screen and (max-width: ${breakpoints.tabletSm}px) {
+    &:not(:nth-last-of-type(2)) {
+      display: none;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    &:before {
+      content: '<';
+      border-color: transparent;
+      border-left-color: var(--light-blue);
+    }
+
+    a {
+      margin-left: var(--spacing-factor);
+    }
   }
 
   a {

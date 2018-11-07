@@ -1,6 +1,12 @@
 import React from 'react';
 import { shallowIntlWrap } from 'testHelper';
 import { TransactionsListPage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<TransactionsListPage />', () => {
   const location = { search: '' };
@@ -19,9 +25,10 @@ describe('<TransactionsListPage />', () => {
         location={location}
         dispatch={dispatch}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('Title').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
 });

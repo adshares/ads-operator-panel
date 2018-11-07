@@ -2,6 +2,11 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
 import { AccountPage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<AccountPage />', () => {
   const location = { search: '' };
@@ -30,9 +35,10 @@ describe('<AccountPage />', () => {
         dispatch={dispatch}
         account={account}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('h3').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
@@ -64,6 +70,7 @@ describe('<AccountPage />', () => {
         dispatch={dispatch}
         account={account}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -101,6 +108,7 @@ describe('<AccountPage />', () => {
         dispatch={dispatch}
         account={account}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -138,6 +146,7 @@ describe('<AccountPage />', () => {
         dispatch={dispatch}
         account={account}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -180,6 +189,7 @@ describe('<AccountPage />', () => {
         dispatch={dispatch}
         account={account}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -228,6 +238,7 @@ describe('<AccountPage />', () => {
         dispatch={dispatch}
         account={account}
         transactions={transactions}
+        breakpoint={breakpoint}
       />,
     );
 

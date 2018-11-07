@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import config from 'config';
+import moment from 'moment';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/organisms/DetailView';
@@ -44,21 +45,32 @@ export class BlockPage extends React.PureComponent {
 
   render() {
     const { id } = this.props.match.params;
-
-    const fields = {
-      id: <FormattedMessage {...messages.fieldId} />,
-      message_count: <FormattedMessage {...messages.fieldMessageCount} />,
-      node_count: <FormattedMessage {...messages.fieldNodeCount} />,
-      transaction_count: (
-        <FormattedMessage {...messages.fieldTransactionCount} />
-      ),
-      dividend_balance: <FormattedMessage {...messages.fieldDividendBalance} />,
-      dividend_pay: <FormattedMessage {...messages.fieldDividendPay} />,
-      old_hash: <FormattedMessage {...messages.fieldOldHash} />,
-      now_hash: <FormattedMessage {...messages.fieldNowHash} />,
-      msg_hash: <FormattedMessage {...messages.fieldMsgHash} />,
-      vip_hash: <FormattedMessage {...messages.fieldVipHash} />,
-      time: <FormattedMessage {...messages.fieldTime} />,
+    const blockConfig = {
+      columns: {
+        id: <FormattedMessage {...messages.fieldId} />,
+        message_count: <FormattedMessage {...messages.fieldMessageCount} />,
+        node_count: <FormattedMessage {...messages.fieldNodeCount} />,
+        transaction_count: (
+          <FormattedMessage {...messages.fieldTransactionCount} />
+        ),
+        dividend_balance: (
+          <FormattedMessage {...messages.fieldDividendBalance} />
+        ),
+        dividend_pay: <FormattedMessage {...messages.fieldDividendPay} />,
+        old_hash: <FormattedMessage {...messages.fieldOldHash} />,
+        now_hash: <FormattedMessage {...messages.fieldNowHash} />,
+        msg_hash: <FormattedMessage {...messages.fieldMsgHash} />,
+        vip_hash: <FormattedMessage {...messages.fieldVipHash} />,
+        time: <FormattedMessage {...messages.fieldTime} />,
+      },
+      data: this.props.block.data,
+      ceilConfiguration: {
+        time: () => (
+          <div title={blockConfig.data.time}>
+            {moment(blockConfig.data.time).fromNow()}
+          </div>
+        ),
+      },
     };
 
     const link = '/blockexplorer/messages';
@@ -75,6 +87,9 @@ export class BlockPage extends React.PureComponent {
       },
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+        node_id: value => (
+          <Link to={`blockexplorer/nodes/${value}`}>{value}</Link>
+        ),
       },
     };
 
@@ -91,23 +106,25 @@ export class BlockPage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
-          fields={fields}
-          data={this.props.block.data}
+          fields={blockConfig.columns}
+          data={blockConfig.data}
           loading={this.props.block.loading}
           error={this.props.block.error}
+          ceilConfiguration={blockConfig.ceilConfiguration}
         />
-        <h4>
+        <h2>
           <FormattedMessage {...messages.messageTabTitle} />
-        </h4>
+        </h2>
         <ListView
           name="messages"
           urlParams={this.props.match.params}
           query={this.props.location.search}
           list={this.props.messages}
+          ceilConfiguration={messageTab.ceilConfiguration}
           columns={messageTab.columns}
           sortingColumns={['id']}
           defaultSort="id"

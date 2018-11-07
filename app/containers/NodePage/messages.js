@@ -71,4 +71,8 @@ export default defineMessages({
     id: 'app.containers.NodePage.publicKey',
     defaultMessage: 'Public Key',
   },
+  fieldVersion: {
+    id: 'app.containers.NodePage.fieldVersion',
+    defaultMessage: 'Version',
+  },
 });
