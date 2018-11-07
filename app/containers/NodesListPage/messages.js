@@ -39,4 +39,8 @@ export default defineMessages({
     id: 'app.containers.NodesListPage.fieldStatus',
     defaultMessage: 'Status',
   },
+  fieldVersion: {
+    id: 'app.containers.NodesListPage.fieldVersion',
+    defaultMessage: 'Version',
+  },
 });

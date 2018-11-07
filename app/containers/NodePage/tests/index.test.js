@@ -2,6 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
 import { NodePage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<NodePage />', () => {
   const location = { search: '' };
@@ -30,9 +36,10 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('h3').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
@@ -64,6 +71,7 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -97,6 +105,7 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -137,6 +146,7 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        breakpoint={breakpoint}
       />,
     );
 

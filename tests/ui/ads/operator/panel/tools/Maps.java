@@ -12,6 +12,7 @@ public class Maps {
   private static HashMap<String, String> dashboard7;
   private static HashMap<String, Integer> id;
   private static HashMap<String, String> url;
+  private static HashMap<String, String> mobile;
 
   public static void createDashboard() {
     dashboard1 = new HashMap<>();
@@ -24,6 +25,7 @@ public class Maps {
   }
   public static void createId() {id = new HashMap<>();}
   public static void createUrl() { Maps.url = new HashMap<>();}
+  public static void createMobile() { Maps.mobile = new HashMap<>();}
 
   public static void dashboard1(String name, String value) { dashboard1.put(name, value); }
   public static void dashboard2(String name, String value) { dashboard2.put(name, value); }
@@ -34,6 +36,7 @@ public class Maps {
   public static void dashboard7(String name, String value) { dashboard7.put(name, value); }
   public static void id        (String name, int value)    { id.put(name, value);  }
   public static void url       (String name, String value) { url.put(name, value);  }
+  public static void mobile    (String name, String value) { mobile.put(name, value);  }
 
   public static Object getDashboard1(String name) { return dashboard1.get(name); }
   public static Object getDashboard2(String name) { return dashboard2.get(name); }
@@ -44,4 +47,5 @@ public class Maps {
   public static Object getDashboard7(String name) { return dashboard7.get(name); }
   public static Object getFromId    (String name) { return id.get(name); }
   public static Object getUrl       (String name) { return url.get(name); }
+  public static Object getMobile    (String name) { return mobile.get(name); }
 }

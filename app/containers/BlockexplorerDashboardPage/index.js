@@ -12,6 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -31,6 +32,9 @@ import {
 } from './actions';
 import messages from './messages';
 import { BlockexplorerWrapper } from './styled';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
+import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
+import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockexplorerDashboardPage extends React.PureComponent {
@@ -41,12 +45,28 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
   }
 
   render() {
-    const nodeColumns = {
+    const { nodes, blocks, breakpoint, transactions } = this.props;
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
+
+    const nodeColumnsMobile = {
+      id: <FormattedMessage {...messages.nodeColumnId} />,
+      balance: <FormattedMessage {...messages.nodeColumnBalance} />,
+      status: <FormattedMessage {...messages.nodeColumnStatus} />,
+    };
+    const nodeColumnsDesktop = {
       id: <FormattedMessage {...messages.nodeColumnId} />,
       account_count: <FormattedMessage {...messages.nodeColumnAccountCount} />,
       msid: <FormattedMessage {...messages.nodeColumnMsid} />,
       balance: <FormattedMessage {...messages.nodeColumnBalance} />,
       status: <FormattedMessage {...messages.nodeColumnStatus} />,
+    };
+    const nodeColumns = isMobile ? nodeColumnsMobile : nodeColumnsDesktop;
+    const blockColumnsMobile = {
+      id: <FormattedMessage {...messages.blockColumnId} />,
+      message_and_transaction_count: (
+        <FormattedMessage {...messages.blockColumnMessageAndTransactionCount} />
+      ),
+      time: <FormattedMessage {...messages.blockColumnTime} />,
     };
 
     const blockColumns = {
@@ -73,6 +93,19 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       time: <FormattedMessage {...messages.transactionColumnTime} />,
     };
 
+    const transactionMobileColumns = {
+      id: <FormattedMessage {...messages.transactionColumnId} />,
+      sender_address: (
+        <FormattedMessage {...messages.transactionColumnSenderAddress} />
+      ),
+      target_address: (
+        <FormattedMessage {...messages.transactionColumnTargetAddress} />
+      ),
+      amount: <FormattedMessage {...messages.transactionColumnAmount} />,
+      type: <FormattedMessage {...messages.transactionColumnType} />,
+      time: <FormattedMessage {...messages.transactionColumnTime} />,
+    };
+
     const nodeTab = {
       id: 'node',
       name: this.context.intl.formatMessage(messages.nodeTabTitle),
@@ -81,6 +114,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       columns: nodeColumns,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
+        status: value => <StatusTableCell value={value} />,
       },
     };
 
@@ -89,9 +123,10 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       name: this.context.intl.formatMessage(messages.blockTabTitle),
       link: '/blockexplorer/blocks',
       data: this.props.blocks.data,
-      columns: blockColumns,
+      columns: isMobile ? blockColumnsMobile : blockColumns,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
     };
 
@@ -100,7 +135,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       name: this.context.intl.formatMessage(messages.transactionTabTitle),
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
-      columns: transactionColumns,
+      columns: isMobile ? transactionMobileColumns : transactionColumns,
       ceilConfiguration: {
         id: value => (
           <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
@@ -127,10 +162,10 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
             address={value}
           />
         ),
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
+        type: value => <TypeTableCell value={value} />,
       },
     };
-
-    const { nodes, blocks, breakpoint, transactions } = this.props;
 
     return (
       <BlockexplorerWrapper>
@@ -143,7 +178,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         </Helmet>
         <LatestPanel
           gridArea="node"
-          tableMinWidth={config.tablesMinWidth.tableSm}
+          tableMinWidth={config.tablesMinWidth.tableXs}
           tabs={[nodeTab]}
           loading={nodes.loading}
           error={nodes.error}

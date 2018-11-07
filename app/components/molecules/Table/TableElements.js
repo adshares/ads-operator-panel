@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { fadeIn } from '../../../styleUtils/keyframes';
+import { breakpoints } from '../../../utils/breakpoints';
 
 export const Table = styled.table`
   min-width: ${props => props.tableMinWidth || `auto`};
@@ -9,6 +10,7 @@ export const Table = styled.table`
   margin-top: ${props => props.margintop || `0`};
   animation: ${fadeIn} 0.5s;
   animation-fill-mode: forwards;
+  box-shadow: var(--box-shadow);
   ${({ showIntroAnimation }) =>
     showIntroAnimation &&
     `
@@ -19,16 +21,29 @@ export const Table = styled.table`
 
 export const TableRow = styled.tr`
   background-color: var(--white);
-  border: 4px solid var(--white-gray);
+  border-left: 2px solid var(--white);
+  border-right: 2px solid var(--white);
+  border-top: 1px solid var(--grayish-white);
+
+  ${({ singleColorRow }) =>
+    singleColorRow &&
+    `
+      background: var(--white);
+`};
 
   ${({ showHoverAnimation }) =>
     showHoverAnimation &&
     `
-  &:hover {
-    position: relative;
-    transform: scale(1.05);
-    box-shadow: 0px 1px 0px #f8f9fa, 2px 1px 0px var(--blue);
-  }
+      @media (max-width: ${breakpoints.tabletLg}px) {
+        &:hover {
+          background-color: var(--light);
+        }
+      }
+      @media (min-width: ${breakpoints.tabletLg}px) {
+        &:hover {
+          border-right-color: var(--blue);
+        }
+      }
 `};
 `;
 
@@ -43,6 +58,7 @@ export const TableCellStyled = styled.td`
   white-space: ${props => props.whitespace || 'nowrap'};
   word-break: ${props => props.textwrap || 'keep-all'};
   position: relative;
+  background-color: inherit;
 
   .ellipsisActive {
     display: block;
@@ -50,21 +66,24 @@ export const TableCellStyled = styled.td`
     font-family: inherit;
     overflow: hidden;
     text-overflow: ellipsis;
+    background-color: inherit;
 
     &:hover {
       position: absolute;
-      background-color: var(--white);
-      padding: 0 calc(var(--spacing-factor) * 3);
-      transform: translateX(-45px);
-      z-index: 10;
-      top: -1px;
+      padding-right: calc(var(--spacing-factor) * 2);
       display: flex;
-      height: 44px;
+      justify-content: center;
       align-items: center;
+      z-index: 10;
+      top: 0;
+      height: 40px;
     }
+  }
 
-    &.time:hover {
-      padding: 0 calc(var(--spacing-factor) * 4);
+  &.time {
+    padding: 0;
+
+    &:hover {
       border-right: 2px solid var(--blue);
     }
   }
@@ -74,22 +93,30 @@ export const TableCellStyled = styled.td`
     text-align: right;
     min-width: 12ch;
   }
-
-  .id,
-  .balance,
-  .amount {
-    font-family: 'Cousine', monospace;
-    letter-spacing: 0.5px;
-  }
 `;
 
-export const TableHeader = styled.th`
+export const TableHeaderRow = styled.tr`
+  border-left: 2px solid var(--white);
+  border-right: 2px solid var(--white);
+`;
+
+export const TableHeaderCell = styled.th`
   width: ${props => props.width || `auto`};
   text-align: ${props => props.textalign || `center`};
   padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
   background-color: ${props => props.bgcolor || `var(--white-gray)`};
-  color: var(--dust-gray);
+  color: var(--gray);
+  font-family: var(--font-family-title);
+  font-weight: 400;
+  text-transform: uppercase;
+  a {
+    color: var(--gray);
+    * {
+      vertical-align: middle;
+    }
+  }
 `;
+
 export const TableNoData = styled.div`
   text-align: center;
   font-size: 21px;
@@ -98,8 +125,27 @@ export const TableNoData = styled.div`
   color: var(--dust-gray);
 `;
 
-TableHeader.displayName = 'TableHeader';
+export const IconCellDescription = styled.span`
+  padding-left: var(--spacing-factor);
+  color: var(--moon-gray);
+  text-transform: capitalize;
+`;
+
+export const IconTableCell = styled.div`
+  color: ${props => props.color || 'var(--gray)'};
+`;
+
+export const IconTableCellWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+TableHeaderRow.displayName = 'TableHeaderRow';
+TableHeaderCell.displayName = 'TableHeaderCell';
 TableRow.displayName = 'TableRow';
 TableCellStyled.displayName = 'TableCellStyled';
 TableBody.displayName = 'TableBody';
 Table.displayName = 'Table';
+IconCellDescription.displayName = 'IconCellDescription';
+IconTableCell.displayName = 'IconTableCell';
+IconTableCellWrapper.displayName = 'IconTableCellWrapper';

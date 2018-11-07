@@ -20,7 +20,6 @@ import {
   Table,
   TableBody,
   TableCellStyled,
-  TableHeader,
   TableRow,
 } from '../../molecules/Table/TableElements';
 import Button from '../../atoms/Button/Button';
@@ -92,17 +91,25 @@ class DetailView extends React.PureComponent {
     if (this.state.selectedTabId === this.tabs[0].id) {
       Object.entries(this.props.fields).forEach(([columnId, columnValue]) => {
         if (this.props.data[columnId] !== undefined) {
+          const cellValue =
+            typeof this.props.ceilConfiguration[columnId] === 'function'
+              ? this.props.ceilConfiguration[columnId](columnValue)
+              : this.props.data[columnId];
           rows.push(
-            <TableRow key={`column_${columnId}`}>
-              <TableHeader textalign="left" bgcolor={palette.white} width="25%">
-                {columnValue}
-              </TableHeader>
+            <TableRow key={`column_${columnId}`} singleColorRow>
+              <TableCellStyled
+                textalign="left"
+                bgcolor={palette.white}
+                width="175px"
+              >
+                {columnValue}:
+              </TableCellStyled>
               <TableCellStyled
                 textalign="left"
                 textwrap="break-word"
                 whitespace="unset"
               >
-                {this.props.data[columnId]}
+                {cellValue}
               </TableCellStyled>
             </TableRow>,
           );
@@ -166,6 +173,11 @@ DetailView.propTypes = {
   fields: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  ceilConfiguration: PropTypes.object,
+};
+
+DetailView.defaultProps = {
+  ceilConfiguration: {},
 };
 
 export default DetailView;

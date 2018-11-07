@@ -9,10 +9,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMsg from 'components/molecules/ErrorMsg';
-import { FaSortUp, FaSortDown } from 'react-icons/fa';
+import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 import {
   TableBody,
-  TableHeader,
+  TableHeaderRow,
+  TableHeaderCell,
   TableRow,
   Table,
   TableNoData,
@@ -49,7 +50,7 @@ class TableDataSet extends React.PureComponent {
 
     return (
       <thead>
-        <tr>{headers}</tr>
+        <TableHeaderRow>{headers}</TableHeaderRow>
       </thead>
     );
   }
@@ -67,19 +68,21 @@ class TableDataSet extends React.PureComponent {
       const link = `${this.props.link}?page=1&sort=${columnId}&order=${order}`;
 
       return (
-        <TableHeader scope="col" key={`${this.props.name}_${columnId}`}>
+        <TableHeaderCell scope="col" key={`${this.props.name}_${columnId}`}>
           <Link to={link}>
             {columnName}
-            {columnId === this.props.sortBy ? TableDataSet.sortIcon(order) : ''}
+            {columnId === this.props.sortBy
+              ? TableDataSet.sortIcon(order)
+              : TableDataSet.sortIcon('none')}
           </Link>
-        </TableHeader>
+        </TableHeaderCell>
       );
     }
 
     return (
-      <TableHeader scope="col" key={`${this.props.name}_${columnId}`}>
+      <TableHeaderCell scope="col" key={`${this.props.name}_${columnId}`}>
         {columnName}
-      </TableHeader>
+      </TableHeaderCell>
     );
   }
 
@@ -92,7 +95,9 @@ class TableDataSet extends React.PureComponent {
   }
 
   static sortIcon(order) {
-    if (order === 'desc') {
+    if (order === 'none') {
+      return <FaSort />;
+    } else if (order === 'desc') {
       return <FaSortUp />;
     }
 
@@ -105,9 +110,9 @@ class TableDataSet extends React.PureComponent {
 
   renderSingleRow(row) {
     const cells = [];
-
     Object.entries(this.props.columns).forEach(([columnHeader]) => {
       const value = row[columnHeader] !== undefined ? row[columnHeader] : '--';
+
       const cellValue =
         typeof this.props.ceilConfiguration[columnHeader] === 'function'
           ? this.props.ceilConfiguration[columnHeader](value, row)

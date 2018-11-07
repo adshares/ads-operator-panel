@@ -14,25 +14,44 @@ import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import config from 'config';
+import { Link } from 'react-router-dom';
 import ListView from 'components/organisms/ListView';
 import makeSelectNodesListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { loadNodes } from './actions';
-import { Title } from '../../components/atoms/Title';
+import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodesListPage extends React.Component {
   render() {
-    const columns = {
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
+
+    const columnsMobile = {
+      id: <FormattedMessage {...messages.fieldId} />,
+      balance: <FormattedMessage {...messages.fieldBalance} />,
+      status: <FormattedMessage {...messages.fieldStatus} />,
+    };
+
+    const columnsDesktop = {
       id: <FormattedMessage {...messages.fieldId} />,
       account_count: <FormattedMessage {...messages.fieldAccountCount} />,
       msid: <FormattedMessage {...messages.fieldMsid} />,
       balance: <FormattedMessage {...messages.fieldBalance} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
+      version: <FormattedMessage {...messages.fieldVersion} />,
     };
-    const sortingColumns = ['id'];
+
+    const columns = isMobile ? columnsMobile : columnsDesktop;
+
+    const ceilConfiguration = {
+      id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
+      status: value => <StatusTableCell value={value} />,
+    };
+
+    const sortingColumns = ['id', 'version'];
     const { match, location, nodes, onPageChange, breakpoint } = this.props;
     return (
       <div>
@@ -43,7 +62,7 @@ export class NodesListPage extends React.Component {
             content={this.context.intl.formatMessage(messages.metaDescription)}
           />
         </Helmet>
-        <Title>{messages.header.defaultMessage}</Title>
+        <h1>{messages.header.defaultMessage}</h1>
         <ListView
           name="nodes"
           urlParams={match.params}
@@ -51,11 +70,12 @@ export class NodesListPage extends React.Component {
           list={nodes}
           columns={columns}
           sortingColumns={sortingColumns}
+          ceilConfiguration={ceilConfiguration}
           defaultSort="id"
           messages={messages}
           link="/blockexplorer/nodes"
           onPageChange={onPageChange}
-          tableMinWidth={config.tablesMinWidth.tableMd}
+          tableMinWidth={config.tablesMinWidth.tableXs}
           breakpoint={breakpoint}
         />
       </div>

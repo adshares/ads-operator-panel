@@ -2,6 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallowIntlWrap } from 'testHelper';
 import { TransactionPage } from '../index';
+import { breakpoints } from '../../../utils/breakpoints';
+
+const breakpoint = {
+  name: 'DesktopLg',
+  size: breakpoints.desktopLg,
+};
 
 describe('<TransactionPage />', () => {
   const location = { search: '' };
@@ -24,9 +30,10 @@ describe('<TransactionPage />', () => {
         location={location}
         dispatch={dispatch}
         transaction={transaction}
+        breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('h3').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
   });
 
@@ -51,6 +58,7 @@ describe('<TransactionPage />', () => {
         location={location}
         dispatch={dispatch}
         transaction={transaction}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -78,6 +86,7 @@ describe('<TransactionPage />', () => {
         location={location}
         dispatch={dispatch}
         transaction={transaction}
+        breakpoint={breakpoint}
       />,
     );
 
@@ -112,6 +121,7 @@ describe('<TransactionPage />', () => {
         location={location}
         dispatch={dispatch}
         transaction={transaction}
+        breakpoint={breakpoint}
       />,
     );
 
