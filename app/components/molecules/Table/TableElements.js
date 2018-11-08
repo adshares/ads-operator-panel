@@ -53,7 +53,7 @@ export const TableBody = styled.tbody`
 export const TableCellStyled = styled.td`
   vertical-align: middle;
   text-align: ${props => props.textalign || `center`};
-  padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
+  padding: calc(var(--spacing-factor)) calc(var(--spacing-factor));
   white-space: ${props => props.whitespace || 'nowrap'};
   word-break: ${props => props.textwrap || 'keep-all'};
   position: relative;
@@ -80,7 +80,7 @@ export const TableCellStyled = styled.td`
   }
 
   &.time {
-    padding: 0;
+    font-size: small;
 
     &:hover {
       border-right: 2px solid var(--blue);

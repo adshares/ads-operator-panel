@@ -93,7 +93,7 @@ function fetchMessage(id) {
 function fetchTransactions(
   limit = defaults.limit,
   offset = defaults.offset,
-  sort = 'block_id',
+  sort = defaults.sort,
   order = defaults.order,
 ) {
   return send(
@@ -105,7 +105,7 @@ function fetchTransactionsByAccountId(
   accountId,
   limit = defaults.limit,
   offset = defaults.offset,
-  sort = 'block_id',
+  sort = defaults.sort,
   order = defaults.order,
 ) {
   return send(

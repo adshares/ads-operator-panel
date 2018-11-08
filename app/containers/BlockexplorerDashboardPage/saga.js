@@ -50,7 +50,7 @@ export function* getBlocks() {
 
 export function* getMessages() {
   try {
-    const messages = yield call(api.fetchMessages, 20);
+    const messages = yield call(api.fetchMessages, 20, 0, 'blockId');
     yield put(latestMessagesLoaded(messages));
   } catch (err) {
     yield put(latestMessagesLoadingError(err));
@@ -59,7 +59,7 @@ export function* getMessages() {
 
 export function* getTransactions() {
   try {
-    const transactions = yield call(api.fetchTransactions, 20);
+    const transactions = yield call(api.fetchTransactions, 20, 0, 'blockId');
     yield put(latestTransactionsLoaded(transactions));
   } catch (err) {
     yield put(latestTransactionsLoadingError(err));

@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -111,7 +110,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       transaction_count: (
         <FormattedMessage {...msg.messageColumnTransactionCount} />
       ),
-      // time: <FormattedMessage {...msg.blockColumnTime} />,
+      time: <FormattedMessage {...msg.messageColumnTime} />,
     };
 
     const messageColumns = {
@@ -121,7 +120,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       transaction_count: (
         <FormattedMessage {...msg.messageColumnTransactionCount} />
       ),
-      // time: <FormattedMessage {...msg.blockColumnTime} />,
+      time: <FormattedMessage {...msg.messageColumnTime} />,
     };
 
     const transactionColumns = {
@@ -165,7 +164,8 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
     const accountTab = {
       id: 'account',
       name: this.context.intl.formatMessage(msg.accountTabTitle),
-      link: '/blockexplorer/accounts',
+      // link: '/blockexplorer/accounts',
+      link: null,
       data: this.props.accounts.data,
       columns: isMobile ? accountColumnsMobile : accountColumnsDesktop,
       ceilConfiguration: {
@@ -191,7 +191,8 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
     const messagesTab = {
       id: 'message',
       name: this.context.intl.formatMessage(msg.messageTabTitle),
-      link: '/blockexplorer/messages',
+      // link: '/blockexplorer/messages',
+      link: null,
       data: this.props.messages.data,
       columns: isMobile ? messageColumnsMobile : messageColumns,
       ceilConfiguration: {
@@ -204,7 +205,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         block_id: value => (
           <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
         ),
-        // time: value => <div title={value}> {moment(value).fromNow()} </div>,
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
     };
 
@@ -256,7 +257,6 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         </Helmet>
         <LatestPanel
           gridArea="latest"
-          tableMinWidth={config.tablesMinWidth.tableXs}
           tabs={[transactionTab, messagesTab, blockTab]}
           loading={transactions.loading || messages.loading || blocks.loading}
           error={transactions.error || messages.error || blocks.error}
@@ -264,7 +264,6 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         />
         <LatestPanel
           gridArea="inventory"
-          tableMinWidth={config.tablesMinWidth.tableXs}
           tabs={[nodeTab, accountTab]}
           loading={nodes.loading || accounts.loading}
           error={nodes.error || accounts.error}

@@ -38,7 +38,9 @@ const makeSelectLatestBlocks = () =>
     if (blocks.data) {
       blocks.data.map(rawBlock => {
         const block = rawBlock;
-        block.time = formatDate(block.time);
+        if (block.time) {
+          block.time = formatDate(block.time);
+        }
         block.message_and_transaction_count = `${block.message_count} / ${
           block.transaction_count
         }`;
@@ -53,12 +55,15 @@ const makeSelectLatestMessages = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const messages = globalState.get('messages').toJS();
 
-    // if (messages.data) {
-    //   messages.data.map(item => {
-    //     item.time = formatDate(item.time);
-    //     return item;
-    //   });
-    // }
+    if (messages.data) {
+      messages.data.map(rawMessage => {
+        const message = rawMessage;
+        if (message.time) {
+          message.time = formatDate(message.time);
+        }
+        return message;
+      });
+    }
 
     return messages;
   });
