@@ -41,7 +41,7 @@ export function* getAccounts() {
 
 export function* getBlocks() {
   try {
-    const blocks = yield call(api.fetchBlocks, 20, 'time');
+    const blocks = yield call(api.fetchBlocks, 20, 0, 'time');
     yield put(latestBlocksLoaded(blocks));
   } catch (err) {
     yield put(latestBlocksLoadingError(err));
