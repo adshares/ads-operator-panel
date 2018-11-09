@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import config from 'config';
 import { FormattedMessage, intlShape } from 'react-intl';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -19,18 +18,22 @@ import injectReducer from 'utils/injectReducer';
 import LatestPanel from 'components/organisms/LatestPanel';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import {
-  makeSelectLatestNodes,
+  makeSelectTopNodes,
+  makeSelectTopAccounts,
   makeSelectLatestBlocks,
+  makeSelectLatestMessages,
   makeSelectLatestTransactions,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import {
+  loadTopNodes,
+  loadTopAccounts,
   loadLatestBlocks,
-  loadLatestNode,
+  loadLatestsMessages,
   loadLatestsTransactions,
 } from './actions';
-import messages from './messages';
+import msg from './messages';
 import { BlockexplorerWrapper } from './styled';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
@@ -39,88 +42,143 @@ import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableC
 /* eslint-disable react/prefer-stateless-function */
 export class BlockexplorerDashboardPage extends React.PureComponent {
   componentDidMount() {
-    this.props.dispatch(loadLatestNode());
+    this.props.dispatch(loadTopNodes());
+    this.props.dispatch(loadTopAccounts());
     this.props.dispatch(loadLatestBlocks());
+    this.props.dispatch(loadLatestsMessages());
     this.props.dispatch(loadLatestsTransactions());
   }
 
   render() {
-    const { nodes, blocks, breakpoint, transactions } = this.props;
+    const {
+      nodes,
+      accounts,
+      transactions,
+      messages,
+      blocks,
+      breakpoint,
+    } = this.props;
     const isMobile = breakpointIsMobile(this.props.breakpoint.size);
 
     const nodeColumnsMobile = {
-      id: <FormattedMessage {...messages.nodeColumnId} />,
-      balance: <FormattedMessage {...messages.nodeColumnBalance} />,
-      status: <FormattedMessage {...messages.nodeColumnStatus} />,
+      id: <FormattedMessage {...msg.nodeColumnId} />,
+      balance: <FormattedMessage {...msg.nodeColumnBalance} />,
+      status: <FormattedMessage {...msg.nodeColumnStatus} />,
     };
+
     const nodeColumnsDesktop = {
-      id: <FormattedMessage {...messages.nodeColumnId} />,
-      account_count: <FormattedMessage {...messages.nodeColumnAccountCount} />,
-      msid: <FormattedMessage {...messages.nodeColumnMsid} />,
-      balance: <FormattedMessage {...messages.nodeColumnBalance} />,
-      status: <FormattedMessage {...messages.nodeColumnStatus} />,
+      id: <FormattedMessage {...msg.nodeColumnId} />,
+      account_count: <FormattedMessage {...msg.nodeColumnAccountCount} />,
+      msid: <FormattedMessage {...msg.nodeColumnMsid} />,
+      balance: <FormattedMessage {...msg.nodeColumnBalance} />,
+      status: <FormattedMessage {...msg.nodeColumnStatus} />,
     };
-    const nodeColumns = isMobile ? nodeColumnsMobile : nodeColumnsDesktop;
+
+    const accountColumnsMobile = {
+      id: <FormattedMessage {...msg.accountColumnId} />,
+      balance: <FormattedMessage {...msg.accountColumnBalance} />,
+      status: <FormattedMessage {...msg.accountColumnStatus} />,
+    };
+
+    const accountColumnsDesktop = {
+      id: <FormattedMessage {...msg.accountColumnId} />,
+      // account_count: <FormattedMessage {...msg.nodeColumnAccountCount} />,
+      msid: <FormattedMessage {...msg.accountColumnMsid} />,
+      balance: <FormattedMessage {...msg.accountColumnBalance} />,
+      status: <FormattedMessage {...msg.accountColumnStatus} />,
+    };
+
     const blockColumnsMobile = {
-      id: <FormattedMessage {...messages.blockColumnId} />,
+      id: <FormattedMessage {...msg.blockColumnId} />,
       message_and_transaction_count: (
-        <FormattedMessage {...messages.blockColumnMessageAndTransactionCount} />
+        <FormattedMessage {...msg.blockColumnMessageAndTransactionCount} />
       ),
-      time: <FormattedMessage {...messages.blockColumnTime} />,
+      time: <FormattedMessage {...msg.blockColumnTime} />,
     };
 
     const blockColumns = {
-      id: <FormattedMessage {...messages.blockColumnId} />,
-      message_count: <FormattedMessage {...messages.blockColumnMessageCount} />,
+      id: <FormattedMessage {...msg.blockColumnId} />,
+      message_count: <FormattedMessage {...msg.blockColumnMessageCount} />,
       transaction_count: (
-        <FormattedMessage {...messages.blockColumnTransactionCount} />
+        <FormattedMessage {...msg.blockColumnTransactionCount} />
       ),
-      time: <FormattedMessage {...messages.blockColumnTime} />,
+      time: <FormattedMessage {...msg.blockColumnTime} />,
+    };
+
+    const messageColumnsMobile = {
+      id: <FormattedMessage {...msg.messageColumnId} />,
+      transaction_count: (
+        <FormattedMessage {...msg.messageColumnTransactionCount} />
+      ),
+      time: <FormattedMessage {...msg.messageColumnTime} />,
+    };
+
+    const messageColumns = {
+      id: <FormattedMessage {...msg.messageColumnId} />,
+      node_id: <FormattedMessage {...msg.messageColumnNodeId} />,
+      block_id: <FormattedMessage {...msg.messageColumnBlockId} />,
+      transaction_count: (
+        <FormattedMessage {...msg.messageColumnTransactionCount} />
+      ),
+      time: <FormattedMessage {...msg.messageColumnTime} />,
     };
 
     const transactionColumns = {
-      id: <FormattedMessage {...messages.transactionColumnId} />,
-      block_id: <FormattedMessage {...messages.transactionColumnBlockId} />,
-      message_id: <FormattedMessage {...messages.transactionColumnMessageId} />,
+      id: <FormattedMessage {...msg.transactionColumnId} />,
       sender_address: (
-        <FormattedMessage {...messages.transactionColumnSenderAddress} />
+        <FormattedMessage {...msg.transactionColumnSenderAddress} />
       ),
       target_address: (
-        <FormattedMessage {...messages.transactionColumnTargetAddress} />
+        <FormattedMessage {...msg.transactionColumnTargetAddress} />
       ),
-      amount: <FormattedMessage {...messages.transactionColumnAmount} />,
-      type: <FormattedMessage {...messages.transactionColumnType} />,
-      time: <FormattedMessage {...messages.transactionColumnTime} />,
+      amount: <FormattedMessage {...msg.transactionColumnAmount} />,
+      type: <FormattedMessage {...msg.transactionColumnType} />,
+      time: <FormattedMessage {...msg.transactionColumnTime} />,
     };
 
     const transactionMobileColumns = {
-      id: <FormattedMessage {...messages.transactionColumnId} />,
+      id: <FormattedMessage {...msg.transactionColumnId} />,
       sender_address: (
-        <FormattedMessage {...messages.transactionColumnSenderAddress} />
+        <FormattedMessage {...msg.transactionColumnSenderAddress} />
       ),
       target_address: (
-        <FormattedMessage {...messages.transactionColumnTargetAddress} />
+        <FormattedMessage {...msg.transactionColumnTargetAddress} />
       ),
-      amount: <FormattedMessage {...messages.transactionColumnAmount} />,
-      type: <FormattedMessage {...messages.transactionColumnType} />,
-      time: <FormattedMessage {...messages.transactionColumnTime} />,
+      amount: <FormattedMessage {...msg.transactionColumnAmount} />,
+      type: <FormattedMessage {...msg.transactionColumnType} />,
+      time: <FormattedMessage {...msg.transactionColumnTime} />,
     };
 
     const nodeTab = {
       id: 'node',
-      name: this.context.intl.formatMessage(messages.nodeTabTitle),
+      name: this.context.intl.formatMessage(msg.nodeTabTitle),
       link: '/blockexplorer/nodes',
       data: this.props.nodes.data,
-      columns: nodeColumns,
+      columns: isMobile ? nodeColumnsMobile : nodeColumnsDesktop,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
         status: value => <StatusTableCell value={value} />,
       },
     };
 
+    const accountTab = {
+      id: 'account',
+      name: this.context.intl.formatMessage(msg.accountTabTitle),
+      // link: '/blockexplorer/accounts',
+      link: null,
+      data: this.props.accounts.data,
+      columns: isMobile ? accountColumnsMobile : accountColumnsDesktop,
+      ceilConfiguration: {
+        id: value => (
+          <Link to={`/blockexplorer/accounts/${value}`}>{value}</Link>
+        ),
+        status: value => <StatusTableCell value={value} />,
+      },
+    };
+
     const blockTab = {
       id: 'block',
-      name: this.context.intl.formatMessage(messages.blockTabTitle),
+      name: this.context.intl.formatMessage(msg.blockTabTitle),
       link: '/blockexplorer/blocks',
       data: this.props.blocks.data,
       columns: isMobile ? blockColumnsMobile : blockColumns,
@@ -130,9 +188,30 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       },
     };
 
+    const messagesTab = {
+      id: 'message',
+      name: this.context.intl.formatMessage(msg.messageTabTitle),
+      // link: '/blockexplorer/messages',
+      link: null,
+      data: this.props.messages.data,
+      columns: isMobile ? messageColumnsMobile : messageColumns,
+      ceilConfiguration: {
+        id: value => (
+          <Link to={`/blockexplorer/messages/${value}`}>{value}</Link>
+        ),
+        node_id: value => (
+          <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>
+        ),
+        block_id: value => (
+          <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
+        ),
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
+      },
+    };
+
     const transactionTab = {
       id: 'transaction',
-      name: this.context.intl.formatMessage(messages.transactionTabTitle),
+      name: this.context.intl.formatMessage(msg.transactionTabTitle),
       link: '/blockexplorer/transactions',
       data: this.props.transactions.data,
       columns: isMobile ? transactionMobileColumns : transactionColumns,
@@ -170,34 +249,24 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
     return (
       <BlockexplorerWrapper>
         <Helmet>
-          <title>{this.context.intl.formatMessage(messages.metaTitle)}</title>
+          <title>{this.context.intl.formatMessage(msg.metaTitle)}</title>
           <meta
             name="description"
-            content={this.context.intl.formatMessage(messages.metaDescription)}
+            content={this.context.intl.formatMessage(msg.metaDescription)}
           />
         </Helmet>
         <LatestPanel
-          gridArea="node"
-          tableMinWidth={config.tablesMinWidth.tableXs}
-          tabs={[nodeTab]}
-          loading={nodes.loading}
-          error={nodes.error}
+          gridArea="latest"
+          tabs={[transactionTab, messagesTab, blockTab]}
+          loading={transactions.loading || messages.loading || blocks.loading}
+          error={transactions.error || messages.error || blocks.error}
           breakpoint={breakpoint}
         />
         <LatestPanel
-          gridArea="block"
-          tableMinWidth={config.tablesMinWidth.tableSm}
-          tabs={[blockTab]}
-          loading={blocks.loading}
-          error={blocks.error}
-          breakpoint={breakpoint}
-        />
-        <LatestPanel
-          gridArea="latestTrans"
-          tableMinWidth={config.tablesMinWidth.tableLg}
-          tabs={[transactionTab]}
-          loading={transactions.loading}
-          error={transactions.error}
+          gridArea="inventory"
+          tabs={[nodeTab, accountTab]}
+          loading={nodes.loading || accounts.loading}
+          error={nodes.error || accounts.error}
           breakpoint={breakpoint}
         />
       </BlockexplorerWrapper>
@@ -209,7 +278,9 @@ BlockexplorerDashboardPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   nodes: PropTypes.object,
+  accounts: PropTypes.object,
   blocks: PropTypes.object,
+  messages: PropTypes.object,
   transactions: PropTypes.object,
   breakpoint: PropTypes.object,
 };
@@ -219,8 +290,10 @@ BlockexplorerDashboardPage.contextTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  nodes: makeSelectLatestNodes(),
+  nodes: makeSelectTopNodes(),
+  accounts: makeSelectTopAccounts(),
   blocks: makeSelectLatestBlocks(),
+  messages: makeSelectLatestMessages(),
   transactions: makeSelectLatestTransactions(),
   breakpoint: state => state.get('breakpoint'),
 });

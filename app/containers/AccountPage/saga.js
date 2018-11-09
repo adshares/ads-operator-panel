@@ -12,7 +12,7 @@ import api from '../../api';
 
 export function* getAccount(action) {
   try {
-    const account = yield call(api.fetchAccountsById, action.id);
+    const account = yield call(api.fetchAccount, action.id);
     yield put(accountLoaded(account));
   } catch (err) {
     yield put(accountLoadingError(err));

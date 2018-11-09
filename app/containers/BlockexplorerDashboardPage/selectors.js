@@ -9,7 +9,7 @@ import { initialState } from './reducer';
 const selectBlockexplorerDashboardPageDomain = state =>
   state.get('blockexplorerDashboardPage', initialState);
 
-const makeSelectLatestNodes = () =>
+const makeSelectTopNodes = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const nodes = globalState.get('nodes').toJS();
     nodes.data.map(item => {
@@ -20,6 +20,17 @@ const makeSelectLatestNodes = () =>
     return nodes;
   });
 
+const makeSelectTopAccounts = () =>
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
+    const accounts = globalState.get('accounts').toJS();
+    accounts.data.map(item => {
+      item.balance = formatMoney(item.balance); // eslint-disable-line
+      return item;
+    });
+
+    return accounts;
+  });
+
 const makeSelectLatestBlocks = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const blocks = globalState.get('blocks').toJS();
@@ -27,7 +38,9 @@ const makeSelectLatestBlocks = () =>
     if (blocks.data) {
       blocks.data.map(rawBlock => {
         const block = rawBlock;
-        block.time = formatDate(block.time);
+        if (block.time) {
+          block.time = formatDate(block.time);
+        }
         block.message_and_transaction_count = `${block.message_count} / ${
           block.transaction_count
         }`;
@@ -36,6 +49,23 @@ const makeSelectLatestBlocks = () =>
     }
 
     return blocks;
+  });
+
+const makeSelectLatestMessages = () =>
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
+    const messages = globalState.get('messages').toJS();
+
+    if (messages.data) {
+      messages.data.map(rawMessage => {
+        const message = rawMessage;
+        if (message.time) {
+          message.time = formatDate(message.time);
+        }
+        return message;
+      });
+    }
+
+    return messages;
   });
 
 const makeSelectLatestTransactions = () =>
@@ -68,7 +98,9 @@ const makeSelectLatestTransactions = () =>
   });
 
 export {
-  makeSelectLatestNodes,
+  makeSelectTopNodes,
+  makeSelectTopAccounts,
   makeSelectLatestBlocks,
+  makeSelectLatestMessages,
   makeSelectLatestTransactions,
 };
