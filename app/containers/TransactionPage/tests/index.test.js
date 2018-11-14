@@ -22,6 +22,7 @@ describe('<TransactionPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const renderedComponent = shallowIntlWrap(
@@ -48,6 +49,7 @@ describe('<TransactionPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -76,6 +78,7 @@ describe('<TransactionPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -111,6 +114,7 @@ describe('<TransactionPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();

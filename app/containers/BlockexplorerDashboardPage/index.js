@@ -62,30 +62,35 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
     const nodeColumnsMobile = {
       id: <FormattedMessage {...msg.nodeColumnId} />,
-      balance: <FormattedMessage {...msg.nodeColumnBalance} />,
       status: <FormattedMessage {...msg.nodeColumnStatus} />,
+      balance: <FormattedMessage {...msg.nodeColumnBalance} />,
     };
 
     const nodeColumnsDesktop = {
       id: <FormattedMessage {...msg.nodeColumnId} />,
-      account_count: <FormattedMessage {...msg.nodeColumnAccountCount} />,
-      msid: <FormattedMessage {...msg.nodeColumnMsid} />,
-      balance: <FormattedMessage {...msg.nodeColumnBalance} />,
       status: <FormattedMessage {...msg.nodeColumnStatus} />,
+      balance: <FormattedMessage {...msg.nodeColumnBalance} />,
+      account_count: <FormattedMessage {...msg.nodeColumnAccountCount} />,
+      message_count: <FormattedMessage {...msg.nodeColumnMessageCount} />,
+      transaction_count: (
+        <FormattedMessage {...msg.nodeColumnTransactionCount} />
+      ),
     };
 
     const accountColumnsMobile = {
       id: <FormattedMessage {...msg.accountColumnId} />,
-      balance: <FormattedMessage {...msg.accountColumnBalance} />,
       status: <FormattedMessage {...msg.accountColumnStatus} />,
+      balance: <FormattedMessage {...msg.accountColumnBalance} />,
     };
 
     const accountColumnsDesktop = {
       id: <FormattedMessage {...msg.accountColumnId} />,
-      // account_count: <FormattedMessage {...msg.nodeColumnAccountCount} />,
-      msid: <FormattedMessage {...msg.accountColumnMsid} />,
-      balance: <FormattedMessage {...msg.accountColumnBalance} />,
       status: <FormattedMessage {...msg.accountColumnStatus} />,
+      balance: <FormattedMessage {...msg.accountColumnBalance} />,
+      message_count: <FormattedMessage {...msg.accountColumnMessageCount} />,
+      transaction_count: (
+        <FormattedMessage {...msg.accountColumnTransactionCount} />
+      ),
     };
 
     const blockColumnsMobile = {
@@ -98,6 +103,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
     const blockColumns = {
       id: <FormattedMessage {...msg.blockColumnId} />,
+      votes: <FormattedMessage {...msg.blockColumnVotes} />,
       message_count: <FormattedMessage {...msg.blockColumnMessageCount} />,
       transaction_count: (
         <FormattedMessage {...msg.blockColumnTransactionCount} />
@@ -125,6 +131,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
     const transactionColumns = {
       id: <FormattedMessage {...msg.transactionColumnId} />,
+      type: <FormattedMessage {...msg.transactionColumnType} />,
       sender_address: (
         <FormattedMessage {...msg.transactionColumnSenderAddress} />
       ),
@@ -132,12 +139,12 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         <FormattedMessage {...msg.transactionColumnTargetAddress} />
       ),
       amount: <FormattedMessage {...msg.transactionColumnAmount} />,
-      type: <FormattedMessage {...msg.transactionColumnType} />,
       time: <FormattedMessage {...msg.transactionColumnTime} />,
     };
 
     const transactionMobileColumns = {
       id: <FormattedMessage {...msg.transactionColumnId} />,
+      type: <FormattedMessage {...msg.transactionColumnType} />,
       sender_address: (
         <FormattedMessage {...msg.transactionColumnSenderAddress} />
       ),
@@ -145,7 +152,6 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         <FormattedMessage {...msg.transactionColumnTargetAddress} />
       ),
       amount: <FormattedMessage {...msg.transactionColumnAmount} />,
-      type: <FormattedMessage {...msg.transactionColumnType} />,
       time: <FormattedMessage {...msg.transactionColumnTime} />,
     };
 

@@ -27,13 +27,17 @@ export default defineMessages({
     id: 'app.containers.BlockPage.fieldId',
     defaultMessage: 'Id',
   },
+  fieldVotes: {
+    id: 'app.containers.BlockPage.fieldVotes',
+    defaultMessage: 'Votes',
+  },
+  fieldVotesTitle: {
+    id: 'app.containers.BlockPage.fieldVotesTitle',
+    defaultMessage: 'Acceptance / Total votes',
+  },
   fieldMessageCount: {
     id: 'app.containers.BlockPage.fieldMessageCount',
     defaultMessage: 'Messages',
-  },
-  fieldNodeCount: {
-    id: 'app.containers.BlockPage.fieldNodeCount',
-    defaultMessage: 'Nodes',
   },
   fieldTransactionCount: {
     id: 'app.containers.BlockPage.fieldTransactionCount',
@@ -73,10 +77,18 @@ export default defineMessages({
   },
   columnMessagesNodeId: {
     id: 'app.containers.BlockPage.columnMessagesNodeId',
-    defaultMessage: 'Node Id',
+    defaultMessage: 'Node',
   },
   columnMessagesTransactionCount: {
     id: 'app.containers.BlockPage.columnMessagesTransactionCount',
     defaultMessage: 'Transactions',
+  },
+  columnMessagesTime: {
+    id: 'app.containers.BlockPage.columnMessagesTime',
+    defaultMessage: 'Time',
+  },
+  columnHash: {
+    id: 'app.containers.BlockPage.columnHash',
+    defaultMessage: 'Hash',
   },
 });

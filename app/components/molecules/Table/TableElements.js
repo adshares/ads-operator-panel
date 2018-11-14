@@ -9,7 +9,6 @@ export const Table = styled.table`
   margin-top: ${props => props.margintop || `0`};
   animation: ${fadeIn} 0.5s;
   animation-fill-mode: forwards;
-  box-shadow: var(--box-shadow);
   ${({ showIntroAnimation }) =>
     showIntroAnimation &&
     `
@@ -79,18 +78,23 @@ export const TableCellStyled = styled.td`
     }
   }
 
-  &.time {
+  &.time,
+  &.mtim,
+  &.version {
     font-size: small;
-
-    &:hover {
-      border-right: 2px solid var(--blue);
-    }
   }
 
   .balance,
   .amount {
     text-align: right;
     min-width: 12ch;
+  }
+
+  &.public_key,
+  &.hash,
+  &.now_hash,
+  &.signature {
+    max-width: 120px;
   }
 `;
 
@@ -108,6 +112,7 @@ export const TableHeaderCell = styled.th`
   font-family: var(--font-family-title);
   font-weight: 400;
   text-transform: uppercase;
+  font-size: small;
   a {
     color: var(--gray);
     * {

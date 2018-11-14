@@ -83,6 +83,22 @@ export default defineMessages({
     id: 'app.containers.AccountPage.fieldLocalChange',
     defaultMessage: 'Last Active Time',
   },
+  fieldMessageCount: {
+    id: 'app.containers.AccountPage.fieldMessageCount',
+    defaultMessage: 'Messages',
+  },
+  fieldTransactionCount: {
+    id: 'app.containers.AccountPage.fieldTransactionCount',
+    defaultMessage: 'Transactions',
+  },
+  fieldHash: {
+    id: 'app.containers.AccountPage.fieldHash',
+    defaultMessage: 'Hash',
+  },
+  fieldNodeId: {
+    id: 'app.containers.TransactionPage.fieldNodeId',
+    defaultMessage: 'Node',
+  },
   multiTransaction: {
     id: 'app.containers.AccountPage.multiTransaction',
     defaultMessage: 'Multi Transaction',

@@ -138,7 +138,7 @@ class DetailView extends React.PureComponent {
   }
 
   getData() {
-    return JSON.stringify(this.props.data, null, 2);
+    return JSON.stringify(this.props.rawData || this.props.data, null, 2);
   }
 
   render() {
@@ -170,6 +170,7 @@ class DetailView extends React.PureComponent {
 
 DetailView.propTypes = {
   data: PropTypes.object.isRequired,
+  rawData: PropTypes.object,
   fields: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),

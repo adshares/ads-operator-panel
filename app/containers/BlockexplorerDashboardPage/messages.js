@@ -47,9 +47,13 @@ export default defineMessages({
     id: 'app.containers.BlockexplorerDashboardPage.nodeColumnAccountCount',
     defaultMessage: 'Accounts',
   },
-  nodeColumnMsid: {
-    id: 'app.containers.BlockexplorerDashboardPage.nodeColumnMsid',
+  nodeColumnMessageCount: {
+    id: 'app.containers.BlockexplorerDashboardPage.nodeColumnMessageCount',
     defaultMessage: 'Messages',
+  },
+  nodeColumnTransactionCount: {
+    id: 'app.containers.BlockexplorerDashboardPage.nodeColumnTransactionCount',
+    defaultMessage: 'Transactions',
   },
   nodeColumnBalance: {
     id: 'app.containers.BlockexplorerDashboardPage.nodeColumnBalance',
@@ -63,9 +67,14 @@ export default defineMessages({
     id: 'app.containers.BlockexplorerDashboardPage.accountColumnId',
     defaultMessage: 'Id',
   },
-  accountColumnMsid: {
-    id: 'app.containers.BlockexplorerDashboardPage.accountColumnMsid',
+  accountColumnMessageCount: {
+    id: 'app.containers.BlockexplorerDashboardPage.accountColumnMessageCount',
     defaultMessage: 'Messages',
+  },
+  accountColumnTransactionCount: {
+    id:
+      'app.containers.BlockexplorerDashboardPage.accountColumnTransactionCount',
+    defaultMessage: 'Transactions',
   },
   accountColumnBalance: {
     id: 'app.containers.BlockexplorerDashboardPage.accountColumnBalance',
@@ -95,6 +104,10 @@ export default defineMessages({
   blockColumnTime: {
     id: 'app.containers.BlockexplorerDashboardPage.blockColumnTime',
     defaultMessage: 'Time',
+  },
+  blockColumnVotes: {
+    id: 'app.containers.BlockexplorerDashboardPage.blockColumnVotes',
+    defaultMessage: 'Votes',
   },
   messageColumnId: {
     id: 'app.containers.BlockexplorerDashboardPage.messageColumnId',

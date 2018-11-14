@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
@@ -37,11 +38,16 @@ export class NodesListPage extends React.Component {
 
     const columnsDesktop = {
       id: <FormattedMessage {...messages.fieldId} />,
-      account_count: <FormattedMessage {...messages.fieldAccountCount} />,
-      msid: <FormattedMessage {...messages.fieldMsid} />,
-      balance: <FormattedMessage {...messages.fieldBalance} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
+      public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+      balance: <FormattedMessage {...messages.fieldBalance} />,
+      account_count: <FormattedMessage {...messages.fieldAccountCount} />,
+      message_count: <FormattedMessage {...messages.fieldMessageCount} />,
+      transaction_count: (
+        <FormattedMessage {...messages.fieldTransactionCount} />
+      ),
       version: <FormattedMessage {...messages.fieldVersion} />,
+      mtim: <FormattedMessage {...messages.fieldMessageTime} />,
     };
 
     const columns = isMobile ? columnsMobile : columnsDesktop;
@@ -49,9 +55,17 @@ export class NodesListPage extends React.Component {
     const ceilConfiguration = {
       id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
       status: value => <StatusTableCell value={value} />,
+      mtim: value => <div title={value}>{moment(value).fromNow()}</div>,
     };
 
-    const sortingColumns = ['id', 'version'];
+    const sortingColumns = [
+      'id',
+      'account_count',
+      'balance',
+      'message_count',
+      'transaction_count',
+      'version',
+    ];
     const { match, location, nodes, onPageChange, breakpoint } = this.props;
     return (
       <div>
@@ -72,6 +86,7 @@ export class NodesListPage extends React.Component {
           sortingColumns={sortingColumns}
           ceilConfiguration={ceilConfiguration}
           defaultSort="id"
+          defaultOrder="asc"
           messages={messages}
           link="/blockexplorer/nodes"
           onPageChange={onPageChange}

@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import moment from 'moment';
+import formatDate from 'lib/formatDate';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
@@ -52,23 +52,33 @@ export class NodePage extends React.PureComponent {
     const nodeConfig = {
       columns: {
         id: <FormattedMessage {...messages.fieldId} />,
-        account_count: <FormattedMessage {...messages.fieldAccountCount} />,
-        msid: <FormattedMessage {...messages.fieldMsid} />,
-        balance: <FormattedMessage {...messages.fieldBalance} />,
         status: <FormattedMessage {...messages.fieldStatus} />,
+        balance: <FormattedMessage {...messages.fieldBalance} />,
+        account_count: <FormattedMessage {...messages.fieldAccountCount} />,
+        message_count: <FormattedMessage {...messages.fieldMessageCount} />,
+        transaction_count: (
+          <FormattedMessage {...messages.fieldTransactionCount} />
+        ),
         ipv4: <FormattedMessage {...messages.fieldIp} />,
-        version: <FormattedMessage {...messages.fieldVersion} />,
         public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+        hash: <FormattedMessage {...messages.fieldHash} />,
+        message_hash: <FormattedMessage {...messages.fieldMessageHash} />,
+        version: <FormattedMessage {...messages.fieldVersion} />,
         mtim: <FormattedMessage {...messages.fieldMtim} />,
       },
-      data: this.props.node.data,
+      data: this.props.node.prettyData,
       ceilConfiguration: {
         status: () => (
           <StatusTableCell value={nodeConfig.data.status} showDesc />
         ),
+        ipv4: () => (
+          <span>
+            {nodeConfig.data.ipv4}:{nodeConfig.data.port}
+          </span>
+        ),
         mtim: () => (
           <div title={nodeConfig.data.mtim}>
-            {moment(nodeConfig.data.mtim).fromNow()}
+            {formatDate(nodeConfig.data.mtim)}
           </div>
         ),
       },
@@ -77,8 +87,14 @@ export class NodePage extends React.PureComponent {
     const link = '/blockexplorer/accounts';
     const accountMobileColumns = {
       id: this.context.intl.formatMessage(messages.accountColumnId),
-      balance: this.context.intl.formatMessage(messages.accountBalance),
       status: this.context.intl.formatMessage(messages.accountStatus),
+      balance: this.context.intl.formatMessage(messages.accountBalance),
+      message_count: this.context.intl.formatMessage(
+        messages.accountMessageCount,
+      ),
+      transaction_count: this.context.intl.formatMessage(
+        messages.accountTransactionCount,
+      ),
     };
 
     const accountColumns = {
@@ -131,7 +147,8 @@ export class NodePage extends React.PureComponent {
         </h1>
         <DetailView
           fields={nodeConfig.columns}
-          data={node.data}
+          data={nodeConfig.data}
+          rawData={this.props.node.data}
           loading={node.loading}
           error={node.error}
           breakpoint={breakpoint}
@@ -147,8 +164,14 @@ export class NodePage extends React.PureComponent {
           list={accounts}
           columns={accountTab.columns}
           ceilConfiguration={ceilConfiguration}
-          sortingColumns={['id']}
+          sortingColumns={[
+            'id',
+            'balance',
+            'message_count',
+            'transaction_count',
+          ]}
           defaultSort="id"
+          defaultOrder="asc"
           messages={messages}
           link={`/blockexplorer/nodes/${id}/accounts`}
           onPageChange={onPageChange}

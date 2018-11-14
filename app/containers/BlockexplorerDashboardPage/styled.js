@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { breakpoints } from '../../utils/breakpoints';
 
 export const BlockexplorerWrapper = styled.div`
   display: grid;
@@ -9,11 +10,11 @@ export const BlockexplorerWrapper = styled.div`
     'inventory'
     / 90vw;
 
-  @media (min-width: 1600px) {
+  @media (min-width: ${breakpoints.desktopLg}px) {
     grid-gap: calc(var(--spacing-factor) * 8);
     grid-template:
       'latest inventory'
-      / 0.6fr 0.4fr;
+      / 2.85fr 2.15fr;
   }
 `;
 

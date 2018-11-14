@@ -10,7 +10,7 @@ const makeSelectNodesListPage = () =>
     const nodes = substate.toJS();
     nodes.data.map(item => {
       const node = item;
-      node.balance = formatMoney(node.balance);
+      node.balance = formatMoney(node.balance, 4);
 
       return node;
     });

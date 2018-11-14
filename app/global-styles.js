@@ -31,7 +31,7 @@ injectGlobal`
     --light: #f1f1f1;
     --dark: #343a40;
     --box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.16);
-    --spacing-factor: 8px;
+    --spacing-factor: 6px;
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
@@ -46,7 +46,7 @@ injectGlobal`
   body {
     height: 100%;
     width: 100%;
-  
+    font-size: 0.9rem;
   }
 
   body {

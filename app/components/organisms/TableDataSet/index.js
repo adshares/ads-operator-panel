@@ -56,6 +56,11 @@ class TableDataSet extends React.PureComponent {
   }
 
   renderColumnHeader(columnId, columnName) {
+    const ceilValue =
+      typeof this.props.headerConfiguration[columnId] === 'function'
+        ? this.props.headerConfiguration[columnId](columnId, columnName)
+        : columnName;
+
     if (
       this.props.sortingColumns.length > 0 &&
       this.props.sortingColumns.lastIndexOf(columnId) !== -1
@@ -70,7 +75,7 @@ class TableDataSet extends React.PureComponent {
       return (
         <TableHeaderCell scope="col" key={`${this.props.name}_${columnId}`}>
           <Link to={link}>
-            {columnName}
+            {ceilValue}
             {columnId === this.props.sortBy
               ? TableDataSet.sortIcon(order)
               : TableDataSet.sortIcon('none')}
@@ -81,7 +86,7 @@ class TableDataSet extends React.PureComponent {
 
     return (
       <TableHeaderCell scope="col" key={`${this.props.name}_${columnId}`}>
-        {columnName}
+        {ceilValue}
       </TableHeaderCell>
     );
   }
@@ -175,6 +180,7 @@ TableDataSet.propTypes = {
   columns: PropTypes.object.isRequired,
   sortingColumns: PropTypes.array,
   ceilConfiguration: PropTypes.object,
+  headerConfiguration: PropTypes.object,
   sortBy: PropTypes.string,
   orderBy: PropTypes.string,
   link: PropTypes.string,
@@ -189,6 +195,7 @@ TableDataSet.propTypes = {
 TableDataSet.defaultProps = {
   sortingColumns: [],
   ceilConfiguration: {},
+  headerConfiguration: {},
   sortBy: 'id',
   orderBy: 'desc',
   link: '',
