@@ -15,8 +15,10 @@ const selectAccountPageDomain = state => state.get('accountPage', initialState);
 const makeSelectAccount = () =>
   createSelector(selectAccountPageDomain, globalState => {
     const account = globalState.get('account').toJS();
-    account.prettyData = Object.assign({}, account.data);
-    account.prettyData.balance = `${formatMoney(account.data.balance)} ADS`;
+    account.prettyData = {
+      ...account.data,
+      balance: `${formatMoney(account.data.balance)} ADS`,
+    };
     return account;
   });
 

@@ -8,7 +8,7 @@ const selectMessagePageDomain = state => state.get('messagePage', initialState);
 const makeSelectMessage = () =>
   createSelector(selectMessagePageDomain, globalState => {
     const message = globalState.get('message').toJS();
-    message.prettyData = Object.assign({}, message.data);
+    message.prettyData = { ...message.data };
     return message;
   });
 

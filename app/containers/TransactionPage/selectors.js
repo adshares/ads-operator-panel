@@ -9,12 +9,12 @@ const selectTransactionPageDomain = state =>
 const makeSelectTransaction = () =>
   createSelector(selectTransactionPageDomain, globalState => {
     const transaction = globalState.get('transaction').toJS();
-    transaction.prettyData = Object.assign({}, transaction.data);
+    transaction.prettyData = { ...transaction.data };
 
     if (transaction.data.wires) {
       transaction.prettyData.wires = [];
       transaction.data.wires.forEach(wire => {
-        transaction.prettyData.wires.push(Object.assign({}, wire));
+        transaction.prettyData.wires.push({ ...wire });
       });
     }
 

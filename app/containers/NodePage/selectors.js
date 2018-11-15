@@ -14,8 +14,10 @@ const selectNodePageDomain = state => state.get('nodePage', initialState);
 const makeSelectNode = () =>
   createSelector(selectNodePageDomain, globalState => {
     const node = globalState.get('node').toJS();
-    node.prettyData = Object.assign({}, node.data);
-    node.prettyData.balance = `${formatMoney(node.data.balance)} ADS`;
+    node.prettyData = {
+      ...node.data,
+      balance: `${formatMoney(node.data.balance)} ADS`,
+    };
     return node;
   });
 
