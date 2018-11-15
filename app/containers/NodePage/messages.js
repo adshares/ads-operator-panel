@@ -95,4 +95,8 @@ export default defineMessages({
     id: 'app.containers.NodePage.publicKey',
     defaultMessage: 'Public Key',
   },
+  accountLocalChange: {
+    id: 'app.containers.NodePage.accountLocalChange',
+    defaultMessage: 'Last Active',
+  },
 });

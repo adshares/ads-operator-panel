@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import formatDate from 'lib/formatDate';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import moment from 'moment/moment';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
 import config from 'config';
@@ -84,8 +85,7 @@ export class NodePage extends React.PureComponent {
       },
     };
 
-    const link = '/blockexplorer/accounts';
-    const accountMobileColumns = {
+    const columnsMobile = {
       id: this.context.intl.formatMessage(messages.accountColumnId),
       status: this.context.intl.formatMessage(messages.accountStatus),
       balance: this.context.intl.formatMessage(messages.accountBalance),
@@ -97,28 +97,32 @@ export class NodePage extends React.PureComponent {
       ),
     };
 
-    const accountColumns = {
-      ...accountMobileColumns,
+    const columns = {
+      id: this.context.intl.formatMessage(messages.accountColumnId),
+      status: this.context.intl.formatMessage(messages.accountStatus),
       public_key: this.context.intl.formatMessage(messages.accountPublicKey),
+      balance: this.context.intl.formatMessage(messages.accountBalance),
+      message_count: this.context.intl.formatMessage(
+        messages.accountMessageCount,
+      ),
+      transaction_count: this.context.intl.formatMessage(
+        messages.accountTransactionCount,
+      ),
+      local_change: this.context.intl.formatMessage(
+        messages.accountLocalChange,
+      ),
     };
 
-    const accountTab = {
-      id: 'account',
-      name: this.context.intl.formatMessage(messages.accountTabTitle),
-      data: this.props.accounts.data,
-      columns: breakpointIsMobile(this.props.breakpoint.size)
-        ? accountMobileColumns
-        : accountColumns,
-      ceilConfiguration: {
-        id: value => <Link to={`${link}/${value}`}>{value}</Link>,
-      },
-    };
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
 
     const ceilConfiguration = {
       id: value => (
         <Link to={`/blockexplorer/nodes/${id}/accounts/${value}`}>{value}</Link>
       ),
       status: value => <StatusTableCell value={value} />,
+      local_change: (value, row) => (
+        <div title={row.local_change}>{moment(row.local_change).fromNow()}</div>
+      ),
     };
 
     const metaDescription = this.context.intl.formatMessage(
@@ -133,6 +137,13 @@ export class NodePage extends React.PureComponent {
       onPageChange,
       breakpoint,
     } = this.props;
+
+    const sortingColumns = [
+      'id',
+      'balance',
+      'message_count',
+      'transaction_count',
+    ];
 
     return (
       <NodePageWrapper>
@@ -162,14 +173,9 @@ export class NodePage extends React.PureComponent {
           urlParams={match.params}
           query={location.search}
           list={accounts}
-          columns={accountTab.columns}
+          columns={isMobile ? columnsMobile : columns}
           ceilConfiguration={ceilConfiguration}
-          sortingColumns={[
-            'id',
-            'balance',
-            'message_count',
-            'transaction_count',
-          ]}
+          sortingColumns={sortingColumns}
           defaultSort="id"
           defaultOrder="asc"
           messages={messages}
