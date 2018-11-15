@@ -20,7 +20,6 @@ import {
   Table,
   TableBody,
   TableCellStyled,
-  TableHeader,
   TableRow,
 } from '../../molecules/Table/TableElements';
 import Button from '../../atoms/Button/Button';
@@ -98,9 +97,13 @@ class DetailView extends React.PureComponent {
               : this.props.data[columnId];
           rows.push(
             <TableRow key={`column_${columnId}`} singleColorRow>
-              <TableHeader textalign="left" bgcolor={palette.white} width="25%">
-                {columnValue}
-              </TableHeader>
+              <TableCellStyled
+                textalign="left"
+                bgcolor={palette.white}
+                width="175px"
+              >
+                {columnValue}:
+              </TableCellStyled>
               <TableCellStyled
                 textalign="left"
                 textwrap="break-word"
@@ -135,7 +138,7 @@ class DetailView extends React.PureComponent {
   }
 
   getData() {
-    return JSON.stringify(this.props.data, null, 2);
+    return JSON.stringify(this.props.rawData || this.props.data, null, 2);
   }
 
   render() {
@@ -167,6 +170,7 @@ class DetailView extends React.PureComponent {
 
 DetailView.propTypes = {
   data: PropTypes.object.isRequired,
+  rawData: PropTypes.object,
   fields: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),

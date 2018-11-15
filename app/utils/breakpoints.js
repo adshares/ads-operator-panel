@@ -1,6 +1,7 @@
 export const breakpoints = {
   xxl: 1000000, // Ensures that active breakpoint always exist
-  desktopLg: 1400,
+  desktopLn: 1700,
+  desktopLg: 1460,
   desktopMd: 1300,
   desktopSm: 1200,
   tabletLg: 1040,

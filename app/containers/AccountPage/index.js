@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import moment from 'moment';
+import formatDate from 'lib/formatDate';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
 import config from 'config';
@@ -27,6 +28,7 @@ import { AccountPageWrapper } from './styled';
 import messages from './messages';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 export class AccountPage extends React.PureComponent {
@@ -53,38 +55,54 @@ export class AccountPage extends React.PureComponent {
     const accountConfig = {
       columns: {
         id: <FormattedMessage {...messages.fieldId} />,
-        balance: <FormattedMessage {...messages.fieldBalance} />,
         status: <FormattedMessage {...messages.fieldStatus} />,
+        node_id: <FormattedMessage {...messages.fieldNodeId} />,
+        balance: <FormattedMessage {...messages.fieldBalance} />,
+        message_count: <FormattedMessage {...messages.fieldMessageCount} />,
+        transaction_count: (
+          <FormattedMessage {...messages.fieldTransactionCount} />
+        ),
         public_key: <FormattedMessage {...messages.fieldPublicKey} />,
+        hash: <FormattedMessage {...messages.fieldHash} />,
         local_change: <FormattedMessage {...messages.fieldLocalChange} />,
-        time: <FormattedMessage {...messages.fieldTime} />,
       },
-      data: this.props.account.data,
+      data: this.props.account.prettyData,
       ceilConfiguration: {
-        time: () => (
-          <div title={accountConfig.data.time}>
-            {moment(accountConfig.data.time).fromNow()}
-          </div>
-        ),
         local_change: () => (
-          <div title={accountConfig.data.time}>
-            {moment(accountConfig.data.time).fromNow()}
+          <div title={accountConfig.data.local_change}>
+            {formatDate(accountConfig.data.local_change)}
           </div>
         ),
-        status: value => <StatusTableCell value={value} showDesc />,
+        status: () => (
+          <StatusTableCell value={accountConfig.data.status} showDesc />
+        ),
+        node_id: () => (
+          <Link to={`/blockexplorer/nodes/${accountConfig.data.node_id}`}>
+            {accountConfig.data.node_id}
+          </Link>
+        ),
       },
+    };
+
+    const columnsMobile = {
+      id: <FormattedMessage {...messages.columnId} />,
+      type: <FormattedMessage {...messages.columnType} />,
+      address: <FormattedMessage {...messages.columnAddress} />,
+      amount: <FormattedMessage {...messages.columnAmount} />,
+      time: <FormattedMessage {...messages.columnTime} />,
     };
 
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
-      block_id: <FormattedMessage {...messages.columnBlockId} />,
-      message_id: <FormattedMessage {...messages.columnMessageId} />,
+      type: <FormattedMessage {...messages.columnType} />,
       address: <FormattedMessage {...messages.columnAddress} />,
       amount: <FormattedMessage {...messages.columnAmount} />,
-      type: <FormattedMessage {...messages.columnType} />,
+      block_id: <FormattedMessage {...messages.columnBlockId} />,
+      message_id: <FormattedMessage {...messages.columnMessageId} />,
       time: <FormattedMessage {...messages.columnTime} />,
     };
 
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
     const link = `/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`;
 
     const ceilConfiguration = {
@@ -117,6 +135,15 @@ export class AccountPage extends React.PureComponent {
       { id },
     );
 
+    const sortingColumns = [
+      'id',
+      'block_id',
+      'message_id',
+      'type',
+      'amount',
+      'time',
+    ];
+
     return (
       <AccountPageWrapper>
         <Helmet>
@@ -125,28 +152,29 @@ export class AccountPage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
           fields={accountConfig.columns}
-          data={this.props.account.data}
+          data={accountConfig.data}
+          rawData={this.props.account.data}
           loading={this.props.account.loading}
           error={this.props.account.error}
           ceilConfiguration={accountConfig.ceilConfiguration}
         />
-        <h4>
+        <h2>
           <FormattedMessage {...messages.transactionTabTitle} />
-        </h4>
+        </h2>
         <ListView
           name="transactions"
           urlParams={this.props.match.params}
           query={this.props.location.search}
           list={this.props.transactions}
-          columns={columns}
+          columns={isMobile ? columnsMobile : columns}
           ceilConfiguration={ceilConfiguration}
-          sortingColumns={['id', 'block_id', 'type']}
-          defaultSort="block_id"
+          sortingColumns={sortingColumns}
+          defaultSort="time"
           messages={messages}
           link={link}
           onPageChange={this.props.onPageChange}

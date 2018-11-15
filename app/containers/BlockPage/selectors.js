@@ -1,4 +1,3 @@
-import formatDate from 'lib/formatDate';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -7,15 +6,11 @@ const selectBlockPageDomain = state => state.get('blockPage', initialState);
 const makeSelectBlock = () =>
   createSelector(selectBlockPageDomain, globalState => {
     const block = globalState.get('block').toJS();
-
-    if (block.data.time) {
-      block.data.time = formatDate(block.data.time);
-    }
-
-    if (block.data.dividend_pay) {
-      block.data.dividend_pay =
-        block.data.dividend_pay === true ? 'true' : 'false';
-    }
+    block.prettyData = {
+      ...block.data,
+      votes: `${block.data.vote_yes}/${block.data.vote_total}`,
+      dividend_pay: block.data.dividend_pay === true ? 'true' : 'false',
+    };
 
     return block;
   });

@@ -9,10 +9,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMsg from 'components/molecules/ErrorMsg';
-import { FaSortUp, FaSortDown } from 'react-icons/fa';
+import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 import {
   TableBody,
-  TableHeader,
+  TableHeaderRow,
+  TableHeaderCell,
   TableRow,
   Table,
   TableNoData,
@@ -49,12 +50,17 @@ class TableDataSet extends React.PureComponent {
 
     return (
       <thead>
-        <tr>{headers}</tr>
+        <TableHeaderRow>{headers}</TableHeaderRow>
       </thead>
     );
   }
 
   renderColumnHeader(columnId, columnName) {
+    const ceilValue =
+      typeof this.props.headerConfiguration[columnId] === 'function'
+        ? this.props.headerConfiguration[columnId](columnId, columnName)
+        : columnName;
+
     if (
       this.props.sortingColumns.length > 0 &&
       this.props.sortingColumns.lastIndexOf(columnId) !== -1
@@ -67,19 +73,21 @@ class TableDataSet extends React.PureComponent {
       const link = `${this.props.link}?page=1&sort=${columnId}&order=${order}`;
 
       return (
-        <TableHeader scope="col" key={`${this.props.name}_${columnId}`}>
+        <TableHeaderCell scope="col" key={`${this.props.name}_${columnId}`}>
           <Link to={link}>
-            {columnName}
-            {columnId === this.props.sortBy ? TableDataSet.sortIcon(order) : ''}
+            {ceilValue}
+            {columnId === this.props.sortBy
+              ? TableDataSet.sortIcon(order)
+              : TableDataSet.sortIcon('none')}
           </Link>
-        </TableHeader>
+        </TableHeaderCell>
       );
     }
 
     return (
-      <TableHeader scope="col" key={`${this.props.name}_${columnId}`}>
-        {columnName}
-      </TableHeader>
+      <TableHeaderCell scope="col" key={`${this.props.name}_${columnId}`}>
+        {ceilValue}
+      </TableHeaderCell>
     );
   }
 
@@ -92,7 +100,9 @@ class TableDataSet extends React.PureComponent {
   }
 
   static sortIcon(order) {
-    if (order === 'desc') {
+    if (order === 'none') {
+      return <FaSort />;
+    } else if (order === 'desc') {
       return <FaSortUp />;
     }
 
@@ -170,6 +180,7 @@ TableDataSet.propTypes = {
   columns: PropTypes.object.isRequired,
   sortingColumns: PropTypes.array,
   ceilConfiguration: PropTypes.object,
+  headerConfiguration: PropTypes.object,
   sortBy: PropTypes.string,
   orderBy: PropTypes.string,
   link: PropTypes.string,
@@ -184,6 +195,7 @@ TableDataSet.propTypes = {
 TableDataSet.defaultProps = {
   sortingColumns: [],
   ceilConfiguration: {},
+  headerConfiguration: {},
   sortBy: 'id',
   orderBy: 'desc',
   link: '',

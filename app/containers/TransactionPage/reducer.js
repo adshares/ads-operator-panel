@@ -12,28 +12,30 @@ import {
 } from './constants';
 
 export const initialState = fromJS({
-  data: {},
-  loading: false,
-  error: false,
+  transaction: {
+    loading: false,
+    error: false,
+    data: {},
+  },
 });
 
 function transactionPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_TRANSACTION:
       return state
-        .set('loading', true)
-        .set('error', false)
-        .set('data', fromJS({}));
+        .setIn(['transaction', 'loading'], true)
+        .setIn(['transaction', 'error'], false)
+        .setIn(['transaction', 'data'], fromJS({}));
     case LOAD_TRANSACTION_SUCCESS:
       return state
-        .set('loading', false)
-        .set('error', false)
-        .set('data', fromJS(action.data));
+        .setIn(['transaction', 'loading'], false)
+        .setIn(['transaction', 'error'], false)
+        .setIn(['transaction', 'data'], fromJS(action.data));
     case LOAD_TRANSACTION_ERROR:
       return state
-        .set('loading', false)
-        .set('error', fromJS(action.error))
-        .set('data', fromJS({}));
+        .setIn(['transaction', 'loading'], false)
+        .setIn(['transaction', 'error'], fromJS(action.error))
+        .setIn(['transaction', 'data'], fromJS({}));
     default:
       return state;
   }

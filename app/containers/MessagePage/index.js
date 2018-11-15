@@ -12,6 +12,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import moment from 'moment';
+import formatDate from 'lib/formatDate';
 import { Link } from 'react-router-dom';
 import config from 'config';
 import injectSaga from 'utils/injectSaga';
@@ -26,6 +27,7 @@ import messages from './messages';
 import { loadMessage, loadTransactions } from './actions';
 import { MessagePageWrapper } from './styled';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 export class MessagePage extends React.PureComponent {
@@ -60,34 +62,48 @@ export class MessagePage extends React.PureComponent {
           <FormattedMessage {...messages.fieldTransactionCount} />
         ),
         length: <FormattedMessage {...messages.fieldLength} />,
+        hash: <FormattedMessage {...messages.fieldHash} />,
+        time: <FormattedMessage {...messages.fieldTime} />,
       },
-      messageData: this.props.message.data,
+      data: this.props.message.prettyData,
       ceilConfiguration: {
         node_id: () => (
-          <Link
-            to={`/blockexplorer/nodes/${messageConfig.messageData.node_id}`}
-          >
-            {messageConfig.messageData.node_id}
+          <Link to={`/blockexplorer/nodes/${messageConfig.data.node_id}`}>
+            {messageConfig.data.node_id}
           </Link>
         ),
         block_id: () => (
-          <Link
-            to={`/blockexplorer/blocks/${messageConfig.messageData.block_id}`}
-          >
-            {messageConfig.messageData.block_id}
+          <Link to={`/blockexplorer/blocks/${messageConfig.data.block_id}`}>
+            {messageConfig.data.block_id}
           </Link>
+        ),
+        time: () => (
+          <div title={messageConfig.data.time}>
+            {formatDate(messageConfig.data.time)}
+          </div>
         ),
       },
     };
 
-    const columns = {
+    const columnsMobile = {
       id: <FormattedMessage {...messages.columnId} />,
+      type: <FormattedMessage {...messages.columnType} />,
       sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
       target_address: <FormattedMessage {...messages.columnTargetAddress} />,
       amount: <FormattedMessage {...messages.columnAmount} />,
-      type: <FormattedMessage {...messages.columnType} />,
       time: <FormattedMessage {...messages.columnTime} />,
     };
+
+    const columns = {
+      id: <FormattedMessage {...messages.columnId} />,
+      type: <FormattedMessage {...messages.columnType} />,
+      sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
+      target_address: <FormattedMessage {...messages.columnTargetAddress} />,
+      amount: <FormattedMessage {...messages.columnAmount} />,
+      time: <FormattedMessage {...messages.columnTime} />,
+    };
+
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
 
     const link = `/blockexplorer/blocks/${blockId}/messages/${id}/transactions`;
 
@@ -116,6 +132,15 @@ export class MessagePage extends React.PureComponent {
       { id },
     );
 
+    const sortingColumns = [
+      'id',
+      'sender_address',
+      'target_address',
+      'amount',
+      'type',
+      'time',
+    ];
+
     return (
       <MessagePageWrapper>
         <Helmet>
@@ -124,29 +149,31 @@ export class MessagePage extends React.PureComponent {
           </title>
           <meta name="description" content={metaDescription} />
         </Helmet>
-        <h3>
+        <h1>
           <FormattedMessage {...messages.header} /> #{id}
-        </h3>
+        </h1>
         <DetailView
           fields={messageConfig.columns}
-          data={this.props.message.data}
+          data={messageConfig.data}
+          rawData={this.props.message.data}
           ceilConfiguration={messageConfig.ceilConfiguration}
           loading={this.props.message.loading}
           error={this.props.message.error}
           tableMinWidth={config.tablesMinWidth.tableLg}
         />
-        <h4>
+        <h2>
           <FormattedMessage {...messages.transactionTabTitle} />
-        </h4>
+        </h2>
         <ListView
           name="transactions"
           urlParams={this.props.match.params}
           query={this.props.location.search}
           list={this.props.transactions}
-          columns={columns}
-          sortingColumns={['id']}
+          columns={isMobile ? columnsMobile : columns}
+          sortingColumns={sortingColumns}
           ceilConfiguration={ceilConfiguration}
           defaultSort="id"
+          defaultOrder="asc"
           messages={messages}
           link={link}
           onPageChange={this.props.onPageChange}

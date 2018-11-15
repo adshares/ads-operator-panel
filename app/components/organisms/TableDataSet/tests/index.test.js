@@ -40,7 +40,7 @@ describe('<TableDataSet />', () => {
     );
 
     expect(renderedComponent.find('Table').length).toEqual(1);
-    expect(renderedComponent.find('TableHeader').length).toEqual(1);
+    expect(renderedComponent.find('TableHeaderCell').length).toEqual(1);
   });
 
   it('should render rows if data are not empty', () => {

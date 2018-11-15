@@ -27,6 +27,7 @@ describe('<MessagePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const renderedComponent = shallowIntlWrap(
@@ -39,7 +40,7 @@ describe('<MessagePage />', () => {
         breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('h3').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
@@ -60,6 +61,7 @@ describe('<MessagePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -96,6 +98,9 @@ describe('<MessagePage />', () => {
       loading: false,
       error: false,
       data: {
+        block_id: '12345678',
+      },
+      prettyData: {
         block_id: '12345678',
       },
     };
@@ -136,6 +141,7 @@ describe('<MessagePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -172,6 +178,7 @@ describe('<MessagePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -214,6 +221,7 @@ describe('<MessagePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();

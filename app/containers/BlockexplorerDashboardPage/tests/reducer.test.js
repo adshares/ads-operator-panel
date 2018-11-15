@@ -10,7 +10,17 @@ describe('blockexplorerDashboardPageReducer', () => {
           error: false,
           data: [],
         },
+        accounts: {
+          loading: false,
+          error: false,
+          data: [],
+        },
         blocks: {
+          loading: false,
+          error: false,
+          data: [],
+        },
+        messages: {
           loading: false,
           error: false,
           data: [],

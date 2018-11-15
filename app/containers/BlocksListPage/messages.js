@@ -31,11 +31,14 @@ export default defineMessages({
     id: 'app.containers.BlocksListPage.columnVotes',
     defaultMessage: 'Votes',
   },
+  columnVotesTitle: {
+    id: 'app.containers.BlocksListPage.columnVotesTitle',
+    defaultMessage: 'Acceptance / Total votes',
+  },
   columnTransactionCount: {
     id: 'app.containers.BlocksListPage.columnTransactionCount',
     defaultMessage: 'Transactions',
   },
-
   columnMessageAndTransactionCount: {
     id: 'app.containers.BlocksListPage.columnMessageAndTransactionCount',
     defaultMessage: 'Message / Transactions',
@@ -43,5 +46,9 @@ export default defineMessages({
   columnTime: {
     id: 'app.containers.BlocksListPage.columnTime',
     defaultMessage: 'Time',
+  },
+  columnNowHash: {
+    id: 'app.containers.BlocksListPage.columnNowHash',
+    defaultMessage: 'Hash',
   },
 });

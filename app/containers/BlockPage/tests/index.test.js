@@ -27,6 +27,7 @@ describe('<BlockPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const renderedComponent = shallowIntlWrap(
@@ -39,7 +40,7 @@ describe('<BlockPage />', () => {
         breakpoint={breakpoint}
       />,
     );
-    expect(renderedComponent.find('h3').length).toEqual(1);
+    expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
     expect(renderedComponent.find('ListView').length).toEqual(1);
   });
@@ -60,6 +61,7 @@ describe('<BlockPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -94,6 +96,7 @@ describe('<BlockPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -135,6 +138,7 @@ describe('<BlockPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();

@@ -1,96 +1,136 @@
-function fetchNodes(limit = 5, offset = 0, sort = 'id', order = 'desc') {
-  return send(
-    `api/v1/blockexplorer/nodes?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
-  );
-}
+const defaults = {
+  apiUrl: 'api/v1/blockexplorer/',
+  limit: 10,
+  offset: 0,
+  sort: 'id',
+  order: 'desc',
+};
 
-function fetchBlocks(limit = 5, offset = 0, sort = 'id', order = 'desc') {
-  return send(
-    `api/v1/blockexplorer/blocks?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
-  );
-}
-
-function fetchTransactions(
-  limit = 10,
-  offset = 0,
-  sort = 'block_id',
-  order = 'desc',
+function fetchNodes(
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
 ) {
   return send(
-    `api/v1/blockexplorer/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+    `nodes?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
 function fetchNode(id) {
-  return send(`api/v1/blockexplorer/nodes/${id}`);
+  return send(`nodes/${id}`);
+}
+
+function fetchAccounts(
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `accounts?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function fetchAccountsByNodeId(
   nodeId,
-  limit = 5,
-  offset = 0,
-  sort = 'id',
-  order = 'desc',
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
 ) {
   return send(
-    `api/v1/blockexplorer/nodes/${nodeId}/accounts?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+    `nodes/${nodeId}/accounts?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
-function fetchAccountsById(id) {
-  return send(`api/v1/blockexplorer/accounts/${id}`);
+function fetchAccount(id) {
+  return send(`accounts/${id}`);
 }
 
-function fetchTransactionsByAccountId(
-  accountId,
-  limit = 5,
-  offset = 0,
-  sort = 'block_id',
-  order = 'desc',
+function fetchBlocks(
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
 ) {
   return send(
-    `api/v1/blockexplorer/accounts/${accountId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+    `blocks?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
-}
-
-function fetchTransaction(id) {
-  return send(`api/v1/blockexplorer/transactions/${id}`);
 }
 
 function fetchBlock(id) {
-  return send(`api/v1/blockexplorer/blocks/${id}`);
+  return send(`blocks/${id}`);
+}
+
+function fetchMessages(
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function fetchMessagesByBlockId(
   blockId,
-  limit = 5,
-  offset = 0,
-  sort = 'id',
-  order = 'desc',
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
 ) {
   return send(
-    `api/v1/blockexplorer/blocks/${blockId}/messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+    `blocks/${blockId}/messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
 function fetchMessage(id) {
-  return send(`api/v1/blockexplorer/messages/${id}`);
+  return send(`messages/${id}`);
+}
+
+function fetchTransactions(
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
+function fetchTransactionsByAccountId(
+  accountId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `accounts/${accountId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
 }
 
 function fetchTransactionsByMessageId(
   messageId,
-  limit = 5,
-  offset = 0,
-  sort = 'id',
-  order = 'desc',
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
 ) {
   return send(
-    `api/v1/blockexplorer/messages/${messageId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+    `messages/${messageId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
+function fetchTransaction(id) {
+  return send(`transactions/${id}`);
+}
+
 function send(url, params) {
-  const endpoint = process.env.API_URL + url;
+  const endpoint = process.env.API_URL + defaults.apiUrl + url;
   const credentials = {};
   const init = params ? { ...credentials, ...params } : { ...credentials };
 
@@ -107,15 +147,17 @@ function send(url, params) {
 
 export default {
   fetchNodes,
-  fetchBlocks,
-  fetchTransactions,
   fetchNode,
+  fetchAccounts,
   fetchAccountsByNodeId,
-  fetchAccountsById,
-  fetchTransactionsByAccountId,
-  fetchTransaction,
+  fetchAccount,
+  fetchBlocks,
   fetchBlock,
+  fetchMessages,
   fetchMessagesByBlockId,
   fetchMessage,
+  fetchTransactions,
+  fetchTransactionsByAccountId,
   fetchTransactionsByMessageId,
+  fetchTransaction,
 };
