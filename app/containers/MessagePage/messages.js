@@ -29,11 +29,11 @@ export default defineMessages({
   },
   fieldNodeId: {
     id: 'app.containers.MessagePage.fieldNodeId',
-    defaultMessage: 'Node Id',
+    defaultMessage: 'Node',
   },
   fieldBlockId: {
     id: 'app.containers.MessagePage.fieldBlockId',
-    defaultMessage: 'Block Id',
+    defaultMessage: 'Block',
   },
   fieldTransactionCount: {
     id: 'app.containers.MessagePage.fieldTransactionCount',
@@ -41,7 +41,15 @@ export default defineMessages({
   },
   fieldLength: {
     id: 'app.containers.MessagePage.fieldLength',
-    defaultMessage: 'Length',
+    defaultMessage: 'Size',
+  },
+  fieldHash: {
+    id: 'app.containers.MessagePage.fieldHash',
+    defaultMessage: 'Hash',
+  },
+  fieldTime: {
+    id: 'app.containers.MessagePage.fieldTime',
+    defaultMessage: 'Time',
   },
   columnId: {
     id: 'app.containers.MessagePage.columnId',

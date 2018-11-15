@@ -6,9 +6,11 @@ import { initialState } from './reducer';
 const selectMessagePageDomain = state => state.get('messagePage', initialState);
 
 const makeSelectMessage = () =>
-  createSelector(selectMessagePageDomain, globalState =>
-    globalState.get('message').toJS(),
-  );
+  createSelector(selectMessagePageDomain, globalState => {
+    const message = globalState.get('message').toJS();
+    message.prettyData = { ...message.data };
+    return message;
+  });
 
 const makeSelectTransactions = () =>
   createSelector(selectMessagePageDomain, globalState => {

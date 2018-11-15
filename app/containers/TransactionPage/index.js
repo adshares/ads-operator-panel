@@ -8,8 +8,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import config from 'config';
-import moment from 'moment';
+import formatDate from 'lib/formatDate';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -40,31 +41,110 @@ export class TransactionPage extends React.PureComponent {
     }
   }
 
+  renderAccountLink(nodeId, address, amount) {
+    const amountSpan =
+      typeof amount === 'undefined' ? null : <span>&nbsp;({amount})</span>;
+
+    return (
+      <span key={address}>
+        <Link to={`/blockexplorer/nodes/${nodeId}/accounts/${address}`}>
+          {address}
+        </Link>
+        {amountSpan}
+      </span>
+    );
+  }
+
+  renderAccountLinks(transaction) {
+    const links = [];
+
+    if (transaction.type === 'send_many') {
+      transaction.wires.forEach(wire => {
+        if (links.length > 0) {
+          links.push(<span>,&nbsp;</span>);
+        }
+        links.push(
+          this.renderAccountLink(
+            wire.target_node_id,
+            wire.target_address,
+            wire.amount,
+          ),
+        );
+      });
+    } else if (transaction.type === 'send_one') {
+      links.push(
+        this.renderAccountLink(
+          transaction.target_node_id,
+          transaction.target_address,
+        ),
+      );
+    }
+
+    return links;
+  }
+
   render() {
     const { id } = this.props.match.params;
 
     const transactionConfig = {
       columns: {
         id: <FormattedMessage {...messages.fieldId} />,
-        block_id: <FormattedMessage {...messages.fieldBlockId} />,
         message_id: <FormattedMessage {...messages.fieldMessageId} />,
+        node_id: <FormattedMessage {...messages.fieldNodeId} />,
+        block_id: <FormattedMessage {...messages.fieldBlockId} />,
+        type: <FormattedMessage {...messages.fieldType} />,
         sender_address: <FormattedMessage {...messages.fieldSenderAddress} />,
         target_address: <FormattedMessage {...messages.fieldTargetAddress} />,
         amount: <FormattedMessage {...messages.fieldAmount} />,
         sender_fee: <FormattedMessage {...messages.fieldSenderFee} />,
         size: <FormattedMessage {...messages.fieldSize} />,
-        type: <FormattedMessage {...messages.fieldType} />,
+        message: <FormattedMessage {...messages.fieldMessage} />,
+        decoded_message: <FormattedMessage {...messages.fieldDecodedMessage} />,
+        signature: <FormattedMessage {...messages.fieldSignature} />,
         time: <FormattedMessage {...messages.fieldTime} />,
       },
-      data: this.props.transaction.data,
+      data: this.props.transaction.prettyData,
       ceilConfiguration: {
-        time: () => (
-          <div title={transactionConfig.data.time}>
-            {moment(transactionConfig.data.time).fromNow()}
-          </div>
+        message_id: () => (
+          <Link
+            to={`/blockexplorer/blocks/${
+              transactionConfig.data.block_id
+            }/messages/${transactionConfig.data.message_id}`}
+          >
+            {transactionConfig.data.message_id}
+          </Link>
+        ),
+        node_id: () => (
+          <Link to={`/blockexplorer/nodes/${transactionConfig.data.node_id}`}>
+            {transactionConfig.data.node_id}
+          </Link>
+        ),
+        block_id: () => (
+          <Link to={`/blockexplorer/blocks/${transactionConfig.data.block_id}`}>
+            {transactionConfig.data.block_id}
+          </Link>
+        ),
+        sender_address: () => (
+          <span>
+            {this.renderAccountLink(
+              transactionConfig.data.node_id,
+              transactionConfig.data.sender_address,
+            )}
+          </span>
+        ),
+        target_address: () => (
+          <span>{this.renderAccountLinks(transactionConfig.data)}</span>
         ),
         type: () => (
           <TypeTableCell value={transactionConfig.data.type} showDesc />
+        ),
+        decoded_message: () => (
+          <code>{transactionConfig.data.decoded_message}</code>
+        ),
+        time: () => (
+          <div title={transactionConfig.data.time}>
+            {formatDate(transactionConfig.data.time)}
+          </div>
         ),
       },
     };
@@ -88,6 +168,7 @@ export class TransactionPage extends React.PureComponent {
         <DetailView
           fields={transactionConfig.columns}
           data={transactionConfig.data}
+          rawData={this.props.transaction.data}
           ceilConfiguration={transactionConfig.ceilConfiguration}
           loading={this.props.transaction.loading}
           error={this.props.transaction.error}

@@ -27,6 +27,7 @@ describe('<NodePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const renderedComponent = shallowIntlWrap(
@@ -60,6 +61,7 @@ describe('<NodePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -94,6 +96,7 @@ describe('<NodePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -135,6 +138,7 @@ describe('<NodePage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();

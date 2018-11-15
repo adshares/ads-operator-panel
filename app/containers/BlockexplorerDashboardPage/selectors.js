@@ -13,7 +13,7 @@ const makeSelectTopNodes = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const nodes = globalState.get('nodes').toJS();
     nodes.data.map(item => {
-      item.balance = formatMoney(item.balance); // eslint-disable-line
+      item.balance = formatMoney(item.balance, 4); // eslint-disable-line
       return item;
     });
 
@@ -24,7 +24,7 @@ const makeSelectTopAccounts = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const accounts = globalState.get('accounts').toJS();
     accounts.data.map(item => {
-      item.balance = formatMoney(item.balance); // eslint-disable-line
+      item.balance = formatMoney(item.balance, 4); // eslint-disable-line
       return item;
     });
 
@@ -44,6 +44,7 @@ const makeSelectLatestBlocks = () =>
         block.message_and_transaction_count = `${block.message_count} / ${
           block.transaction_count
         }`;
+        block.votes = `${block.vote_yes}/${block.vote_total}`;
         return block;
       });
     }

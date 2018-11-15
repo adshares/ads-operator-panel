@@ -14,6 +14,7 @@ import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import config from 'config';
 import moment from 'moment';
+import formatDate from 'lib/formatDate';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/organisms/DetailView';
@@ -24,6 +25,7 @@ import saga from './saga';
 import messages from './messages';
 import { BlockPageWrapper } from './styled';
 import { loadBlock, loadMessages } from './actions';
+import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockPage extends React.PureComponent {
@@ -48,48 +50,64 @@ export class BlockPage extends React.PureComponent {
     const blockConfig = {
       columns: {
         id: <FormattedMessage {...messages.fieldId} />,
+        votes: <FormattedMessage {...messages.fieldVotes} />,
         message_count: <FormattedMessage {...messages.fieldMessageCount} />,
-        node_count: <FormattedMessage {...messages.fieldNodeCount} />,
         transaction_count: (
           <FormattedMessage {...messages.fieldTransactionCount} />
         ),
-        dividend_balance: (
-          <FormattedMessage {...messages.fieldDividendBalance} />
-        ),
-        dividend_pay: <FormattedMessage {...messages.fieldDividendPay} />,
         old_hash: <FormattedMessage {...messages.fieldOldHash} />,
         now_hash: <FormattedMessage {...messages.fieldNowHash} />,
         msg_hash: <FormattedMessage {...messages.fieldMsgHash} />,
         vip_hash: <FormattedMessage {...messages.fieldVipHash} />,
         time: <FormattedMessage {...messages.fieldTime} />,
       },
-      data: this.props.block.data,
+      data: this.props.block.prettyData,
       ceilConfiguration: {
         time: () => (
           <div title={blockConfig.data.time}>
-            {moment(blockConfig.data.time).fromNow()}
+            {formatDate(blockConfig.data.time)}
+          </div>
+        ),
+        votes: () => (
+          <div title={messages.fieldVotesTitle.defaultMessage}>
+            {blockConfig.data.votes}
           </div>
         ),
       },
     };
+
+    const columnsMobile = {
+      id: <FormattedMessage {...messages.columnMessagesId} />,
+      transaction_count: (
+        <FormattedMessage {...messages.columnMessagesTransactionCount} />
+      ),
+      time: <FormattedMessage {...messages.columnMessagesTime} />,
+    };
+
+    const columns = {
+      id: <FormattedMessage {...messages.columnMessagesId} />,
+      hash: <FormattedMessage {...messages.columnHash} />,
+      node_id: <FormattedMessage {...messages.columnMessagesNodeId} />,
+      transaction_count: (
+        <FormattedMessage {...messages.columnMessagesTransactionCount} />
+      ),
+      time: <FormattedMessage {...messages.columnMessagesTime} />,
+    };
+
+    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
 
     const link = '/blockexplorer/messages';
     const messageTab = {
       id: 'messages',
       name: <FormattedMessage {...messages.messageTabTitle} />,
       data: this.props.messages.data,
-      columns: {
-        id: <FormattedMessage {...messages.columnMessagesId} />,
-        node_id: <FormattedMessage {...messages.columnMessagesNodeId} />,
-        transaction_count: (
-          <FormattedMessage {...messages.columnMessagesTransactionCount} />
-        ),
-      },
+      columns: isMobile ? columnsMobile : columns,
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
         node_id: value => (
           <Link to={`blockexplorer/nodes/${value}`}>{value}</Link>
         ),
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
     };
 
@@ -97,6 +115,8 @@ export class BlockPage extends React.PureComponent {
       messages.metaDescription,
       { id },
     );
+
+    const sortingColumns = ['id', 'node_id', 'transaction_count', 'time'];
 
     return (
       <BlockPageWrapper>
@@ -112,6 +132,7 @@ export class BlockPage extends React.PureComponent {
         <DetailView
           fields={blockConfig.columns}
           data={blockConfig.data}
+          rawData={this.props.block.data}
           loading={this.props.block.loading}
           error={this.props.block.error}
           ceilConfiguration={blockConfig.ceilConfiguration}
@@ -126,8 +147,9 @@ export class BlockPage extends React.PureComponent {
           list={this.props.messages}
           ceilConfiguration={messageTab.ceilConfiguration}
           columns={messageTab.columns}
-          sortingColumns={['id']}
+          sortingColumns={sortingColumns}
           defaultSort="id"
+          defaultOrder="asc"
           messages={messages}
           link={`/blockexplorer/blocks/${id}/messages`}
           onPageChange={this.props.onPageChange}

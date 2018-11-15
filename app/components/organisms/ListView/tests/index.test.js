@@ -52,7 +52,7 @@ describe('<ListView />', () => {
     expect(renderedComponent.find('ErrorMsg').length).toEqual(1);
   });
 
-  it('should render <ListViewWrapper> when sort and order values are valid', () => {
+  it('should render <section> when sort and order values are valid', () => {
     const sortingColumns = ['id', 'title'];
     const columns = {
       id: 'id',
@@ -83,7 +83,7 @@ describe('<ListView />', () => {
     );
 
     expect(renderedComponent.find('ErrorMsg').length).toEqual(0);
-    expect(renderedComponent.find('ListViewWrapper').length).toEqual(1);
+    expect(renderedComponent.find('section').length).toEqual(1);
     expect(renderedComponent.find('TableDataSet').length).toEqual(1);
   });
 
