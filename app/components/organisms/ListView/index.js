@@ -12,7 +12,6 @@ import queryString from 'query-string';
 import config from 'config';
 import Pagination from 'components/Pagination/Loadable';
 import ErrorMsg from 'components/molecules/ErrorMsg';
-import { ListViewWrapper } from './styled';
 import listViewMessages from './messages';
 import TableDataSet from '../TableDataSet/index';
 
@@ -106,7 +105,7 @@ class ListView extends React.PureComponent {
       );
     }
     return (
-      <ListViewWrapper>
+      <section>
         <TableDataSet
           name={name}
           columns={columns}
@@ -131,7 +130,7 @@ class ListView extends React.PureComponent {
           order={order}
           nextPage={list.data.length > config.limit}
         />
-      </ListViewWrapper>
+      </section>
     );
   }
 }
