@@ -1,26 +1,66 @@
-language: node_js
+sudo: required
 
-node_js:
-- 9
-- 8
+language: minimal
 
-cache:
-  yarn: true
-  directories:
-  - node_modules
+services:
+  - docker
 
-before_install:
-- export CHROME_BIN=chromium-browser
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
+stages:
+  - build check
 
-script:
-- node ./internals/scripts/generate-templates-for-linting
-- npm test -- --maxWorkers=4
-- npm run build
+env:
+  global:
+    - DOCKER_IMAGE=awlodarkiewicz/devops:build-latest
+    - HOST_PATH=/home/travis/build/adshares/ads-operator-panel
+    - BUILD_PATH=/build/ads-operator-panel
+    - BUILD_NAME=ads_operator_panel_build
+  matrix:
+    - >-
+      CHROME_BIN=chromium-browser
+      DISPLAY=:99.0
 
-after_success: 'npm run coveralls'
+before_script:
+  ## Setup test environment
+  # Run docker container
 
+  - docker pull $DOCKER_IMAGE
+  - >
+    docker run -d
+    --mount type=bind,src=$HOST_PATH,dst=$BUILD_PATH
+    -e TRAVIS=true
+    -e CHROME_BIN=${CHROME_BIN}
+    -e DISPLAY=${DISPLAY}
+    -e ADS_OPERATOR_PANEL_INSTALLATION_DIR=/var/www/ads-operator-panel
+    --name $BUILD_NAME
+    $DOCKER_IMAGE
+    sleep infinity
+  - docker exec $BUILD_NAME apt-get -qq -y update
+  - docker exec $BUILD_NAME apt-get -qq -y install chromium-browser xvfb
+
+jobs:
+  include:
+    # node.js build
+    - stage: build check
+      script:
+        # Run pre-build script
+        - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && ./scripts/pre-build.sh"
+
+        # Run build script
+        - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && ./scripts/build.sh"
+
+        # Test
+        - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && node ./internals/scripts/generate-templates-for-linting"
+        - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm test -- --maxWorkers=4"
+        - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run build"
+
+after_success:
+  - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run coveralls"
+
+after_script:
+  # Cleanup
+  - docker stop $BUILD_NAME && docker rm $BUILD_NAME
+
+# After a build, send email push-notification with the build results
 notifications:
   email: false
   slack:
@@ -28,6 +68,3 @@ notifications:
       secure: "kt8D0pp8uOgsjL+G84wzHeIDHgVnwC+uxjiHEP3WmyOh/0JzFGhkpJsaZg/DRQYA9eqnm6SPFMMFXz/RFbV97eTlVBenkbIG8A1jXgxiaTiFweDPKwL4m5od6vUPwa4NG3PrUHoLSBpHuy2LIxbxh8tRVEHHtklPGSHiFa0hJw00wQQWscDrfP8izZGq2VOsai/ANPvZSOOGhbjSjAyweU+PEACqJRTGKNc4ocUrssxNR1QwzZMAR1sbhOz/YHqbg5MCvMUnQu7AF17u2sMxpBd6ZgLfBz2MsQF1lEhZwc8WJk1Kd8Ks2PTPE5pIWUKPW+idW+/zV/b1Ro/Vr/yUjIYm/URPyCq9Ex1GBNLkjdaTq/3wKzVAO3uXqKwWsdAoTR3gAMwflH8ZpX4hkIZ0WbVidzrLESOxMpVrat1RbMDF3Ih1OTxVf1c2H9UcHWmwYlYr5qRp7OPmIITb7MhJaWsDoiaybaaaxOZiz8PXMvrRUORyNHvLlYgbmvrntuxq11lJC9HLOfJ3z48a2g5zyOTTNPcW2Gzsb2WWMCYoKU2mZGSk8SsoL4ybfkkolSzcNqj6w9ye6HZ6Qf0tOSHK4QAUwBaFEkIwVmCUGvTIIDhfd5JG9V3FTsD+4maWPuqDENWPTNVERlO/5epgK45+zr4YRmgan2Wo4PFPvSc2MI8="
     on_success: change
     on_failure: always
-
-
-
