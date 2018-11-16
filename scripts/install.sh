@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p ${ADS_OPERATOR_PANEL_INSTALLATION_DIR}
-mv build/* ${ADS_OPERATOR_PANEL_INSTALLATION_DIR}/
+set -e
+
+mkdir -p ${INSTALLATION_PATH}
+mv build/* ${INSTALLATION_PATH}/

@@ -1,6 +1,6 @@
 sudo: required
 
-language: minimal
+language: node.js
 
 services:
   - docker
@@ -10,14 +10,12 @@ stages:
 
 env:
   global:
-    - DOCKER_IMAGE=awlodarkiewicz/devops:build-latest
+    - DOCKER_IMAGE=awlodarkiewicz/devops:js
     - HOST_PATH=/home/travis/build/adshares/ads-operator-panel
     - BUILD_PATH=/build/ads-operator-panel
     - BUILD_NAME=ads_operator_panel_build
-  matrix:
-    - >-
-      CHROME_BIN=chromium-browser
-      DISPLAY=:99.0
+    - CHROME_BIN=chromium-browser
+    - DISPLAY=:99.0
 
 before_script:
   ## Setup test environment
@@ -55,10 +53,6 @@ jobs:
 
 after_success:
   - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run coveralls"
-
-after_script:
-  # Cleanup
-  - docker stop $BUILD_NAME && docker rm $BUILD_NAME
 
 # After a build, send email push-notification with the build results
 notifications:
