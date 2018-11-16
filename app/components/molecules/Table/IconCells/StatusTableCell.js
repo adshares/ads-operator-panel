@@ -15,16 +15,16 @@ const StatusTableCell = ({ value, showDesc }) => {
     let desc;
     let icon;
     if (value & 1) {
-      desc = 'Deleted';
+      desc = `Deleted [${value}]`;
       icon = <FaTimes color="var(--red)" />;
     } else if (value & 4) {
-      desc = 'Super VIP';
+      desc = `Super VIP [${value}]`;
       icon = <FaTrophy color="var(--yellow)" />;
     } else if (value & 2) {
-      desc = 'VIP';
+      desc = `VIP [${value}]`;
       icon = <FaStar color="var(--yellow)" />;
     } else {
-      desc = 'Normal';
+      desc = `Normal [${value}]`;
       icon = <FaShieldAlt />;
     }
 

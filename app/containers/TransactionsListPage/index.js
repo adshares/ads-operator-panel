@@ -33,25 +33,34 @@ export class TransactionsListPage extends React.PureComponent {
 
     const columnsMobile = {
       id: <FormattedMessage {...messages.columnId} />,
+      type: <FormattedMessage {...messages.columnType} />,
       sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
       target_address: <FormattedMessage {...messages.columnTargetAddress} />,
       amount: <FormattedMessage {...messages.columnAmount} />,
-      type: <FormattedMessage {...messages.columnType} />,
       time: <FormattedMessage {...messages.columnTime} />,
     };
 
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
-      block_id: <FormattedMessage {...messages.columnBlockId} />,
-      message_id: <FormattedMessage {...messages.columnMessageId} />,
+      type: <FormattedMessage {...messages.columnType} />,
       sender_address: <FormattedMessage {...messages.columnSenderAddress} />,
       target_address: <FormattedMessage {...messages.columnTargetAddress} />,
       amount: <FormattedMessage {...messages.columnAmount} />,
-      type: <FormattedMessage {...messages.columnType} />,
+      block_id: <FormattedMessage {...messages.columnBlockId} />,
+      message_id: <FormattedMessage {...messages.columnMessageId} />,
       time: <FormattedMessage {...messages.columnTime} />,
     };
 
-    const sortingColumns = ['id', 'block_id', 'type'];
+    const sortingColumns = [
+      'id',
+      'block_id',
+      'message_id',
+      'sender_address',
+      'target_address',
+      'amount',
+      'type',
+      'time',
+    ];
     const ceilConfiguration = {
       id: value => (
         <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
@@ -102,7 +111,7 @@ export class TransactionsListPage extends React.PureComponent {
           columns={isMobile ? columnsMobile : columns}
           sortingColumns={sortingColumns}
           ceilConfiguration={ceilConfiguration}
-          defaultSort="block_id"
+          defaultSort="time"
           messages={messages}
           link="/blockexplorer/transactions"
           onPageChange={this.props.onPageChange}

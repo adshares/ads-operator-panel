@@ -9,15 +9,26 @@ import { initialState } from './reducer';
 const selectBlockexplorerDashboardPageDomain = state =>
   state.get('blockexplorerDashboardPage', initialState);
 
-const makeSelectLatestNodes = () =>
+const makeSelectTopNodes = () =>
   createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
     const nodes = globalState.get('nodes').toJS();
     nodes.data.map(item => {
-      item.balance = formatMoney(item.balance); // eslint-disable-line
+      item.balance = formatMoney(item.balance, 4); // eslint-disable-line
       return item;
     });
 
     return nodes;
+  });
+
+const makeSelectTopAccounts = () =>
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
+    const accounts = globalState.get('accounts').toJS();
+    accounts.data.map(item => {
+      item.balance = formatMoney(item.balance, 4); // eslint-disable-line
+      return item;
+    });
+
+    return accounts;
   });
 
 const makeSelectLatestBlocks = () =>
@@ -27,15 +38,35 @@ const makeSelectLatestBlocks = () =>
     if (blocks.data) {
       blocks.data.map(rawBlock => {
         const block = rawBlock;
-        block.time = formatDate(block.time);
+        if (block.time) {
+          block.time = formatDate(block.time);
+        }
         block.message_and_transaction_count = `${block.message_count} / ${
           block.transaction_count
         }`;
+        block.votes = `${block.vote_yes}/${block.vote_total}`;
         return block;
       });
     }
 
     return blocks;
+  });
+
+const makeSelectLatestMessages = () =>
+  createSelector(selectBlockexplorerDashboardPageDomain, globalState => {
+    const messages = globalState.get('messages').toJS();
+
+    if (messages.data) {
+      messages.data.map(rawMessage => {
+        const message = rawMessage;
+        if (message.time) {
+          message.time = formatDate(message.time);
+        }
+        return message;
+      });
+    }
+
+    return messages;
   });
 
 const makeSelectLatestTransactions = () =>
@@ -68,7 +99,9 @@ const makeSelectLatestTransactions = () =>
   });
 
 export {
-  makeSelectLatestNodes,
+  makeSelectTopNodes,
+  makeSelectTopAccounts,
   makeSelectLatestBlocks,
+  makeSelectLatestMessages,
   makeSelectLatestTransactions,
 };

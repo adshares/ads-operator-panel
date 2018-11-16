@@ -7,12 +7,16 @@ export const AppContainer = styled.div`
   width: 100%;
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 0.7fr 5fr 0.7fr;
+  grid-template-columns: 0.1fr 5fr 0.1fr;
   grid-template-rows: 70px 40px 1fr;
   grid-template-areas:
     'header header header '
     '. breadcrumbs . '
     '. container . ';
+
+  @media (min-width: ${breakpoints.desktopLn}px) {
+    grid-template-columns: 0.5fr calc(${breakpoints.desktopLn}px - 100px) 0.5fr;
+  }
 
   @media (max-width: ${breakpoints.tabletMd}px) {
     display: flex;

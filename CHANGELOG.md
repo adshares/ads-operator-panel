@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2018-10-29
+### Added
+- Sorting everywhere
+- Additional data in models
+
+### Changed
+- Dashboard layout
+- UI & UX
+
+### Fixed
+- Mobile UI
+
 ## [0.1.2] - 2018-10-29
 ### Changed
 - Distinguish transactions direction by colors (green, red)
@@ -53,8 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed redundant columns on mobile view
 - Messages and transactions columns combined on mobile view 
 
-[Unreleased]: https://github.com/adshares/ads-operator-panel/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/adshares/ads-operator-panel/compare/v0.1.3...HEAD
 
+[0.1.3]: https://github.com/adshares/ads-operator/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/adshares/ads-operator/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/adshares/ads-operator/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/adshares/ads-operator-panel/releases/tag/v0.1.0

@@ -4,13 +4,11 @@ import { breakpoints } from '../../../utils/breakpoints';
 
 export const Table = styled.table`
   min-width: ${props => props.tableMinWidth || `auto`};
-  table-layout: fixed;
   width: 100%;
   background-color: transparent;
   margin-top: ${props => props.margintop || `0`};
   animation: ${fadeIn} 0.5s;
   animation-fill-mode: forwards;
-  box-shadow: var(--box-shadow);
   ${({ showIntroAnimation }) =>
     showIntroAnimation &&
     `
@@ -54,7 +52,7 @@ export const TableBody = styled.tbody`
 export const TableCellStyled = styled.td`
   vertical-align: middle;
   text-align: ${props => props.textalign || `center`};
-  padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
+  padding: calc(var(--spacing-factor)) calc(var(--spacing-factor));
   white-space: ${props => props.whitespace || 'nowrap'};
   word-break: ${props => props.textwrap || 'keep-all'};
   position: relative;
@@ -80,18 +78,23 @@ export const TableCellStyled = styled.td`
     }
   }
 
-  &.time {
-    padding: 0;
-
-    &:hover {
-      border-right: 2px solid var(--blue);
-    }
+  &.time,
+  &.mtim,
+  &.version {
+    font-size: small;
   }
 
   .balance,
   .amount {
     text-align: right;
     min-width: 12ch;
+  }
+
+  &.public_key,
+  &.hash,
+  &.now_hash,
+  &.signature {
+    max-width: 120px;
   }
 `;
 
@@ -109,6 +112,7 @@ export const TableHeaderCell = styled.th`
   font-family: var(--font-family-title);
   font-weight: 400;
   text-transform: uppercase;
+  font-size: small;
   a {
     color: var(--gray);
     * {

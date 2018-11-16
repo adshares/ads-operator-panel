@@ -27,9 +27,13 @@ export default defineMessages({
     id: 'app.containers.NodesListPage.fieldAccountCount',
     defaultMessage: 'Accounts',
   },
-  fieldMsid: {
-    id: 'app.containers.NodesListPage.fieldMsid',
+  fieldMessageCount: {
+    id: 'app.containers.NodesListPage.fieldMessageCount',
     defaultMessage: 'Messages',
+  },
+  fieldTransactionCount: {
+    id: 'app.containers.NodesListPage.fieldTransactionCount',
+    defaultMessage: 'Transactions',
   },
   fieldBalance: {
     id: 'app.containers.NodesListPage.fieldBalance',
@@ -42,5 +46,13 @@ export default defineMessages({
   fieldVersion: {
     id: 'app.containers.NodesListPage.fieldVersion',
     defaultMessage: 'Version',
+  },
+  fieldPublicKey: {
+    id: 'app.containers.NodePage.fieldPublicKey',
+    defaultMessage: 'Public Key',
+  },
+  fieldMessageTime: {
+    id: 'app.containers.NodePage.fieldMessageTime',
+    defaultMessage: 'Last Active',
   },
 });

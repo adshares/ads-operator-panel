@@ -26,6 +26,7 @@ describe('<AccountPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const renderedComponent = shallowIntlWrap(
@@ -59,6 +60,7 @@ describe('<AccountPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -95,6 +97,9 @@ describe('<AccountPage />', () => {
       loading: false,
       error: false,
       data: {
+        node_id: '0001',
+      },
+      prettyData: {
         node_id: '0001',
       },
     };
@@ -135,6 +140,7 @@ describe('<AccountPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -178,6 +184,7 @@ describe('<AccountPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();
@@ -227,6 +234,7 @@ describe('<AccountPage />', () => {
       loading: false,
       error: false,
       data: {},
+      prettyData: {},
     };
 
     const dispatch = sinon.spy();

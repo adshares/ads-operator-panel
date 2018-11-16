@@ -10,26 +10,32 @@ describe('transactionPageReducer', () => {
   let state;
   beforeEach(() => {
     state = fromJS({
-      data: {},
-      loading: false,
-      error: false,
+      transaction: {
+        loading: false,
+        error: false,
+        data: {},
+      },
     });
   });
 
   it('returns the initial state', () => {
     const expectedResult = fromJS({
-      data: {},
-      loading: false,
-      error: false,
+      transaction: {
+        loading: false,
+        error: false,
+        data: {},
+      },
     });
     expect(transactionPageReducer(undefined, {})).toEqual(expectedResult);
   });
 
   it('should handle the loadTransaction action correctly', () => {
     const expectedResult = fromJS({
-      data: {},
-      loading: true,
-      error: false,
+      transaction: {
+        loading: true,
+        error: false,
+        data: {},
+      },
     });
 
     expect(transactionPageReducer(state, loadTransaction())).toEqual(
@@ -43,9 +49,11 @@ describe('transactionPageReducer', () => {
     };
 
     const expectedResult = fromJS({
-      data,
-      loading: false,
-      error: false,
+      transaction: {
+        loading: false,
+        error: false,
+        data,
+      },
     });
 
     expect(transactionPageReducer(state, transactionLoaded(data))).toEqual(
@@ -59,9 +67,11 @@ describe('transactionPageReducer', () => {
     };
 
     const expectedResult = fromJS({
-      loading: false,
-      error,
-      data: {},
+      transaction: {
+        loading: false,
+        error,
+        data: {},
+      },
     });
 
     expect(

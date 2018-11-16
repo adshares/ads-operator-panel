@@ -23,13 +23,17 @@ export default defineMessages({
     id: 'app.containers.TransactionPage.fieldId',
     defaultMessage: 'Id',
   },
+  fieldNodeId: {
+    id: 'app.containers.TransactionPage.fieldNodeId',
+    defaultMessage: 'Node',
+  },
   fieldBlockId: {
     id: 'app.containers.TransactionPage.fieldBlockId',
-    defaultMessage: 'Block Id',
+    defaultMessage: 'Block',
   },
   fieldMessageId: {
     id: 'app.containers.TransactionPage.fieldMessageId',
-    defaultMessage: 'Message Id',
+    defaultMessage: 'Message',
   },
   fieldSenderAddress: {
     id: 'app.containers.TransactionPage.fieldSenderAddress',
@@ -54,6 +58,18 @@ export default defineMessages({
   fieldType: {
     id: 'app.containers.TransactionPage.fieldType',
     defaultMessage: 'Type',
+  },
+  fieldMessage: {
+    id: 'app.containers.TransactionPage.fieldMessage',
+    defaultMessage: 'Message',
+  },
+  fieldDecodedMessage: {
+    id: 'app.containers.TransactionPage.fieldDecodedMessage',
+    defaultMessage: 'Decoded message',
+  },
+  fieldSignature: {
+    id: 'app.containers.TransactionPage.fieldSignature',
+    defaultMessage: 'Signature',
   },
   fieldTime: {
     id: 'app.containers.TransactionPage.fieldTime',

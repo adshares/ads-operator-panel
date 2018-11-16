@@ -37,6 +37,7 @@ export class BlocksListPage extends React.PureComponent {
 
     const columns = {
       id: <FormattedMessage {...messages.columnId} />,
+      now_hash: <FormattedMessage {...messages.columnNowHash} />,
       votes: <FormattedMessage {...messages.columnVotes} />,
       message_count: <FormattedMessage {...messages.columnMessageCount} />,
       transaction_count: (
@@ -48,9 +49,18 @@ export class BlocksListPage extends React.PureComponent {
     const ceilConfiguration = {
       id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
       time: value => <div title={value}> {moment(value).fromNow()} </div>,
+      votes: value => (
+        <span title={messages.columnVotesTitle.defaultMessage}>{value}</span>
+      ),
     };
 
-    const sortingColumns = ['id'];
+    const headerConfiguration = {
+      votes: (id, value) => (
+        <span title={messages.columnVotesTitle.defaultMessage}>{value}</span>
+      ),
+    };
+
+    const sortingColumns = ['id', 'message_count', 'transaction_count', 'time'];
     const { match, location, blocks, onPageChange, breakpoint } = this.props;
 
     const isMobile = breakpointIsMobile(this.props.breakpoint.size);
@@ -74,12 +84,13 @@ export class BlocksListPage extends React.PureComponent {
           list={blocks}
           columns={isMobile ? columnsMobile : columns}
           sortingColumns={sortingColumns}
-          defaultSort="id"
+          defaultSort="time"
           messages={messages}
           link="/blockexplorer/blocks"
           onPageChange={onPageChange}
           tableMinWidth={config.tablesMinWidth.tableXs}
           ceilConfiguration={ceilConfiguration}
+          headerConfiguration={headerConfiguration}
           breakpoint={breakpoint}
         />
       </div>

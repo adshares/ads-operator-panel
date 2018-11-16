@@ -27,9 +27,13 @@ export default defineMessages({
     id: 'app.containers.NodePage.fieldAccountCount',
     defaultMessage: 'Accounts',
   },
-  fieldMsid: {
-    id: 'app.containers.NodePage.fieldMsid',
+  fieldMessageCount: {
+    id: 'app.containers.NodePage.fieldMessageCount',
     defaultMessage: 'Messages',
+  },
+  fieldTransactionCount: {
+    id: 'app.containers.NodePage.fieldTransactionCount',
+    defaultMessage: 'Transactions',
   },
   fieldBalance: {
     id: 'app.containers.NodePage.fieldBalance',
@@ -41,15 +45,27 @@ export default defineMessages({
   },
   fieldIp: {
     id: 'app.containers.NodePage.fieldIp',
-    defaultMessage: 'Ip',
+    defaultMessage: 'IP address',
   },
   fieldPublicKey: {
     id: 'app.containers.NodePage.fieldPublicKey',
     defaultMessage: 'Public Key',
   },
+  fieldHash: {
+    id: 'app.containers.NodePage.fieldHash',
+    defaultMessage: 'Hash',
+  },
+  fieldMessageHash: {
+    id: 'app.containers.NodePage.fieldMessageHash',
+    defaultMessage: 'Message Hash',
+  },
   fieldMtim: {
     id: 'app.containers.NodePage.fieldMtim',
-    defaultMessage: 'Last Message Time',
+    defaultMessage: 'Last Active Time',
+  },
+  fieldVersion: {
+    id: 'app.containers.NodePage.fieldVersion',
+    defaultMessage: 'Version',
   },
   accountTabTitle: {
     id: 'app.containers.NodePage.accountTabTitle',
@@ -67,12 +83,20 @@ export default defineMessages({
     id: 'app.containers.NodePage.status',
     defaultMessage: 'Status',
   },
+  accountMessageCount: {
+    id: 'app.containers.NodePage.accountMessageCount',
+    defaultMessage: 'Messages',
+  },
+  accountTransactionCount: {
+    id: 'app.containers.NodePage.accountTransactionCount',
+    defaultMessage: 'Transactions',
+  },
   accountPublicKey: {
     id: 'app.containers.NodePage.publicKey',
     defaultMessage: 'Public Key',
   },
-  fieldVersion: {
-    id: 'app.containers.NodePage.fieldVersion',
-    defaultMessage: 'Version',
+  accountLocalChange: {
+    id: 'app.containers.NodePage.accountLocalChange',
+    defaultMessage: 'Last Active',
   },
 });

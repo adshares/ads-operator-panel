@@ -6,6 +6,6 @@ export default function(value) {
     return null;
   }
 
-  const date = moment.parseZone(value);
+  const date = moment(value);
   return date.format(config.date_format);
 }
