@@ -143,6 +143,7 @@ export class NodePage extends React.PureComponent {
       'balance',
       'message_count',
       'transaction_count',
+      'local_change',
     ];
 
     return (
@@ -177,7 +178,7 @@ export class NodePage extends React.PureComponent {
           ceilConfiguration={ceilConfiguration}
           sortingColumns={sortingColumns}
           defaultSort="id"
-          defaultOrder="asc"
+          defaultOrder="desc"
           messages={messages}
           link={`/blockexplorer/nodes/${id}/accounts`}
           onPageChange={onPageChange}
