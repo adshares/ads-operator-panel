@@ -170,8 +170,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
     const accountTab = {
       id: 'account',
       name: this.context.intl.formatMessage(msg.accountTabTitle),
-      // link: '/blockexplorer/accounts',
-      link: null,
+      link: '/blockexplorer/accounts',
       data: this.props.accounts.data,
       columns: isMobile ? accountColumnsMobile : accountColumnsDesktop,
       ceilConfiguration: {
