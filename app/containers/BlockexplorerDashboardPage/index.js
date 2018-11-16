@@ -197,8 +197,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
     const messagesTab = {
       id: 'message',
       name: this.context.intl.formatMessage(msg.messageTabTitle),
-      // link: '/blockexplorer/messages',
-      link: null,
+      link: '/blockexplorer/messages',
       data: this.props.messages.data,
       columns: isMobile ? messageColumnsMobile : messageColumns,
       ceilConfiguration: {
