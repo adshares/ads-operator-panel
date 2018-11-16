@@ -105,7 +105,7 @@ export class BlockPage extends React.PureComponent {
       ceilConfiguration: {
         id: value => <Link to={`${link}/${value}`}>{value}</Link>,
         node_id: value => (
-          <Link to={`blockexplorer/nodes/${value}`}>{value}</Link>
+          <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>
         ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
