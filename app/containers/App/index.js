@@ -23,6 +23,7 @@ import BlockPage from 'containers/BlockPage/Loadable';
 import NodePage from 'containers/NodePage/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
 import TransactionPage from 'containers/TransactionPage/Loadable';
+import MessagesListPage from 'containers/MessagesListPage/Loadable';
 import MessagePage from 'containers/MessagePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import HeaderWrapper from 'containers/HeaderWrapper/HeaderWrapper';
@@ -127,7 +128,11 @@ export default function App() {
             path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:id([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})/transactions"
             component={AccountPage}
           />
-
+          <Route
+            exact
+            path="/blockexplorer/messages"
+            component={MessagesListPage}
+          />
           <Route
             exact
             path="/blockexplorer/messages/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8})"

@@ -17,11 +17,11 @@ const routes = {
   '/blockexplorer/blocks/:blockId/messages/:id': 'Message id',
   '/blockexplorer/blocks/:blockId/messages/:id/transactions/:id':
     'Transaction :id',
+  '/blockexplorer/messages': 'Messages',
   '/blockexplorer/messages/:id': 'Message :id',
   '/blockexplorer/accounts/:id': 'Account :id',
   '/blockexplorer/transactions': 'Transactions',
   '/blockexplorer/accounts': null,
-  '/blockexplorer/messages': null,
 };
 
 const tablesMinWidth = {
