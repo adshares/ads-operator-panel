@@ -1,6 +1,6 @@
 sudo: required
 
-language: minimal
+language: node.js
 
 services:
   - docker
@@ -51,7 +51,8 @@ jobs:
         - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm test -- --maxWorkers=4"
         - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run build"
 
-        - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run coveralls"
+after_success:
+  - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run coveralls"
 
 # After a build, send email push-notification with the build results
 notifications:
