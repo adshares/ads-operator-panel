@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Sorting nodes and accounts by last active time
 - List of messages
+- List of accounts
 
 ## [0.1.3] - 2018-10-29
 ### Added

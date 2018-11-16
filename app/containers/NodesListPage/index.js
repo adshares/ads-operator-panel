@@ -32,8 +32,8 @@ export class NodesListPage extends React.Component {
 
     const columnsMobile = {
       id: <FormattedMessage {...messages.fieldId} />,
-      balance: <FormattedMessage {...messages.fieldBalance} />,
       status: <FormattedMessage {...messages.fieldStatus} />,
+      balance: <FormattedMessage {...messages.fieldBalance} />,
     };
 
     const columnsDesktop = {

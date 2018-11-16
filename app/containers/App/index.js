@@ -21,6 +21,7 @@ import TransactionsListPage from 'containers/TransactionsListPage/Loadable';
 import BlocksListPage from 'containers/BlocksListPage/Loadable';
 import BlockPage from 'containers/BlockPage/Loadable';
 import NodePage from 'containers/NodePage/Loadable';
+import AccountsListPage from 'containers/AccountsListPage/Loadable';
 import AccountPage from 'containers/AccountPage/Loadable';
 import TransactionPage from 'containers/TransactionPage/Loadable';
 import MessagesListPage from 'containers/MessagesListPage/Loadable';
@@ -92,6 +93,11 @@ export default function App() {
             exact
             path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})/messages"
             component={BlockPage}
+          />
+          <Route
+            exact
+            path="/blockexplorer/accounts"
+            component={AccountsListPage}
           />
           <Route
             exact

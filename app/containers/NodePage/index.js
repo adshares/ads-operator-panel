@@ -89,12 +89,6 @@ export class NodePage extends React.PureComponent {
       id: this.context.intl.formatMessage(messages.accountColumnId),
       status: this.context.intl.formatMessage(messages.accountStatus),
       balance: this.context.intl.formatMessage(messages.accountBalance),
-      message_count: this.context.intl.formatMessage(
-        messages.accountMessageCount,
-      ),
-      transaction_count: this.context.intl.formatMessage(
-        messages.accountTransactionCount,
-      ),
     };
 
     const columns = {

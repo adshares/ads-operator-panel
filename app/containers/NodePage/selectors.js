@@ -26,7 +26,7 @@ const makeSelectAccounts = () =>
     const accounts = globalState.get('accounts').toJS();
     accounts.data.map(item => {
       const account = item;
-      account.balance = formatMoney(account.balance);
+      account.balance = formatMoney(account.balance, 4);
 
       return account;
     });
