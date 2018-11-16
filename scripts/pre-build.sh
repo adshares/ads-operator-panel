@@ -30,4 +30,4 @@ fi
 
 # Install yarn
 apt-get -qq -y update
-apt-get -qq -y install --no-install-recommends libpng-dev gettext-base $PACKAGE_LIST
+apt-get -qq -y install --no-install-recommends make libpng-dev gettext-base $PACKAGE_LIST
