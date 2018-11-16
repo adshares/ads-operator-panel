@@ -10,7 +10,7 @@ stages:
 
 env:
   global:
-    - DOCKER_IMAGE=awlodarkiewicz/devops:build-latest
+    - DOCKER_IMAGE=awlodarkiewicz/devops:js
     - HOST_PATH=/home/travis/build/adshares/ads-operator-panel
     - BUILD_PATH=/build/ads-operator-panel
     - BUILD_NAME=ads_operator_panel_build
@@ -51,12 +51,7 @@ jobs:
         - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm test -- --maxWorkers=4"
         - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run build"
 
-after_success:
-  - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run coveralls"
-
-after_script:
-  # Cleanup
-  - docker stop $BUILD_NAME && docker rm $BUILD_NAME
+        - docker exec $BUILD_NAME /bin/bash -c "cd $BUILD_PATH && npm run coveralls"
 
 # After a build, send email push-notification with the build results
 notifications:

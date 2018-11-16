@@ -3,18 +3,31 @@
 set -e
 
 # Ubuntu 18.04 only
+nodejs --version || export INSTALL_NODEJS=true
+npm --version || export INSTALL_NPM=true
+yarn --version || export INSTALL_YARN=true
 
 # Install dependencies for yarn operations
-apt-get -qq -y install nodejs npm libpng-dev
+if [ -v INSTALL_NODEJS ]; then
+    PACKAGE_LIST="${PACKAGE_LIST:-""} nodejs"
+fi
 
-# envsubst binary
-apt-get -qq -y install gettext-base
+if [ -v INSTALL_NPM ]; then
+    PACKAGE_LIST="${PACKAGE_LIST:-""} npm"
+fi
 
-# Get yarn
-apt-get -qq -y install curl
+if [ -v INSTALL_YARN ]; then
 
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    # Get yarn
+    curl --version || apt-get -qq -y --no-install-recommends install curl
+
+    # Get yarn
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+    PACKAGE_LIST="${PACKAGE_LIST:-""} yarn"
+fi
 
 # Install yarn
-apt-get update && apt-get -qq -y install yarn
+apt-get -qq -y update
+apt-get -qq -y install --no-install-recommends libpng-dev gettext-base $PACKAGE_LIST
