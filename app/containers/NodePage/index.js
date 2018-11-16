@@ -178,7 +178,7 @@ export class NodePage extends React.PureComponent {
           ceilConfiguration={ceilConfiguration}
           sortingColumns={sortingColumns}
           defaultSort="id"
-          defaultOrder="asc"
+          defaultOrder="desc"
           messages={messages}
           link={`/blockexplorer/nodes/${id}/accounts`}
           onPageChange={onPageChange}
