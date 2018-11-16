@@ -22,8 +22,6 @@ const routes = {
   '/blockexplorer/accounts': 'Accounts',
   '/blockexplorer/accounts/:id': 'Account :id',
   '/blockexplorer/transactions': 'Transactions',
-  '/blockexplorer/accounts': null,
-  '/blockexplorer/messages': null,
 };
 
 const tablesMinWidth = {
