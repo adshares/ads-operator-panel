@@ -18,7 +18,7 @@ describe('AccountsListPage actions', () => {
     it('has a type of LOAD_ACCOUNTS_SUCCESS', () => {
       const accounts = [
         {
-          id: 'AAAAAABB',
+          id: '0001-00000000-9B6F',
         },
       ];
 
