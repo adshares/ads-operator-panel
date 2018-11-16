@@ -143,6 +143,7 @@ export class NodePage extends React.PureComponent {
       'balance',
       'message_count',
       'transaction_count',
+      'local_change',
     ];
 
     return (

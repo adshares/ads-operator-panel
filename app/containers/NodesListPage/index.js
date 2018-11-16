@@ -65,6 +65,7 @@ export class NodesListPage extends React.Component {
       'message_count',
       'transaction_count',
       'version',
+      'mtim',
     ];
     const { match, location, nodes, onPageChange, breakpoint } = this.props;
     return (
