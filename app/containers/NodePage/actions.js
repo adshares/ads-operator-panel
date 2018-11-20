@@ -11,6 +11,9 @@ import {
   LOAD_ACCOUNTS,
   LOAD_ACCOUNTS_SUCCESS,
   LOAD_ACCOUNTS_ERROR,
+  LOAD_MESSAGES,
+  LOAD_MESSAGES_SUCCESS,
+  LOAD_MESSAGES_ERROR,
 } from './constants';
 
 export function loadNode(id) {
@@ -55,6 +58,31 @@ export function accountsLoaded(data) {
 export function accountsLoadingError(error) {
   return {
     type: LOAD_ACCOUNTS_ERROR,
+    error,
+  };
+}
+
+export function loadMessages(nodeId, limit, offset, sort, order) {
+  return {
+    type: LOAD_MESSAGES,
+    nodeId,
+    limit,
+    offset,
+    sort,
+    order,
+  };
+}
+
+export function messagesLoaded(data) {
+  return {
+    type: LOAD_MESSAGES_SUCCESS,
+    data,
+  };
+}
+
+export function messagesLoadingError(error) {
+  return {
+    type: LOAD_MESSAGES_ERROR,
     error,
   };
 }

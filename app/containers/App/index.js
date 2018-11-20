@@ -70,6 +70,11 @@ export default function App() {
           />
           <Route
             exact
+            path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/messages"
+            component={NodePage}
+          />
+          <Route
+            exact
             path="/blockexplorer/blocks/:blockId([a-fA-F0-9]{8})/messages/:messageId([a-fA-F0-9]{4}:[a-fA-F0-9]{8})/transactions/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8}:[a-fA-F0-9]{4})"
             component={TransactionPage}
           />

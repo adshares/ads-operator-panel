@@ -34,4 +34,17 @@ const makeSelectAccounts = () =>
     return accounts;
   });
 
-export { makeSelectNode, makeSelectAccounts };
+const makeSelectMessages = () =>
+  createSelector(selectNodePageDomain, globalState => {
+    const messages = globalState.get('messages').toJS();
+    messages.data.map(item => {
+      const message = item;
+      // message.balance = formatMoney(message.balance, 4);
+
+      return message;
+    });
+
+    return messages;
+  });
+
+export { makeSelectNode, makeSelectAccounts, makeSelectMessages };

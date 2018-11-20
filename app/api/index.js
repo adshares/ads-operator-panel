@@ -86,6 +86,18 @@ function fetchMessagesByBlockId(
   );
 }
 
+function fetchMessagesByNodeId(
+  nodeId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `nodes/${nodeId}/messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
 function fetchMessage(id) {
   return send(`messages/${id}`);
 }
@@ -155,6 +167,7 @@ export default {
   fetchBlock,
   fetchMessages,
   fetchMessagesByBlockId,
+  fetchMessagesByNodeId,
   fetchMessage,
   fetchTransactions,
   fetchTransactionsByAccountId,

@@ -5,6 +5,7 @@
  */
 
 import { defineMessages } from 'react-intl';
+import messages from '../BlockPage/messages';
 
 export default defineMessages({
   header: {
@@ -98,5 +99,21 @@ export default defineMessages({
   accountLocalChange: {
     id: 'app.containers.NodePage.accountLocalChange',
     defaultMessage: 'Last Active',
+  },
+  messageColumnId: {
+    id: 'app.containers.BlockPage.messageColumnId',
+    defaultMessage: 'Id',
+  },
+  messageTransactionCount: {
+    id: 'app.containers.BlockPage.messageTransactionCount',
+    defaultMessage: 'Transactions',
+  },
+  messageTime: {
+    id: 'app.containers.BlockPage.messageTime',
+    defaultMessage: 'Time',
+  },
+  messageHash: {
+    id: 'app.containers.BlockPage.messageHash',
+    defaultMessage: 'Hash',
   },
 });

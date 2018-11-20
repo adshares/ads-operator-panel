@@ -1,11 +1,14 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
-import { LOAD_ACCOUNTS, LOAD_NODE } from './constants';
+import { LOAD_NODE, LOAD_ACCOUNTS, LOAD_MESSAGES } from './constants';
+
 import {
-  accountsLoaded,
-  accountsLoadingError,
   nodeLoaded,
   nodeLoadingError,
+  accountsLoaded,
+  accountsLoadingError,
+  messagesLoaded,
+  messagesLoadingError,
 } from './actions';
 
 import api from '../../api';
@@ -35,8 +38,25 @@ export function* getAccounts(action) {
   }
 }
 
+export function* getMessages(action) {
+  try {
+    const messages = yield call(
+      api.fetchMessagesByNodeId,
+      action.nodeId,
+      action.limit,
+      action.offset,
+      action.sort,
+      action.order,
+    );
+    yield put(messagesLoaded(messages));
+  } catch (err) {
+    yield put(messagesLoadingError(err));
+  }
+}
+
 // Individual exports for testing
 export default function* defaultSaga() {
   yield takeLatest(LOAD_NODE, getNode);
   yield takeLatest(LOAD_ACCOUNTS, getAccounts);
+  yield takeLatest(LOAD_MESSAGES, getMessages);
 }
