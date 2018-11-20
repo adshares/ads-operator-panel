@@ -69,7 +69,11 @@ export default defineMessages({
   },
   fieldTime: {
     id: 'app.containers.BlockPage.fieldTime',
-    defaultMessage: 'Time',
+    defaultMessage: 'Start Time',
+  },
+  fieldEndTime: {
+    id: 'app.containers.BlockPage.fieldEndTime',
+    defaultMessage: 'End Time',
   },
   columnMessagesId: {
     id: 'app.containers.BlockPage.columnMessagesId',

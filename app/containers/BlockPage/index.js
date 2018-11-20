@@ -60,12 +60,18 @@ export class BlockPage extends React.PureComponent {
         msg_hash: <FormattedMessage {...messages.fieldMsgHash} />,
         vip_hash: <FormattedMessage {...messages.fieldVipHash} />,
         time: <FormattedMessage {...messages.fieldTime} />,
+        end_time: <FormattedMessage {...messages.fieldEndTime} />,
       },
       data: this.props.block.prettyData,
       ceilConfiguration: {
         time: () => (
           <div title={blockConfig.data.time}>
             {formatDate(blockConfig.data.time)}
+          </div>
+        ),
+        end_time: () => (
+          <div title={blockConfig.data.end_time}>
+            {formatDate(blockConfig.data.end_time)}
           </div>
         ),
         votes: () => (

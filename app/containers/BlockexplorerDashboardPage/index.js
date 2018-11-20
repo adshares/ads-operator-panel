@@ -98,7 +98,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       message_and_transaction_count: (
         <FormattedMessage {...msg.blockColumnMessageAndTransactionCount} />
       ),
-      time: <FormattedMessage {...msg.blockColumnTime} />,
+      end_time: <FormattedMessage {...msg.blockColumnTime} />,
     };
 
     const blockColumns = {
@@ -108,7 +108,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       transaction_count: (
         <FormattedMessage {...msg.blockColumnTransactionCount} />
       ),
-      time: <FormattedMessage {...msg.blockColumnTime} />,
+      end_time: <FormattedMessage {...msg.blockColumnTime} />,
     };
 
     const messageColumnsMobile = {
@@ -189,7 +189,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       columns: isMobile ? blockColumnsMobile : blockColumns,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
-        time: value => <div title={value}> {moment(value).fromNow()} </div>,
+        end_time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
     };
 
