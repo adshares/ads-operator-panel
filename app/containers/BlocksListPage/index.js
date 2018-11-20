@@ -32,7 +32,7 @@ export class BlocksListPage extends React.PureComponent {
       message_and_transaction_count: (
         <FormattedMessage {...messages.columnMessageAndTransactionCount} />
       ),
-      time: <FormattedMessage {...messages.columnTime} />,
+      end_time: <FormattedMessage {...messages.columnTime} />,
     };
 
     const columns = {
@@ -43,12 +43,12 @@ export class BlocksListPage extends React.PureComponent {
       transaction_count: (
         <FormattedMessage {...messages.columnTransactionCount} />
       ),
-      time: <FormattedMessage {...messages.columnTime} />,
+      end_time: <FormattedMessage {...messages.columnTime} />,
     };
 
     const ceilConfiguration = {
       id: value => <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>,
-      time: value => <div title={value}> {moment(value).fromNow()} </div>,
+      end_time: value => <div title={value}> {moment(value).fromNow()} </div>,
       votes: value => (
         <span title={messages.columnVotesTitle.defaultMessage}>{value}</span>
       ),
@@ -60,7 +60,12 @@ export class BlocksListPage extends React.PureComponent {
       ),
     };
 
-    const sortingColumns = ['id', 'message_count', 'transaction_count', 'time'];
+    const sortingColumns = [
+      'id',
+      'message_count',
+      'transaction_count',
+      'end_time',
+    ];
     const { match, location, blocks, onPageChange, breakpoint } = this.props;
 
     const isMobile = breakpointIsMobile(this.props.breakpoint.size);
@@ -84,7 +89,7 @@ export class BlocksListPage extends React.PureComponent {
           list={blocks}
           columns={isMobile ? columnsMobile : columns}
           sortingColumns={sortingColumns}
-          defaultSort="time"
+          defaultSort="end_time"
           messages={messages}
           link="/blockexplorer/blocks"
           onPageChange={onPageChange}
