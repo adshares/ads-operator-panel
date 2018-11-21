@@ -279,7 +279,7 @@ export class NodePage extends React.PureComponent {
           ceilConfiguration={nodeConfig.ceilConfiguration}
         />
         <TabListView
-          tabs={[accountsTab, messagesTab, transactionsTab]}
+          tabs={[accountsTab, transactionsTab, messagesTab]}
           defaultTab={tab}
           urlParams={match.params}
           query={location.search}
