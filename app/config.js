@@ -14,6 +14,7 @@ const routes = {
 
   '/blockexplorer/blocks': 'Blocks',
   '/blockexplorer/blocks/:blockId/messages': null,
+  '/blockexplorer/blocks/:blockId/transactions': null,
   '/blockexplorer/blocks/:blockId/messages/:id/transactions': null,
   '/blockexplorer/blocks/:id': 'Block id',
   '/blockexplorer/blocks/:blockId/messages/:id': 'Message id',

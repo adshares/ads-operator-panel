@@ -113,6 +113,18 @@ function fetchTransactions(
   );
 }
 
+function fetchTransactionsByNodeId(
+  nodeId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `nodes/${nodeId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
 function fetchTransactionsByAccountId(
   accountId,
   limit = defaults.limit,
@@ -125,6 +137,18 @@ function fetchTransactionsByAccountId(
   );
 }
 
+function fetchTransactionsByBlockId(
+  blockId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `blocks/${blockId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
 function fetchTransactionsByMessageId(
   messageId,
   limit = defaults.limit,
@@ -134,18 +158,6 @@ function fetchTransactionsByMessageId(
 ) {
   return send(
     `messages/${messageId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
-  );
-}
-
-function fetchTransactionsByNodeId(
-  nodeId,
-  limit = defaults.limit,
-  offset = defaults.offset,
-  sort = defaults.sort,
-  order = defaults.order,
-) {
-  return send(
-    `nodes/${nodeId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
@@ -182,8 +194,9 @@ export default {
   fetchMessagesByNodeId,
   fetchMessage,
   fetchTransactions,
+  fetchTransactionsByNodeId,
+  fetchTransactionsByBlockId,
   fetchTransactionsByAccountId,
   fetchTransactionsByMessageId,
-  fetchTransactionsByNodeId,
   fetchTransaction,
 };

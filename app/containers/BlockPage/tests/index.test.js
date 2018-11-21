@@ -12,22 +12,27 @@ const breakpoint = {
 describe('<BlockPage />', () => {
   const location = { search: '' };
 
-  it('should render h3, DetailView, ListView elements', () => {
+  it('should render h3, DetailView, TabListView elements', () => {
     const match = {
       params: {},
     };
 
     const dispatch = () => {};
-    const messages = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const block = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const renderedComponent = shallowIntlWrap(
@@ -37,12 +42,14 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
     expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
-    expect(renderedComponent.find('ListView').length).toEqual(1);
+    expect(renderedComponent.find('TabListView').length).toEqual(1);
   });
 
   it('should dispatch loadBlock when id exists', () => {
@@ -52,16 +59,21 @@ describe('<BlockPage />', () => {
       },
     };
 
-    const messages = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const block = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const dispatch = sinon.spy();
@@ -73,7 +85,9 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
 
@@ -87,16 +101,21 @@ describe('<BlockPage />', () => {
       },
     };
 
-    const messages = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const block = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const dispatch = sinon.spy();
@@ -108,7 +127,9 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
 
@@ -129,16 +150,21 @@ describe('<BlockPage />', () => {
       },
     };
 
-    const messages = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const block = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const dispatch = sinon.spy();
@@ -150,7 +176,9 @@ describe('<BlockPage />', () => {
         dispatch={dispatch}
         block={block}
         messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
 
@@ -161,6 +189,6 @@ describe('<BlockPage />', () => {
     };
 
     renderedComponent.setProps({ match: newMatchProp });
-    expect(dispatch.callCount).toEqual(3);
+    expect(dispatch.callCount).toEqual(4);
   });
 });

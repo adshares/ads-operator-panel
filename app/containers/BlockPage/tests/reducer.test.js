@@ -7,6 +7,9 @@ import {
   loadMessages,
   messagesLoaded,
   messagesLoadingError,
+  loadTransactions,
+  transactionsLoaded,
+  transactionsLoadingError,
 } from '../actions';
 
 describe('blockPageReducer', () => {
@@ -19,6 +22,11 @@ describe('blockPageReducer', () => {
         data: {},
       },
       messages: {
+        loading: false,
+        error: false,
+        data: [],
+      },
+      transactions: {
         loading: false,
         error: false,
         data: [],
@@ -38,6 +46,11 @@ describe('blockPageReducer', () => {
         error: false,
         data: [],
       },
+      transactions: {
+        loading: false,
+        error: false,
+        data: [],
+      },
     });
     expect(blockPageReducer(undefined, {})).toEqual(expectedResult);
   });
@@ -50,6 +63,11 @@ describe('blockPageReducer', () => {
         data: {},
       },
       messages: {
+        loading: false,
+        error: false,
+        data: [],
+      },
+      transactions: {
         loading: false,
         error: false,
         data: [],
@@ -77,6 +95,11 @@ describe('blockPageReducer', () => {
         error: false,
         data: [],
       },
+      transactions: {
+        loading: false,
+        error: false,
+        data: [],
+      },
     });
 
     expect(blockPageReducer(state, blockLoaded(data))).toEqual(expectedResult);
@@ -98,6 +121,11 @@ describe('blockPageReducer', () => {
         error: false,
         data: [],
       },
+      transactions: {
+        loading: false,
+        error: false,
+        data: [],
+      },
     });
 
     expect(blockPageReducer(state, blockLoadingError(error))).toEqual(
@@ -114,6 +142,11 @@ describe('blockPageReducer', () => {
       },
       messages: {
         loading: true,
+        error: false,
+        data: [],
+      },
+      transactions: {
+        loading: false,
         error: false,
         data: [],
       },
@@ -140,6 +173,11 @@ describe('blockPageReducer', () => {
         error: false,
         data,
       },
+      transactions: {
+        loading: false,
+        error: false,
+        data: [],
+      },
     });
 
     expect(blockPageReducer(state, messagesLoaded(data))).toEqual(
@@ -163,9 +201,94 @@ describe('blockPageReducer', () => {
         error,
         data: [],
       },
+      transactions: {
+        loading: false,
+        error: false,
+        data: [],
+      },
     });
 
     expect(blockPageReducer(state, messagesLoadingError(error))).toEqual(
+      expectedResult,
+    );
+  });
+
+  it('should handle the loadTransactions action correctly', () => {
+    const expectedResult = fromJS({
+      block: {
+        loading: false,
+        error: false,
+        data: {},
+      },
+      messages: {
+        loading: false,
+        error: false,
+        data: [],
+      },
+      transactions: {
+        loading: true,
+        error: false,
+        data: [],
+      },
+    });
+
+    expect(blockPageReducer(state, loadTransactions())).toEqual(expectedResult);
+  });
+
+  it('should handle the transactionsLoaded action correctly', () => {
+    const data = [
+      {
+        id: '000F:00003823:0001',
+      },
+    ];
+
+    const expectedResult = fromJS({
+      block: {
+        loading: false,
+        error: false,
+        data: {},
+      },
+      messages: {
+        loading: false,
+        error: false,
+        data: [],
+      },
+      transactions: {
+        loading: false,
+        error: false,
+        data,
+      },
+    });
+
+    expect(blockPageReducer(state, transactionsLoaded(data))).toEqual(
+      expectedResult,
+    );
+  });
+
+  it('should handle transactionsLoadingError action correctly', () => {
+    const error = {
+      message: 'custom error',
+    };
+
+    const expectedResult = fromJS({
+      block: {
+        loading: false,
+        error: false,
+        data: {},
+      },
+      messages: {
+        loading: false,
+        error: false,
+        data: [],
+      },
+      transactions: {
+        loading: false,
+        error,
+        data: [],
+      },
+    });
+
+    expect(blockPageReducer(state, transactionsLoadingError(error))).toEqual(
       expectedResult,
     );
   });

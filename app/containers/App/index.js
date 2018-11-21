@@ -80,13 +80,7 @@ export default function App() {
           />
           <Route
             exact
-            path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})"
-            component={BlockPage}
-          />
-
-          <Route
-            exact
-            path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})/messages"
+            path="/blockexplorer/blocks/:id([a-fA-F0-9]{8})/:tab(messages|transactions)?"
             component={BlockPage}
           />
           <Route
