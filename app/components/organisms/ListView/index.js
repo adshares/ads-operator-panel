@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { intlShape } from 'react-intl';
 import queryString from 'query-string';
 import config from 'config';
