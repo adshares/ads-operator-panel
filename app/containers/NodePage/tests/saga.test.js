@@ -72,14 +72,14 @@ describe('getAccounts Saga', () => {
   });
 
   it('should dispatch the accountsLoaded action if it requests the data successfully', () => {
-    const node = [
+    const accounts = [
       {
-        id: '0001',
+        id: '0002-00000001-659C',
       },
     ];
 
-    const putDescriptor = getAccountsGenarator.next(node).value;
-    expect(putDescriptor).toEqual(put(accountsLoaded(node)));
+    const putDescriptor = getAccountsGenarator.next(accounts).value;
+    expect(putDescriptor).toEqual(put(accountsLoaded(accounts)));
   });
 
   it('should call the accountsLoadingError action if the response errors', () => {
@@ -104,14 +104,14 @@ describe('getMessages Saga', () => {
   });
 
   it('should dispatch the messagesLoaded action if it requests the data successfully', () => {
-    const node = [
+    const messages = [
       {
-        id: '0001',
+        id: '000F:00003823',
       },
     ];
 
-    const putDescriptor = getMessagesGenarator.next(node).value;
-    expect(putDescriptor).toEqual(put(messagesLoaded(node)));
+    const putDescriptor = getMessagesGenarator.next(messages).value;
+    expect(putDescriptor).toEqual(put(messagesLoaded(messages)));
   });
 
   it('should call the messagesLoadingError action if the response errors', () => {
@@ -136,14 +136,14 @@ describe('getTransactions Saga', () => {
   });
 
   it('should dispatch the transactionsLoaded action if it requests the data successfully', () => {
-    const node = [
+    const transactions = [
       {
-        id: '0001',
+        id: '000F:00003823:0001',
       },
     ];
 
-    const putDescriptor = getTransactionsGenarator.next(node).value;
-    expect(putDescriptor).toEqual(put(transactionsLoaded(node)));
+    const putDescriptor = getTransactionsGenarator.next(transactions).value;
+    expect(putDescriptor).toEqual(put(transactionsLoaded(transactions)));
   });
 
   it('should call the transactionsLoadingError action if the response errors', () => {
