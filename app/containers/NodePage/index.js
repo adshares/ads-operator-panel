@@ -174,6 +174,7 @@ export class NodePage extends React.PureComponent {
       columns: {
         id: <FormattedMessage {...msg.messagesColumnId} />,
         hash: <FormattedMessage {...msg.messagesHash} />,
+        block_id: <FormattedMessage {...msg.messagesBlockId} />,
         transaction_count: (
           <FormattedMessage {...msg.messagesTransactionCount} />
         ),
@@ -182,6 +183,9 @@ export class NodePage extends React.PureComponent {
       ceilConfiguration: {
         id: value => (
           <Link to={`/blockexplorer/messages/${value}`}>{value}</Link>
+        ),
+        block_id: value => (
+          <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
         ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },

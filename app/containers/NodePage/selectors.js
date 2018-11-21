@@ -35,17 +35,9 @@ const makeSelectAccounts = () =>
   });
 
 const makeSelectMessages = () =>
-  createSelector(selectNodePageDomain, globalState => {
-    const messages = globalState.get('messages').toJS();
-    messages.data.map(item => {
-      const message = item;
-      // message.balance = formatMoney(message.balance, 4);
-
-      return message;
-    });
-
-    return messages;
-  });
+  createSelector(selectNodePageDomain, globalState =>
+    globalState.get('messages').toJS(),
+  );
 
 const makeSelectTransactions = () =>
   createSelector(selectNodePageDomain, globalState => {
