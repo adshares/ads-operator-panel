@@ -12,22 +12,32 @@ const breakpoint = {
 describe('<NodePage />', () => {
   const location = { search: '' };
 
-  it('should render h3, DetailView, ListView elements', () => {
+  it('should render h3, DetailView, TabListView elements', () => {
     const match = {
       params: {},
     };
 
     const dispatch = () => {};
-    const accounts = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const node = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const accounts = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const renderedComponent = shallowIntlWrap(
@@ -37,12 +47,15 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
     expect(renderedComponent.find('h1').length).toEqual(1);
     expect(renderedComponent.find('DetailView').length).toEqual(1);
-    expect(renderedComponent.find('ListView').length).toEqual(1);
+    expect(renderedComponent.find('TabListView').length).toEqual(1);
   });
 
   it('should dispatch loadNode when id exists', () => {
@@ -52,16 +65,26 @@ describe('<NodePage />', () => {
       },
     };
 
-    const accounts = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const node = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const accounts = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const dispatch = sinon.spy();
@@ -73,7 +96,10 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
 
@@ -87,16 +113,26 @@ describe('<NodePage />', () => {
       },
     };
 
-    const accounts = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const node = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const accounts = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const dispatch = sinon.spy();
@@ -108,7 +144,10 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
 
@@ -129,16 +168,26 @@ describe('<NodePage />', () => {
       },
     };
 
-    const accounts = {
-      loading: false,
-      error: false,
-      data: [],
-    };
     const node = {
       loading: false,
       error: false,
       data: {},
       prettyData: {},
+    };
+    const accounts = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const messages = {
+      loading: false,
+      error: false,
+      data: [],
+    };
+    const transactions = {
+      loading: false,
+      error: false,
+      data: [],
     };
 
     const dispatch = sinon.spy();
@@ -150,7 +199,10 @@ describe('<NodePage />', () => {
         dispatch={dispatch}
         node={node}
         accounts={accounts}
+        messages={messages}
+        transactions={transactions}
         breakpoint={breakpoint}
+        history={{}}
       />,
     );
 
@@ -161,6 +213,6 @@ describe('<NodePage />', () => {
     };
 
     renderedComponent.setProps({ match: newMatchProp });
-    expect(dispatch.callCount).toEqual(3);
+    expect(dispatch.callCount).toEqual(5);
   });
 });

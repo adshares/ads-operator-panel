@@ -57,20 +57,10 @@ export default function App() {
             path="/blockexplorer/nodes/:nodeId([a-fA-F0-9]{4})/accounts/:id([a-fA-F0-9]{4}-[a-fA-F0-9]{8}-[a-fA-F0-9]{4})"
             component={AccountPage}
           />
-          <Route
-            exact
-            path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})"
-            component={NodePage}
-          />
           <Route exact path="/blockexplorer/nodes" component={NodesListPage} />
           <Route
             exact
-            path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/accounts"
-            component={NodePage}
-          />
-          <Route
-            exact
-            path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/messages"
+            path="/blockexplorer/nodes/:id([a-fA-F0-9]{4})/:tab(accounts|messages|transactions)?"
             component={NodePage}
           />
           <Route

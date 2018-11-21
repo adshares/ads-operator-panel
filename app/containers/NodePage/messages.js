@@ -5,7 +5,6 @@
  */
 
 import { defineMessages } from 'react-intl';
-import messages from '../BlockPage/messages';
 
 export default defineMessages({
   header: {
@@ -68,52 +67,92 @@ export default defineMessages({
     id: 'app.containers.NodePage.fieldVersion',
     defaultMessage: 'Version',
   },
-  accountTabTitle: {
-    id: 'app.containers.NodePage.accountTabTitle',
+  accountsTabTitle: {
+    id: 'app.containers.NodePage.accountsTabTitle',
     defaultMessage: 'Accounts',
   },
-  accountColumnId: {
-    id: 'app.containers.NodePage.accountColumnId',
+  accountsColumnId: {
+    id: 'app.containers.NodePage.accountsColumnId',
     defaultMessage: 'Account Id',
   },
-  accountBalance: {
+  accountsBalance: {
     id: 'app.containers.NodePage.balance',
-    defaultMessage: 'Balance',
+    defaultMessage: 'accountsBalance',
   },
-  accountStatus: {
+  accountsStatus: {
     id: 'app.containers.NodePage.status',
-    defaultMessage: 'Status',
+    defaultMessage: 'accountsStatus',
   },
-  accountMessageCount: {
-    id: 'app.containers.NodePage.accountMessageCount',
+  accountsMessageCount: {
+    id: 'app.containers.NodePage.accountsMessageCount',
     defaultMessage: 'Messages',
   },
-  accountTransactionCount: {
-    id: 'app.containers.NodePage.accountTransactionCount',
+  accountsTransactionCount: {
+    id: 'app.containers.NodePage.accountsTransactionCount',
     defaultMessage: 'Transactions',
   },
-  accountPublicKey: {
-    id: 'app.containers.NodePage.publicKey',
+  accountsPublicKey: {
+    id: 'app.containers.NodePage.accountsPublicKey',
     defaultMessage: 'Public Key',
   },
-  accountLocalChange: {
-    id: 'app.containers.NodePage.accountLocalChange',
+  accountsLocalChange: {
+    id: 'app.containers.NodePage.accountsLocalChange',
     defaultMessage: 'Last Active',
   },
-  messageColumnId: {
-    id: 'app.containers.BlockPage.messageColumnId',
+  messagesTabTitle: {
+    id: 'app.containers.NodePage.messagesTabTitle',
+    defaultMessage: 'Messages',
+  },
+  messagesColumnId: {
+    id: 'app.containers.BlockPage.messagesColumnId',
     defaultMessage: 'Id',
   },
-  messageTransactionCount: {
-    id: 'app.containers.BlockPage.messageTransactionCount',
+  messagesTransactionCount: {
+    id: 'app.containers.BlockPage.messagesTransactionCount',
     defaultMessage: 'Transactions',
   },
-  messageTime: {
-    id: 'app.containers.BlockPage.messageTime',
+  messagesTime: {
+    id: 'app.containers.BlockPage.messagesTime',
     defaultMessage: 'Time',
   },
-  messageHash: {
-    id: 'app.containers.BlockPage.messageHash',
+  messagesHash: {
+    id: 'app.containers.BlockPage.messagesHash',
     defaultMessage: 'Hash',
+  },
+  transactionsTabTitle: {
+    id: 'app.containers.NodePage.transactionsTabTitle',
+    defaultMessage: 'Transactions',
+  },
+  transactionsColumnId: {
+    id: 'app.containers.MessagePage.transactionsColumnId',
+    defaultMessage: 'Id',
+  },
+  transactionsType: {
+    id: 'app.containers.MessagePage.transactionsType',
+    defaultMessage: 'Type',
+  },
+  transactionsSenderAddress: {
+    id: 'app.containers.MessagePage.transactionsSenderAddress',
+    defaultMessage: 'From',
+  },
+  transactionsTargetAddress: {
+    id: 'app.containers.MessagePage.transactionsTargetAddress',
+    defaultMessage: 'To',
+  },
+  transactionsAmount: {
+    id: 'app.containers.MessagePage.transactionsAmount',
+    defaultMessage: 'Amount',
+  },
+  transactionsTime: {
+    id: 'app.containers.MessagePage.transactionsTime',
+    defaultMessage: 'Time',
+  },
+  transactionsBlockId: {
+    id: 'app.containers.MessagePage.transactionsBlockId',
+    defaultMessage: 'Block',
+  },
+  transactionsMessageId: {
+    id: 'app.containers.MessagePage.transactionsMessageId',
+    defaultMessage: 'Message',
   },
 });

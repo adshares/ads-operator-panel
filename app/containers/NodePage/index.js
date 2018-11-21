@@ -18,19 +18,26 @@ import config from 'config';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import DetailView from 'components/organisms/DetailView';
-import ListView from 'components/organisms/ListView';
+import TabListView from 'components/organisms/TabListView';
+import TransactionAddressLink from 'components/TransactionAddressLink';
+import TypeTableCell from 'components/molecules/Table/IconCells/TypeTableCell';
+import StatusTableCell from 'components/molecules/Table/IconCells/StatusTableCell';
 import {
   makeSelectNode,
   makeSelectAccounts,
   makeSelectMessages,
+  makeSelectTransactions,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { loadAccounts, loadNode, loadMessages } from './actions';
+import {
+  loadNode,
+  loadAccounts,
+  loadMessages,
+  loadTransactions,
+} from './actions';
 import { NodePageWrapper } from './styled';
 import msg from './messages';
-import { breakpointIsMobile } from '../../utils/responsiveHelpers';
-import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodePage extends React.PureComponent {
@@ -48,13 +55,13 @@ export class NodePage extends React.PureComponent {
     if (oldId !== newId) {
       this.props.dispatch(loadNode(newId));
       this.props.dispatch(loadAccounts(newId));
-      // this.props.dispatch(loadMessages(newId));
+      this.props.dispatch(loadMessages(newId));
+      this.props.dispatch(loadTransactions(newId));
     }
   }
 
   render() {
-    const { id } = this.props.match.params;
-    const isMobile = breakpointIsMobile(this.props.breakpoint.size);
+    const { id, tab } = this.props.match.params;
 
     const nodeConfig = {
       columns: {
@@ -89,22 +96,43 @@ export class NodePage extends React.PureComponent {
       },
     };
 
-    const accountTab = {
+    const {
+      node,
+      match,
+      location,
+      history,
+      accounts,
+      messages,
+      transactions,
+      onAccountsPageChange,
+      onMessagesPageChange,
+      onTransactionsPageChange,
+      breakpoint,
+    } = this.props;
+
+    const accountsTab = {
+      id: `accounts`,
+      name: this.context.intl.formatMessage(msg.accountsTabTitle),
+      list: accounts,
+      link: `/blockexplorer/nodes/${id}/accounts`,
+      onPageChange: onAccountsPageChange,
       columnsMobile: {
-        id: this.context.intl.formatMessage(msg.accountColumnId),
-        status: this.context.intl.formatMessage(msg.accountStatus),
-        balance: this.context.intl.formatMessage(msg.accountBalance),
+        id: this.context.intl.formatMessage(msg.accountsColumnId),
+        status: this.context.intl.formatMessage(msg.accountsStatus),
+        balance: this.context.intl.formatMessage(msg.accountsBalance),
       },
       columns: {
-        id: this.context.intl.formatMessage(msg.accountColumnId),
-        status: this.context.intl.formatMessage(msg.accountStatus),
-        public_key: this.context.intl.formatMessage(msg.accountPublicKey),
-        balance: this.context.intl.formatMessage(msg.accountBalance),
-        message_count: this.context.intl.formatMessage(msg.accountMessageCount),
-        transaction_count: this.context.intl.formatMessage(
-          msg.accountTransactionCount,
+        id: this.context.intl.formatMessage(msg.accountsColumnId),
+        status: this.context.intl.formatMessage(msg.accountsStatus),
+        public_key: this.context.intl.formatMessage(msg.accountsPublicKey),
+        balance: this.context.intl.formatMessage(msg.accountsBalance),
+        message_count: this.context.intl.formatMessage(
+          msg.accountsMessageCount,
         ),
-        local_change: this.context.intl.formatMessage(msg.accountLocalChange),
+        transaction_count: this.context.intl.formatMessage(
+          msg.accountsTransactionCount,
+        ),
+        local_change: this.context.intl.formatMessage(msg.accountsLocalChange),
       },
       ceilConfiguration: {
         id: value => (
@@ -126,23 +154,30 @@ export class NodePage extends React.PureComponent {
         'transaction_count',
         'local_change',
       ],
+      defaultSort: 'id',
+      defaultOrder: 'asc',
     };
 
-    const messageTab = {
+    const messagesTab = {
+      id: `messages`,
+      name: this.context.intl.formatMessage(msg.messagesTabTitle),
+      list: messages,
+      link: `/blockexplorer/nodes/${id}/messages`,
+      onPageChange: onMessagesPageChange,
       columnsMobile: {
-        id: <FormattedMessage {...msg.messageColumnId} />,
+        id: <FormattedMessage {...msg.messagesColumnId} />,
         transaction_count: (
-          <FormattedMessage {...msg.messageTransactionCount} />
+          <FormattedMessage {...msg.messagesTransactionCount} />
         ),
-        time: <FormattedMessage {...msg.messageTime} />,
+        time: <FormattedMessage {...msg.messagesTime} />,
       },
       columns: {
-        id: <FormattedMessage {...msg.messageColumnId} />,
-        hash: <FormattedMessage {...msg.messageHash} />,
+        id: <FormattedMessage {...msg.messagesColumnId} />,
+        hash: <FormattedMessage {...msg.messagesHash} />,
         transaction_count: (
-          <FormattedMessage {...msg.messageTransactionCount} />
+          <FormattedMessage {...msg.messagesTransactionCount} />
         ),
-        time: <FormattedMessage {...msg.messageTime} />,
+        time: <FormattedMessage {...msg.messagesTime} />,
       },
       ceilConfiguration: {
         id: value => (
@@ -150,19 +185,73 @@ export class NodePage extends React.PureComponent {
         ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
-      sortingColumns: ['id', 'node_id', 'transaction_count', 'time'],
+      sortingColumns: ['id', 'transaction_count', 'time'],
+      defaultSort: 'id',
     };
 
-    const {
-      node,
-      match,
-      location,
-      accounts,
-      messages,
-      onAccountPageChange,
-      onMessagePageChange,
-      breakpoint,
-    } = this.props;
+    const transactionsTab = {
+      id: `transactions`,
+      name: this.context.intl.formatMessage(msg.transactionsTabTitle),
+      list: transactions,
+      link: `/blockexplorer/nodes/${id}/transactions`,
+      onPageChange: onTransactionsPageChange,
+      columnsMobile: {
+        id: <FormattedMessage {...msg.transactionsColumnId} />,
+        type: <FormattedMessage {...msg.transactionsType} />,
+        sender_address: <FormattedMessage {...msg.transactionsSenderAddress} />,
+        target_address: <FormattedMessage {...msg.transactionsTargetAddress} />,
+        amount: <FormattedMessage {...msg.transactionsAmount} />,
+        time: <FormattedMessage {...msg.transactionsTime} />,
+      },
+      columns: {
+        id: <FormattedMessage {...msg.transactionsColumnId} />,
+        type: <FormattedMessage {...msg.transactionsType} />,
+        sender_address: <FormattedMessage {...msg.transactionsSenderAddress} />,
+        target_address: <FormattedMessage {...msg.transactionsTargetAddress} />,
+        amount: <FormattedMessage {...msg.transactionsAmount} />,
+        block_id: <FormattedMessage {...msg.transactionsBlockId} />,
+        message_id: <FormattedMessage {...msg.transactionsMessageId} />,
+        time: <FormattedMessage {...msg.transactionsTime} />,
+      },
+      ceilConfiguration: {
+        id: value => (
+          <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
+        ),
+        block_id: value => (
+          <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
+        ),
+        message_id: value => (
+          <Link to={`/blockexplorer/messages/${value}`}>{value}</Link>
+        ),
+        sender_address: (value, row) => (
+          <TransactionAddressLink
+            transactionLink="/blockexplorer/transactions"
+            transactionId={row.id}
+            address={value}
+          />
+        ),
+        target_address: (value, row) => (
+          <TransactionAddressLink
+            transactionLink="/blockexplorer/transactions"
+            transactionId={row.id}
+            address={value}
+          />
+        ),
+        type: value => <TypeTableCell value={value} />,
+        time: value => <div title={value}> {moment(value).fromNow()} </div>,
+      },
+      sortingColumns: [
+        'id',
+        'sender_address',
+        'target_address',
+        'amount',
+        'block_id',
+        'message_id',
+        'type',
+        'time',
+      ],
+      defaultSort: 'id',
+    };
 
     return (
       <NodePageWrapper>
@@ -189,38 +278,12 @@ export class NodePage extends React.PureComponent {
           breakpoint={breakpoint}
           ceilConfiguration={nodeConfig.ceilConfiguration}
         />
-        <h2>
-          <FormattedMessage {...msg.accountTabTitle} />
-        </h2>
-        <ListView
-          name="accounts"
+        <TabListView
+          tabs={[accountsTab, messagesTab, transactionsTab]}
+          defaultTab={tab}
           urlParams={match.params}
           query={location.search}
-          list={accounts}
-          columns={isMobile ? accountTab.columnsMobile : accountTab.columns}
-          ceilConfiguration={accountTab.ceilConfiguration}
-          sortingColumns={accountTab.sortingColumns}
-          defaultSort="id"
-          defaultOrder="asc"
-          messages={msg}
-          link={`/blockexplorer/nodes/${id}/accounts`}
-          onPageChange={onAccountPageChange}
-          breakpoint={breakpoint}
-          tableMinWidth={config.tablesMinWidth.tableMd}
-        />
-        <ListView
-          name="messages"
-          urlParams={match.params}
-          query={location.search}
-          list={messages}
-          columns={isMobile ? messageTab.columnsMobile : messageTab.columns}
-          ceilConfiguration={messageTab.ceilConfiguration}
-          sortingColumns={messageTab.sortingColumns}
-          defaultSort="id"
-          defaultOrder="asc"
-          messages={msg}
-          link={`/blockexplorer/nodes/${id}/messages`}
-          onPageChange={onMessagePageChange}
+          history={history}
           breakpoint={breakpoint}
           tableMinWidth={config.tablesMinWidth.tableMd}
         />
@@ -232,12 +295,15 @@ export class NodePage extends React.PureComponent {
 NodePage.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object,
+  history: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   node: PropTypes.object,
   accounts: PropTypes.object,
   messages: PropTypes.object,
-  onAccountPageChange: PropTypes.func,
-  onMessagePageChange: PropTypes.func,
+  transactions: PropTypes.object,
+  onAccountsPageChange: PropTypes.func,
+  onMessagesPageChange: PropTypes.func,
+  onTransactionsPageChange: PropTypes.func,
   breakpoint: PropTypes.object,
 };
 
@@ -249,19 +315,26 @@ const mapStateToProps = createStructuredSelector({
   node: makeSelectNode(),
   accounts: makeSelectAccounts(),
   messages: makeSelectMessages(),
+  transactions: makeSelectTransactions(),
   breakpoint: state => state.get('breakpoint'),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    onAccountPageChange: (id, page, sort, order) => {
+    onAccountsPageChange: (id, page, sort, order) => {
       const offset = (page - 1) * config.limit;
       return dispatch(loadAccounts(id, config.limit + 1, offset, sort, order));
     },
-    onMessagePageChange: (id, page, sort, order) => {
+    onMessagesPageChange: (id, page, sort, order) => {
       const offset = (page - 1) * config.limit;
       return dispatch(loadMessages(id, config.limit + 1, offset, sort, order));
+    },
+    onTransactionsPageChange: (id, page, sort, order) => {
+      const offset = (page - 1) * config.limit;
+      return dispatch(
+        loadTransactions(id, config.limit + 1, offset, sort, order),
+      );
     },
   };
 }

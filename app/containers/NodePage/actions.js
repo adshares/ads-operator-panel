@@ -14,6 +14,9 @@ import {
   LOAD_MESSAGES,
   LOAD_MESSAGES_SUCCESS,
   LOAD_MESSAGES_ERROR,
+  LOAD_TRANSACTIONS,
+  LOAD_TRANSACTIONS_SUCCESS,
+  LOAD_TRANSACTIONS_ERROR,
 } from './constants';
 
 export function loadNode(id) {
@@ -83,6 +86,31 @@ export function messagesLoaded(data) {
 export function messagesLoadingError(error) {
   return {
     type: LOAD_MESSAGES_ERROR,
+    error,
+  };
+}
+
+export function loadTransactions(nodeId, limit, offset, sort, order) {
+  return {
+    type: LOAD_TRANSACTIONS,
+    nodeId,
+    limit,
+    offset,
+    sort,
+    order,
+  };
+}
+
+export function transactionsLoaded(data) {
+  return {
+    type: LOAD_TRANSACTIONS_SUCCESS,
+    data,
+  };
+}
+
+export function transactionsLoadingError(error) {
+  return {
+    type: LOAD_TRANSACTIONS_ERROR,
     error,
   };
 }

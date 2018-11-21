@@ -4,6 +4,8 @@ const routes = {
 
   '/blockexplorer/nodes': 'Nodes',
   '/blockexplorer/nodes/:id/accounts': null,
+  '/blockexplorer/nodes/:id/messages': null,
+  '/blockexplorer/nodes/:id/transactions': null,
   '/blockexplorer/nodes/:nodeId/accounts/:accountId/transactions': null,
   '/blockexplorer/nodes/:id': 'Node :id',
   '/blockexplorer/nodes/:nodeId/accounts/:id': 'Account :id',
