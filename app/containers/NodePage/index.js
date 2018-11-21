@@ -190,7 +190,7 @@ export class NodePage extends React.PureComponent {
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
       sortingColumns: ['id', 'transaction_count', 'time'],
-      defaultSort: 'id',
+      defaultSort: 'time',
     };
 
     const transactionsTab = {
@@ -254,7 +254,7 @@ export class NodePage extends React.PureComponent {
         'type',
         'time',
       ],
-      defaultSort: 'id',
+      defaultSort: 'time',
     };
 
     return (
