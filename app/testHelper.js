@@ -24,7 +24,7 @@ const createContext = () => ({
 
 const createIntlContext = () => ({
   context: { router, intl },
-  childContextTypes: { router: shape({}) },
+  childContextTypes: { router: shape({}), intl: shape({}) },
 });
 
 function nodeWithIntlProp(node) {
@@ -33,6 +33,10 @@ function nodeWithIntlProp(node) {
 
 export function mountWrap(node) {
   return mount(node, createContext());
+}
+
+export function mountIntlWrap(node) {
+  return mount(nodeWithIntlProp(node), createIntlContext());
 }
 
 export function shallowWrap(node) {

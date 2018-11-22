@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { intlShape } from 'react-intl';
 import queryString from 'query-string';
 import config from 'config';
@@ -25,7 +24,8 @@ class ListView extends React.PureComponent {
 
     if (
       this.props.sortingColumns.includes(sort) &&
-      ['desc', 'asc'].includes(order)
+      ['desc', 'asc'].includes(order) &&
+      this.props.onPageChange
     ) {
       const page = parsedQuery.page || 1;
       const { id } = this.props.urlParams;
@@ -45,9 +45,10 @@ class ListView extends React.PureComponent {
     const paramsFromProps = queryString.parse(this.props.query);
 
     if (
-      paramsFromProps.page !== params.page ||
-      paramsFromProps.sort !== params.sort ||
-      paramsFromProps.order !== params.order
+      this.props.onPageChange &&
+      (paramsFromProps.page !== params.page ||
+        paramsFromProps.sort !== params.sort ||
+        paramsFromProps.order !== params.order)
     ) {
       const { id } = this.props.urlParams;
 
@@ -72,9 +73,7 @@ class ListView extends React.PureComponent {
 
   render() {
     const parsedQuery = queryString.parse(this.props.query);
-    const ceilConfiguration = this.props.ceilConfiguration || {
-      id: value => <Link to={`${this.props.link}/${value}`}>{value}</Link>,
-    };
+    const ceilConfiguration = this.props.ceilConfiguration || {};
     const headerConfiguration = this.props.headerConfiguration || {};
 
     const page = parseInt(parsedQuery.page || 1, 10);

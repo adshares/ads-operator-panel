@@ -12,6 +12,12 @@ import {
   LOAD_ACCOUNTS,
   LOAD_ACCOUNTS_SUCCESS,
   LOAD_ACCOUNTS_ERROR,
+  LOAD_MESSAGES,
+  LOAD_MESSAGES_SUCCESS,
+  LOAD_MESSAGES_ERROR,
+  LOAD_TRANSACTIONS,
+  LOAD_TRANSACTIONS_SUCCESS,
+  LOAD_TRANSACTIONS_ERROR,
 } from './constants';
 
 export const initialState = fromJS({
@@ -21,6 +27,16 @@ export const initialState = fromJS({
     data: {},
   },
   accounts: {
+    loading: false,
+    error: false,
+    data: [],
+  },
+  messages: {
+    loading: false,
+    error: false,
+    data: [],
+  },
+  transactions: {
     loading: false,
     error: false,
     data: [],
@@ -59,6 +75,36 @@ function nodePageReducer(state = initialState, action) {
         .setIn(['accounts', 'loading'], false)
         .setIn(['accounts', 'error'], fromJS(action.error))
         .setIn(['accounts', 'data'], fromJS([]));
+    case LOAD_MESSAGES:
+      return state
+        .setIn(['messages', 'loading'], true)
+        .setIn(['messages', 'error'], false)
+        .setIn(['messages', 'data'], fromJS([]));
+    case LOAD_MESSAGES_SUCCESS:
+      return state
+        .setIn(['messages', 'loading'], false)
+        .setIn(['messages', 'error'], false)
+        .setIn(['messages', 'data'], fromJS(action.data));
+    case LOAD_MESSAGES_ERROR:
+      return state
+        .setIn(['messages', 'loading'], false)
+        .setIn(['messages', 'error'], fromJS(action.error))
+        .setIn(['messages', 'data'], fromJS([]));
+    case LOAD_TRANSACTIONS:
+      return state
+        .setIn(['transactions', 'loading'], true)
+        .setIn(['transactions', 'error'], false)
+        .setIn(['transactions', 'data'], fromJS([]));
+    case LOAD_TRANSACTIONS_SUCCESS:
+      return state
+        .setIn(['transactions', 'loading'], false)
+        .setIn(['transactions', 'error'], false)
+        .setIn(['transactions', 'data'], fromJS(action.data));
+    case LOAD_TRANSACTIONS_ERROR:
+      return state
+        .setIn(['transactions', 'loading'], false)
+        .setIn(['transactions', 'error'], fromJS(action.error))
+        .setIn(['transactions', 'data'], fromJS([]));
     default:
       return state;
   }

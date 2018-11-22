@@ -86,6 +86,18 @@ function fetchMessagesByBlockId(
   );
 }
 
+function fetchMessagesByNodeId(
+  nodeId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `nodes/${nodeId}/messages?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
 function fetchMessage(id) {
   return send(`messages/${id}`);
 }
@@ -101,6 +113,18 @@ function fetchTransactions(
   );
 }
 
+function fetchTransactionsByNodeId(
+  nodeId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `nodes/${nodeId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
 function fetchTransactionsByAccountId(
   accountId,
   limit = defaults.limit,
@@ -110,6 +134,18 @@ function fetchTransactionsByAccountId(
 ) {
   return send(
     `accounts/${accountId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
+function fetchTransactionsByBlockId(
+  blockId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `blocks/${blockId}/transactions?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
   );
 }
 
@@ -155,8 +191,11 @@ export default {
   fetchBlock,
   fetchMessages,
   fetchMessagesByBlockId,
+  fetchMessagesByNodeId,
   fetchMessage,
   fetchTransactions,
+  fetchTransactionsByNodeId,
+  fetchTransactionsByBlockId,
   fetchTransactionsByAccountId,
   fetchTransactionsByMessageId,
   fetchTransaction,

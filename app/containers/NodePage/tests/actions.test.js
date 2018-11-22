@@ -1,9 +1,22 @@
-import { loadNode, nodeLoaded, loadAccounts, accountsLoaded } from '../actions';
 import {
-  LOAD_ACCOUNTS,
-  LOAD_ACCOUNTS_SUCCESS,
+  loadNode,
+  nodeLoaded,
+  loadAccounts,
+  accountsLoaded,
+  loadMessages,
+  messagesLoaded,
+  loadTransactions,
+  transactionsLoaded,
+} from '../actions';
+import {
   LOAD_NODE,
   LOAD_NODE_SUCCESS,
+  LOAD_ACCOUNTS,
+  LOAD_ACCOUNTS_SUCCESS,
+  LOAD_MESSAGES,
+  LOAD_MESSAGES_SUCCESS,
+  LOAD_TRANSACTIONS,
+  LOAD_TRANSACTIONS_SUCCESS,
 } from '../constants';
 
 describe('NodePage actions', () => {
@@ -15,7 +28,7 @@ describe('NodePage actions', () => {
       expect(loadNode()).toEqual(expected);
     });
   });
-  describe('node loaded Action', () => {
+  describe('Node loaded Action', () => {
     it('has a type of LOAD_NODE_SUCCESS', () => {
       const node = {
         id: '0001',
@@ -36,7 +49,7 @@ describe('NodePage actions', () => {
       expect(loadAccounts()).toEqual(expected);
     });
   });
-  describe('accounts loaded Action', () => {
+  describe('Accounts loaded Action', () => {
     it('has a type of LOAD_ACCOUNTS_SUCCESS', () => {
       const accounts = [
         {
@@ -52,6 +65,58 @@ describe('NodePage actions', () => {
         data: accounts,
       };
       expect(accountsLoaded(accounts)).toEqual(expected);
+    });
+  });
+  describe('Load messages Action', () => {
+    it('has a type of LOAD_MESSAGES', () => {
+      const expected = {
+        type: LOAD_MESSAGES,
+      };
+      expect(loadMessages()).toEqual(expected);
+    });
+  });
+  describe('Messages loaded Action', () => {
+    it('has a type of LOAD_MESSAGES_SUCCESS', () => {
+      const messages = [
+        {
+          id: '0020:00003583',
+        },
+        {
+          id: '000F:00003821',
+        },
+      ];
+
+      const expected = {
+        type: LOAD_MESSAGES_SUCCESS,
+        data: messages,
+      };
+      expect(messagesLoaded(messages)).toEqual(expected);
+    });
+  });
+  describe('Load transactions Action', () => {
+    it('has a type of LOAD_TRANSACTIONS', () => {
+      const expected = {
+        type: LOAD_TRANSACTIONS,
+      };
+      expect(loadTransactions()).toEqual(expected);
+    });
+  });
+  describe('Transactions loaded Action', () => {
+    it('has a type of LOAD_TRANSACTIONS_SUCCESS', () => {
+      const transactions = [
+        {
+          id: '001C:0000391B:0001',
+        },
+        {
+          id: '0004:0000341C:0001',
+        },
+      ];
+
+      const expected = {
+        type: LOAD_TRANSACTIONS_SUCCESS,
+        data: transactions,
+      };
+      expect(transactionsLoaded(transactions)).toEqual(expected);
     });
   });
 });

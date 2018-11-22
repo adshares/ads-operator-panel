@@ -75,24 +75,64 @@ export default defineMessages({
     id: 'app.containers.BlockPage.fieldEndTime',
     defaultMessage: 'End Time',
   },
-  columnMessagesId: {
-    id: 'app.containers.BlockPage.columnMessagesId',
+  messagesTabTitle: {
+    id: 'app.containers.BlockPage.messagesTabTitle',
+    defaultMessage: 'Messages',
+  },
+  messagesColumnId: {
+    id: 'app.containers.BlockPage.messagesColumnId',
     defaultMessage: 'Id',
   },
-  columnMessagesNodeId: {
-    id: 'app.containers.BlockPage.columnMessagesNodeId',
+  messagesNodeId: {
+    id: 'app.containers.BlockPage.messagesNodeId',
     defaultMessage: 'Node',
   },
-  columnMessagesTransactionCount: {
-    id: 'app.containers.BlockPage.columnMessagesTransactionCount',
+  messagesTransactionCount: {
+    id: 'app.containers.BlockPage.messagesTransactionCount',
     defaultMessage: 'Transactions',
   },
-  columnMessagesTime: {
-    id: 'app.containers.BlockPage.columnMessagesTime',
+  messagesTime: {
+    id: 'app.containers.BlockPage.messagesTime',
     defaultMessage: 'Time',
   },
-  columnHash: {
-    id: 'app.containers.BlockPage.columnHash',
+  messagesHash: {
+    id: 'app.containers.BlockPage.messagesHash',
     defaultMessage: 'Hash',
+  },
+  transactionsTabTitle: {
+    id: 'app.containers.BlockPage.transactionsTabTitle',
+    defaultMessage: 'Transactions',
+  },
+  transactionsColumnId: {
+    id: 'app.containers.BlockPage.transactionsColumnId',
+    defaultMessage: 'Id',
+  },
+  transactionsType: {
+    id: 'app.containers.BlockPage.transactionsType',
+    defaultMessage: 'Type',
+  },
+  transactionsSenderAddress: {
+    id: 'app.containers.BlockPage.transactionsSenderAddress',
+    defaultMessage: 'From',
+  },
+  transactionsTargetAddress: {
+    id: 'app.containers.BlockPage.transactionsTargetAddress',
+    defaultMessage: 'To',
+  },
+  transactionsAmount: {
+    id: 'app.containers.BlockPage.transactionsAmount',
+    defaultMessage: 'Amount',
+  },
+  transactionsTime: {
+    id: 'app.containers.BlockPage.transactionsTime',
+    defaultMessage: 'Time',
+  },
+  transactionsNodeId: {
+    id: 'app.containers.BlockPage.transactionsNodeId',
+    defaultMessage: 'Node',
+  },
+  transactionsMessageId: {
+    id: 'app.containers.BlockPage.transactionsMessageId',
+    defaultMessage: 'Message',
   },
 });

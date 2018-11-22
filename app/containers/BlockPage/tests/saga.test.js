@@ -4,14 +4,16 @@
 
 /* eslint-disable redux-saga/yield-effects */
 import { put, takeLatest } from 'redux-saga/effects';
-import defaultSaga, { getBlock, getMessages } from '../saga';
+import defaultSaga, { getBlock, getMessages, getTransactions } from '../saga';
 import {
   blockLoaded,
   blockLoadingError,
   messagesLoaded,
   messagesLoadingError,
+  transactionsLoaded,
+  transactionsLoadingError,
 } from '../actions';
-import { LOAD_BLOCK, LOAD_MESSAGES } from '../constants';
+import { LOAD_BLOCK, LOAD_MESSAGES, LOAD_TRANSACTIONS } from '../constants';
 
 describe('getBlock Saga', () => {
   let getBlockGenarator;
@@ -58,20 +60,52 @@ describe('getMessages Saga', () => {
   });
 
   it('should dispatch the messagesLoaded action if it requests the data successfully', () => {
-    const transactions = [
+    const messages = [
       {
-        id: '0001:12345678',
+        id: '000F:00003823',
       },
     ];
 
-    const putDescriptor = getMessagesGenarator.next(transactions).value;
-    expect(putDescriptor).toEqual(put(messagesLoaded(transactions)));
+    const putDescriptor = getMessagesGenarator.next(messages).value;
+    expect(putDescriptor).toEqual(put(messagesLoaded(messages)));
   });
 
   it('should call the messagesLoadingError action if the response errors', () => {
     const response = new Error('Some error');
     const putDescriptor = getMessagesGenarator.throw(response).value;
     expect(putDescriptor).toEqual(put(messagesLoadingError(response)));
+  });
+});
+
+describe('getTransactions Saga', () => {
+  let getTransactionsGenarator;
+
+  beforeEach(() => {
+    const action = {
+      blockId: 'ABC11234',
+    };
+
+    getTransactionsGenarator = getTransactions(action);
+
+    const selectDescriptor = getTransactionsGenarator.next().value;
+    expect(selectDescriptor).toMatchSnapshot();
+  });
+
+  it('should dispatch the transactionsLoaded action if it requests the data successfully', () => {
+    const transactions = [
+      {
+        id: '000F:00003823:0001',
+      },
+    ];
+
+    const putDescriptor = getTransactionsGenarator.next(transactions).value;
+    expect(putDescriptor).toEqual(put(transactionsLoaded(transactions)));
+  });
+
+  it('should call the transactionsLoadingError action if the response errors', () => {
+    const response = new Error('Some error');
+    const putDescriptor = getTransactionsGenarator.throw(response).value;
+    expect(putDescriptor).toEqual(put(transactionsLoadingError(response)));
   });
 });
 
@@ -87,6 +121,13 @@ describe('defaultSaga Saga', () => {
     const takeLatestDescriptor = saga.next().value;
     expect(takeLatestDescriptor).toEqual(
       takeLatest(LOAD_MESSAGES, getMessages),
+    );
+  });
+
+  it('second task should be LOAD_TRANSACTIONS action', () => {
+    const takeLatestDescriptor = saga.next().value;
+    expect(takeLatestDescriptor).toEqual(
+      takeLatest(LOAD_TRANSACTIONS, getTransactions),
     );
   });
 });

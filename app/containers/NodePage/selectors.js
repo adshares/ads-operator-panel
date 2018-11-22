@@ -34,4 +34,41 @@ const makeSelectAccounts = () =>
     return accounts;
   });
 
-export { makeSelectNode, makeSelectAccounts };
+const makeSelectMessages = () =>
+  createSelector(selectNodePageDomain, globalState =>
+    globalState.get('messages').toJS(),
+  );
+
+const makeSelectTransactions = () =>
+  createSelector(selectNodePageDomain, globalState => {
+    const transactions = globalState.get('transactions').toJS();
+    transactions.data.map(item => {
+      const transaction = item;
+
+      if (transaction.type === 'send_many' && transaction.wires.length > 0) {
+        const targetAddress = [];
+        let amount = 0;
+        transaction.wires.forEach(target => {
+          targetAddress.push(target.target_address);
+          amount += parseInt(target.amount, 10);
+        });
+
+        transaction.target_address =
+          targetAddress.length === 1 ? targetAddress[0] : targetAddress;
+        transaction.amount = formatMoney(amount);
+      } else if (transaction.type === 'send_one') {
+        transaction.amount = formatMoney(transaction.amount);
+      }
+
+      return transaction;
+    });
+
+    return transactions;
+  });
+
+export {
+  makeSelectNode,
+  makeSelectAccounts,
+  makeSelectMessages,
+  makeSelectTransactions,
+};

@@ -1,14 +1,18 @@
 import {
   loadBlock,
-  loadMessages,
   blockLoaded,
+  loadMessages,
   messagesLoaded,
+  loadTransactions,
+  transactionsLoaded,
 } from '../actions';
 import {
   LOAD_BLOCK,
-  LOAD_MESSAGES,
   LOAD_BLOCK_SUCCESS,
+  LOAD_MESSAGES,
   LOAD_MESSAGES_SUCCESS,
+  LOAD_TRANSACTIONS,
+  LOAD_TRANSACTIONS_SUCCESS,
 } from '../constants';
 
 describe('BlockPage actions', () => {
@@ -57,6 +61,32 @@ describe('BlockPage actions', () => {
         data: messages,
       };
       expect(messagesLoaded(messages)).toEqual(expected);
+    });
+  });
+  describe('Load transactions Action', () => {
+    it('has a type of LOAD_TRANSACTIONS', () => {
+      const expected = {
+        type: LOAD_TRANSACTIONS,
+      };
+      expect(loadTransactions()).toEqual(expected);
+    });
+  });
+  describe('Transactions loaded Action', () => {
+    it('has a type of LOAD_TRANSACTIONS_SUCCESS', () => {
+      const transactions = [
+        {
+          id: '0015:00003845:0001',
+        },
+        {
+          id: '0004:00003423:0001',
+        },
+      ];
+
+      const expected = {
+        type: LOAD_TRANSACTIONS_SUCCESS,
+        data: transactions,
+      };
+      expect(transactionsLoaded(transactions)).toEqual(expected);
     });
   });
 });
