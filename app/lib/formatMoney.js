@@ -5,9 +5,15 @@ export default function(value, precision, trim, decimal, thousand) {
   const p = typeof precision === 'undefined' ? 11 : Math.max(precision, 2);
   const d = typeof decimal === 'undefined' ? '.' : decimal;
   const t = typeof thousand === 'undefined' ? ',' : thousand;
-  let v = value;
+  let v = ((value || '0') + '');
 
-  v = ((v || '0') + '').padStart(11, '0');
+  let s = '';
+  if (value < 0) {
+    s = '-';
+    v = v.substr(1);
+  }
+
+  v = v.padStart(11, '0');
   const l = v.length - 11;
   const a = v.substr(0, l) || '0';
   const j = a.length > 3 ? a.length % 3 : 0;
@@ -21,6 +27,7 @@ export default function(value, precision, trim, decimal, thousand) {
   }
 
   return (
+    s +
     (j ? a.substr(0, j) + t : '') +
     a.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + t) +
     d +
