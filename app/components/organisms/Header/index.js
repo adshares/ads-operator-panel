@@ -7,7 +7,7 @@ import Brand from '../../molecules/Brand';
 import Logo from '../../assets/adshares.png';
 import { HeaderWrapper } from './HeaderLayout';
 import { breakpoints } from '../../../utils/breakpoints';
-import { HeaderNav, MobileHamburgerMenu } from './HeaderNav';
+import { HeaderNav, SmallHeaderNav, MobileHamburgerMenu } from './HeaderNav';
 import { breakpointIsLessThan } from '../../../utils/responsiveHelpers';
 import { TEST_ENV_ACTIVE } from '../../../utils/checkEnv';
 import LinkWhite from '../../atoms/Link';
@@ -28,11 +28,17 @@ class Header extends React.Component {
   }
 
   render() {
-    const smallScreen = breakpointIsLessThan(
+    const tabletScreen = breakpointIsLessThan(
       breakpoints.tabletMd,
       this.props.breakpoint.size,
     );
+    const smallScreen = breakpointIsLessThan(
+      breakpoints.desktopSm,
+      this.props.breakpoint.size,
+    );
     const { showNavigation } = this.state;
+    const showNav = !smallScreen || showNavigation;
+    const showSmallNav = !tabletScreen && smallScreen;
 
     return (
       <HeaderWrapper>
@@ -43,13 +49,17 @@ class Header extends React.Component {
           </LinkWhite>
         </Brand>
 
-        {smallScreen && (
+        {tabletScreen && (
           <MobileHamburgerMenu
             handleMouseEnter={() => this.toggleMenuOpen(true)}
           />
         )}
 
-        {(!smallScreen || showNavigation) && (
+        {showSmallNav && (
+          <SmallHeaderNav handleMouseLeave={() => this.toggleMenuOpen(false)} />
+        )}
+
+        {showNav && (
           <HeaderNav handleMouseLeave={() => this.toggleMenuOpen(false)} />
         )}
 

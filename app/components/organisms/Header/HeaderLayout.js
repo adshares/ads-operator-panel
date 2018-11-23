@@ -7,10 +7,22 @@ export const HeaderWrapper = styled.header`
   display: grid;
   grid-gap: 2px;
   grid-template:
-    '. brand  navbar . search .'
-    70px / 1.2fr 2fr 1fr 2fr 3fr 1.2fr;
+    '. brand . navbar . search .'
+    70px / 1.2fr 2fr 0.2fr 2fr 0.2fr 3fr 1.2fr;
   background: var(--blue);
   box-shadow: 0px 2px 8px 0 rgba(0, 0, 0, 0.16);
+
+  @media (max-width: ${breakpoints.desktopLg}px) {
+    grid-template:
+      '. brand .  navbar . search .'
+      70px / 0.2fr 2fr 0.2fr 1fr 0.5fr 3fr 0.2fr;
+  }
+
+  @media (max-width: ${breakpoints.desktopSm}px) {
+    grid-template:
+      '. brand .  navbar . search .'
+      70px / 0.2fr 2fr 0.2fr 1fr 0.5fr 3fr 0.2fr;
+  }
 
   @media (max-width: ${breakpoints.tabletMd}px) {
     grid-template:

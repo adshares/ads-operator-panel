@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { breakpoints } from '../../utils/breakpoints';
 import { scaleIn } from '../../styleUtils/keyframes';
+import LinkButton from '../atoms/Button/LinkButton';
 
 export const NavBar = styled.nav`
   grid-area: navbar;
   display: flex;
   justify-content: center;
+  margin-top: 7px;
 
   @media (max-width: ${breakpoints.tabletMd}px) {
     flex-direction: column;
@@ -20,5 +22,10 @@ export const NavBar = styled.nav`
   }
 `;
 
+export const NavLink = styled(LinkButton)`
+  font-size: 0.9rem;
+`;
+
 NavBar.displayName = 'NavBar';
+NavLink.displayName = 'NavLink';
 export default NavBar;
