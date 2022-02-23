@@ -75,6 +75,7 @@ const makeSelectTransactions = () =>
           }
         } else if (type === 'dividend') {
           transaction.direction = transaction.amount < 0 ? 'out' : 'in';
+          transaction.amount = transaction.amount.abs();
         }
 
         if (
