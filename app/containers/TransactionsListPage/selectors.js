@@ -22,9 +22,12 @@ const makeSelectTransactions = () =>
 
         transaction.target_address =
           targetAddress.length === 1 ? targetAddress[0] : targetAddress;
-        transaction.amount = formatMoney(amount);
-      } else if (transaction.type === 'send_one') {
+        transaction.amount = amount;
+      }
+
+      if (transaction.amount) {
         transaction.amount = formatMoney(transaction.amount);
+        transaction.direction = transaction.amount < 0 ? 'out' : 'in';
       }
 
       if (transaction.time) {

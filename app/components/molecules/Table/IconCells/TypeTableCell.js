@@ -21,7 +21,7 @@ import { toTitleCase } from '../../../../utils/transformationHelpers';
 import CombinedIcon from '../../../atoms/CombinedIcon';
 
 const TYPE_DEFAULT = 'send_one';
-const TYPES = ['send_one', 'send_many', 'broadcast'];
+const TYPES = ['send_one', 'send_many', 'broadcast', 'dividend'];
 const DIRECTION_IN = 'in';
 
 const SendToManyIcon = ({ iconColor }) => (
@@ -56,13 +56,16 @@ const TypeTableCell = ({ value, showDesc, direction }) => {
     }
 
     if (!direction) {
+      let icon;
+      if (value === TYPE_DEFAULT) {
+        icon = <FaLongArrowAltRight color="var(--green)" />;
+      } else if (value === 'dividend') {
+        icon = <FaAsterisk color="var(--blue)" />;
+      } else {
+        icon = <SendToManyIcon iconColor="var(--green)" />;
+      }
       return {
-        icon:
-          value === TYPE_DEFAULT ? (
-            <FaLongArrowAltRight color="var(--green)" />
-          ) : (
-            <SendToManyIcon iconColor="var(--green)" />
-          ),
+        icon,
         desc,
       };
     }

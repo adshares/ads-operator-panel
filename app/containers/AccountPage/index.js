@@ -106,15 +106,23 @@ export class AccountPage extends React.PureComponent {
     const link = `/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`;
 
     const ceilConfiguration = {
-      id: value => <Link to={`${link}/${value}`}>{value}</Link>,
+      id: value => {
+        if (value.indexOf('dividend') > -1) {
+          return 'staking';
+        }
+        return <Link to={`${link}/${value}`}>{value}</Link>;
+      },
       block_id: value => (
         <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
       ),
-      message_id: (value, row) => (
-        <Link to={`/blockexplorer/blocks/${row.block_id}/messages/${value}`}>
-          {value}
-        </Link>
-      ),
+      message_id: (value, row) =>
+        value !== '--' ? (
+          <Link to={`/blockexplorer/blocks/${row.block_id}/messages/${value}`}>
+            {value}
+          </Link>
+        ) : (
+          '--'
+        ),
       address: (value, row) => (
         <TransactionAddressLink
           transactionLink={link}

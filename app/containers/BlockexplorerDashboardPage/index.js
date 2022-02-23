@@ -220,9 +220,14 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       data: this.props.transactions.data,
       columns: isMobile ? transactionMobileColumns : transactionColumns,
       ceilConfiguration: {
-        id: value => (
-          <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
-        ),
+        id: value => {
+          if (value.indexOf('dividend') > -1) {
+            return 'staking';
+          }
+          return (
+            <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
+          );
+        },
         block_id: value => (
           <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
         ),
@@ -246,7 +251,9 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
           />
         ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
-        type: value => <TypeTableCell value={value} />,
+        type: (value, row) => (
+          <TypeTableCell value={value} direction={row.direction} />
+        ),
       },
     };
 

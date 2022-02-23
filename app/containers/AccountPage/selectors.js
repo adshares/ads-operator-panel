@@ -68,6 +68,8 @@ const makeSelectTransactions = () =>
               return true;
             });
           }
+        } else if (type === 'dividend') {
+          transaction.direction = transaction.amount < 0 ? 'out' : 'in';
         }
 
         if (transaction.amount) {
