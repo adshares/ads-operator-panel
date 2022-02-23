@@ -33,7 +33,7 @@ class TransactionAddressLink extends React.PureComponent {
       );
     }
 
-    if (this.props.address === '--') {
+    if (this.props.address === '--' || this.props.address === 'self') {
       return <span>{this.props.address}</span>;
     }
 

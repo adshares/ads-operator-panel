@@ -123,6 +123,16 @@ export class AccountPage extends React.PureComponent {
         ) : (
           '--'
         ),
+      amount: (value, row) => (
+        <span
+          className={
+            row.direction === 'in' ? 'amount positive' : 'amount negative'
+          }
+        >
+          {' '}
+          {value}{' '}
+        </span>
+      ),
       address: (value, row) => (
         <TransactionAddressLink
           transactionLink={link}

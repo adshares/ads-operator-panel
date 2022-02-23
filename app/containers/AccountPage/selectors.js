@@ -41,13 +41,18 @@ const makeSelectTransactions = () =>
             transaction.direction = 'in';
             transaction.address = transaction.sender_address;
           }
+          if (transaction.sender_address === transaction.target_address) {
+            transaction.amount = 0;
+          }
         } else if (type === 'send_many' && transaction.wires.length > 0) {
           if (senderAddress === accountId) {
             let amount = 0;
             const targetAddress = [];
 
             transaction.wires.forEach(target => {
-              amount += parseInt(target.amount, 10);
+              if (target.target_address !== accountId) {
+                amount += parseInt(target.amount, 10);
+              }
               targetAddress.push(target.target_address);
             });
 
@@ -72,6 +77,14 @@ const makeSelectTransactions = () =>
           transaction.direction = transaction.amount < 0 ? 'out' : 'in';
         }
 
+        if (
+          transaction.sender_address === accountId &&
+          transaction.sender_fee
+        ) {
+          transaction.amount =
+            1 * transaction.amount + 1 * transaction.sender_fee;
+        }
+
         if (transaction.amount) {
           transaction.amount = formatMoney(transaction.amount);
         }
@@ -79,7 +92,9 @@ const makeSelectTransactions = () =>
         if (transaction.time) {
           transaction.time = formatDate(transaction.time);
         }
-
+        if (transaction.sender_address === transaction.target_address) {
+          transaction.address = 'self';
+        }
         data.push(transaction);
       });
 

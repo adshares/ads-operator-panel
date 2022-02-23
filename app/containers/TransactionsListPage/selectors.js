@@ -27,7 +27,6 @@ const makeSelectTransactions = () =>
 
       if (transaction.amount) {
         transaction.amount = formatMoney(transaction.amount);
-        transaction.direction = transaction.amount < 0 ? 'out' : 'in';
       }
 
       if (transaction.time) {
