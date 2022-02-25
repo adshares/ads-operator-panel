@@ -28,6 +28,7 @@ import { AccountPageWrapper } from './styled';
 import messages from './messages';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
+import TransactionIdCell from '../../components/molecules/Table/TransactionIdCell';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -106,12 +107,13 @@ export class AccountPage extends React.PureComponent {
     const link = `/blockexplorer/nodes/${nodeId}/accounts/${id}/transactions`;
 
     const ceilConfiguration = {
-      id: value => {
-        if (value.indexOf('dividend') > -1) {
-          return 'staking';
-        }
-        return <Link to={`${link}/${value}`}>{value}</Link>;
-      },
+      id: (value, row) => (
+        <TransactionIdCell
+          value={value}
+          amount={parseFloat(row.amount)}
+          direction={row.direction}
+        />
+      ),
       block_id: value => (
         <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
       ),

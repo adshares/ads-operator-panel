@@ -11,6 +11,7 @@ import {
   FaLongArrowAltRight,
   FaBullhorn,
   FaAsterisk,
+  FaCoins,
 } from 'react-icons/fa';
 import {
   IconCellDescription,
@@ -38,29 +39,34 @@ const FromManyIcon = ({ iconColor }) => (
   </CombinedIcon>
 );
 
-const TypeTableCell = ({ value, showDesc, direction }) => {
+const TypeTableCell = ({ value, showDesc, direction, amount }) => {
   const getData = () => {
     const desc = typeof value === 'string' && toTitleCase(value, '_');
+    let localDirection = direction;
 
     if (!TYPES.includes(value)) {
       return {
-        desc,
         icon: <FaAsterisk color="var(--gray)" />,
+        desc,
       };
     }
     if (value === 'broadcast') {
       return {
-        desc,
         icon: <FaBullhorn color="var(--light-blue)" />,
+        desc,
       };
     }
 
-    if (!direction) {
+    if (value === 'dividend' && !localDirection && amount) {
+      localDirection = amount < 0 ? 'out' : 'in';
+    }
+
+    if (!localDirection) {
       let icon;
       if (value === TYPE_DEFAULT) {
         icon = <FaLongArrowAltRight color="var(--green)" />;
       } else if (value === 'dividend') {
-        icon = <FaAsterisk color="var(--blue)" />;
+        icon = <FaCoins />;
       } else {
         icon = <SendToManyIcon iconColor="var(--green)" />;
       }
@@ -70,25 +76,31 @@ const TypeTableCell = ({ value, showDesc, direction }) => {
       };
     }
 
-    if (direction === DIRECTION_IN) {
+    if (localDirection === DIRECTION_IN) {
+      let icon;
+      if (value === TYPE_DEFAULT) {
+        icon = <FaLongArrowAltLeft color="var(--green)" />;
+      } else if (value === 'dividend') {
+        icon = <FaCoins color="var(--green)" />;
+      } else {
+        icon = <FromManyIcon iconColor="var(--green)" />;
+      }
       return {
+        icon,
         desc,
-        icon:
-          value === TYPE_DEFAULT ? (
-            <FaLongArrowAltLeft color="var(--green)" />
-          ) : (
-            <FromManyIcon iconColor="var(--green)" />
-          ),
       };
     }
 
+    let icon;
+    if (value === TYPE_DEFAULT) {
+      icon = <FaLongArrowAltRight color="var(--red)" />;
+    } else if (value === 'dividend') {
+      icon = <FaCoins color="var(--red)" />;
+    } else {
+      icon = <SendToManyIcon iconColor="var(--red)" />;
+    }
     return {
-      icon:
-        value === TYPE_DEFAULT ? (
-          <FaLongArrowAltRight color="var(--red)" />
-        ) : (
-          <SendToManyIcon iconColor="var(--red)" />
-        ),
+      icon,
       desc,
     };
   };
@@ -116,6 +128,7 @@ TypeTableCell.propTypes = {
   ]).isRequired,
   showDesc: PropTypes.bool,
   direction: PropTypes.string,
+  amount: PropTypes.oneOf(PropTypes.string, PropTypes.number),
 };
 
 SendToManyIcon.propTypes = {
