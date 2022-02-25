@@ -27,10 +27,6 @@ const TransactionIdCell = ({ value, direction, amount }) => {
         label = 'dormancy fee';
         title =
           'Last outgoing transaction was more than 2 years ago. Inactivity fee is 0.1% per dividend period (2048 blocks ~ 12 days).';
-      } else if (localAmount === 0.0002) {
-        label = 'inactivity fee';
-        title =
-          'Last outgoing transaction was more than 1 year ago. Maintenance fee is taken every dividend period (2048 blocks ~ 12 days)';
       } else if (localAmount >= 0) {
         label = 'maintenance fee';
         title =
