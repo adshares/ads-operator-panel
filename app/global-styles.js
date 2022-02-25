@@ -52,21 +52,21 @@ injectGlobal`
   body {
     font-family: var(--font-family-content);
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-title);
     font-weight: 400;
   }
-  
-  h1 { 
+
+  h1 {
     font-size: 1.66em;
-  } 
-   
+  }
+
   h2 {
     font-size: 1.5em;
   }
-   
-  h3 { 
+
+  h3 {
     font-size: 1.33em;
   }
 
@@ -80,12 +80,27 @@ injectGlobal`
   label {
     line-height: 1.5em;
   }
-  
+
   a {
     color: var(--light-blue);
-    
+
     &:hover {
       color: var(--blue);
+    }
+  }
+
+  .amount.positive {
+    color: var(--green);
+    ::before {
+      content: "+";
+    }
+  }
+
+  .amount.negative {
+    color: var(--red);
+
+    ::before {
+      content: "-";
     }
   }
 `;

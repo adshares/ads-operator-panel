@@ -21,6 +21,7 @@ import DetailView from 'components/organisms/DetailView';
 import TabListView from 'components/organisms/TabListView';
 import TransactionAddressLink from 'components/TransactionAddressLink';
 import TypeTableCell from 'components/molecules/Table/IconCells/TypeTableCell';
+import TransactionIdCell from 'components/molecules/Table/TransactionIdCell';
 import {
   makeSelectBlock,
   makeSelectMessages,
@@ -159,8 +160,12 @@ export class BlockPage extends React.PureComponent {
         time: <FormattedMessage {...msg.transactionsTime} />,
       },
       ceilConfiguration: {
-        id: value => (
-          <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
+        id: (value, row) => (
+          <TransactionIdCell
+            value={value}
+            amount={parseFloat(row.amount)}
+            direction={row.direction}
+          />
         ),
         node_id: value => (
           <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>
@@ -182,7 +187,9 @@ export class BlockPage extends React.PureComponent {
             address={value}
           />
         ),
-        type: value => <TypeTableCell value={value} />,
+        type: (value, row) => (
+          <TypeTableCell value={value} amount={row.amount} />
+        ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
       sortingColumns: [

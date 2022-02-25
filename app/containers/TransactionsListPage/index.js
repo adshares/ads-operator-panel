@@ -24,6 +24,7 @@ import saga from './saga';
 import messages from './messages';
 import { loadTransactions } from './actions';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
+import TransactionIdCell from '../../components/molecules/Table/TransactionIdCell';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -62,8 +63,12 @@ export class TransactionsListPage extends React.PureComponent {
       'time',
     ];
     const ceilConfiguration = {
-      id: value => (
-        <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
+      id: (value, row) => (
+        <TransactionIdCell
+          value={value}
+          amount={parseFloat(row.amount)}
+          direction={row.direction}
+        />
       ),
       block_id: value => (
         <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
@@ -87,7 +92,13 @@ export class TransactionsListPage extends React.PureComponent {
           address={value}
         />
       ),
-      type: value => <TypeTableCell value={value} />,
+      type: (value, row) => (
+        <TypeTableCell
+          value={value}
+          direction={row.direction}
+          amount={row.amount}
+        />
+      ),
       time: value => <div title={value}> {moment(value).fromNow()} </div>,
     };
 

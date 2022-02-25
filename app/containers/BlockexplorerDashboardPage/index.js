@@ -38,6 +38,7 @@ import { BlockexplorerWrapper } from './styled';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
+import TransactionIdCell from '../../components/molecules/Table/TransactionIdCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockexplorerDashboardPage extends React.PureComponent {
@@ -220,8 +221,12 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       data: this.props.transactions.data,
       columns: isMobile ? transactionMobileColumns : transactionColumns,
       ceilConfiguration: {
-        id: value => (
-          <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
+        id: (value, row) => (
+          <TransactionIdCell
+            value={value}
+            amount={parseFloat(row.amount)}
+            direction={row.direction}
+          />
         ),
         block_id: value => (
           <Link to={`/blockexplorer/blocks/${value}`}>{value}</Link>
@@ -246,7 +251,13 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
           />
         ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
-        type: value => <TypeTableCell value={value} />,
+        type: (value, row) => (
+          <TypeTableCell
+            value={value}
+            direction={row.direction}
+            amount={row.amount}
+          />
+        ),
       },
     };
 
