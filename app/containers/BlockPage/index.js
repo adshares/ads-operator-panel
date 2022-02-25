@@ -159,9 +159,14 @@ export class BlockPage extends React.PureComponent {
         time: <FormattedMessage {...msg.transactionsTime} />,
       },
       ceilConfiguration: {
-        id: value => (
-          <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
-        ),
+        id: value => {
+          if (value.indexOf('dividend') > -1) {
+            return 'staking';
+          }
+          return (
+            <Link to={`/blockexplorer/transactions/${value}`}>{value}</Link>
+          );
+        },
         node_id: value => (
           <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>
         ),
