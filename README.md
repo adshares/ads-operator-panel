@@ -9,7 +9,7 @@
     ·
     <a href="https://github.com/adshares/ads-operator-panel/issues/new?template=feature_request.md&labels=New%20Feature">Request feature</a>
     ·
-    <a href="https://github.com/adshares/ads-operator-panel/wiki">Wiki</a>
+    <a href="https://docs.adshares.net/ads-operator-panel/index.html">Docs</a>
 </p>
 
 [![Build Status](https://travis-ci.org/adshares/ads-operator-panel.svg?branch=master)](https://travis-ci.org/adshares/ads-operator-panel#master "Master")
@@ -24,12 +24,12 @@ ADS Operator Panel is an application (SPA) to explore ADS Blockchain. It allows 
 
 ## Getting Started
 
-Clone the repo: `git@github.com:adshares/ads-operator-panel.git` and follow the instruction on [Wiki](https://github.com/adshares/ads-operator-panel/wiki/Installation).
+Clone the repo: `git@github.com:adshares/ads-operator-panel.git` and follow the instruction on [docs](https://docs.adshares.net/ads-operator-panel/installation.html.
  
 
 ## Documentation
-* [Installation](https://github.com/adshares/ads-operator-panel/wiki/Installation)
-* [Quality](https://github.com/adshares/ads-operator-panel/wiki/Quality)
+* [Installation](https://docs.adshares.net/ads-operator-panel/installation.html)
+* [Quality](https://docs.adshares.net/ads-operator-panel/quality.html)
 
 
 ## Contributing
