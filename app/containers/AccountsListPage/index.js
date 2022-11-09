@@ -55,7 +55,7 @@ export class AccountsListPage extends React.PureComponent {
           {value}
         </Link>
       ),
-      status: value => <StatusTableCell value={value} />,
+      status: (value, row) => <StatusTableCell value={value} id={row.id} />,
       node_id: value => (
         <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>
       ),

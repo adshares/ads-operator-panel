@@ -75,7 +75,11 @@ export class AccountPage extends React.PureComponent {
           </div>
         ),
         status: () => (
-          <StatusTableCell value={accountConfig.data.status} showDesc />
+          <StatusTableCell
+            value={accountConfig.data.status}
+            id={accountConfig.data.id}
+            showDesc
+          />
         ),
         node_id: () => (
           <Link to={`/blockexplorer/nodes/${accountConfig.data.node_id}`}>

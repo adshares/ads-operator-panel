@@ -9,9 +9,6 @@ import { palette } from '../../../styleUtils/variables';
 
 export const SmallHeaderNav = props => (
   <NavBar onMouseLeave={props.handleMouseLeave}>
-    <NavLink to="/blockexplorer">
-      <FormattedMessage {...messages.dashboard} />
-    </NavLink>
     <NavLink to="/blockexplorer/nodes">
       <FormattedMessage {...messages.nodes} />
     </NavLink>
@@ -26,9 +23,6 @@ export const SmallHeaderNav = props => (
 
 export const HeaderNav = props => (
   <NavBar onMouseLeave={props.handleMouseLeave}>
-    <NavLink to="/blockexplorer">
-      <FormattedMessage {...messages.dashboard} />
-    </NavLink>
     <NavLink to="/blockexplorer/nodes">
       <FormattedMessage {...messages.nodes} />
     </NavLink>
@@ -43,6 +37,9 @@ export const HeaderNav = props => (
     </NavLink>
     <NavLink to="/blockexplorer/blocks">
       <FormattedMessage {...messages.blocks} />
+    </NavLink>
+    <NavLink to="/blockexplorer/snapshots">
+      <FormattedMessage {...messages.snapshots} />
     </NavLink>
   </NavBar>
 );

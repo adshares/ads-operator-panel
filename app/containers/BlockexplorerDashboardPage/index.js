@@ -164,7 +164,9 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       columns: isMobile ? nodeColumnsMobile : nodeColumnsDesktop,
       ceilConfiguration: {
         id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
-        status: value => <StatusTableCell value={value} />,
+        status: (value, row) => (
+          <StatusTableCell value={value} address={row.address} />
+        ),
       },
     };
 
@@ -178,7 +180,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
         id: value => (
           <Link to={`/blockexplorer/accounts/${value}`}>{value}</Link>
         ),
-        status: value => <StatusTableCell value={value} />,
+        status: (value, row) => <StatusTableCell value={value} id={row.id} />,
       },
     };
 

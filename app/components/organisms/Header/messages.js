@@ -33,6 +33,10 @@ export default defineMessages({
     id: 'boilerplate.components.Header.accounts',
     defaultMessage: 'Accounts',
   },
+  snapshots: {
+    id: 'boilerplate.components.Header.snapshots',
+    defaultMessage: 'Snapshots',
+  },
   administrator: {
     id: 'boilerplate.components.Header.administrator',
     defaultMessage: 'Administrator',

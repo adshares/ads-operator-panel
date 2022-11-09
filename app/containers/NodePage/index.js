@@ -81,7 +81,11 @@ export class NodePage extends React.PureComponent {
       data: this.props.node.prettyData,
       ceilConfiguration: {
         status: () => (
-          <StatusTableCell value={nodeConfig.data.status} showDesc />
+          <StatusTableCell
+            value={nodeConfig.data.status}
+            id={nodeConfig.data.id}
+            showDesc
+          />
         ),
         ipv4: () => (
           <span>
@@ -140,7 +144,7 @@ export class NodePage extends React.PureComponent {
             {value}
           </Link>
         ),
-        status: value => <StatusTableCell value={value} />,
+        status: (value, row) => <StatusTableCell value={value} id={row.id} />,
         local_change: (value, row) => (
           <div title={row.local_change}>
             {moment(row.local_change).fromNow()}

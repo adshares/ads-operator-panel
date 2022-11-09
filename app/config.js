@@ -25,6 +25,8 @@ const routes = {
   '/blockexplorer/accounts': 'Accounts',
   '/blockexplorer/accounts/:id': 'Account :id',
   '/blockexplorer/transactions': 'Transactions',
+  '/blockexplorer/snapshots': 'Snapshots',
+  '/blockexplorer/snapshots/:id': 'Snapshot :id',
 };
 
 const tablesMinWidth = {
@@ -34,9 +36,21 @@ const tablesMinWidth = {
   tableLg: '1024px',
 };
 
+const accounts = {
+  technical: {
+    '0001-00000024-FF89': 'Black hole',
+  },
+  exchanges: {
+    '0001-00000002-BB2D': 'Ethereum Gateway',
+    '0001-00000003-AB0C': 'Binance Smart Chain Gateway',
+    '0001-0000002C-7E81': 'Graviex Exchange',
+  },
+};
+
 export default {
   limit: process.env.LIMIT,
   date_format: 'YYYY-MM-DD HH:mm:ss',
   routes,
   tablesMinWidth,
+  accounts,
 };
