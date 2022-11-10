@@ -10,8 +10,9 @@ describe('<Pagination />', () => {
         page={4}
         sort="id"
         order="desc"
-        nextPage={false}
         link="/api"
+        limit={10}
+        count={10}
         onPageChange={() => {}}
       />,
     );
@@ -20,36 +21,16 @@ describe('<Pagination />', () => {
     expect(renderedComponent.find('ul').hasClass('pagination')).toEqual(true);
   });
 
-  it('should render previous, next and 1,2 buttons', () => {
+  it('should render first, previous, current, next and last buttons', () => {
     const renderedComponent = shallowIntlWrap(
       <Pagination
         page={2}
         sort="id"
         order="desc"
-        nextPage={false}
+        limit={10}
+        count={1000}
         link="/api"
         onPageChange={() => {}}
-        pageRangeDisplayed={10}
-      />,
-    );
-
-    expect(renderedComponent.find('ul').length).toEqual(1);
-    expect(renderedComponent.find('ul').hasClass('pagination')).toEqual(true);
-
-    expect(renderedComponent.find('Item').length).toEqual(4);
-  });
-
-  it('should render previous, next and 1,2, 3 ..., 4, next', () => {
-    // prev 1 2 3 ... 4 next (disabled)
-    const renderedComponent = shallowIntlWrap(
-      <Pagination
-        page={4}
-        sort="id"
-        order="desc"
-        nextPage={false}
-        link="/api"
-        onPageChange={() => {}}
-        pageRangeDisplayed={3}
       />,
     );
 
@@ -57,26 +38,5 @@ describe('<Pagination />', () => {
     expect(renderedComponent.find('ul').hasClass('pagination')).toEqual(true);
 
     expect(renderedComponent.find('Item').length).toEqual(7);
-  });
-
-  it('should render prev, 1-5 ... 10-12 buttons', () => {
-    // prev 1 2 3 4 5 ... 9 10 11 12 next (disabled)
-    const renderedComponent = shallowIntlWrap(
-      <Pagination
-        page={12}
-        sort="id"
-        order="desc"
-        nextPage={false}
-        link="/api"
-        onPageChange={() => {}}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={3}
-      />,
-    );
-
-    expect(renderedComponent.find('ul').length).toEqual(1);
-    expect(renderedComponent.find('ul').hasClass('pagination')).toEqual(true);
-
-    expect(renderedComponent.find('Item').length).toEqual(12);
   });
 });

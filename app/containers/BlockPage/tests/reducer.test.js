@@ -25,11 +25,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
   });
@@ -45,11 +47,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
     expect(blockPageReducer(undefined, {})).toEqual(expectedResult);
@@ -66,11 +70,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -94,11 +100,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -120,11 +128,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -144,11 +154,13 @@ describe('blockPageReducer', () => {
         loading: true,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -161,6 +173,7 @@ describe('blockPageReducer', () => {
         id: '0000:12345678',
       },
     ];
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       block: {
@@ -172,15 +185,17 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data,
+        meta,
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
-    expect(blockPageReducer(state, messagesLoaded(data))).toEqual(
+    expect(blockPageReducer(state, messagesLoaded({ data, meta }))).toEqual(
       expectedResult,
     );
   });
@@ -200,11 +215,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -224,11 +241,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: true,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -241,6 +260,7 @@ describe('blockPageReducer', () => {
         id: '000F:00003823:0001',
       },
     ];
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       block: {
@@ -252,15 +272,17 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data,
+        meta,
       },
     });
 
-    expect(blockPageReducer(state, transactionsLoaded(data))).toEqual(
+    expect(blockPageReducer(state, transactionsLoaded({ data, meta }))).toEqual(
       expectedResult,
     );
   });
@@ -280,11 +302,13 @@ describe('blockPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error,
         data: [],
+        meta: { count: 0 },
       },
     });
 

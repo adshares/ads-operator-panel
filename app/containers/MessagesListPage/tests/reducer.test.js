@@ -7,6 +7,7 @@ describe('messagesListPageReducer', () => {
   beforeEach(() => {
     state = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error: false,
     });
@@ -15,6 +16,7 @@ describe('messagesListPageReducer', () => {
   it('returns the initial state', () => {
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error: false,
     });
@@ -24,6 +26,7 @@ describe('messagesListPageReducer', () => {
   it('should handle the loadMessages action correctly', () => {
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: true,
       error: false,
     });
@@ -39,16 +42,18 @@ describe('messagesListPageReducer', () => {
         id: '0000:12341234:1111',
       },
     ];
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       data,
+      meta,
       loading: false,
       error: false,
     });
 
-    expect(messagesListPageReducer(state, messagesLoaded(data))).toEqual(
-      expectedResult,
-    );
+    expect(
+      messagesListPageReducer(state, messagesLoaded({ data, meta })),
+    ).toEqual(expectedResult);
   });
 
   it('should handle the messagesLoadingError action correctly', () => {
@@ -58,6 +63,7 @@ describe('messagesListPageReducer', () => {
 
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error,
     });

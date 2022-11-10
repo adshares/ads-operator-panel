@@ -12,13 +12,19 @@ describe('NodesListPage actions', () => {
   });
   describe('Latest nodes loaded Action', () => {
     it('has a type of LOAD_NODES_SUCCESS', () => {
-      const nodes = [];
+      const nodes = [
+        {
+          id: '0001',
+        },
+      ];
+      const meta = { count: 1 };
 
       const expected = {
         type: LOAD_NODES_SUCCESS,
         data: nodes,
+        meta,
       };
-      expect(nodesLoaded(nodes)).toEqual(expected);
+      expect(nodesLoaded({ data: nodes, meta })).toEqual(expected);
     });
   });
 });

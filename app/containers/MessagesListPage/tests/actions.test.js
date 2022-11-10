@@ -21,12 +21,14 @@ describe('MessagesListPage actions', () => {
           id: 'AAAAAABB',
         },
       ];
+      const meta = { count: 2 };
 
       const expected = {
         type: LOAD_MESSAGES_SUCCESS,
         data: messages,
+        meta,
       };
-      expect(messagesLoaded(messages)).toEqual(expected);
+      expect(messagesLoaded({ data: messages, meta })).toEqual(expected);
     });
   });
   describe('messages error Action', () => {

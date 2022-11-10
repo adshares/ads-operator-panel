@@ -21,12 +21,14 @@ describe('AccountsListPage actions', () => {
           id: '0001-00000000-9B6F',
         },
       ];
+      const meta = { count: 1 };
 
       const expected = {
         type: LOAD_ACCOUNTS_SUCCESS,
         data: accounts,
+        meta,
       };
-      expect(accountsLoaded(accounts)).toEqual(expected);
+      expect(accountsLoaded({ data: accounts, meta })).toEqual(expected);
     });
   });
   describe('accounts error Action', () => {

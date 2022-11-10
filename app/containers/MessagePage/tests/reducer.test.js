@@ -22,6 +22,7 @@ describe('messagePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
   });
@@ -37,6 +38,7 @@ describe('messagePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
     expect(messagePageReducer(undefined, {})).toEqual(expectedResult);
@@ -53,6 +55,7 @@ describe('messagePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -75,6 +78,7 @@ describe('messagePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -98,6 +102,7 @@ describe('messagePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -117,6 +122,7 @@ describe('messagePageReducer', () => {
         loading: true,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
     const messageId = '0001-00000001';
@@ -130,6 +136,7 @@ describe('messagePageReducer', () => {
     const data = {
       id: '0000:12341234:1111',
     };
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       message: {
@@ -141,12 +148,13 @@ describe('messagePageReducer', () => {
         loading: false,
         error: false,
         data,
+        meta,
       },
     });
 
-    expect(messagePageReducer(state, transactionsLoaded(data))).toEqual(
-      expectedResult,
-    );
+    expect(
+      messagePageReducer(state, transactionsLoaded({ data, meta })),
+    ).toEqual(expectedResult);
   });
 
   it('should handle transactionsLoadingError action correctly', () => {
@@ -164,6 +172,7 @@ describe('messagePageReducer', () => {
         loading: false,
         error,
         data: [],
+        meta: { count: 0 },
       },
     });
 

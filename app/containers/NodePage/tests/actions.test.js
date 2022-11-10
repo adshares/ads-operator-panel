@@ -59,12 +59,14 @@ describe('NodePage actions', () => {
           id: '0000-12345678-1234',
         },
       ];
+      const meta = { count: 2 };
 
       const expected = {
         type: LOAD_ACCOUNTS_SUCCESS,
         data: accounts,
+        meta,
       };
-      expect(accountsLoaded(accounts)).toEqual(expected);
+      expect(accountsLoaded({ data: accounts, meta })).toEqual(expected);
     });
   });
   describe('Load messages Action', () => {
@@ -85,12 +87,14 @@ describe('NodePage actions', () => {
           id: '000F:00003821',
         },
       ];
+      const meta = { count: 2 };
 
       const expected = {
         type: LOAD_MESSAGES_SUCCESS,
         data: messages,
+        meta,
       };
-      expect(messagesLoaded(messages)).toEqual(expected);
+      expect(messagesLoaded({ data: messages, meta })).toEqual(expected);
     });
   });
   describe('Load transactions Action', () => {
@@ -111,12 +115,16 @@ describe('NodePage actions', () => {
           id: '0004:0000341C:0001',
         },
       ];
+      const meta = { count: 2 };
 
       const expected = {
         type: LOAD_TRANSACTIONS_SUCCESS,
         data: transactions,
+        meta,
       };
-      expect(transactionsLoaded(transactions)).toEqual(expected);
+      expect(transactionsLoaded({ data: transactions, meta })).toEqual(
+        expected,
+      );
     });
   });
 });

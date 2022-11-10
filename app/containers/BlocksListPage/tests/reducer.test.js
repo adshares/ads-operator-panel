@@ -7,6 +7,7 @@ describe('blocksListPageReducer', () => {
   beforeEach(() => {
     state = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error: false,
     });
@@ -15,6 +16,7 @@ describe('blocksListPageReducer', () => {
   it('returns the initial state', () => {
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error: false,
     });
@@ -24,6 +26,7 @@ describe('blocksListPageReducer', () => {
   it('should handle the loadBlocks action correctly', () => {
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: true,
       error: false,
     });
@@ -37,14 +40,16 @@ describe('blocksListPageReducer', () => {
         id: '0000:12341234:1111',
       },
     ];
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       data,
+      meta,
       loading: false,
       error: false,
     });
 
-    expect(blocksListPageReducer(state, blocksLoaded(data))).toEqual(
+    expect(blocksListPageReducer(state, blocksLoaded({ data, meta }))).toEqual(
       expectedResult,
     );
   });
@@ -56,6 +61,7 @@ describe('blocksListPageReducer', () => {
 
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error,
     });

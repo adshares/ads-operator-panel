@@ -11,6 +11,7 @@ describe('transactionsListPageReducer', () => {
   beforeEach(() => {
     state = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error: false,
     });
@@ -19,6 +20,7 @@ describe('transactionsListPageReducer', () => {
   it('returns the initial state', () => {
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error: false,
     });
@@ -28,6 +30,7 @@ describe('transactionsListPageReducer', () => {
   it('should handle the loadTransactions action correctly', () => {
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: true,
       error: false,
     });
@@ -43,15 +46,17 @@ describe('transactionsListPageReducer', () => {
         id: '0000:12341234:1111',
       },
     ];
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       data,
+      meta,
       loading: false,
       error: false,
     });
 
     expect(
-      transactionsListPageReducer(state, transactionsLoaded(data)),
+      transactionsListPageReducer(state, transactionsLoaded({ data, meta })),
     ).toEqual(expectedResult);
   });
 
@@ -62,6 +67,7 @@ describe('transactionsListPageReducer', () => {
 
     const expectedResult = fromJS({
       data: [],
+      meta: { count: 0 },
       loading: false,
       error,
     });

@@ -48,7 +48,7 @@ const accounts = {
 };
 
 export default {
-  limit: process.env.LIMIT,
+  limit: process.env.LIMIT || 50,
   date_format: 'YYYY-MM-DD HH:mm:ss',
   routes,
   tablesMinWidth,

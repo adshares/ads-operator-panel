@@ -55,12 +55,14 @@ describe('BlockPage actions', () => {
           id: '0002:12345678',
         },
       ];
+      const meta = { count: 2 };
 
       const expected = {
         type: LOAD_MESSAGES_SUCCESS,
         data: messages,
+        meta,
       };
-      expect(messagesLoaded(messages)).toEqual(expected);
+      expect(messagesLoaded({ data: messages, meta })).toEqual(expected);
     });
   });
   describe('Load transactions Action', () => {
@@ -81,12 +83,16 @@ describe('BlockPage actions', () => {
           id: '0004:00003423:0001',
         },
       ];
+      const meta = { count: 2 };
 
       const expected = {
         type: LOAD_TRANSACTIONS_SUCCESS,
         data: transactions,
+        meta,
       };
-      expect(transactionsLoaded(transactions)).toEqual(expected);
+      expect(transactionsLoaded({ data: transactions, meta })).toEqual(
+        expected,
+      );
     });
   });
 });

@@ -50,7 +50,10 @@ describe('getNodes Saga', () => {
         id: '0002',
       },
     ];
-    const putDescriptor = getNodesGenarator.next(nodes).value;
+    const putDescriptor = getNodesGenarator.next({
+      data: nodes,
+      meta: { count: 2 },
+    }).value;
     expect(putDescriptor).toEqual(put(topNodesLoaded(nodes)));
   });
 
@@ -80,7 +83,10 @@ describe('getAccounts Saga', () => {
         id: '0001-00000001-8B4E',
       },
     ];
-    const putDescriptor = getAccountsGenarator.next(accounts).value;
+    const putDescriptor = getAccountsGenarator.next({
+      data: accounts,
+      meta: { count: 2 },
+    }).value;
     expect(putDescriptor).toEqual(put(topAccountsLoaded(accounts)));
   });
 
@@ -110,7 +116,10 @@ describe('getBlocks Saga', () => {
         id: '5B67E3A1',
       },
     ];
-    const putDescriptor = getBlocksGenerator.next(blocks).value;
+    const putDescriptor = getBlocksGenerator.next({
+      data: blocks,
+      meta: { count: 2 },
+    }).value;
     expect(putDescriptor).toEqual(put(latestBlocksLoaded(blocks)));
   });
 
@@ -140,7 +149,10 @@ describe('getMessages Saga', () => {
         id: '0001:00000002',
       },
     ];
-    const putDescriptor = getMessagesGenerator.next(messages).value;
+    const putDescriptor = getMessagesGenerator.next({
+      data: messages,
+      meta: { count: 2 },
+    }).value;
     expect(putDescriptor).toEqual(put(latestMessagesLoaded(messages)));
   });
 
@@ -170,7 +182,10 @@ describe('getTransactions Saga', () => {
         id: '0001:00000001:0002',
       },
     ];
-    const putDescriptor = getTransactionsGenerator.next(transactions).value;
+    const putDescriptor = getTransactionsGenerator.next({
+      data: transactions,
+      meta: { count: 2 },
+    }).value;
     expect(putDescriptor).toEqual(put(latestTransactionsLoaded(transactions)));
   });
 

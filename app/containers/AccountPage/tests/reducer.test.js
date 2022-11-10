@@ -22,6 +22,7 @@ describe('accountPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
   });
@@ -37,6 +38,7 @@ describe('accountPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
     expect(accountPageReducer(undefined, {})).toEqual(expectedResult);
@@ -53,6 +55,7 @@ describe('accountPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -74,6 +77,7 @@ describe('accountPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -97,6 +101,7 @@ describe('accountPageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -116,6 +121,7 @@ describe('accountPageReducer', () => {
         loading: true,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -128,6 +134,7 @@ describe('accountPageReducer', () => {
     const data = {
       id: '0000:12341234:1111',
     };
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       account: {
@@ -139,12 +146,13 @@ describe('accountPageReducer', () => {
         loading: false,
         error: false,
         data,
+        meta,
       },
     });
 
-    expect(accountPageReducer(state, transactionsLoaded(data))).toEqual(
-      expectedResult,
-    );
+    expect(
+      accountPageReducer(state, transactionsLoaded({ data, meta })),
+    ).toEqual(expectedResult);
   });
 
   it('should handle transactionsLoadingError action correctly', () => {
@@ -162,6 +170,7 @@ describe('accountPageReducer', () => {
         loading: false,
         error,
         data: [],
+        meta: { count: 0 },
       },
     });
 

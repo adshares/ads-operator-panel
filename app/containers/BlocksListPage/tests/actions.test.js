@@ -21,12 +21,14 @@ describe('BlocksListPage actions', () => {
           id: 'AAAAAABB',
         },
       ];
+      const meta = { count: 1 };
 
       const expected = {
         type: LOAD_BLOCKS_SUCCESS,
         data: blocks,
+        meta,
       };
-      expect(blocksLoaded(blocks)).toEqual(expected);
+      expect(blocksLoaded({ data: blocks, meta })).toEqual(expected);
     });
   });
   describe('blocks error Action', () => {

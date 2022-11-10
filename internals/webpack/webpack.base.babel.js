@@ -128,7 +128,7 @@ module.exports = options => ({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         APP_ENV: JSON.stringify(process.env.APP_ENV),
         API_URL: JSON.stringify(process.env.API_URL),
-        LIMIT: 25,
+        LIMIT: process.env.LIMIT,
       },
     }),
   ]),

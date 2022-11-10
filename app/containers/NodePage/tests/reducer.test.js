@@ -28,16 +28,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
   });
@@ -53,16 +56,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
     expect(nodePageReducer(undefined, {})).toEqual(expectedResult);
@@ -79,16 +85,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -110,16 +119,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -141,16 +153,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -170,16 +185,19 @@ describe('nodePageReducer', () => {
         loading: true,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -190,6 +208,7 @@ describe('nodePageReducer', () => {
     const data = {
       id: '0000-12341234-1111',
     };
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       node: {
@@ -201,20 +220,23 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data,
+        meta,
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
-    expect(nodePageReducer(state, accountsLoaded(data))).toEqual(
+    expect(nodePageReducer(state, accountsLoaded({ data, meta }))).toEqual(
       expectedResult,
     );
   });
@@ -234,16 +256,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -263,16 +288,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: true,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -283,6 +311,7 @@ describe('nodePageReducer', () => {
     const data = {
       id: '0001:00000083',
     };
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       node: {
@@ -294,20 +323,23 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data,
+        meta,
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
-    expect(nodePageReducer(state, messagesLoaded(data))).toEqual(
+    expect(nodePageReducer(state, messagesLoaded({ data, meta }))).toEqual(
       expectedResult,
     );
   });
@@ -327,16 +359,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -356,16 +391,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: true,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
     });
 
@@ -376,6 +414,7 @@ describe('nodePageReducer', () => {
     const data = {
       id: '0001:0000001B:0001',
     };
+    const meta = { count: 1 };
 
     const expectedResult = fromJS({
       node: {
@@ -387,20 +426,23 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error: false,
         data,
+        meta,
       },
     });
 
-    expect(nodePageReducer(state, transactionsLoaded(data))).toEqual(
+    expect(nodePageReducer(state, transactionsLoaded({ data, meta }))).toEqual(
       expectedResult,
     );
   });
@@ -420,16 +462,19 @@ describe('nodePageReducer', () => {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       messages: {
         loading: false,
         error: false,
         data: [],
+        meta: { count: 0 },
       },
       transactions: {
         loading: false,
         error,
         data: [],
+        meta: { count: 0 },
       },
     });
 

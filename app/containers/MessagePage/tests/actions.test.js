@@ -66,12 +66,16 @@ describe('MessagenPage actions', () => {
           id: '0001:00000001:1234',
         },
       ];
+      const meta = { count: 1 };
 
       const expected = {
         type: LOAD_TRANSACTIONS_SUCCESS,
         data: transactions,
+        meta,
       };
-      expect(transactionsLoaded(transactions)).toEqual(expected);
+      expect(transactionsLoaded({ data: transactions, meta })).toEqual(
+        expected,
+      );
     });
   });
   describe('transactions error Action', () => {

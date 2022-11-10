@@ -51,12 +51,16 @@ describe('AccountPage actions', () => {
           id: '0001:000001:1234',
         },
       ];
+      const meta = { count: 2 };
 
       const expected = {
         type: LOAD_TRANSACTIONS_SUCCESS,
         data: transactions,
+        meta,
       };
-      expect(transactionsLoaded(transactions)).toEqual(expected);
+      expect(transactionsLoaded({ data: transactions, meta })).toEqual(
+        expected,
+      );
     });
   });
 });

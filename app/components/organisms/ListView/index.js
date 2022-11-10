@@ -103,6 +103,7 @@ class ListView extends React.PureComponent {
         />
       );
     }
+
     const data =
       list.data.length > config.limit ? list.data.slice(0, -1) : list.data;
     const count = list.meta && list.meta.count ? list.meta.count : data.length;

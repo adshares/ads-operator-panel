@@ -128,7 +128,7 @@ TypeTableCell.propTypes = {
   ]).isRequired,
   showDesc: PropTypes.bool,
   direction: PropTypes.string,
-  amount: PropTypes.oneOf(PropTypes.string, PropTypes.number),
+  amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 SendToManyIcon.propTypes = {
