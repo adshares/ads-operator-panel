@@ -103,8 +103,19 @@ class ListView extends React.PureComponent {
         />
       );
     }
+    const data =
+      list.data.length > config.limit ? list.data.slice(0, -1) : list.data;
+    const count = list.meta && list.meta.count ? list.meta.count : data.length;
     return (
       <section>
+        <Pagination
+          link={link}
+          page={page}
+          sort={sort}
+          order={order}
+          limit={config.limit}
+          count={count}
+        />
         <TableDataSet
           name={name}
           columns={columns}
@@ -114,9 +125,7 @@ class ListView extends React.PureComponent {
           orderBy={order}
           ceilConfiguration={ceilConfiguration}
           headerConfiguration={headerConfiguration}
-          data={
-            list.data.length > config.limit ? list.data.slice(0, -1) : list.data
-          }
+          data={data}
           loading={list.loading}
           error={list.error}
           tableMinWidth={tableMinWidth}
@@ -127,7 +136,8 @@ class ListView extends React.PureComponent {
           page={page}
           sort={sort}
           order={order}
-          nextPage={list.data.length > config.limit}
+          limit={config.limit}
+          count={count}
         />
       </section>
     );

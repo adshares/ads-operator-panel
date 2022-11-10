@@ -7,12 +7,32 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  current: {
+    id: 'app.components.Pagination.current',
+    defaultMessage: 'Page {page} of {total}',
+  },
+  first: {
+    id: 'app.components.Pagination.first',
+    defaultMessage: 'First',
+  },
+  last: {
+    id: 'app.components.Pagination.last',
+    defaultMessage: 'Last',
+  },
   previous: {
     id: 'app.components.Pagination.previous',
-    defaultMessage: 'Previous',
+    defaultMessage: '‹',
   },
   next: {
     id: 'app.components.Pagination.next',
-    defaultMessage: 'Next',
+    defaultMessage: '›',
+  },
+  previousBatch: {
+    id: 'app.components.Pagination.previousBatch',
+    defaultMessage: '«',
+  },
+  nextBatch: {
+    id: 'app.components.Pagination.nextBatch',
+    defaultMessage: '»',
   },
 });

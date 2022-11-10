@@ -23,7 +23,7 @@ export function loadAccounts(limit, offset, sort, order) {
 export function accountsLoaded(data) {
   return {
     type: LOAD_ACCOUNTS_SUCCESS,
-    data,
+    ...data,
   };
 }
 

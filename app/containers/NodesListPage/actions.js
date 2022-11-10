@@ -19,7 +19,7 @@ export function loadNodes(limit, offset, sort, order) {
 export function nodesLoaded(data) {
   return {
     type: LOAD_NODES_SUCCESS,
-    data,
+    ...data,
   };
 }
 

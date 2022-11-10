@@ -54,7 +54,7 @@ export function loadAccounts(nodeId, limit, offset, sort, order) {
 export function accountsLoaded(data) {
   return {
     type: LOAD_ACCOUNTS_SUCCESS,
-    data,
+    ...data,
   };
 }
 
@@ -79,7 +79,7 @@ export function loadMessages(nodeId, limit, offset, sort, order) {
 export function messagesLoaded(data) {
   return {
     type: LOAD_MESSAGES_SUCCESS,
-    data,
+    ...data,
   };
 }
 
@@ -104,7 +104,7 @@ export function loadTransactions(nodeId, limit, offset, sort, order) {
 export function transactionsLoaded(data) {
   return {
     type: LOAD_TRANSACTIONS_SUCCESS,
-    data,
+    ...data,
   };
 }
 

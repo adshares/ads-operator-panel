@@ -11,6 +11,7 @@ export const initialState = fromJS({
   loading: false,
   error: false,
   data: [],
+  meta: { count: 0 },
 });
 
 function nodesListPageReducer(state = initialState, action) {
@@ -19,17 +20,19 @@ function nodesListPageReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .set('data', []);
+        .set('data', initialState.get('data'));
     case LOAD_NODES_SUCCESS:
       return state
         .set('loading', false)
         .set('error', false)
-        .set('data', fromJS(action.data));
+        .set('data', fromJS(action.data))
+        .set('meta', fromJS(action.meta));
     case LOAD_NODES_ERROR:
       return state
         .set('loading', false)
         .set('error', fromJS(action.error))
-        .set('data', []);
+        .set('data', initialState.get('data'))
+        .set('meta', initialState.get('meta'));
     default:
       return state;
   }

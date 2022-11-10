@@ -8,6 +8,7 @@ const selectNodesListPageDomain = state =>
 const makeSelectNodesListPage = () =>
   createSelector(selectNodesListPageDomain, substate => {
     const nodes = substate.toJS();
+    // console.debug(nodes)
     nodes.data.map(item => {
       const node = item;
       node.balance = formatMoney(node.balance, 4);

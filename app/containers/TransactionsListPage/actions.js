@@ -23,7 +23,7 @@ export function loadTransactions(limit, offset, sort, order) {
 export function transactionsLoaded(data) {
   return {
     type: LOAD_TRANSACTIONS_SUCCESS,
-    data,
+    ...data,
   };
 }
 

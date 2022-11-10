@@ -23,7 +23,7 @@ export function loadBlocks(limit, offset, sort, order) {
 export function blocksLoaded(data) {
   return {
     type: LOAD_BLOCKS_SUCCESS,
-    data,
+    ...data,
   };
 }
 

@@ -23,7 +23,7 @@ export function loadMessages(limit, offset, sort, order) {
 export function messagesLoaded(data) {
   return {
     type: LOAD_MESSAGES_SUCCESS,
-    data,
+    ...data,
   };
 }
 

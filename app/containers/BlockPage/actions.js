@@ -51,7 +51,7 @@ export function loadMessages(blockId, limit, offset, sort, order) {
 export function messagesLoaded(data) {
   return {
     type: LOAD_MESSAGES_SUCCESS,
-    data,
+    ...data,
   };
 }
 
@@ -76,7 +76,7 @@ export function loadTransactions(blockId, limit, offset, sort, order) {
 export function transactionsLoaded(data) {
   return {
     type: LOAD_TRANSACTIONS_SUCCESS,
-    data,
+    ...data,
   };
 }
 

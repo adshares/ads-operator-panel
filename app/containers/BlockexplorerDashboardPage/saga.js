@@ -24,7 +24,7 @@ import api from '../../api';
 export function* getNodes() {
   try {
     const nodes = yield call(api.fetchNodes, 20, 0, 'balance');
-    yield put(topNodesLoaded(nodes));
+    yield put(topNodesLoaded(nodes.data));
   } catch (err) {
     yield put(topNodesLoadingError(err));
   }
@@ -33,7 +33,7 @@ export function* getNodes() {
 export function* getAccounts() {
   try {
     const accounts = yield call(api.fetchAccounts, 20, 0, 'balance');
-    yield put(topAccountsLoaded(accounts));
+    yield put(topAccountsLoaded(accounts.data));
   } catch (err) {
     yield put(topAccountsLoadingError(err));
   }
@@ -42,7 +42,7 @@ export function* getAccounts() {
 export function* getBlocks() {
   try {
     const blocks = yield call(api.fetchBlocks, 20, 0, 'time');
-    yield put(latestBlocksLoaded(blocks));
+    yield put(latestBlocksLoaded(blocks.data));
   } catch (err) {
     yield put(latestBlocksLoadingError(err));
   }
@@ -51,7 +51,7 @@ export function* getBlocks() {
 export function* getMessages() {
   try {
     const messages = yield call(api.fetchMessages, 20, 0, 'time');
-    yield put(latestMessagesLoaded(messages));
+    yield put(latestMessagesLoaded(messages.data));
   } catch (err) {
     yield put(latestMessagesLoadingError(err));
   }
@@ -60,7 +60,7 @@ export function* getMessages() {
 export function* getTransactions() {
   try {
     const transactions = yield call(api.fetchTransactions, 20, 0, 'time');
-    yield put(latestTransactionsLoaded(transactions));
+    yield put(latestTransactionsLoaded(transactions.data));
   } catch (err) {
     yield put(latestTransactionsLoadingError(err));
   }

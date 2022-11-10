@@ -5,7 +5,6 @@ export const PaginationWrapper = styled.nav`
 `;
 
 export const PaginationListElement = styled.li`
-  padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,6 +13,12 @@ export const PaginationListElement = styled.li`
   border: 1px solid var(--light-gray);
   font-family: var(--font-family-title);
   box-shadow: var(--box-shadow);
+
+  & > a,
+  & > span {
+    display: block;
+    padding: var(--spacing-factor) calc(var(--spacing-factor) * 2);
+  }
 
   &:first-of-type {
     border-bottom-left-radius: 3px;
@@ -40,7 +45,7 @@ export const PaginationListElement = styled.li`
     background: var(--light-blue);
     color: var(--white);
     border: 0;
-    
+
     &:hover,
     &:focus-within {
       background-color: var(--blue);
