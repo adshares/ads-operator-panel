@@ -165,6 +165,21 @@ function fetchTransaction(id) {
   return send(`transactions/${id}`);
 }
 
+function fetchSnapshots(
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `snapshots?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
+function fetchSnapshot(id) {
+  return send(`snapshots/${id}`);
+}
+
 function send(url, params) {
   const endpoint = process.env.API_URL + defaults.apiUrl + url;
   const credentials = {};
@@ -199,4 +214,6 @@ export default {
   fetchTransactionsByAccountId,
   fetchTransactionsByMessageId,
   fetchTransaction,
+  fetchSnapshots,
+  fetchSnapshot,
 };

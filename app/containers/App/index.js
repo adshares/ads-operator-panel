@@ -26,6 +26,7 @@ import AccountPage from 'containers/AccountPage/Loadable';
 import TransactionPage from 'containers/TransactionPage/Loadable';
 import MessagesListPage from 'containers/MessagesListPage/Loadable';
 import MessagePage from 'containers/MessagePage/Loadable';
+import SnapshotsListPage from 'containers/SnapshotsListPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import HeaderWrapper from 'containers/HeaderWrapper/HeaderWrapper';
 import config from 'config';
@@ -137,6 +138,11 @@ export default function App() {
             exact
             path="/blockexplorer/messages/:id([a-fA-F0-9]{4}:[a-fA-F0-9]{8})/transactions"
             component={MessagePage}
+          />
+          <Route
+            exact
+            path="/blockexplorer/snapshots"
+            component={SnapshotsListPage}
           />
           <Route component={NotFoundPage} />
         </Switch>
