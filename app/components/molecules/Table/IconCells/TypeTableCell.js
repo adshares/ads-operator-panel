@@ -41,7 +41,7 @@ const FromManyIcon = ({ iconColor }) => (
 
 const TypeTableCell = ({ value, showDesc, direction, amount }) => {
   const getData = () => {
-    const desc = typeof value === 'string' && toTitleCase(value, '_');
+    let desc = typeof value === 'string' && toTitleCase(value, '_');
     let localDirection = direction;
 
     if (!TYPES.includes(value)) {
@@ -67,6 +67,7 @@ const TypeTableCell = ({ value, showDesc, direction, amount }) => {
         icon = <FaLongArrowAltRight color="var(--green)" />;
       } else if (value === 'dividend') {
         icon = <FaCoins />;
+        desc = 'Reward/Fee';
       } else {
         icon = <SendToManyIcon iconColor="var(--green)" />;
       }
@@ -82,6 +83,7 @@ const TypeTableCell = ({ value, showDesc, direction, amount }) => {
         icon = <FaLongArrowAltLeft color="var(--green)" />;
       } else if (value === 'dividend') {
         icon = <FaCoins color="var(--green)" />;
+        desc = 'Reward';
       } else {
         icon = <FromManyIcon iconColor="var(--green)" />;
       }
@@ -96,6 +98,7 @@ const TypeTableCell = ({ value, showDesc, direction, amount }) => {
       icon = <FaLongArrowAltRight color="var(--red)" />;
     } else if (value === 'dividend') {
       icon = <FaCoins color="var(--red)" />;
+      desc = 'Fee';
     } else {
       icon = <SendToManyIcon iconColor="var(--red)" />;
     }

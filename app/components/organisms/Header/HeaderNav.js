@@ -38,6 +38,9 @@ export const HeaderNav = props => (
     <NavLink to="/blockexplorer/blocks">
       <FormattedMessage {...messages.blocks} />
     </NavLink>
+    <NavLink to="/blockexplorer/snapshots">
+      <FormattedMessage {...messages.snapshots} />
+    </NavLink>
   </NavBar>
 );
 

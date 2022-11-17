@@ -24,18 +24,18 @@ const TransactionIdCell = ({ value, direction, amount }) => {
 
     if (localDirection === 'out') {
       if (localAmount > 0.0002) {
-        label = 'dormancy fee';
+        label = 'Dormancy fee';
         title =
-          'Last outgoing transaction was more than 2 years ago. Inactivity fee is 0.1% per dividend period (2048 blocks ~ 12 days).';
+          'Last outgoing transaction was more than 2 years ago. Inactivity fee is 0.1% per staking period (2048 blocks ~ 12 days).';
       } else if (localAmount >= 0) {
-        label = 'maintenance fee';
+        label = 'Maintenance fee';
         title =
-          'Staking reward did not cover maintenance fee taken every dividend period (2048 blocks ~ 12 days)';
+          'Staking reward did not cover maintenance fee taken every staking period (2048 blocks ~ 12 days)';
       }
     } else if (localDirection === 'in') {
-      label = 'staking reward';
+      label = 'Staking reward';
       title =
-        'Reward size depends on network activity and account balance. Dividend period is 2048 blocks (~ 12 days).';
+        'Reward size depends on network activity and account balance. Staking period is 2048 blocks (~ 12 days).';
     }
     return <span title={title}>{label}</span>;
   }

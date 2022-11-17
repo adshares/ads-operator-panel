@@ -38,6 +38,7 @@ import {
 } from './actions';
 import { NodePageWrapper } from './styled';
 import msg from './messages';
+import LabelTableCell from '../../components/molecules/Table/IconCells/LabelTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class NodePage extends React.PureComponent {
@@ -139,12 +140,15 @@ export class NodePage extends React.PureComponent {
         local_change: this.context.intl.formatMessage(msg.accountsLocalChange),
       },
       ceilConfiguration: {
-        id: value => (
-          <Link to={`/blockexplorer/nodes/${id}/accounts/${value}`}>
-            {value}
-          </Link>
+        id: (value, row) => (
+          <div>
+            <Link to={`/blockexplorer/nodes/${row.node_id}/accounts/${value}`}>
+              {value}
+            </Link>
+            <LabelTableCell value={row.label} icon={row.icon} />
+          </div>
         ),
-        status: (value, row) => <StatusTableCell value={value} id={row.id} />,
+        status: value => <StatusTableCell value={value} />,
         local_change: (value, row) => (
           <div title={row.local_change}>
             {moment(row.local_change).fromNow()}

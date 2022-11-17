@@ -45,11 +45,11 @@ export default defineMessages({
   },
   fieldDividendBalance: {
     id: 'app.containers.BlockPage.fieldDividendBalance',
-    defaultMessage: 'Dividend Balance',
+    defaultMessage: 'Staking Balance',
   },
   fieldDividendPay: {
     id: 'app.containers.BlockPage.fieldDividendPay',
-    defaultMessage: 'Dividend Pay',
+    defaultMessage: 'Staking Pay',
   },
   fieldOldHash: {
     id: 'app.containers.BlockPage.fieldDividendOldHash',

@@ -54,7 +54,7 @@ export class NodesListPage extends React.Component {
 
     const ceilConfiguration = {
       id: value => <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>,
-      status: (value, row) => <StatusTableCell value={value} id={row.id} />,
+      status: value => <StatusTableCell value={value} />,
       mtim: value => <div title={value}>{moment(value).fromNow()}</div>,
     };
 

@@ -39,6 +39,7 @@ import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
 import TransactionIdCell from '../../components/molecules/Table/TransactionIdCell';
+import LabelTableCell from '../../components/molecules/Table/IconCells/LabelTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class BlockexplorerDashboardPage extends React.PureComponent {
@@ -177,10 +178,15 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
       data: this.props.accounts.data,
       columns: isMobile ? accountColumnsMobile : accountColumnsDesktop,
       ceilConfiguration: {
-        id: value => (
-          <Link to={`/blockexplorer/accounts/${value}`}>{value}</Link>
+        id: (value, row) => (
+          <div>
+            <Link to={`/blockexplorer/nodes/${row.node_id}/accounts/${value}`}>
+              {value}
+            </Link>
+            <LabelTableCell value={row.label} icon={row.icon} />
+          </div>
         ),
-        status: (value, row) => <StatusTableCell value={value} id={row.id} />,
+        status: value => <StatusTableCell value={value} />,
       },
     };
 

@@ -30,6 +30,7 @@ import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableC
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
 import TransactionIdCell from '../../components/molecules/Table/TransactionIdCell';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
+import LabelTableCell from '../../components/molecules/Table/IconCells/LabelTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class AccountPage extends React.PureComponent {
@@ -75,11 +76,7 @@ export class AccountPage extends React.PureComponent {
           </div>
         ),
         status: () => (
-          <StatusTableCell
-            value={accountConfig.data.status}
-            id={accountConfig.data.id}
-            showDesc
-          />
+          <StatusTableCell value={accountConfig.data.status} showDesc />
         ),
         node_id: () => (
           <Link to={`/blockexplorer/nodes/${accountConfig.data.node_id}`}>
@@ -178,6 +175,11 @@ export class AccountPage extends React.PureComponent {
         </Helmet>
         <h1>
           <FormattedMessage {...messages.header} /> #{id}
+          <LabelTableCell
+            value={this.props.account.data.label}
+            icon={this.props.account.data.icon}
+            showDesc
+          />
         </h1>
         <DetailView
           fields={accountConfig.columns}

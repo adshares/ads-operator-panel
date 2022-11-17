@@ -135,8 +135,10 @@ export const IconCellDescription = styled.span`
   text-transform: capitalize;
 `;
 
-export const IconTableCell = styled.div`
+export const IconTableCell = styled.span`
   color: ${props => props.color || 'var(--gray)'};
+  display: inline-block;
+  min-width: 17px;
 `;
 
 export const IconTableCellWrapper = styled.div`

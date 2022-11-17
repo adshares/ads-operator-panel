@@ -24,6 +24,7 @@ import messages from './messages';
 import { loadAccounts } from './actions';
 import { breakpointIsMobile } from '../../utils/responsiveHelpers';
 import StatusTableCell from '../../components/molecules/Table/IconCells/StatusTableCell';
+import LabelTableCell from '../../components/molecules/Table/IconCells/LabelTableCell';
 
 /* eslint-disable react/prefer-stateless-function */
 export class AccountsListPage extends React.PureComponent {
@@ -51,11 +52,14 @@ export class AccountsListPage extends React.PureComponent {
 
     const ceilConfiguration = {
       id: (value, row) => (
-        <Link to={`/blockexplorer/nodes/${row.node_id}/accounts/${value}`}>
-          {value}
-        </Link>
+        <div>
+          <Link to={`/blockexplorer/nodes/${row.node_id}/accounts/${value}`}>
+            {value}
+          </Link>
+          <LabelTableCell value={row.label} icon={row.icon} />
+        </div>
       ),
-      status: (value, row) => <StatusTableCell value={value} id={row.id} />,
+      status: value => <StatusTableCell value={value} />,
       node_id: value => (
         <Link to={`/blockexplorer/nodes/${value}`}>{value}</Link>
       ),
