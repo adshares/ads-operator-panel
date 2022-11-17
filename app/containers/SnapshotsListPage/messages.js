@@ -23,32 +23,8 @@ export default defineMessages({
     id: 'app.containers.SnapshotsListPage.columnId',
     defaultMessage: 'Id',
   },
-  columnMessageCount: {
-    id: 'app.containers.SnapshotsListPage.columnMessageCount',
-    defaultMessage: 'Messages',
-  },
-  columnVotes: {
-    id: 'app.containers.SnapshotsListPage.columnVotes',
-    defaultMessage: 'Votes',
-  },
-  columnVotesTitle: {
-    id: 'app.containers.SnapshotsListPage.columnVotesTitle',
-    defaultMessage: 'Acceptance / Total votes',
-  },
-  columnTransactionCount: {
-    id: 'app.containers.SnapshotsListPage.columnTransactionCount',
-    defaultMessage: 'Transactions',
-  },
-  columnMessageAndTransactionCount: {
-    id: 'app.containers.SnapshotsListPage.columnMessageAndTransactionCount',
-    defaultMessage: 'Message / Transactions',
-  },
   columnTime: {
     id: 'app.containers.SnapshotsListPage.columnTime',
     defaultMessage: 'Time',
-  },
-  columnNowHash: {
-    id: 'app.containers.SnapshotsListPage.columnNowHash',
-    defaultMessage: 'Hash',
   },
 });

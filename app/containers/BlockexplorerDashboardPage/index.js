@@ -159,7 +159,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
     const nodeTab = {
       id: 'node',
-      name: this.context.intl.formatMessage(msg.nodeTabTitle),
+      name: this.context.intl.formatMessage(msg.nodesTabTitle),
       link: '/blockexplorer/nodes',
       data: this.props.nodes.data,
       columns: isMobile ? nodeColumnsMobile : nodeColumnsDesktop,
@@ -173,7 +173,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
 
     const accountTab = {
       id: 'account',
-      name: this.context.intl.formatMessage(msg.accountTabTitle),
+      name: this.context.intl.formatMessage(msg.accountsTabTitle),
       link: '/blockexplorer/accounts',
       data: this.props.accounts.data,
       columns: isMobile ? accountColumnsMobile : accountColumnsDesktop,

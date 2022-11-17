@@ -19,12 +19,12 @@ export default defineMessages({
     id: 'app.containers.BlockexplorerDashboardPage.metaDescription',
     defaultMessage: 'Blockexplorer dashboard',
   },
-  nodeTabTitle: {
-    id: 'app.containers.BlockexplorerDashboardPage.nodeTabTitle',
+  nodesTabTitle: {
+    id: 'app.containers.BlockexplorerDashboardPage.nodesTabTitle',
     defaultMessage: 'Nodes',
   },
-  accountTabTitle: {
-    id: 'app.containers.BlockexplorerDashboardPage.accountTabTitle',
+  accountsTabTitle: {
+    id: 'app.containers.BlockexplorerDashboardPage.accountsTabTitle',
     defaultMessage: 'Accounts',
   },
   blockTabTitle: {

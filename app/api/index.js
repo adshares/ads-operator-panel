@@ -180,6 +180,30 @@ function fetchSnapshot(id) {
   return send(`snapshots/${id}`);
 }
 
+function fetchNodesBySnapshotId(
+  snapshotId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `snapshots/${snapshotId}/nodes?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
+function fetchAccountsBySnapshotId(
+  snapshotId,
+  limit = defaults.limit,
+  offset = defaults.offset,
+  sort = defaults.sort,
+  order = defaults.order,
+) {
+  return send(
+    `snapshots/${snapshotId}/accounts?limit=${limit}&offset=${offset}&sort=${sort}&order=${order}`,
+  );
+}
+
 function send(url, params) {
   const endpoint = process.env.API_URL + defaults.apiUrl + url;
   const credentials = {};
@@ -216,4 +240,6 @@ export default {
   fetchTransaction,
   fetchSnapshots,
   fetchSnapshot,
+  fetchNodesBySnapshotId,
+  fetchAccountsBySnapshotId,
 };
