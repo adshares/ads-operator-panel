@@ -8,7 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaTimes, FaTrophy, FaStar, FaShieldAlt } from 'react-icons/fa';
-import { IconCellDescription, IconTableCell } from '../TableElements';
+import {
+  IconCellDescription,
+  IconTableCell,
+  IconTableCellWrapper,
+} from '../TableElements';
 
 const StatusTableCell = ({ value, showDesc }) => {
   const getData = () => {
@@ -36,16 +40,11 @@ const StatusTableCell = ({ value, showDesc }) => {
 
   const { icon, desc } = getData();
   return (
-    <IconTableCell>
-      <span title={desc}>
-        {showDesc ? (
-          <span>
-            {icon} <IconCellDescription>{desc}</IconCellDescription>
-          </span>
-        ) : (
-          icon
-        )}
-      </span>
+    <IconTableCell title={desc}>
+      <IconTableCellWrapper>
+        {icon}
+        {showDesc && <IconCellDescription>{desc}</IconCellDescription>}
+      </IconTableCellWrapper>
     </IconTableCell>
   );
 };

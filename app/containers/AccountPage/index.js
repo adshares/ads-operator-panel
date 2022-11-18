@@ -144,7 +144,11 @@ export class AccountPage extends React.PureComponent {
         />
       ),
       type: (value, row) => (
-        <TypeTableCell value={value} direction={row.direction} />
+        <TypeTableCell
+          value={value}
+          direction={row.direction}
+          message={row.message}
+        />
       ),
       time: (value, row) => (
         <div title={row.time}> {moment(row.time).fromNow()} </div>

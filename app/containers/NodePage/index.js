@@ -249,7 +249,9 @@ export class NodePage extends React.PureComponent {
             address={value}
           />
         ),
-        type: value => <TypeTableCell value={value} />,
+        type: (value, row) => (
+          <TypeTableCell value={value} message={row.message} />
+        ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
       sortingColumns: [

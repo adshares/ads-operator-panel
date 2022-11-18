@@ -4,12 +4,13 @@ export default function(value) {
     .toString()
     .trim()
     .replace(/^0x/, ''); // force conversion
+
   let str = '';
   for (let i = 0; i < hex.length; i += 2) {
     const chars = hex.substr(i, 2);
     const code = parseInt(chars, 16);
     if (code !== 0) {
-      if (code < 32 || code >= 127) {
+      if (code !== 10 && code !== 13 && (code < 32 || code >= 127)) {
         str = '--- non-printable ---';
         break;
       }

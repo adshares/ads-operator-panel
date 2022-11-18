@@ -139,9 +139,10 @@ export const IconTableCell = styled.span`
   color: ${props => props.color || 'var(--gray)'};
   display: inline-block;
   min-width: 17px;
+  vertical-align: bottom;
 `;
 
-export const IconTableCellWrapper = styled.div`
+export const IconTableCellWrapper = styled.span`
   display: flex;
   align-items: center;
 `;

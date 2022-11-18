@@ -97,6 +97,7 @@ export class TransactionsListPage extends React.PureComponent {
           value={value}
           direction={row.direction}
           amount={row.amount}
+          message={row.message}
         />
       ),
       time: value => <div title={value}> {moment(value).fromNow()} </div>,

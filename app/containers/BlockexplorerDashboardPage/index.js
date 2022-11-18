@@ -264,6 +264,7 @@ export class BlockexplorerDashboardPage extends React.PureComponent {
             value={value}
             direction={row.direction}
             amount={row.amount}
+            message={row.message}
           />
         ),
       },

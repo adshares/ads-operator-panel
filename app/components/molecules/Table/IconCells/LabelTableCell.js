@@ -8,7 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import fa from 'react-icons/fa';
-import { IconCellDescription, IconTableCell } from '../TableElements';
+import {
+  IconCellDescription,
+  IconTableCell,
+  IconTableCellWrapper,
+} from '../TableElements';
 
 const LabelTableCell = ({ value, icon, showDesc }) => {
   const FaIcon = icon ? fa[icon] : null;
@@ -17,11 +21,11 @@ const LabelTableCell = ({ value, icon, showDesc }) => {
     color = 'var(--red)';
   }
   return (
-    <IconTableCell>
-      <span title={value}>
+    <IconTableCell title={value}>
+      <IconTableCellWrapper>
         {FaIcon && <FaIcon color={color} />}
         {showDesc && <IconCellDescription>{value}</IconCellDescription>}
-      </span>
+      </IconTableCellWrapper>
     </IconTableCell>
   );
 };

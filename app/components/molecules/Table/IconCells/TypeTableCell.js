@@ -12,6 +12,8 @@ import {
   FaBullhorn,
   FaAsterisk,
   FaCoins,
+  FaVoteYea,
+  FaFileAlt,
 } from 'react-icons/fa';
 import {
   IconCellDescription,
@@ -39,7 +41,7 @@ const FromManyIcon = ({ iconColor }) => (
   </CombinedIcon>
 );
 
-const TypeTableCell = ({ value, showDesc, direction, amount }) => {
+const TypeTableCell = ({ value, showDesc, direction, amount, message }) => {
   const getData = () => {
     let desc = typeof value === 'string' && toTitleCase(value, '_');
     let localDirection = direction;
@@ -51,6 +53,21 @@ const TypeTableCell = ({ value, showDesc, direction, amount }) => {
       };
     }
     if (value === 'broadcast') {
+      const type = message && message.substring(0, 8).toUpperCase();
+      if (type === '41495020') {
+        return {
+          icon: <FaFileAlt color="var(--light-blue)" />,
+          desc: `AIP ${desc}`,
+        };
+      }
+
+      if (type === '44414F20') {
+        return {
+          icon: <FaVoteYea color="var(--light-blue)" />,
+          desc: `DAO ${desc}`,
+        };
+      }
+
       return {
         icon: <FaBullhorn color="var(--light-blue)" />,
         desc,
@@ -111,14 +128,11 @@ const TypeTableCell = ({ value, showDesc, direction, amount }) => {
   const { icon, desc } = getData();
 
   return (
-    <IconTableCell title={showDesc ? '' : desc}>
-      {showDesc ? (
-        <IconTableCellWrapper>
-          {icon} <IconCellDescription>{desc}</IconCellDescription>
-        </IconTableCellWrapper>
-      ) : (
-        icon
-      )}
+    <IconTableCell title={desc}>
+      <IconTableCellWrapper>
+        {icon}
+        {showDesc && <IconCellDescription>{desc}</IconCellDescription>}
+      </IconTableCellWrapper>
     </IconTableCell>
   );
 };
@@ -132,6 +146,7 @@ TypeTableCell.propTypes = {
   showDesc: PropTypes.bool,
   direction: PropTypes.string,
   amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  message: PropTypes.string,
 };
 
 SendToManyIcon.propTypes = {

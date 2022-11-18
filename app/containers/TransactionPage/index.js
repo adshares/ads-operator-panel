@@ -23,6 +23,7 @@ import messages from './messages';
 import { loadTransaction } from './actions';
 import DetailView from '../../components/organisms/DetailView';
 import TypeTableCell from '../../components/molecules/Table/IconCells/TypeTableCell';
+import { DecodedMessage } from '../../components/molecules/DecodedMessage';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransactionPage extends React.PureComponent {
@@ -98,8 +99,8 @@ export class TransactionPage extends React.PureComponent {
         amount: <FormattedMessage {...messages.fieldAmount} />,
         sender_fee: <FormattedMessage {...messages.fieldSenderFee} />,
         size: <FormattedMessage {...messages.fieldSize} />,
-        message: <FormattedMessage {...messages.fieldMessage} />,
         decoded_message: <FormattedMessage {...messages.fieldDecodedMessage} />,
+        message: <FormattedMessage {...messages.fieldMessage} />,
         signature: <FormattedMessage {...messages.fieldSignature} />,
         time: <FormattedMessage {...messages.fieldTime} />,
       },
@@ -136,10 +137,16 @@ export class TransactionPage extends React.PureComponent {
           <span>{this.renderAccountLinks(transactionConfig.data)}</span>
         ),
         type: () => (
-          <TypeTableCell value={transactionConfig.data.type} showDesc />
+          <TypeTableCell
+            value={transactionConfig.data.type}
+            showDesc
+            message={transactionConfig.data.message}
+          />
         ),
         decoded_message: () => (
-          <code>{transactionConfig.data.decoded_message}</code>
+          <DecodedMessage>
+            {transactionConfig.data.decoded_message}
+          </DecodedMessage>
         ),
         time: () => (
           <div title={transactionConfig.data.time}>

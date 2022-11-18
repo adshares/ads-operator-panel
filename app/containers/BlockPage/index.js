@@ -188,7 +188,11 @@ export class BlockPage extends React.PureComponent {
           />
         ),
         type: (value, row) => (
-          <TypeTableCell value={value} amount={row.amount} />
+          <TypeTableCell
+            value={value}
+            amount={row.amount}
+            message={row.message}
+          />
         ),
         time: value => <div title={value}> {moment(value).fromNow()} </div>,
       },
