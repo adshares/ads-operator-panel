@@ -45,6 +45,14 @@ export const TableRow = styled.tr`
 `};
 `;
 
+export const IconTableCell = styled.span`
+  color: ${props => props.color || 'var(--gray)'};
+  display: inline-block;
+  min-width: 17px;
+  vertical-align: baseline;
+  box-sizing: content-box;
+`;
+
 export const TableBody = styled.tbody`
   position: relative;
 `;
@@ -137,14 +145,6 @@ export const IconCellDescription = styled.span`
   padding-left: var(--spacing-factor);
   color: var(--moon-gray);
   text-transform: capitalize;
-`;
-
-export const IconTableCell = styled.span`
-  color: ${props => props.color || 'var(--gray)'};
-  display: inline-block;
-  min-width: 17px;
-  vertical-align: middle;
-  box-sizing: content-box;
 `;
 
 export const IconTableCellWrapper = styled.span`
