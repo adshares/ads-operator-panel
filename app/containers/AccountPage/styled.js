@@ -9,5 +9,6 @@ export const AccountPageWrapper = styled.div`
   }
   h1 ${/* sc-selector */IconTableCell} {
     margin-left: 20px;
+    vertical-align: bottom;
   }
 `;

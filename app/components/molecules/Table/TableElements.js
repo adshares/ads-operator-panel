@@ -139,7 +139,7 @@ export const IconTableCell = styled.span`
   color: ${props => props.color || 'var(--gray)'};
   display: inline-block;
   min-width: 17px;
-  vertical-align: bottom;
+  vertical-align: middle;
 `;
 
 export const IconTableCellWrapper = styled.span`
