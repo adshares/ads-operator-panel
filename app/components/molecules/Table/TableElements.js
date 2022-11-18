@@ -96,6 +96,10 @@ export const TableCellStyled = styled.td`
   &.signature {
     max-width: 120px;
   }
+
+  &.id ${/* sc-selector */ IconTableCell} {
+    padding-left: 7px;
+  }
 `;
 
 export const TableHeaderRow = styled.tr`
@@ -140,6 +144,7 @@ export const IconTableCell = styled.span`
   display: inline-block;
   min-width: 17px;
   vertical-align: middle;
+  box-sizing: content-box;
 `;
 
 export const IconTableCellWrapper = styled.span`
